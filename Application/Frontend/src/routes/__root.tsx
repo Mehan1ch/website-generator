@@ -1,11 +1,16 @@
-import {createRootRouteWithContext, Link} from '@tanstack/react-router'
+import {createRootRouteWithContext, Link, Outlet} from '@tanstack/react-router'
 import {QueryClient} from "@tanstack/react-query";
-import Index from "./index.tsx";
+import {TanStackRouterDevtools} from "@tanstack/react-router-devtools";
 
 export const Route = createRootRouteWithContext<{
     queryClient: QueryClient
 }>()({
-    component: Index,
+    component: () => (
+        <>
+            <Outlet/>
+            <TanStackRouterDevtools/>
+        </>
+    ),
     notFoundComponent: () => {
         return (
             <div>

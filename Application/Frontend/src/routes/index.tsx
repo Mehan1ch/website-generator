@@ -2,7 +2,7 @@ import {useState} from 'react'
 import reactLogo from '../assets/react.svg'
 import viteLogo from '/vite.svg'
 import '../App.css'
-import {createFileRoute} from "@tanstack/react-router";
+import {createFileRoute, Link} from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
     component: Index
@@ -33,6 +33,7 @@ function Index() {
             <p className="read-the-docs">
                 Click on the Vite and React logos to learn more
             </p>
+            <Link to={"/login"}>Login!</Link>
         </>
     )
 }

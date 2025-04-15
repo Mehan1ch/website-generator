@@ -3,6 +3,7 @@ import {createRouter, RouterProvider} from '@tanstack/react-router'
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import {routeTree} from './routeTree.gen'
 import {StrictMode} from "react";
+import {AuthProvider} from "@/hooks/authProvider.tsx";
 
 const queryClient = new QueryClient()
 
@@ -33,7 +34,9 @@ if (!rootElement.innerHTML) {
     root.render(
         <StrictMode>
             <QueryClientProvider client={queryClient}>
-                <RouterProvider router={router}/>
+                <AuthProvider>
+                    <RouterProvider router={router}/>
+                </AuthProvider>
             </QueryClientProvider>,
         </StrictMode>
     )
