@@ -3,7 +3,7 @@ import {createRouter, RouterProvider} from '@tanstack/react-router'
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import {routeTree} from './routeTree.gen'
 import {StrictMode} from "react";
-import {AuthProvider} from "@/hooks/authProvider.tsx";
+import {AuthProvider} from "@/providers/auth-provider.tsx";
 
 const queryClient = new QueryClient()
 
