@@ -2,7 +2,7 @@ import * as React from "react";
 import {useState} from "react";
 import {useQueryClient} from "@tanstack/react-query";
 import axios from "axios";
-import {AuthContext} from "@/context/auth-context";
+import {AuthContext} from "@/contexts/auth-context";
 
 
 export const AuthProvider = ({children}: { children: React.ReactNode }) => {

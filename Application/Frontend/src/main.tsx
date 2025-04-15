@@ -4,6 +4,7 @@ import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import {routeTree} from './routeTree.gen'
 import {StrictMode} from "react";
 import {AuthProvider} from "@/providers/auth-provider.tsx";
+import {ThemeProvider} from "@/providers/theme-provider.tsx";
 
 const queryClient = new QueryClient()
 
@@ -35,7 +36,9 @@ if (!rootElement.innerHTML) {
         <StrictMode>
             <QueryClientProvider client={queryClient}>
                 <AuthProvider>
-                    <RouterProvider router={router}/>
+                    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+                        <RouterProvider router={router}/>
+                    </ThemeProvider>
                 </AuthProvider>
             </QueryClientProvider>,
         </StrictMode>
