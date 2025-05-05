@@ -5,6 +5,7 @@ import {routeTree} from './routeTree.gen'
 import {StrictMode} from "react";
 import {AuthProvider} from "@/providers/auth-provider.tsx";
 import {ThemeProvider} from "@/providers/theme-provider.tsx";
+import {useAuth} from "@/hooks/use-auth.tsx";
 
 const queryClient = new QueryClient()
 
@@ -13,6 +14,7 @@ const router = createRouter({
     routeTree,
     context: {
         queryClient,
+        auth: undefined!
     },
     defaultPreload: 'intent',
     // Since we're using React Query, we don't want loader calls to ever be stale
@@ -28,19 +30,32 @@ declare module '@tanstack/react-router' {
     }
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
+function InnerApp() {
+    const auth = useAuth()
+    return <RouterProvider router={router} context={{auth}}/>
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+function App() {
+    return (
+        <QueryClientProvider client={queryClient}>
+            <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+                <AuthProvider>
+                    <InnerApp/>
+                </AuthProvider>
+            </ThemeProvider>
+        </QueryClientProvider>
+    )
+}
+
 const rootElement = document.getElementById('root')!
 
 if (!rootElement.innerHTML) {
     const root = ReactDOM.createRoot(rootElement)
     root.render(
         <StrictMode>
-            <QueryClientProvider client={queryClient}>
-                <AuthProvider>
-                    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-                        <RouterProvider router={router}/>
-                    </ThemeProvider>
-                </AuthProvider>
-            </QueryClientProvider>,
+            <App/>
         </StrictMode>
     )
 }

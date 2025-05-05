@@ -1,11 +1,4 @@
 import {createContext} from "react";
-import {User} from "@/types/user.ts";
+import {AuthContextType} from "@/types/auth.ts";
 
-
-type AuthContext = {
-    user: User | null;
-    login: (credentials: { email: string; password: string }) => Promise<void>;
-    logout: () => Promise<void>;
-}
-
-export const AuthContext = createContext<AuthContext | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | null>(null);
