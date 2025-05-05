@@ -1,4 +1,4 @@
-import {cn} from "@/utils/cn"
+import {cn} from "@/lib/utils.ts"
 import {Button} from "@/components/ui/button"
 import {Input} from "@/components/ui/input"
 import * as React from "react";
