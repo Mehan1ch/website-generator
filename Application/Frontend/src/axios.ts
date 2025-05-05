@@ -2,10 +2,11 @@ import axios from 'axios';
 import {Cookies} from 'react-cookie';
 
 const cookies = new Cookies();
-const apiRoute: string = import.meta.env.VITE_APP_API_URL;
+const backendRoute: string = import.meta.env.VITE_BACKEND_URL;
 
-axios.defaults.baseURL = apiRoute;
+axios.defaults.baseURL = backendRoute;
 axios.defaults.withCredentials = true;
+axios.defaults.withXSRFToken = true;
 
 // Add CSRF token to headers
 axios.interceptors.request.use(async (config) => {

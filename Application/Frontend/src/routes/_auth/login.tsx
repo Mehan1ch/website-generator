@@ -1,9 +1,14 @@
-import {createFileRoute, Link} from '@tanstack/react-router'
+import {createFileRoute, Link, redirect} from '@tanstack/react-router'
 import {GalleryVerticalEnd} from "lucide-react"
 
 import {LoginForm} from "@/components/forms/login-form.tsx"
 
 export const Route = createFileRoute('/_auth/login')({
+    beforeLoad: ({context}) => {
+        if (context.auth.isAuthenticated) {
+            throw redirect({to: "/"})
+        }
+    },
     component: Login,
 })
 
