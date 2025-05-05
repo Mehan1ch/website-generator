@@ -36,6 +36,7 @@ function Index() {
             </p>
             <ModeToggle/>
             <Link to={"/login"}>Login!</Link>
+            <Link to={"/about"}>About!</Link>
         </>
     )
 }
