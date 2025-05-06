@@ -3,7 +3,7 @@ import {useQueryClient} from "@tanstack/react-query";
 import axios from "@/axios";
 import {AuthContext} from "@/contexts/auth-context";
 import {User} from "@/types/user.ts";
-import {LoginCredentials} from "@/types/auth.ts";
+import {LoginCredentials, RegisterCredentials} from "@/types/auth.ts";
 import {redirect} from "@tanstack/react-router";
 import {toast} from "sonner";
 
@@ -73,8 +73,25 @@ export const AuthProvider = ({children}: { children: ReactNode }) => {
         }
     };
 
+    const register = async (credentials: RegisterCredentials) => {
+        try {
+            // Fetch CSRF token
+            await axios.get('/sanctum/csrf-cookie');
+
+            // Perform registration
+            await axios.post('/register', credentials);
+
+            // Invalidate auth queries
+            await queryClient.invalidateQueries({queryKey: ['auth']});
+            toast.success("Registration successful");
+        } catch (error) {
+            toast.error("Registration failed");
+            throw error;
+        }
+    }
+
     return (
-        <AuthContext.Provider value={{user, isAuthenticated, login, logout}}>
+        <AuthContext.Provider value={{user, isAuthenticated, login, logout, register}}>
             {children}
         </AuthContext.Provider>
     );

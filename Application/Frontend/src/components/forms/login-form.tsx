@@ -28,6 +28,8 @@ export function LoginForm({
             email: "",
             password: "",
         },
+        mode: "onBlur",
+        reValidateMode: "onBlur",
     })
 
     const onSubmit = async (data: LoginCredentials) => {
