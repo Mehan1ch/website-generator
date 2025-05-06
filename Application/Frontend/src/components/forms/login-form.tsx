@@ -7,7 +7,8 @@ import {z} from "zod";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useAuth} from "@/hooks/use-auth.tsx";
-import {useRouter} from "@tanstack/react-router";
+import {Link, useRouter} from "@tanstack/react-router";
+import {LoginCredentials} from "@/types/auth.ts";
 
 const formSchema = z.object({
     email: z.string().email("Invalid email address"),
@@ -21,7 +22,7 @@ export function LoginForm({
     const {login} = useAuth();
     const router = useRouter();
 
-    const form = useForm<z.infer<typeof formSchema>>({
+    const form = useForm<LoginCredentials>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             email: "",
@@ -29,12 +30,11 @@ export function LoginForm({
         },
     })
 
-    const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    const onSubmit = async (data: LoginCredentials) => {
         try {
             await login(data);
             router.history.back();
-        } catch (error) {
-            console.error("Login failed", error);
+        } catch {
             form.reset();
         }
     }
@@ -96,9 +96,9 @@ export function LoginForm({
                 </div>
                 <div className="text-center text-sm">
                     Don&apos;t have an account?{" "}
-                    <a href="#" className="underline underline-offset-4">
+                    <Link to={"/register"} className="underline underline-offset-4">
                         Sign up
-                    </a>
+                    </Link>
                 </div>
             </form>
         </Form>

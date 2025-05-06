@@ -5,6 +5,7 @@ import {AuthContext} from "@/contexts/auth-context";
 import {User} from "@/types/user.ts";
 import {LoginCredentials} from "@/types/auth.ts";
 import {redirect} from "@tanstack/react-router";
+import {toast} from "sonner";
 
 
 export const AuthProvider = ({children}: { children: ReactNode }) => {
@@ -52,17 +53,24 @@ export const AuthProvider = ({children}: { children: ReactNode }) => {
 
             // Invalidate auth queries
             await queryClient.invalidateQueries({queryKey: ['auth']});
+            toast.success("Login successful");
         } catch (error) {
-            console.error("Login failed", error);
+            toast.error("Login failed");
             throw error;
         }
     };
 
     const logout = async () => {
-        await axios.post('/logout');
-        setUser(null);
-        setIsAuthenticated(false);
-        await queryClient.invalidateQueries({queryKey: ['auth']});
+        try {
+            await axios.post('/logout');
+            setUser(null);
+            setIsAuthenticated(false);
+            await queryClient.invalidateQueries({queryKey: ['auth']});
+            toast.success("Logout successful");
+        } catch (error) {
+            toast.error("Logout failed");
+            throw error;
+        }
     };
 
     return (

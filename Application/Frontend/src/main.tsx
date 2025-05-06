@@ -6,6 +6,7 @@ import {StrictMode} from "react";
 import {AuthProvider} from "@/providers/auth-provider.tsx";
 import {ThemeProvider} from "@/providers/theme-provider.tsx";
 import {useAuth} from "@/hooks/use-auth.tsx";
+import {Toaster} from "@/components/ui/sonner.tsx";
 
 const queryClient = new QueryClient()
 
@@ -45,6 +46,7 @@ function App() {
         <QueryClientProvider client={queryClient}>
             <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
                 <AuthProvider>
+                    <Toaster/>
                     <InnerApp/>
                 </AuthProvider>
             </ThemeProvider>
