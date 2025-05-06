@@ -1,5 +1,5 @@
 import * as React from "react"
-import {BookOpen, Bot, Command, Frame, Map, PieChart, Settings2, SquareTerminal,} from "lucide-react"
+import {BookOpen, Bot, Command, Frame, Map, PieChart, Settings2, SquareTerminal, User} from "lucide-react"
 
 import {NavMain} from "@/components/nav-main"
 import {NavProjects} from "@/components/nav-projects"
@@ -16,7 +16,8 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar"
 import {useAuth} from "@/hooks/use-auth.tsx";
-import {Link} from "@tanstack/react-router";
+import {useRouter} from "@tanstack/react-router";
+import {ModeToggle} from "@/components/ui/mode-toggle.tsx";
 
 const data = {
     teams: [
@@ -135,12 +136,13 @@ const data = {
 export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
     const appTitle = import.meta.env.VITE_APP_NAME || "Default App Title";
     const {user, isAuthenticated} = useAuth();
+    const router = useRouter();
 
     return (
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader>
-                <SidebarMenuButton size="lg" asChild>
-                    <Link to={"/"}>
+                <SidebarMenuButton size="lg" asChild onClick={() => router.navigate({to: "/"})}>
+                    <div>
                         <div
                             className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                             <SidebarTrigger className="-ml-auto"/>
@@ -148,7 +150,7 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
                         <div className="grid flex-1 text-left text-sm leading-tight">
                             <span className="truncate font-semibold">{appTitle}</span>
                         </div>
-                    </Link>
+                    </div>
                 </SidebarMenuButton>
             </SidebarHeader>
             <SidebarContent>
@@ -156,11 +158,23 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
                 <NavProjects projects={data.projects}/>
             </SidebarContent>
             <SidebarFooter>
+                <ModeToggle/>
                 {isAuthenticated ?
                     <NavUser user={user!}/> :
                     <SidebarMenu>
                         <SidebarMenuItem>
-                            <Link to={"/login"}>Login</Link>
+                            <SidebarMenuButton variant="default" size="lg" asChild
+                                               onClick={() => router.navigate({to: "/login"})}>
+                                <div>
+                                    <div
+                                        className="flex aspect-square size-8 items-center justify-center rounded-lg">
+                                        <User className="-ml-auto"/>
+                                    </div>
+                                    <div className="flex flex-col gap-0.5 leading-none">
+                                        <span className="font-semibold">Login</span>
+                                    </div>
+                                </div>
+                            </SidebarMenuButton>
                         </SidebarMenuItem>
                     </SidebarMenu>
                 }
