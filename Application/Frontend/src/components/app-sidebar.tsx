@@ -1,8 +1,7 @@
 import * as React from "react"
-import {BookOpen, Bot, Command, Frame, Map, PieChart, Settings2, SquareTerminal, User} from "lucide-react"
+import {BookOpen, Bot, Frame, Map, PieChart, Settings2, SquareTerminal, User} from "lucide-react"
 
 import {NavMain} from "@/components/nav-main"
-import {NavProjects} from "@/components/nav-projects"
 import {NavUser} from "@/components/nav-user"
 import {
     Sidebar,
@@ -20,13 +19,6 @@ import {useRouter} from "@tanstack/react-router";
 import {ModeToggle} from "@/components/ui/mode-toggle.tsx";
 
 const data = {
-    teams: [
-        {
-            name: "Design Engineering",
-            logo: Command,
-            plan: "Free",
-        },
-    ],
     navMain: [
         {
             title: "Playground",
@@ -155,7 +147,6 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
             </SidebarHeader>
             <SidebarContent>
                 <NavMain items={data.navMain}/>
-                <NavProjects projects={data.projects}/>
             </SidebarContent>
             <SidebarFooter>
                 <ModeToggle/>
