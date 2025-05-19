@@ -1,5 +1,5 @@
 import * as React from "react"
-import {BookOpen, Bot, Frame, Map, PieChart, Settings2, SquareTerminal, User} from "lucide-react"
+import {Globe, LayoutDashboard, User} from "lucide-react"
 
 import {NavMain} from "@/components/nav-main"
 import {NavUser} from "@/components/nav-user"
@@ -12,7 +12,6 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
     SidebarRail,
-    SidebarTrigger,
 } from "@/components/ui/sidebar"
 import {useAuth} from "@/hooks/use-auth.tsx";
 import {useRouter} from "@tanstack/react-router";
@@ -21,107 +20,15 @@ import {ModeToggle} from "@/components/ui/mode-toggle.tsx";
 const data = {
     navMain: [
         {
-            title: "Playground",
-            url: "#",
-            icon: SquareTerminal,
-            isActive: true,
-            items: [
-                {
-                    title: "History",
-                    url: "#",
-                },
-                {
-                    title: "Starred",
-                    url: "#",
-                },
-                {
-                    title: "Settings",
-                    url: "#",
-                },
-            ],
+            title: "Dashboard",
+            url: "/",
+            icon: LayoutDashboard,
         },
         {
-            title: "Models",
-            url: "#",
-            icon: Bot,
-            items: [
-                {
-                    title: "Genesis",
-                    url: "#",
-                },
-                {
-                    title: "Explorer",
-                    url: "#",
-                },
-                {
-                    title: "Quantum",
-                    url: "#",
-                },
-            ],
-        },
-        {
-            title: "Documentation",
-            url: "#",
-            icon: BookOpen,
-            items: [
-                {
-                    title: "Introduction",
-                    url: "#",
-                },
-                {
-                    title: "Get Started",
-                    url: "#",
-                },
-                {
-                    title: "Tutorials",
-                    url: "#",
-                },
-                {
-                    title: "Changelog",
-                    url: "#",
-                },
-            ],
-        },
-        {
-            title: "Settings",
-            url: "#",
-            icon: Settings2,
-            items: [
-                {
-                    title: "General",
-                    url: "#",
-                },
-                {
-                    title: "Team",
-                    url: "#",
-                },
-                {
-                    title: "Billing",
-                    url: "#",
-                },
-                {
-                    title: "Limits",
-                    url: "#",
-                },
-            ],
-        },
-    ],
-    projects: [
-        {
-            name: "Design Engineering",
-            url: "#",
-            icon: Frame,
-        },
-        {
-            name: "Sales & Marketing",
-            url: "#",
-            icon: PieChart,
-        },
-        {
-            name: "Travel",
-            url: "#",
-            icon: Map,
-        },
+            title: "Websites",
+            url: "/websites",
+            icon: Globe,
+        }
     ],
 }
 
@@ -137,7 +44,7 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
                     <div>
                         <div
                             className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                            <SidebarTrigger className="-ml-auto"/>
+                            <Globe/>
                         </div>
                         <div className="grid flex-1 text-left text-sm leading-tight">
                             <span className="truncate font-semibold">{appTitle}</span>
