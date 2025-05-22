@@ -2,7 +2,7 @@
 
 import {ChevronRight, type LucideIcon} from "lucide-react"
 
-import {Collapsible, CollapsibleContent, CollapsibleTrigger,} from "@/components/ui/collapsible"
+import {Collapsible, CollapsibleContent, CollapsibleTrigger,} from "@/components/ui/collapsible.tsx"
 import {
     SidebarGroup,
     SidebarMenu,
@@ -11,7 +11,8 @@ import {
     SidebarMenuSub,
     SidebarMenuSubButton,
     SidebarMenuSubItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar.tsx"
+import {useRouter} from "@tanstack/react-router";
 
 export function NavMain({
                             items,
@@ -27,6 +28,7 @@ export function NavMain({
         }[]
     }[]
 }) {
+    const router = useRouter()
     return (
         <SidebarGroup>
             <SidebarMenu>
@@ -39,7 +41,7 @@ export function NavMain({
                     >
                         <SidebarMenuItem>
                             <CollapsibleTrigger asChild>
-                                <SidebarMenuButton tooltip={item.title}>
+                                <SidebarMenuButton tooltip={item.title} onClick={() => router.navigate({to: item.url})}>
                                     {item.icon && <item.icon/>}
                                     <span>{item.title}</span>
                                     {item?.items &&

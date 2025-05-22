@@ -11,6 +11,8 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as WebsitesImport } from './routes/websites'
+import { Route as EditorImport } from './routes/editor'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as AuthRegisterImport } from './routes/_auth/register'
@@ -18,6 +20,18 @@ import { Route as AuthLoginImport } from './routes/_auth/login'
 import { Route as AuthAccountImport } from './routes/_auth/account'
 
 // Create/Update Routes
+
+const WebsitesRoute = WebsitesImport.update({
+  id: '/websites',
+  path: '/websites',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const EditorRoute = EditorImport.update({
+  id: '/editor',
+  path: '/editor',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AboutRoute = AboutImport.update({
   id: '/about',
@@ -67,6 +81,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/editor': {
+      id: '/editor'
+      path: '/editor'
+      fullPath: '/editor'
+      preLoaderRoute: typeof EditorImport
+      parentRoute: typeof rootRoute
+    }
+    '/websites': {
+      id: '/websites'
+      path: '/websites'
+      fullPath: '/websites'
+      preLoaderRoute: typeof WebsitesImport
+      parentRoute: typeof rootRoute
+    }
     '/_auth/account': {
       id: '/_auth/account'
       path: '/account'
@@ -96,6 +124,8 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/editor': typeof EditorRoute
+  '/websites': typeof WebsitesRoute
   '/account': typeof AuthAccountRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
@@ -104,6 +134,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/editor': typeof EditorRoute
+  '/websites': typeof WebsitesRoute
   '/account': typeof AuthAccountRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
@@ -113,6 +145,8 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/editor': typeof EditorRoute
+  '/websites': typeof WebsitesRoute
   '/_auth/account': typeof AuthAccountRoute
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/register': typeof AuthRegisterRoute
@@ -120,13 +154,29 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/account' | '/login' | '/register'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/editor'
+    | '/websites'
+    | '/account'
+    | '/login'
+    | '/register'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/account' | '/login' | '/register'
+  to:
+    | '/'
+    | '/about'
+    | '/editor'
+    | '/websites'
+    | '/account'
+    | '/login'
+    | '/register'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/editor'
+    | '/websites'
     | '/_auth/account'
     | '/_auth/login'
     | '/_auth/register'
@@ -136,6 +186,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  EditorRoute: typeof EditorRoute
+  WebsitesRoute: typeof WebsitesRoute
   AuthAccountRoute: typeof AuthAccountRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
@@ -144,6 +196,8 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  EditorRoute: EditorRoute,
+  WebsitesRoute: WebsitesRoute,
   AuthAccountRoute: AuthAccountRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthRegisterRoute: AuthRegisterRoute,
@@ -161,6 +215,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
+        "/editor",
+        "/websites",
         "/_auth/account",
         "/_auth/login",
         "/_auth/register"
@@ -171,6 +227,12 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/editor": {
+      "filePath": "editor.tsx"
+    },
+    "/websites": {
+      "filePath": "websites.tsx"
     },
     "/_auth/account": {
       "filePath": "_auth/account.tsx"

@@ -1,8 +1,8 @@
 import * as React from "react"
-import {Globe, LayoutDashboard, User} from "lucide-react"
+import {Globe, LayoutDashboard, PencilIcon, User} from "lucide-react"
 
-import {NavMain} from "@/components/nav-main"
-import {NavUser} from "@/components/nav-user"
+import {NavMain} from "@/components/sidebar/nav-main.tsx"
+import {NavUser} from "@/components/sidebar/nav-user.tsx"
 import {
     Sidebar,
     SidebarContent,
@@ -12,7 +12,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
     SidebarRail,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar.tsx"
 import {useAuth} from "@/hooks/use-auth.tsx";
 import {useRouter} from "@tanstack/react-router";
 import {ModeToggle} from "@/components/ui/mode-toggle.tsx";
@@ -28,6 +28,11 @@ const data = {
             title: "Websites",
             url: "/websites",
             icon: Globe,
+        },
+        {
+            title: "Editor",
+            url: "/editor",
+            icon: PencilIcon,
         }
     ],
 }

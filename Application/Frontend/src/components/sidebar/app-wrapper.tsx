@@ -1,4 +1,4 @@
-import {AppSidebar} from "@/components/app-sidebar.tsx";
+import {AppSidebar} from "@/components/sidebar/app-sidebar.tsx";
 import {SidebarInset, SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar.tsx";
 import {Separator} from "@/components/ui/separator.tsx";
 import {Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList} from "@/components/ui/breadcrumb.tsx";
@@ -31,7 +31,7 @@ function AppWrapper({header, link, children}: AppWrapperProps) {
                         </Breadcrumb>
                     </div>
                 </header>
-                <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+                <div className="gap-4 p-8 pt-0">
                     {children}
                 </div>
             </SidebarInset>

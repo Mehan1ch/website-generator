@@ -1,6 +1,6 @@
 import "../index.css"
 import {createFileRoute} from "@tanstack/react-router";
-import AppWrapper from "@/components/app-wrapper.tsx";
+import AppWrapper from "@/components/sidebar/app-wrapper.tsx";
 
 export const Route = createFileRoute("/")({
     component: Index
