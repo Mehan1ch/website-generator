@@ -1,4 +1,4 @@
-import {EditorContainer} from "./editor-container"
+import {ContainerDefaultProps, ContainerSettings, EditorContainer} from "./editor-container"
 import {EditorText} from "./editor-text"
 import {EditorButton} from "@/components/editor/editor-button.tsx";
 import {Element, Node, useNode} from "@craftjs/core";
@@ -54,15 +54,23 @@ EditorCardBottom.craft = {
 export const EditorCard = ({background, padding = 20}: EditorCardProps) => {
     return (
         <EditorContainer background={background} padding={padding}>
-            <Element id="text" is={EditorCardTop}> // Canvas Node of type div
-                <EditorText text="Title" size={20}/>
-                <EditorText text="Subtitle" size={15}/>
+            <Element id="text" is={EditorCardTop} canvas> // Canvas Node of type div
+                <EditorText text="Title" fontSize={20}/>
+                <EditorText text="Subtitle" fontSize={15}/>
             </Element>
-            <Element id="buttons" is={EditorCardBottom}> // Canvas Node of type div
+            <Element id="buttons" is={EditorCardBottom} canvas> // Canvas Node of type div
                 <EditorButton size="sm" variant="default" color="primary">
                     Learn more
                 </EditorButton>
             </Element>
         </EditorContainer>
     )
+}
+
+EditorCard.craft = {
+    props: ContainerDefaultProps,
+    related: {
+        // Since Card has the same settings as Container, we'll just reuse ContainerSettings
+        settings: ContainerSettings
+    }
 }

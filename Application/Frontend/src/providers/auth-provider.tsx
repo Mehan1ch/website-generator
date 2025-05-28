@@ -75,6 +75,7 @@ export const AuthProvider = ({children}: { children: ReactNode }) => {
 
     const register = async (credentials: RegisterCredentials) => {
         try {
+            //TODO: refactor with Tanstack Query
             // Fetch CSRF token
             await axios.get('/sanctum/csrf-cookie');
 
@@ -85,6 +86,7 @@ export const AuthProvider = ({children}: { children: ReactNode }) => {
             await queryClient.invalidateQueries({queryKey: ['auth']});
             toast.success("Registration successful");
         } catch (error) {
+            // TODO: include error messages from the server in the toast
             toast.error("Registration failed");
             throw error;
         }
