@@ -35,7 +35,7 @@ export function LoginForm({
     const onSubmit = async (data: LoginCredentials) => {
         try {
             await login(data);
-            router.history.back();
+            router.navigate({to: "/"});
         } catch {
             form.reset();
         }

@@ -96,8 +96,6 @@ export const AuthProvider = ({children}: { children: ReactNode }) => {
 
     const register = async (credentials: RegisterCredentials) => {
         try {
-            //TODO: refactor with Tanstack Query
-            // Fetch CSRF token
             await axios.get('/sanctum/csrf-cookie');
 
             // Perform registration

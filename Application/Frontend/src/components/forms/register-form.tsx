@@ -48,7 +48,7 @@ export function RegisterForm({
     const onSubmit = async (data: RegisterCredentials) => {
         try {
             await register(data);
-            router.history.back();
+            router.navigate({to: "/login"});
         } catch {
             form.reset();
         }
