@@ -16,31 +16,36 @@ import {
 import {useAuth} from "@/hooks/use-auth.tsx";
 import {useRouter} from "@tanstack/react-router";
 import {ModeToggle} from "@/components/ui/mode-toggle.tsx";
+import {NavSection} from "@/types/nav-section.ts";
 
-const data = {
-    navMain: [
-        {
-            title: "Dashboard",
-            url: "/",
-            icon: LayoutDashboard,
-        },
-        {
-            title: "Websites",
-            url: "/websites",
-            icon: Globe,
-        },
-        {
-            title: "Editor",
-            url: "/editor",
-            icon: PencilIcon,
-        }
-    ],
-}
+
+const navMain: NavSection[] = [
+    {
+        title: "Dashboard",
+        url: "/",
+        icon: LayoutDashboard,
+        authRequired: false,
+    },
+    {
+        title: "Websites",
+        url: "/websites",
+        icon: Globe,
+        authRequired: true,
+    },
+    {
+        title: "Editor",
+        url: "/editor",
+        icon: PencilIcon,
+        authRequired: true,
+    }
+];
 
 export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
     const appTitle = import.meta.env.VITE_APP_NAME || "Default App Title";
     const {user, isAuthenticated} = useAuth();
     const router = useRouter();
+
+    const filteredNavMain = navMain.filter(item => !item.authRequired || isAuthenticated);
 
     return (
         <Sidebar collapsible="icon" {...props}>
@@ -58,7 +63,7 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
                 </SidebarMenuButton>
             </SidebarHeader>
             <SidebarContent>
-                <NavMain items={data.navMain}/>
+                <NavMain items={filteredNavMain}/>
             </SidebarContent>
             <SidebarFooter>
                 <ModeToggle/>
