@@ -13,6 +13,27 @@ export const AuthProvider = ({children}: { children: ReactNode }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const queryClient = useQueryClient();
 
+    // Rehydrate auth state from localStorage on mount
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        const storedAuth = localStorage.getItem('isAuthenticated');
+        if (storedUser && storedAuth === 'true') {
+            setUser(JSON.parse(storedUser));
+            setIsAuthenticated(true);
+        }
+    }, []);
+
+    // Save auth state to localStorage when it changes
+    useEffect(() => {
+        if (isAuthenticated && user) {
+            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('isAuthenticated', 'true');
+        } else {
+            localStorage.removeItem('user');
+            localStorage.setItem('isAuthenticated', 'false');
+        }
+    }, [user, isAuthenticated]);
+
     // Axios interceptor to attach CSRF token and handle expired sessions
     useEffect(() => {
         const interceptor = axios.interceptors.response.use(
