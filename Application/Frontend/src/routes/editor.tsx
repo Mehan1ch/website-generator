@@ -22,36 +22,34 @@ export const Route = createFileRoute('/editor')({
 
 function EditorPage() {
     return <AppWrapper header={'Editor'}>
-        <div className="mx-auto">
-            <div className="text-2xl font-semibold text-center mt-4">
-                Edit your page
-            </div>
-            <Editor resolver={{EditorCard, EditorButton, EditorText, EditorContainer, EditorCardTop, EditorCardBottom}}>
-                <Topbar/>
-                <div className="flex gap-3 pt-3">
-                    <div className="flex-1">
-                        <Frame>
-                            <Element is={EditorContainer} padding={5} background="#eee" canvas>
-                                <EditorCard background={''}/>
-                                <EditorButton size="sm" variant="outline" color={"#000"}>Click</EditorButton>
-                                <EditorText fontSize={12} text="Hi world!"/>
-                                <Element is={EditorContainer} padding={2} background="#999" canvas>
-                                    <EditorText fontSize={12} text="It's me again!"/>
-                                </Element>
-                            </Element>
-
-                        </Frame>
-                    </div>
-                    <div className="w-80">
-                        <Card>
-                            <CardContent className="p-4 space-y-4">
-                                <Toolbox/>
-                                <SettingsPanel/>
-                            </CardContent>
-                        </Card>
-                    </div>
-                </div>
-            </Editor>
+        <div className="text-2xl font-semibold text-center mt-4">
+            Edit your page
         </div>
+        <Editor resolver={{EditorCard, EditorButton, EditorText, EditorContainer, EditorCardTop, EditorCardBottom}}>
+            <Topbar/>
+            <div className="flex gap-3 pt-3">
+                <div className="flex-1">
+                    <Frame>
+                        <Element is={EditorContainer} padding={5} background="#eee" canvas>
+                            <EditorCard background={''}/>
+                            <EditorButton size="sm" variant="outline" color={"#000"}>Click</EditorButton>
+                            <EditorText fontSize={12} text="Hi world!"/>
+                            <Element is={EditorContainer} padding={2} background="#999" canvas>
+                                <EditorText fontSize={12} text="It's me again!"/>
+                            </Element>
+                        </Element>
+
+                    </Frame>
+                </div>
+                <div className="w-80">
+                    <Card>
+                        <CardContent className="p-4 space-y-4">
+                            <Toolbox/>
+                            <SettingsPanel/>
+                        </CardContent>
+                    </Card>
+                </div>
+            </div>
+        </Editor>
     </AppWrapper>
 }

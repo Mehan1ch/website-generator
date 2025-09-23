@@ -1,29 +1,23 @@
-import {useTheme} from "@/hooks/use-theme.tsx"
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu.tsx";
-import {Moon, Sun} from "lucide-react";
-import {SidebarMenuButton, useSidebar} from "@/components/ui/sidebar.tsx";
+import {Moon, Sun} from "lucide-react"
+
+import {Button} from "@/components/ui/button"
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,} from "@/components/ui/dropdown-menu"
+import {useTheme} from "@/hooks/use-theme.tsx";
 
 export function ModeToggle() {
     const {theme, setTheme} = useTheme()
-    const {state} = useSidebar()
-    const isSidebarCollapsed = state === "collapsed"
 
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <SidebarMenuButton>
+                <Button>
                     <Sun
-                        className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"/>
+                        className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 dark:hidden"/>
                     <Moon
-                        className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"/>
+                        className="hidden rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 dark:block"/>
                     <span className="sr-only">Toggle theme</span>
-                    {!isSidebarCollapsed && <span className="ml-2 capitalize">{theme}</span>}
-                </SidebarMenuButton>
+                    <span className="ml-2 capitalize">{theme}</span>
+                </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={() => setTheme("light")}>

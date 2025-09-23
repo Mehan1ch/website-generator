@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/sidebar.tsx"
 import {useAuth} from "@/hooks/use-auth.tsx";
 import {useRouter} from "@tanstack/react-router";
-import {ModeToggle} from "@/components/ui/mode-toggle.tsx";
+import {SideBarModeToggle} from "@/components/sidebar/side-bar-mode-toggle.tsx";
 import {NavSection} from "@/types/nav-section.ts";
 
 
@@ -50,14 +50,14 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
     return (
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader>
-                <SidebarMenuButton size="lg" asChild onClick={() => router.navigate({to: "/"})}>
+                <SidebarMenuButton size="lg" asChild onClick={() => router.navigate({to: "/dashboard"})}>
                     <div>
                         <div
-                            className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                            <Globe/>
+                            className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                            <Globe className="size-4"/>
                         </div>
-                        <div className="grid flex-1 text-left text-sm leading-tight">
-                            <span className="truncate font-semibold">{appTitle}</span>
+                        <div className="flex flex-col gap-0.5 leading-none">
+                            <span className="font-medium">{appTitle}</span>
                         </div>
                     </div>
                 </SidebarMenuButton>
@@ -66,7 +66,7 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
                 <NavMain items={filteredNavMain}/>
             </SidebarContent>
             <SidebarFooter>
-                <ModeToggle/>
+                <SideBarModeToggle/>
                 {isAuthenticated ?
                     <NavUser user={user!}/> :
                     <SidebarMenu>

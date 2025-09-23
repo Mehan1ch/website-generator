@@ -4,7 +4,7 @@ import {RegisterForm} from "@/components/forms/register-form.tsx";
 export const Route = createFileRoute('/_auth/register')({
     beforeLoad: ({context}) => {
         if (context.auth.isAuthenticated) {
-            throw redirect({to: '/'})
+            throw redirect({to: '/dashboard'})
         }
     },
     component: RouteComponent,

@@ -15,7 +15,7 @@ import {
 import {SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar,} from "@/components/ui/sidebar.tsx"
 import {User} from "@/types/user.ts";
 import {useAuth} from "@/hooks/use-auth.tsx";
-import {useRouter} from "@tanstack/react-router";
+import {Link, useRouter} from "@tanstack/react-router";
 
 export function NavUser({
                             user,
@@ -68,13 +68,13 @@ export function NavUser({
                         <DropdownMenuGroup>
                             <DropdownMenuItem>
                                 <BadgeCheck/>
-                                Account
+                                <Link to={"/account"}>Account</Link>
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator/>
                         <DropdownMenuItem onClick={async () => {
                             await logout();
-                            router.navigate({to: "/"});
+                            await router.navigate({to: "/"})
                         }}>
                             <LogOut/> Logout
                         </DropdownMenuItem>

@@ -6,7 +6,7 @@ import {LoginForm} from "@/components/forms/login-form.tsx"
 export const Route = createFileRoute('/_auth/login')({
     beforeLoad: ({context}) => {
         if (context.auth.isAuthenticated) {
-            throw redirect({to: "/"})
+            throw redirect({to: "/dashboard"})
         }
     },
     component: Login,

@@ -35,7 +35,7 @@ export function LoginForm({
     const onSubmit = async (data: LoginCredentials) => {
         try {
             await login(data);
-            router.navigate({to: "/"});
+            await router.navigate({to: "/dashboard"});
         } catch {
             form.reset();
         }
@@ -89,6 +89,7 @@ export function LoginForm({
                             )}
                         />
                     </div>
+                    {/* TODO: Add loadercircle or spinner here if needed and set processing state */}
                     <Button type="submit" className="w-full">
                         Login
                     </Button>

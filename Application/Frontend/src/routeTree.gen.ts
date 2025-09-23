@@ -8,241 +8,287 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as WebsitesRouteImport } from './routes/websites'
+import { Route as EditorRouteImport } from './routes/editor'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthVerifyEmailRouteImport } from './routes/_auth/verify-email'
+import { Route as AuthResetPasswordRouteImport } from './routes/_auth/reset-password'
+import { Route as AuthRegisterRouteImport } from './routes/_auth/register'
+import { Route as AuthLoginRouteImport } from './routes/_auth/login'
+import { Route as AuthForgotPasswordRouteImport } from './routes/_auth/forgot-password'
+import { Route as AuthConfirmPasswordRouteImport } from './routes/_auth/confirm-password'
+import { Route as AccountAccountRouteImport } from './routes/_account/account'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as WebsitesImport } from './routes/websites'
-import { Route as EditorImport } from './routes/editor'
-import { Route as AboutImport } from './routes/about'
-import { Route as IndexImport } from './routes/index'
-import { Route as AuthRegisterImport } from './routes/_auth/register'
-import { Route as AuthLoginImport } from './routes/_auth/login'
-import { Route as AuthAccountImport } from './routes/_auth/account'
-
-// Create/Update Routes
-
-const WebsitesRoute = WebsitesImport.update({
+const WebsitesRoute = WebsitesRouteImport.update({
   id: '/websites',
   path: '/websites',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const EditorRoute = EditorImport.update({
+const EditorRoute = EditorRouteImport.update({
   id: '/editor',
   path: '/editor',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AboutRoute = AboutImport.update({
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AuthRegisterRoute = AuthRegisterImport.update({
+const AuthVerifyEmailRoute = AuthVerifyEmailRouteImport.update({
+  id: '/_auth/verify-email',
+  path: '/verify-email',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthResetPasswordRoute = AuthResetPasswordRouteImport.update({
+  id: '/_auth/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRegisterRoute = AuthRegisterRouteImport.update({
   id: '/_auth/register',
   path: '/register',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AuthLoginRoute = AuthLoginImport.update({
+const AuthLoginRoute = AuthLoginRouteImport.update({
   id: '/_auth/login',
   path: '/login',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AuthAccountRoute = AuthAccountImport.update({
-  id: '/_auth/account',
+const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
+  id: '/_auth/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthConfirmPasswordRoute = AuthConfirmPasswordRouteImport.update({
+  id: '/_auth/confirm-password',
+  path: '/confirm-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountAccountRoute = AccountAccountRouteImport.update({
+  id: '/_account/account',
   path: '/account',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
-      parentRoute: typeof rootRoute
-    }
-    '/editor': {
-      id: '/editor'
-      path: '/editor'
-      fullPath: '/editor'
-      preLoaderRoute: typeof EditorImport
-      parentRoute: typeof rootRoute
-    }
-    '/websites': {
-      id: '/websites'
-      path: '/websites'
-      fullPath: '/websites'
-      preLoaderRoute: typeof WebsitesImport
-      parentRoute: typeof rootRoute
-    }
-    '/_auth/account': {
-      id: '/_auth/account'
-      path: '/account'
-      fullPath: '/account'
-      preLoaderRoute: typeof AuthAccountImport
-      parentRoute: typeof rootRoute
-    }
-    '/_auth/login': {
-      id: '/_auth/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof AuthLoginImport
-      parentRoute: typeof rootRoute
-    }
-    '/_auth/register': {
-      id: '/_auth/register'
-      path: '/register'
-      fullPath: '/register'
-      preLoaderRoute: typeof AuthRegisterImport
-      parentRoute: typeof rootRoute
-    }
-  }
-}
-
-// Create and export the route tree
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/dashboard': typeof DashboardRoute
   '/editor': typeof EditorRoute
   '/websites': typeof WebsitesRoute
-  '/account': typeof AuthAccountRoute
+  '/account': typeof AccountAccountRoute
+  '/confirm-password': typeof AuthConfirmPasswordRoute
+  '/forgot-password': typeof AuthForgotPasswordRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
+  '/reset-password': typeof AuthResetPasswordRoute
+  '/verify-email': typeof AuthVerifyEmailRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/dashboard': typeof DashboardRoute
   '/editor': typeof EditorRoute
   '/websites': typeof WebsitesRoute
-  '/account': typeof AuthAccountRoute
+  '/account': typeof AccountAccountRoute
+  '/confirm-password': typeof AuthConfirmPasswordRoute
+  '/forgot-password': typeof AuthForgotPasswordRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
+  '/reset-password': typeof AuthResetPasswordRoute
+  '/verify-email': typeof AuthVerifyEmailRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/dashboard': typeof DashboardRoute
   '/editor': typeof EditorRoute
   '/websites': typeof WebsitesRoute
-  '/_auth/account': typeof AuthAccountRoute
+  '/_account/account': typeof AccountAccountRoute
+  '/_auth/confirm-password': typeof AuthConfirmPasswordRoute
+  '/_auth/forgot-password': typeof AuthForgotPasswordRoute
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/register': typeof AuthRegisterRoute
+  '/_auth/reset-password': typeof AuthResetPasswordRoute
+  '/_auth/verify-email': typeof AuthVerifyEmailRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/dashboard'
     | '/editor'
     | '/websites'
     | '/account'
+    | '/confirm-password'
+    | '/forgot-password'
     | '/login'
     | '/register'
+    | '/reset-password'
+    | '/verify-email'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/dashboard'
     | '/editor'
     | '/websites'
     | '/account'
+    | '/confirm-password'
+    | '/forgot-password'
     | '/login'
     | '/register'
+    | '/reset-password'
+    | '/verify-email'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/dashboard'
     | '/editor'
     | '/websites'
-    | '/_auth/account'
+    | '/_account/account'
+    | '/_auth/confirm-password'
+    | '/_auth/forgot-password'
     | '/_auth/login'
     | '/_auth/register'
+    | '/_auth/reset-password'
+    | '/_auth/verify-email'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  DashboardRoute: typeof DashboardRoute
   EditorRoute: typeof EditorRoute
   WebsitesRoute: typeof WebsitesRoute
-  AuthAccountRoute: typeof AuthAccountRoute
+  AccountAccountRoute: typeof AccountAccountRoute
+  AuthConfirmPasswordRoute: typeof AuthConfirmPasswordRoute
+  AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
+  AuthResetPasswordRoute: typeof AuthResetPasswordRoute
+  AuthVerifyEmailRoute: typeof AuthVerifyEmailRoute
+}
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/websites': {
+      id: '/websites'
+      path: '/websites'
+      fullPath: '/websites'
+      preLoaderRoute: typeof WebsitesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/editor': {
+      id: '/editor'
+      path: '/editor'
+      fullPath: '/editor'
+      preLoaderRoute: typeof EditorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth/verify-email': {
+      id: '/_auth/verify-email'
+      path: '/verify-email'
+      fullPath: '/verify-email'
+      preLoaderRoute: typeof AuthVerifyEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth/reset-password': {
+      id: '/_auth/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof AuthResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth/register': {
+      id: '/_auth/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof AuthRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth/login': {
+      id: '/_auth/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth/forgot-password': {
+      id: '/_auth/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof AuthForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth/confirm-password': {
+      id: '/_auth/confirm-password'
+      path: '/confirm-password'
+      fullPath: '/confirm-password'
+      preLoaderRoute: typeof AuthConfirmPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_account/account': {
+      id: '/_account/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountAccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  DashboardRoute: DashboardRoute,
   EditorRoute: EditorRoute,
   WebsitesRoute: WebsitesRoute,
-  AuthAccountRoute: AuthAccountRoute,
+  AccountAccountRoute: AccountAccountRoute,
+  AuthConfirmPasswordRoute: AuthConfirmPasswordRoute,
+  AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthRegisterRoute: AuthRegisterRoute,
+  AuthResetPasswordRoute: AuthResetPasswordRoute,
+  AuthVerifyEmailRoute: AuthVerifyEmailRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/about",
-        "/editor",
-        "/websites",
-        "/_auth/account",
-        "/_auth/login",
-        "/_auth/register"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/about": {
-      "filePath": "about.tsx"
-    },
-    "/editor": {
-      "filePath": "editor.tsx"
-    },
-    "/websites": {
-      "filePath": "websites.tsx"
-    },
-    "/_auth/account": {
-      "filePath": "_auth/account.tsx"
-    },
-    "/_auth/login": {
-      "filePath": "_auth/login.tsx"
-    },
-    "/_auth/register": {
-      "filePath": "_auth/register.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */

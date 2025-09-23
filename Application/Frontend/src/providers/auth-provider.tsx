@@ -4,8 +4,8 @@ import axios from "@/axios";
 import {AuthContext} from "@/contexts/auth-context";
 import {User} from "@/types/user.ts";
 import {LoginCredentials, RegisterCredentials} from "@/types/auth.ts";
-import {redirect} from "@tanstack/react-router";
 import {toast} from "sonner";
+import {redirect} from "@tanstack/react-router";
 
 
 export const AuthProvider = ({children}: { children: ReactNode }) => {

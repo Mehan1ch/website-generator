@@ -48,7 +48,7 @@ export function RegisterForm({
     const onSubmit = async (data: RegisterCredentials) => {
         try {
             await register(data);
-            router.navigate({to: "/login"});
+            await router.navigate({to: "/login"});
         } catch {
             form.reset();
         }
@@ -128,6 +128,7 @@ export function RegisterForm({
                         />
                     </div>
                     <Button type="submit" className="w-full">
+                        {/* Add loadercircle or spinner here if needed and set processing state */}
                         Register
                     </Button>
                     <div
