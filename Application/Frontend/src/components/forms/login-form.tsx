@@ -15,12 +15,19 @@ const formSchema = z.object({
     password: z.string().min(8, "Password must be at least 8 characters long")
 })
 
+type LoginFormProps = {
+    redirect?: string;
+    className?: string;
+} & React.ComponentPropsWithoutRef<"form">;
+
 export function LoginForm({
                               className,
+                              redirect,
                               ...props
-                          }: React.ComponentPropsWithoutRef<"form">) {
+                          }: LoginFormProps) {
     const {login} = useAuth();
     const router = useRouter();
+    const redirectTo: string = redirect || "/";
 
     const form = useForm<LoginCredentials>({
         resolver: zodResolver(formSchema),
@@ -35,7 +42,7 @@ export function LoginForm({
     const onSubmit = async (data: LoginCredentials) => {
         try {
             await login(data);
-            await router.navigate({to: "/dashboard"});
+            router.history.push(redirect || "/");
         } catch {
             form.reset();
         }
@@ -99,7 +106,9 @@ export function LoginForm({
                 </div>
                 <div className="text-center text-sm">
                     Don&apos;t have an account?{" "}
-                    <Link to={"/register"} className="underline underline-offset-4">
+                    <Link to={"/register"} className="underline underline-offset-4" search={{
+                        redirect: redirectTo
+                    }}>
                         Sign up
                     </Link>
                 </div>

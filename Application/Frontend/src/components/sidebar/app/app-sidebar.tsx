@@ -1,5 +1,5 @@
 import * as React from "react"
-import {Globe, LayoutDashboard, PencilIcon, User} from "lucide-react"
+import {Globe, LayoutDashboard, PencilIcon} from "lucide-react"
 
 import {NavMain} from "@/components/sidebar/nav-main.tsx"
 import {NavUser} from "@/components/sidebar/nav-user.tsx"
@@ -8,9 +8,7 @@ import {
     SidebarContent,
     SidebarFooter,
     SidebarHeader,
-    SidebarMenu,
     SidebarMenuButton,
-    SidebarMenuItem,
     SidebarRail,
 } from "@/components/ui/sidebar.tsx"
 import {useAuth} from "@/hooks/use-auth.tsx";
@@ -22,33 +20,29 @@ import {NavSection} from "@/types/nav-section.ts";
 const navMain: NavSection[] = [
     {
         title: "Dashboard",
-        url: "/",
+        url: "/dashboard",
         icon: LayoutDashboard,
-        authRequired: false,
     },
     {
         title: "Websites",
         url: "/websites",
         icon: Globe,
-        authRequired: true,
     },
     {
         title: "Editor",
         url: "/editor",
         icon: PencilIcon,
-        authRequired: true,
     }
 ];
 
 export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
     const appTitle = import.meta.env.VITE_APP_NAME || "Default App Title";
-    const {user, isAuthenticated} = useAuth();
+    const {user} = useAuth();
     const router = useRouter();
 
-    const filteredNavMain = navMain.filter(item => !item.authRequired || isAuthenticated);
 
     return (
-        <Sidebar collapsible="icon" {...props}>
+        <Sidebar variant={"inset"} collapsible={"icon"} {...props}>
             <SidebarHeader>
                 <SidebarMenuButton size="lg" asChild onClick={() => router.navigate({to: "/dashboard"})}>
                     <div>
@@ -63,29 +57,11 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
                 </SidebarMenuButton>
             </SidebarHeader>
             <SidebarContent>
-                <NavMain items={filteredNavMain}/>
+                <NavMain items={navMain}/>
             </SidebarContent>
             <SidebarFooter>
                 <SideBarModeToggle/>
-                {isAuthenticated ?
-                    <NavUser user={user!}/> :
-                    <SidebarMenu>
-                        <SidebarMenuItem>
-                            <SidebarMenuButton variant="default" size="lg" asChild
-                                               onClick={() => router.navigate({to: "/login"})}>
-                                <div>
-                                    <div
-                                        className="flex aspect-square size-8 items-center justify-center rounded-lg">
-                                        <User className="-ml-auto"/>
-                                    </div>
-                                    <div className="flex flex-col gap-0.5 leading-none">
-                                        <span className="font-semibold">Login</span>
-                                    </div>
-                                </div>
-                            </SidebarMenuButton>
-                        </SidebarMenuItem>
-                    </SidebarMenu>
-                }
+                <NavUser user={user!}/>
             </SidebarFooter>
             <SidebarRail/>
         </Sidebar>

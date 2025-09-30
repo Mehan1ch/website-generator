@@ -25,10 +25,16 @@ const formSchema = z.object({
     }
 });
 
+type RegisterFormProps = {
+    className?: string;
+    redirect?: string;
+} & React.ComponentPropsWithoutRef<"form">;
+
 export function RegisterForm({
                                  className,
+                                 redirect,
                                  ...props
-                             }: React.ComponentPropsWithoutRef<"form">) {
+                             }: RegisterFormProps) {
 
     const router = useRouter();
     const {register} = useAuth();
@@ -48,7 +54,7 @@ export function RegisterForm({
     const onSubmit = async (data: RegisterCredentials) => {
         try {
             await register(data);
-            await router.navigate({to: "/login"});
+            await router.navigate({to: redirect});
         } catch {
             form.reset();
         }
@@ -137,7 +143,9 @@ export function RegisterForm({
                 </div>
                 <div className="text-center text-sm">
                     Already have an account?{" "}
-                    <Link to={"/login"} className="underline underline-offset-4">
+                    <Link to={"/login"} className="underline underline-offset-4" search={{
+                        redirect: redirect || "/",
+                    }}>
                         Login
                     </Link>
                 </div>

@@ -158,7 +158,7 @@ const data = {
 
 export function EditorSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
     return (
-        <Sidebar {...props}>
+        <Sidebar variant={"inset"} {...props}>
             <SidebarContent>
                 <SidebarGroup>
                     <SidebarGroupLabel>Table of Contents</SidebarGroupLabel>

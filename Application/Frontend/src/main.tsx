@@ -15,7 +15,8 @@ const router = createRouter({
     routeTree,
     context: {
         queryClient,
-        auth: undefined!
+        auth: undefined!,
+        getTitle: () => "",
     },
     defaultPreload: 'intent',
     // Since we're using React Query, we don't want loader calls to ever be stale
@@ -34,7 +35,6 @@ declare module '@tanstack/react-router' {
 // eslint-disable-next-line react-refresh/only-export-components
 function InnerApp() {
     const auth = useAuth()
-    console.log("authOnMain", auth)
     return <RouterProvider router={router} context={{
         queryClient,
         auth

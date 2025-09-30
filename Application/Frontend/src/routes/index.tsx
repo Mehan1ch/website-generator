@@ -7,6 +7,9 @@ import {TypographyH3} from "@/components/ui/typography/typography-h3.tsx";
 import {useAuth} from "@/hooks/use-auth.tsx";
 
 export const Route = createFileRoute("/")({
+    validateSearch: (search) => ({
+        redirect: (search.redirect as string) || '/',
+    }),
     component: Index,
 });
 
@@ -14,6 +17,7 @@ function Index() {
     const {VITE_APP_NAME} = import.meta.env;
     const {isAuthenticated} = useAuth();
     const router = useRouter();
+    const {redirect} = Route.useSearch();
     return (
         <div className="min-h-screen bg-background flex flex-col">
             {/* Top Bar */}
@@ -27,11 +31,22 @@ function Index() {
                     </div>
                     {!isAuthenticated ? (
                         <>
-                            <Button onClick={() => router.navigate({to: "/login"})}>Login</Button>
-                            <Button onClick={() => router.navigate({to: "/register"})}>Register</Button>
+                            <Button onClick={() => router.navigate({
+                                to: "/login",
+                                search: {redirect: redirect}
+                            })}>
+                                Login
+                            </Button>
+                            <Button onClick={() => router.navigate({
+                                to: "/register",
+                                search: {redirect: redirect}
+                            })}>Register</Button>
                         </>
                     ) : (
-                        <Button onClick={() => router.navigate({to: "/dashboard"})}>Go to Dashboard
+                        <Button onClick={() => router.navigate({
+                            to: "/dashboard",
+                            search: {redirect: redirect}
+                        })}>Go to Dashboard
                         </Button>
                     )
                     }
@@ -51,10 +66,10 @@ function Index() {
                             required—just design, publish, and share!
                         </p>
                         <div className="flex space-x-2">
-                            <Link to={"/register"}>
+                            <Link to={"/register"} search={{redirect: redirect}}>
                                 <Button>Get Started</Button>
                             </Link>
-                            <Link to={"/login"}>
+                            <Link to={"/login"} search={{redirect: redirect}}>
                                 <Button variant="outline">Login</Button>
                             </Link>
                         </div>

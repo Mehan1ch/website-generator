@@ -46,6 +46,9 @@ export const AuthProvider = ({children}: { children: ReactNode }) => {
                     await queryClient.invalidateQueries({queryKey: ['auth']});
                     throw redirect({
                         to: "/login",
+                        search: {
+                            redirect: location.href
+                        }
                     })
                 }
                 return Promise.reject(error);

@@ -17,14 +17,14 @@ import {User} from "@/types/user.ts";
 import {useAuth} from "@/hooks/use-auth.tsx";
 import {Link, useRouter} from "@tanstack/react-router";
 
-export function NavUser({
-                            user,
-                        }: {
-    user: User
-}) {
+export function NavUser({user}: { user: User }) {
     const {isMobile} = useSidebar()
-    const {logout} = useAuth()
-    const router = useRouter();
+    const {logout, isAuthenticated} = useAuth()
+    const router = useRouter()
+
+    if (!isAuthenticated) {
+        router.history.replace("/")
+    }
 
     return (
         <SidebarMenu>
@@ -66,15 +66,16 @@ export function NavUser({
                         </DropdownMenuLabel>
                         <DropdownMenuSeparator/>
                         <DropdownMenuGroup>
-                            <DropdownMenuItem>
-                                <BadgeCheck/>
-                                <Link to={"/account"}>Account</Link>
-                            </DropdownMenuItem>
+                            <Link to={"/account"}>
+                                <DropdownMenuItem>
+                                    <BadgeCheck/>
+                                    Account
+                                </DropdownMenuItem>
+                            </Link>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator/>
                         <DropdownMenuItem onClick={async () => {
-                            await logout();
-                            await router.navigate({to: "/"})
+                            await logout()
                         }}>
                             <LogOut/> Logout
                         </DropdownMenuItem>

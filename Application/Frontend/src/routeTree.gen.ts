@@ -9,10 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as WebsitesRouteImport } from './routes/websites'
-import { Route as EditorRouteImport } from './routes/editor'
-import { Route as DashboardRouteImport } from './routes/dashboard'
-import { Route as AboutRouteImport } from './routes/about'
+import { Route as AppRouteRouteImport } from './routes/_app/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthVerifyEmailRouteImport } from './routes/_auth/verify-email'
 import { Route as AuthResetPasswordRouteImport } from './routes/_auth/reset-password'
@@ -20,26 +17,13 @@ import { Route as AuthRegisterRouteImport } from './routes/_auth/register'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as AuthForgotPasswordRouteImport } from './routes/_auth/forgot-password'
 import { Route as AuthConfirmPasswordRouteImport } from './routes/_auth/confirm-password'
-import { Route as AccountAccountRouteImport } from './routes/_account/account'
+import { Route as AppWebsitesRouteImport } from './routes/_app/websites'
+import { Route as AppEditorRouteImport } from './routes/_app/editor'
+import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
+import { Route as AppAccountIndexRouteImport } from './routes/_app/account/index'
 
-const WebsitesRoute = WebsitesRouteImport.update({
-  id: '/websites',
-  path: '/websites',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EditorRoute = EditorRouteImport.update({
-  id: '/editor',
-  path: '/editor',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DashboardRoute = DashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
+const AppRouteRoute = AppRouteRouteImport.update({
+  id: '/_app',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -77,107 +61,114 @@ const AuthConfirmPasswordRoute = AuthConfirmPasswordRouteImport.update({
   path: '/confirm-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AccountAccountRoute = AccountAccountRouteImport.update({
-  id: '/_account/account',
-  path: '/account',
-  getParentRoute: () => rootRouteImport,
+const AppWebsitesRoute = AppWebsitesRouteImport.update({
+  id: '/websites',
+  path: '/websites',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppEditorRoute = AppEditorRouteImport.update({
+  id: '/editor',
+  path: '/editor',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppDashboardRoute = AppDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppAccountIndexRoute = AppAccountIndexRouteImport.update({
+  id: '/account/',
+  path: '/account/',
+  getParentRoute: () => AppRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/dashboard': typeof DashboardRoute
-  '/editor': typeof EditorRoute
-  '/websites': typeof WebsitesRoute
-  '/account': typeof AccountAccountRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/editor': typeof AppEditorRoute
+  '/websites': typeof AppWebsitesRoute
   '/confirm-password': typeof AuthConfirmPasswordRoute
   '/forgot-password': typeof AuthForgotPasswordRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
   '/reset-password': typeof AuthResetPasswordRoute
   '/verify-email': typeof AuthVerifyEmailRoute
+  '/account': typeof AppAccountIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/dashboard': typeof DashboardRoute
-  '/editor': typeof EditorRoute
-  '/websites': typeof WebsitesRoute
-  '/account': typeof AccountAccountRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/editor': typeof AppEditorRoute
+  '/websites': typeof AppWebsitesRoute
   '/confirm-password': typeof AuthConfirmPasswordRoute
   '/forgot-password': typeof AuthForgotPasswordRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
   '/reset-password': typeof AuthResetPasswordRoute
   '/verify-email': typeof AuthVerifyEmailRoute
+  '/account': typeof AppAccountIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/dashboard': typeof DashboardRoute
-  '/editor': typeof EditorRoute
-  '/websites': typeof WebsitesRoute
-  '/_account/account': typeof AccountAccountRoute
+  '/_app': typeof AppRouteRouteWithChildren
+  '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/editor': typeof AppEditorRoute
+  '/_app/websites': typeof AppWebsitesRoute
   '/_auth/confirm-password': typeof AuthConfirmPasswordRoute
   '/_auth/forgot-password': typeof AuthForgotPasswordRoute
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/register': typeof AuthRegisterRoute
   '/_auth/reset-password': typeof AuthResetPasswordRoute
   '/_auth/verify-email': typeof AuthVerifyEmailRoute
+  '/_app/account/': typeof AppAccountIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/about'
     | '/dashboard'
     | '/editor'
     | '/websites'
-    | '/account'
     | '/confirm-password'
     | '/forgot-password'
     | '/login'
     | '/register'
     | '/reset-password'
     | '/verify-email'
+    | '/account'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/about'
     | '/dashboard'
     | '/editor'
     | '/websites'
-    | '/account'
     | '/confirm-password'
     | '/forgot-password'
     | '/login'
     | '/register'
     | '/reset-password'
     | '/verify-email'
+    | '/account'
   id:
     | '__root__'
     | '/'
-    | '/about'
-    | '/dashboard'
-    | '/editor'
-    | '/websites'
-    | '/_account/account'
+    | '/_app'
+    | '/_app/dashboard'
+    | '/_app/editor'
+    | '/_app/websites'
     | '/_auth/confirm-password'
     | '/_auth/forgot-password'
     | '/_auth/login'
     | '/_auth/register'
     | '/_auth/reset-password'
     | '/_auth/verify-email'
+    | '/_app/account/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
-  DashboardRoute: typeof DashboardRoute
-  EditorRoute: typeof EditorRoute
-  WebsitesRoute: typeof WebsitesRoute
-  AccountAccountRoute: typeof AccountAccountRoute
+  AppRouteRoute: typeof AppRouteRouteWithChildren
   AuthConfirmPasswordRoute: typeof AuthConfirmPasswordRoute
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthLoginRoute: typeof AuthLoginRoute
@@ -188,32 +179,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/websites': {
-      id: '/websites'
-      path: '/websites'
-      fullPath: '/websites'
-      preLoaderRoute: typeof WebsitesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/editor': {
-      id: '/editor'
-      path: '/editor'
-      fullPath: '/editor'
-      preLoaderRoute: typeof EditorRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AppRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -265,23 +235,58 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthConfirmPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_account/account': {
-      id: '/_account/account'
+    '/_app/websites': {
+      id: '/_app/websites'
+      path: '/websites'
+      fullPath: '/websites'
+      preLoaderRoute: typeof AppWebsitesRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/_app/editor': {
+      id: '/_app/editor'
+      path: '/editor'
+      fullPath: '/editor'
+      preLoaderRoute: typeof AppEditorRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/_app/dashboard': {
+      id: '/_app/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/_app/account/': {
+      id: '/_app/account/'
       path: '/account'
       fullPath: '/account'
-      preLoaderRoute: typeof AccountAccountRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppAccountIndexRouteImport
+      parentRoute: typeof AppRouteRoute
     }
   }
 }
 
+interface AppRouteRouteChildren {
+  AppDashboardRoute: typeof AppDashboardRoute
+  AppEditorRoute: typeof AppEditorRoute
+  AppWebsitesRoute: typeof AppWebsitesRoute
+  AppAccountIndexRoute: typeof AppAccountIndexRoute
+}
+
+const AppRouteRouteChildren: AppRouteRouteChildren = {
+  AppDashboardRoute: AppDashboardRoute,
+  AppEditorRoute: AppEditorRoute,
+  AppWebsitesRoute: AppWebsitesRoute,
+  AppAccountIndexRoute: AppAccountIndexRoute,
+}
+
+const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
+  AppRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
-  DashboardRoute: DashboardRoute,
-  EditorRoute: EditorRoute,
-  WebsitesRoute: WebsitesRoute,
-  AccountAccountRoute: AccountAccountRoute,
+  AppRouteRoute: AppRouteRouteWithChildren,
   AuthConfirmPasswordRoute: AuthConfirmPasswordRoute,
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthLoginRoute: AuthLoginRoute,

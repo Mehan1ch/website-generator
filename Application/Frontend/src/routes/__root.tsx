@@ -3,10 +3,13 @@ import {QueryClient} from "@tanstack/react-query";
 import {TanStackRouterDevtools} from "@tanstack/react-router-devtools";
 import {AuthContextType} from "@/types/auth.ts";
 
-export const Route = createRootRouteWithContext<{
+interface RouterContext {
     queryClient: QueryClient,
     auth: AuthContextType,
-}>()({
+    getTitle: () => string,
+}
+
+export const Route = createRootRouteWithContext<RouterContext>()({
     component: () => (
         <>
             <Outlet/>
@@ -14,10 +17,11 @@ export const Route = createRootRouteWithContext<{
         </>
     ),
     notFoundComponent: () => {
+        //TODO: better looking 404 page
         return (
             <div>
                 <p>This is the notFoundComponent configured on root route</p>
-                <Link to="/">Start Over</Link>
+                <Link to="/" search={{redirect: "/"}}>Start Over</Link>
             </div>
         )
     },

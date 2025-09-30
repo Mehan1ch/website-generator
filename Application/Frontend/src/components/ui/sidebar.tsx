@@ -49,18 +49,28 @@ function SidebarProvider({
                              className,
                              style,
                              children,
+                             name,
                              ...props
                          }: React.ComponentProps<"div"> & {
     defaultOpen?: boolean
     open?: boolean
     onOpenChange?: (open: boolean) => void
+    name: string
 }) {
     const isMobile = useIsMobile()
     const [openMobile, setOpenMobile] = React.useState(false)
 
     // This is the internal state of the sidebar.
     // We use openProp and setOpenProp for control from outside the component.
-    const [_open, _setOpen] = React.useState(defaultOpen)
+    const [_open, _setOpen] = React.useState(
+        () => {
+            const cookieValue = document.cookie
+                .split("; ")
+                .find((row) => row.startsWith(`${name}:state=`))
+                ?.split("=")[1];
+            return cookieValue === "true" ? true : defaultOpen;
+        }
+    )
     const open = openProp ?? _open
     const setOpen = React.useCallback(
         (value: boolean | ((value: boolean) => boolean)) => {

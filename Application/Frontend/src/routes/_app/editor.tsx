@@ -1,5 +1,4 @@
-import {createFileRoute, redirect} from '@tanstack/react-router'
-import AppWrapper from "@/components/sidebar/app-wrapper.tsx";
+import {createFileRoute} from '@tanstack/react-router'
 import {Card, CardContent} from "@/components/ui/card.tsx";
 import {Toolbox} from "@/components/editor/toolbox.tsx";
 import {SettingsPanel} from "@/components/editor/settings-panel.tsx";
@@ -11,21 +10,21 @@ import {EditorCard, EditorCardBottom, EditorCardTop} from "@/components/editor/e
 import {Topbar} from "@/components/editor/topbar.tsx";
 
 
-export const Route = createFileRoute('/editor')({
-    beforeLoad: ({context}) => {
-        if (!context.auth.isAuthenticated) {
-            throw redirect({to: "/login"})
+export const Route = createFileRoute('/_app/editor')({
+    beforeLoad: () => {
+        return {
+            getTitle: () => 'Editor',
         }
     },
     component: EditorPage,
 })
 
+//TODO: Inspiration for final look can be taken from grapes js editor: https://grapesjs.com/demo.html
+
 function EditorPage() {
-    return <AppWrapper header={'Editor'}>
-        <div className="text-2xl font-semibold text-center mt-4">
-            Edit your page
-        </div>
-        <Editor resolver={{EditorCard, EditorButton, EditorText, EditorContainer, EditorCardTop, EditorCardBottom}}>
+    return <div className="flex-1 m-4">
+        <Editor
+            resolver={{EditorCard, EditorButton, EditorText, EditorContainer, EditorCardTop, EditorCardBottom}}>
             <Topbar/>
             <div className="flex gap-3 pt-3">
                 <div className="flex-1">
@@ -51,5 +50,5 @@ function EditorPage() {
                 </div>
             </div>
         </Editor>
-    </AppWrapper>
+    </div>
 }

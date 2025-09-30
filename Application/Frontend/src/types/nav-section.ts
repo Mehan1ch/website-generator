@@ -4,5 +4,4 @@ export type NavSection = {
     title: string;
     url: string;
     icon: LucideIcon;
-    authRequired: boolean;
 }
