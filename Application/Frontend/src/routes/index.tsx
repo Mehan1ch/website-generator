@@ -66,17 +66,20 @@ function Index() {
                             required—just design, publish, and share!
                         </p>
                         <div className="flex space-x-2">
-                            <Link to={"/register"} search={{redirect: redirect}}>
-                                <Button>Get Started</Button>
-                            </Link>
-                            <Link to={"/login"} search={{redirect: redirect}}>
-                                <Button variant="outline">Login</Button>
-                            </Link>
+                            {!isAuthenticated ? (
+                                <><Link to={"/register"} search={{redirect: redirect}}>
+                                    <Button>Get Started</Button>
+                                </Link><Link to={"/login"} search={{redirect: redirect}}>
+                                    <Button variant="outline">Login</Button>
+                                </Link></>) : (
+                                <Link to={"/dashboard"} search={{redirect: redirect}}>
+                                    <Button>Go to Dashboard</Button>
+                                </Link>
+                            )}
                         </div>
                     </CardContent>
                 </Card>
             </main>
         </div>
-    )
-        ;
+    );
 }
