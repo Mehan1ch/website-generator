@@ -2,7 +2,13 @@ import {createFileRoute, Outlet, redirect, useRouterState} from '@tanstack/react
 import {SidebarInset, SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar.tsx";
 import {AppSidebar} from "@/components/sidebar/app/app-sidebar.tsx";
 import {Separator} from "@/components/ui/separator.tsx";
-import {Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList} from "@/components/ui/breadcrumb.tsx";
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbSeparator
+} from "@/components/ui/breadcrumb.tsx";
 
 export const Route = createFileRoute('/_app')({
     beforeLoad: async ({location, context}) => {
@@ -23,13 +29,14 @@ function AppLayout() {
 
     const matches = useRouterState({select: (s) => s.matches})
 
-    const matchWithTitle = [...matches]
-        .reverse()
-        .find((d) => d.context.getTitle)
-
-    const title = matchWithTitle?.context.getTitle() || 'My App'
-    const path = matchWithTitle?.pathname || '/'
-
+    const breadcrumbs = matches
+        .filter((match) => match.context.getTitle)
+        .map(({pathname, context}) => {
+            return {
+                title: context.getTitle(),
+                path: pathname,
+            }
+        }).filter((breadcrumb) => breadcrumb.path !== "/")
 
     return <SidebarProvider name={"App"}>
         <AppSidebar/>
@@ -41,11 +48,17 @@ function AppLayout() {
                     className="mr-2 data-[orientation=vertical]:h-4"/>
                 <Breadcrumb>
                     <BreadcrumbList>
-                        <BreadcrumbItem className="hidden md:block">
-                            <BreadcrumbLink href={path}>
-                                {title}
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
+                        {breadcrumbs.map((breadcrumb, index) => (
+                            <>
+                                <BreadcrumbItem key={index}
+                                                className={index === breadcrumbs.length - 1 ? "hidden md:block" : ""}>
+                                    <BreadcrumbLink href={breadcrumb.path}>
+                                        {breadcrumb.title}
+                                    </BreadcrumbLink>
+                                </BreadcrumbItem>
+                                {(index < breadcrumbs.length - 1) && <BreadcrumbSeparator className="hidden md:block"/>}
+                            </>
+                        ))}
                     </BreadcrumbList>
                 </Breadcrumb>
             </header>
