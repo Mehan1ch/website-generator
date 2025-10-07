@@ -25,6 +25,7 @@ const formSchema = z.object({
     }
 });
 
+//TODO: replace UI with new official shadcn block
 type RegisterFormProps = {
     className?: string;
     redirect?: string;

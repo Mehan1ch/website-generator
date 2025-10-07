@@ -15,6 +15,7 @@ const formSchema = z.object({
     password: z.string().min(8, "Password must be at least 8 characters long")
 })
 
+//TODO: replace UI with new simpler shadcn block
 type LoginFormProps = {
     redirect?: string;
     className?: string;

@@ -66,7 +66,7 @@ export const AuthProvider = ({children}: { children: ReactNode }) => {
             await axios.get('/sanctum/csrf-cookie');
 
             // Perform login
-            await axios.post('/login', credentials);
+            await axios.post('/api/login', credentials);
 
             // Fetch user data
             const userResponse = await axios.get('/api/user');
@@ -86,7 +86,7 @@ export const AuthProvider = ({children}: { children: ReactNode }) => {
 
     const logout = async () => {
         try {
-            await axios.post('/logout');
+            await axios.post('/api/logout');
             setUser(null);
             setIsAuthenticated(false);
             await queryClient.invalidateQueries({queryKey: ['auth']});
@@ -102,7 +102,7 @@ export const AuthProvider = ({children}: { children: ReactNode }) => {
             await axios.get('/sanctum/csrf-cookie');
 
             // Perform registration
-            await axios.post('/register', credentials);
+            await axios.post('/api/register', credentials);
 
             // Invalidate auth queries
             await queryClient.invalidateQueries({queryKey: ['auth']});
