@@ -20,7 +20,7 @@ import { Route as AuthConfirmPasswordRouteImport } from './routes/_auth/confirm-
 import { Route as AppWebsitesRouteImport } from './routes/_app/websites'
 import { Route as AppEditorRouteImport } from './routes/_app/editor'
 import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
-import { Route as AppAccountIndexRouteImport } from './routes/_app/account/index'
+import { Route as AppAccountRouteImport } from './routes/_app/account'
 
 const AppRouteRoute = AppRouteRouteImport.update({
   id: '/_app',
@@ -76,14 +76,15 @@ const AppDashboardRoute = AppDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AppRouteRoute,
 } as any)
-const AppAccountIndexRoute = AppAccountIndexRouteImport.update({
-  id: '/account/',
-  path: '/account/',
+const AppAccountRoute = AppAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
   getParentRoute: () => AppRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/account': typeof AppAccountRoute
   '/dashboard': typeof AppDashboardRoute
   '/editor': typeof AppEditorRoute
   '/websites': typeof AppWebsitesRoute
@@ -93,10 +94,10 @@ export interface FileRoutesByFullPath {
   '/register': typeof AuthRegisterRoute
   '/reset-password': typeof AuthResetPasswordRoute
   '/verify-email': typeof AuthVerifyEmailRoute
-  '/account': typeof AppAccountIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/account': typeof AppAccountRoute
   '/dashboard': typeof AppDashboardRoute
   '/editor': typeof AppEditorRoute
   '/websites': typeof AppWebsitesRoute
@@ -106,12 +107,12 @@ export interface FileRoutesByTo {
   '/register': typeof AuthRegisterRoute
   '/reset-password': typeof AuthResetPasswordRoute
   '/verify-email': typeof AuthVerifyEmailRoute
-  '/account': typeof AppAccountIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteRouteWithChildren
+  '/_app/account': typeof AppAccountRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/editor': typeof AppEditorRoute
   '/_app/websites': typeof AppWebsitesRoute
@@ -121,12 +122,12 @@ export interface FileRoutesById {
   '/_auth/register': typeof AuthRegisterRoute
   '/_auth/reset-password': typeof AuthResetPasswordRoute
   '/_auth/verify-email': typeof AuthVerifyEmailRoute
-  '/_app/account/': typeof AppAccountIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/account'
     | '/dashboard'
     | '/editor'
     | '/websites'
@@ -136,10 +137,10 @@ export interface FileRouteTypes {
     | '/register'
     | '/reset-password'
     | '/verify-email'
-    | '/account'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/account'
     | '/dashboard'
     | '/editor'
     | '/websites'
@@ -149,11 +150,11 @@ export interface FileRouteTypes {
     | '/register'
     | '/reset-password'
     | '/verify-email'
-    | '/account'
   id:
     | '__root__'
     | '/'
     | '/_app'
+    | '/_app/account'
     | '/_app/dashboard'
     | '/_app/editor'
     | '/_app/websites'
@@ -163,7 +164,6 @@ export interface FileRouteTypes {
     | '/_auth/register'
     | '/_auth/reset-password'
     | '/_auth/verify-email'
-    | '/_app/account/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -256,28 +256,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDashboardRouteImport
       parentRoute: typeof AppRouteRoute
     }
-    '/_app/account/': {
-      id: '/_app/account/'
+    '/_app/account': {
+      id: '/_app/account'
       path: '/account'
       fullPath: '/account'
-      preLoaderRoute: typeof AppAccountIndexRouteImport
+      preLoaderRoute: typeof AppAccountRouteImport
       parentRoute: typeof AppRouteRoute
     }
   }
 }
 
 interface AppRouteRouteChildren {
+  AppAccountRoute: typeof AppAccountRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppEditorRoute: typeof AppEditorRoute
   AppWebsitesRoute: typeof AppWebsitesRoute
-  AppAccountIndexRoute: typeof AppAccountIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
+  AppAccountRoute: AppAccountRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppEditorRoute: AppEditorRoute,
   AppWebsitesRoute: AppWebsitesRoute,
-  AppAccountIndexRoute: AppAccountIndexRoute,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
