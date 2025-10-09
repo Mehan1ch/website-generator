@@ -21,6 +21,9 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
-/.scribe
+/.scribe/endpoints.cache
+/.scribe/.filehashes
+/.scribe/auth.md
+/.scribe/intro.md
 /resources/views/scribe
 /public/vendor/scribe
