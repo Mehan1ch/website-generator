@@ -12,14 +12,14 @@ import {useAuth} from "@/hooks/use-auth.tsx";
 
 const formSchema = z.object({
     name: z.string().max(255, "Name must be at most 255 characters long"),
-    email: z.string().email("Invalid email address"),
+    email: z.email("Invalid email address"),
     password: z.string().min(8, "Password must be at least 8 characters long"),
     password_confirmation: z.string().min(8, "Password confirmation must be at least 8 characters long"),
 }).superRefine(({password, password_confirmation}, ctx) => {
     if (password !== password_confirmation) {
         ctx.addIssue({
             path: ["password_confirmation"],
-            code: z.ZodIssueCode.custom,
+            code: "custom",
             message: "Passwords do not match",
         })
     }
