@@ -10,8 +10,8 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: User
+      description: 'Get the authenticated user.'
       authenticated: false
       deprecated: false
       custom: []
@@ -27,8 +27,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
+        status: 200
+        content: '{"data":{"id":null,"name":"Mrs. Modesta Wilkinson IV","email":"russel.abbott@example.com","email_verified_at":"2025-10-15T21:55:10.000000Z","created_at":null,"updated_at":null}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json

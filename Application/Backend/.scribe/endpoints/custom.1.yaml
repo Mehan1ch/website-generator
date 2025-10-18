@@ -35,18 +35,7 @@
   responses:
     - status: 200
       description: Login successful.
-      content:
-        {
-          "user": {
-            "id": 1,
-            "name": "John Doe",
-            "email": "user@example.com",
-            "email_verified_at": "2024-01-01T00:00:00.000000Z",
-            "created_at": "2024-01-01T00:00:00.000000Z",
-            "updated_at": "2024-01-01T00:00:00.000000Z"
-          },
-          "token": "1|abc123def456ghi789"
-        }
+      content: null
     - status: 422
       description: Login failed - invalid credentials.
       content:
@@ -279,32 +268,6 @@
     - status: 204
       description: Email verified successfully.
       content: null
-
-# User Profile Group
-- httpMethods:
-    - GET
-  uri: /user
-  metadata:
-    groupName: User Profile
-    groupDescription: User profile management endpoints
-    title: Get User Profile
-    description: Get the authenticated user's profile information.
-    authenticated: true
-  headers:
-    Accept: application/json
-    Authorization: Bearer {token}
-  responses:
-    - status: 200
-      description: User profile retrieved successfully.
-      content:
-        {
-          "id": 1,
-          "name": "John Doe",
-          "email": "user@example.com",
-          "email_verified_at": "2024-01-01T00:00:00.000000Z",
-          "created_at": "2024-01-01T00:00:00.000000Z",
-          "updated_at": "2024-01-01T00:00:00.000000Z"
-        }
 
 - httpMethods:
     - PUT
