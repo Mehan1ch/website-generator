@@ -1,122 +1,96 @@
 import {ReactNode, useEffect, useState} from "react";
-import {useQueryClient} from "@tanstack/react-query";
-import axios from "@/axios";
-import {AuthContext} from "@/contexts/auth-context";
-import {User} from "@/types/user.ts";
-import {LoginCredentials, RegisterCredentials} from "@/types/auth.ts";
+import {Spinner} from "@/components/ui/spinner.tsx";
+import {LoginBody, RegisterBody} from "@/api/models";
+import {useGetCSRFCookie} from "@/api/endpoints/csrf-protection/csrf-protection.gen.ts";
+import {useLogin, useLogout, useRegister} from "@/api/endpoints/authentication/authentication.gen.ts";
 import {toast} from "sonner";
-import {redirect} from "@tanstack/react-router";
+import {AuthContext} from "@/contexts/auth-context";
+import {User} from "@/types/auth.ts";
+import {useUser} from "@/api/endpoints/endpoints/endpoints.gen.ts";
 
-
-export const AuthProvider = ({children}: { children: ReactNode }) => {
+export function AuthProvider({children}: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const queryClient = useQueryClient();
+    const [isLoading, setIsLoading] = useState(true);
+    const csrfQuery = useGetCSRFCookie({query: {enabled: false}});
+    const loginMutation = useLogin();
+    const logoutMutation = useLogout();
+    const registerMutation = useRegister();
+    const userQuery = useUser({query: {enabled: false}});
 
-    // Rehydrate auth state from localStorage on mount
+
+    // Restore auth state on app load
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         const storedAuth = localStorage.getItem('isAuthenticated');
-        if (storedUser && storedAuth === 'true') {
-            setUser(JSON.parse(storedUser));
+        if (storedUser && storedAuth) {
+            setUser(JSON.parse(storedUser) as User);
             setIsAuthenticated(true);
         }
+        setIsLoading(false);
     }, []);
 
-    // Save auth state to localStorage when it changes
-    useEffect(() => {
-        if (isAuthenticated && user) {
-            localStorage.setItem('user', JSON.stringify(user));
-            localStorage.setItem('isAuthenticated', 'true');
-        } else {
-            localStorage.removeItem('user');
-            localStorage.setItem('isAuthenticated', 'false');
-        }
-    }, [user, isAuthenticated]);
-
-    // Axios interceptor to attach CSRF token and handle expired sessions
-    useEffect(() => {
-        const interceptor = axios.interceptors.response.use(
-            (response) => response,
-            async (error) => {
-                if (error.response?.status === 401 || error.response?.status === 419) {
-                    // Token expired or unauthenticated
-                    setUser(null);
-                    setIsAuthenticated(false);
-                    await queryClient.invalidateQueries({queryKey: ['auth']});
-                    throw redirect({
-                        to: "/login",
-                        search: {
-                            redirect: location.href
-                        }
-                    })
-                }
-                return Promise.reject(error);
-            }
+    // Show loading state while checking auth
+    if (isLoading) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-screen space-y-4">
+                <Spinner/>
+                <p className="text-muted-foreground">Loading...</p>
+            </div>
         );
-
-        return () => {
-            axios.interceptors.response.eject(interceptor);
-        };
-    }, [queryClient]);
-
-    const login = async (credentials: LoginCredentials) => {
-        try {
-            // Fetch CSRF token
-            await axios.get('/sanctum/csrf-cookie');
-
-            // Perform login
-            await axios.post('/api/login', credentials);
-
-            // Fetch user data
-            const userResponse = await axios.get('/api/user');
-
-            const currentUser: User = userResponse.data;
-            setUser(currentUser);
-            setIsAuthenticated(true);
-
-            // Invalidate auth queries
-            await queryClient.invalidateQueries({queryKey: ['auth']});
-            toast.success("Login successful");
-        } catch (error) {
-            toast.error("Login failed");
-            throw error;
-        }
-    };
-
-    const logout = async () => {
-        try {
-            await axios.post('/api/logout');
-            setUser(null);
-            setIsAuthenticated(false);
-            await queryClient.invalidateQueries({queryKey: ['auth']});
-            toast.success("Logout successful");
-        } catch (error) {
-            toast.error("Logout failed");
-            throw error;
-        }
-    };
-
-    const register = async (credentials: RegisterCredentials) => {
-        try {
-            await axios.get('/sanctum/csrf-cookie');
-
-            // Perform registration
-            await axios.post('/api/register', credentials);
-
-            // Invalidate auth queries
-            await queryClient.invalidateQueries({queryKey: ['auth']});
-            toast.success("Registration successful");
-        } catch (error) {
-            // TODO: include error messages from the server in the toast
-            toast.error("Registration failed");
-            throw error;
-        }
     }
 
+    const login = async (credentials: LoginBody) => {
+        await csrfQuery.refetch();
+        await loginMutation.mutateAsync({data: credentials});
+        const {data, isError} = await userQuery.refetch();
+
+        if (loginMutation.isError || isError || !data) {
+            toast.error("Login failed!");
+            return {isSuccess: false, isError: true};
+        }
+
+        const userData: User = data.data as User;
+
+        setIsAuthenticated(true);
+        setUser(userData);
+        localStorage.setItem('user', JSON.stringify(data));
+        localStorage.setItem('isAuthenticated', 'true');
+        toast.success("Login successful!");
+        return {isSuccess: true, isError: false};
+    };
+
+
+    const logout = async () => {
+        await logoutMutation.mutateAsync();
+        if (logoutMutation.isError) {
+            toast.error("Logout failed!");
+            return {isSuccess: false, isError: true};
+        }
+        setUser(null);
+        setIsAuthenticated(false);
+        localStorage.removeItem('user');
+        localStorage.removeItem('isAuthenticated');
+        toast.success("Logout successful!");
+        return {isSuccess: false, isError: false};
+    };
+
+    const register = async (credentials: RegisterBody) => {
+        await csrfQuery.refetch();
+        await registerMutation.mutateAsync({
+            data: credentials
+        });
+        if (registerMutation.isError) {
+            toast.error("Registration failed!");
+            return {isSuccess: true, isError: false};
+        }
+        toast.success("Registration successful! Please log in.");
+        return {isSuccess: true, isError: false};
+    };
+
     return (
-        <AuthContext.Provider value={{user, isAuthenticated, login, logout, register}}>
+        <AuthContext.Provider value={{isAuthenticated, user, login, logout, register}}>
             {children}
         </AuthContext.Provider>
     );
-};
+}

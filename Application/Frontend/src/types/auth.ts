@@ -1,21 +1,16 @@
-import {User} from "@/types/user.ts";
+import {LoginBody, RegisterBody, User200Data} from "@/api/models";
+
+export type User = User200Data;
+
+export type AuthState = {
+    isError: boolean;
+    isSuccess: boolean;
+}
 
 export type AuthContextType = {
     user: User | null;
     isAuthenticated: boolean;
-    login: (credentials: LoginCredentials) => Promise<void>;
-    register: (credentials: RegisterCredentials) => Promise<void>;
-    logout: () => Promise<void>;
-}
-
-export type LoginCredentials = {
-    email: string;
-    password: string;
-}
-
-export type RegisterCredentials = {
-    name: string;
-    email: string;
-    password: string;
-    password_confirmation: string;
+    login: (credentials: LoginBody) => Promise<AuthState>;
+    register: (credentials: RegisterBody) => Promise<AuthState>;
+    logout: () => Promise<AuthState>;
 }

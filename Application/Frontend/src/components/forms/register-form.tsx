@@ -1,31 +1,17 @@
-import {cn} from "@/lib/utils"
-import {Button} from "@/components/ui/button"
-import {Input} from "@/components/ui/input"
+import {cn} from "@/lib/utils";
+import {Button} from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
 import * as React from "react";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form"
-import {z} from "zod";
+import {useState} from "react";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Link, useRouter} from "@tanstack/react-router";
-import {RegisterCredentials} from "@/types/auth.ts";
 import {useAuth} from "@/hooks/use-auth.tsx";
+import {RegisterBody} from "@/api/models";
+import {registerBody} from "@/api/endpoints/authentication/authentication.zod.ts";
+import {Spinner} from "@/components/ui/spinner.tsx";
 
-const formSchema = z.object({
-    name: z.string().max(255, "Name must be at most 255 characters long"),
-    email: z.email("Invalid email address"),
-    password: z.string().min(8, "Password must be at least 8 characters long"),
-    password_confirmation: z.string().min(8, "Password confirmation must be at least 8 characters long"),
-}).superRefine(({password, password_confirmation}, ctx) => {
-    if (password !== password_confirmation) {
-        ctx.addIssue({
-            path: ["password_confirmation"],
-            code: "custom",
-            message: "Passwords do not match",
-        })
-    }
-});
-
-//TODO: replace UI with new official shadcn block
 type RegisterFormProps = {
     className?: string;
     redirect?: string;
@@ -39,9 +25,10 @@ export function RegisterForm({
 
     const router = useRouter();
     const {register} = useAuth();
+    const [loading, setLoading] = useState(false);
 
-    const form = useForm<RegisterCredentials>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<RegisterBody>({
+        resolver: zodResolver(registerBody),
         defaultValues: {
             name: "",
             email: "",
@@ -50,16 +37,19 @@ export function RegisterForm({
         },
         mode: "onBlur",
         reValidateMode: "onBlur",
-    })
+    });
 
-    const onSubmit = async (data: RegisterCredentials) => {
-        try {
-            await register(data);
-            await router.navigate({to: redirect});
-        } catch {
+    const onSubmit = async (data: RegisterBody) => {
+        setLoading(true);
+        const {isError, isSuccess} = await register(data);
+        if (isError) {
             form.reset();
+            setLoading(false);
         }
-    }
+        if (isSuccess) {
+            router.history.push(redirect || "/");
+        }
+    };
 
     return (
         <Form {...form} {...props}>
@@ -134,8 +124,8 @@ export function RegisterForm({
                             )}
                         />
                     </div>
-                    <Button type="submit" className="w-full">
-                        {/* Add loadercircle or spinner here if needed and set processing state */}
+                    <Button type="submit" className="w-full" disabled={loading}>
+                        {loading && <Spinner/>}
                         Register
                     </Button>
                     <div
@@ -152,5 +142,5 @@ export function RegisterForm({
                 </div>
             </form>
         </Form>
-    )
+    );
 }

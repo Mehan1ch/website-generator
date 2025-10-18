@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import {BadgeCheck, ChevronsUpDown, LogOut,} from "lucide-react"
+import {BadgeCheck, ChevronsUpDown, LogOut,} from "lucide-react";
 
-import {Avatar, AvatarFallback, AvatarImage,} from "@/components/ui/avatar.tsx"
+import {Avatar, AvatarFallback, AvatarImage,} from "@/components/ui/avatar.tsx";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -11,19 +11,19 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu.tsx"
-import {SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar,} from "@/components/ui/sidebar.tsx"
-import {User} from "@/types/user.ts";
+} from "@/components/ui/dropdown-menu.tsx";
+import {SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar,} from "@/components/ui/sidebar.tsx";
+import {User} from "@/types/auth.ts";
 import {useAuth} from "@/hooks/use-auth.tsx";
 import {Link, useRouter} from "@tanstack/react-router";
 
 export function NavUser({user}: { user: User }) {
-    const {isMobile} = useSidebar()
-    const {logout, isAuthenticated} = useAuth()
-    const router = useRouter()
+    const {isMobile} = useSidebar();
+    const {logout, isAuthenticated} = useAuth();
+    const router = useRouter();
 
     if (!isAuthenticated) {
-        router.history.replace("/")
+        router.history.replace("/");
     }
 
     return (
@@ -75,7 +75,7 @@ export function NavUser({user}: { user: User }) {
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator/>
                         <DropdownMenuItem onClick={async () => {
-                            await logout()
+                            await logout();
                         }}>
                             <LogOut/> Logout
                         </DropdownMenuItem>
@@ -83,5 +83,5 @@ export function NavUser({user}: { user: User }) {
                 </DropdownMenu>
             </SidebarMenuItem>
         </SidebarMenu>
-    )
+    );
 }

@@ -1,25 +1,22 @@
-import {cn} from "@/lib/utils"
-import {Button} from "@/components/ui/button"
-import {Input} from "@/components/ui/input"
-import * as React from "react";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form"
-import {z} from "zod";
+import {cn} from "@/lib/utils";
+import {Button} from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useAuth} from "@/hooks/use-auth.tsx";
 import {Link, useRouter} from "@tanstack/react-router";
-import {LoginCredentials} from "@/types/auth.ts";
-
-const formSchema = z.object({
-    email: z.email("Invalid email address"),
-    password: z.string().min(8, "Password must be at least 8 characters long")
-})
+import {LoginBody} from "@/api/models";
+import {loginBody} from "@/api/endpoints/authentication/authentication.zod.ts";
+import {ComponentPropsWithoutRef, useState} from "react";
+import {Spinner} from "@/components/ui/spinner.tsx";
 
 //TODO: replace UI with new simpler shadcn block
+
 type LoginFormProps = {
     redirect?: string;
     className?: string;
-} & React.ComponentPropsWithoutRef<"form">;
+} & ComponentPropsWithoutRef<"form">;
 
 export function LoginForm({
                               className,
@@ -27,27 +24,31 @@ export function LoginForm({
                               ...props
                           }: LoginFormProps) {
     const {login} = useAuth();
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
     const redirectTo: string = redirect || "/";
 
-    const form = useForm<LoginCredentials>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<LoginBody>({
+        resolver: zodResolver(loginBody),
         defaultValues: {
             email: "",
             password: "",
         },
         mode: "onBlur",
         reValidateMode: "onBlur",
-    })
+    });
 
-    const onSubmit = async (data: LoginCredentials) => {
-        try {
-            await login(data);
-            router.history.push(redirect || "/");
-        } catch {
+    const onSubmit = async (data: LoginBody) => {
+        setLoading(true);
+        const {isError, isSuccess} = await login(data);
+        if (isError) {
             form.reset();
+            setLoading(false);
         }
-    }
+        if (isSuccess) {
+            router.history.push(redirect || "/");
+        }
+    };
 
     return (
         <Form {...form} {...props}>
@@ -97,8 +98,8 @@ export function LoginForm({
                             )}
                         />
                     </div>
-                    {/* TODO: Add loadercircle or spinner here if needed and set processing state */}
-                    <Button type="submit" className="w-full">
+                    <Button type="submit" className="w-full" disabled={loading}>
+                        {loading && <Spinner/>}
                         Login
                     </Button>
                     <div
@@ -115,5 +116,5 @@ export function LoginForm({
                 </div>
             </form>
         </Form>
-    )
+    );
 }
