@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "openapi-ts": "openapi-ts"
+    "orval": "orval --config orval.config.ts"
   },
   "dependencies": {
     "@craftjs/core": "^0.2.12",
@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
+    "@faker-js/faker": "^10.0.0",
     "@tanstack/react-router-devtools": "^1.116.0",
     "@tanstack/router-plugin": "^1.116.1",
     "@types/node": "^22.14.1",
@@ -63,6 +64,8 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
+    "msw": "^2.11.5",
+    "orval": "^7.13.2",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
     "vite": "^6.2.0"
