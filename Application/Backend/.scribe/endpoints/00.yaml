@@ -10,8 +10,8 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: User
-      description: 'Get the authenticated user.'
+      title: 'Get user'
+      description: "Return the authenticated user's information."
       authenticated: false
       deprecated: false
       custom: []
@@ -28,13 +28,44 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"id":null,"name":"Martin Mayert","email":"lilla.wyman@example.com","email_verified_at":"2025-10-18T22:41:59.000000Z","avatar":null,"created_at":null,"updated_at":null}}'
+        content: '{"data":{"id":null,"name":"Alvera Kshlerin","email":"carroll.lyla@example.com","email_verified_at":"2025-10-19T18:37:28.000000Z","avatar":null,"created_at":null,"updated_at":null}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           vary: Origin
         description: null
         custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: api/user
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete user'
+      description: "Delete the authenticated user's account and all associated data."
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
     responseFields: []
     auth: []
     controller: null

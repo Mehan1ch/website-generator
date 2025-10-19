@@ -10,6 +10,8 @@ import {Spinner} from "@/components/ui/spinner.tsx";
 import {LoginBody, loginFormSchema} from "@/types/auth.ts";
 import {Field, FieldDescription, FieldError, FieldGroup, FieldLabel} from "../ui/field";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
+import {toast} from "sonner";
+import {APIError} from "@/hooks/use-api.tsx";
 
 type LoginFormProps = {
     redirect?: string;
@@ -41,9 +43,10 @@ export function LoginForm({
         setLoading(true);
         try {
             await login(data);
+            toast.success("Successfully logged in");
             router.history.push(redirect || "/");
-            return;
-        } catch {
+        } catch (error) {
+            toast.error("Login failed!", {description: (error as APIError).message});
             form.reset();
             setLoading(false);
         }

@@ -1,8 +1,7 @@
 import {cn} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
-import * as React from "react";
-import {useState} from "react";
+import {ComponentPropsWithoutRef, useState} from "react";
 import {Controller, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
@@ -17,7 +16,7 @@ import {useAuth} from "@/hooks/use-auth.tsx";
 
 type PasswordFormProps = {
     className?: string;
-} & React.ComponentPropsWithoutRef<"div">;
+} & ComponentPropsWithoutRef<"div">;
 
 export function PasswordForm({
                                  className,

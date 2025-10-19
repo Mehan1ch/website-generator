@@ -12,12 +12,14 @@ export function AuthProvider({children}: { children: ReactNode }) {
     const api = useApi();
     const loginMutation = api.useMutation("post", "/login");
     const logoutMutation = api.useMutation("post", "/logout");
+    const deleteUserMutation = api.useMutation("delete", "/api/user");
     const userQuery = api.useQuery("get", "/api/user", {
         enabled: false,
+        throwOnError: true,
     });
 
 
-    // Restore auth state on app load
+// Restore auth state on app load
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         const storedAuth = localStorage.getItem('isAuthenticated');
@@ -28,7 +30,7 @@ export function AuthProvider({children}: { children: ReactNode }) {
         setIsLoading(false);
     }, []);
 
-    // Show loading state while checking auth
+// Show loading state while checking auth
     if (isLoading) {
         return (
             <div className="flex flex-col items-center justify-center min-h-screen space-y-4">
@@ -39,54 +41,57 @@ export function AuthProvider({children}: { children: ReactNode }) {
     }
 
     const login = async (credentials: LoginBody) => {
-        try {
-            await loginMutation.mutateAsync({body: credentials});
-        } catch (error) {
-            if (error instanceof APIError) {
-                toast.error("Login failed!", {
-                    description: error.message
-                });
-            }
-            throw error;
-        }
+        await loginMutation.mutateAsync({body: credentials});
         const {data} = await userQuery.refetch();
         const user: User = data!.data as User;
         setIsAuthenticated(true);
         setUser(user);
         localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('isAuthenticated', 'true');
-        toast.success("Login successful!");
     };
 
 
     const logout = async () => {
-        try {
-            await logoutMutation.mutateAsync({});
-        } catch (error) {
-            if (error instanceof APIError) {
+        logoutMutation.mutate({}, {
+            onSuccess: () => {
+                setUser(null);
+                setIsAuthenticated(false);
+                localStorage.removeItem('user');
+                localStorage.removeItem('isAuthenticated');
+                toast.success("Logout successful!");
+            },
+            onError: (error) => {
                 toast.error("Logout failed!", {
-                    description: error.message
+                    description: (error as APIError).message
                 });
+                throw error;
             }
-            throw error;
-        }
-        setUser(null);
-        setIsAuthenticated(false);
-        localStorage.removeItem('user');
-        localStorage.removeItem('isAuthenticated');
-        toast.success("Logout successful!");
+        });
     };
 
     const updateUserContext = async () => {
-        const {data, error} = await userQuery.refetch();
-        if (error || !data) throw error;
-        const user: User = data.data as User;
+        const {data} = await userQuery.refetch();
+        const user: User = data!.data as User;
         setUser(user);
         localStorage.setItem('user', JSON.stringify(user));
     };
 
+    const deleteUser = async () => {
+        deleteUserMutation.mutate({}, {
+            onSuccess: () => {
+                setUser(null);
+                setIsAuthenticated(false);
+                localStorage.removeItem('user');
+                localStorage.removeItem('isAuthenticated');
+            },
+            onError: (error) => {
+                throw error;
+            }
+        });
+    };
+
     return (
-        <AuthContext.Provider value={{isAuthenticated, user, login, logout, updateUserContext}}>
+        <AuthContext.Provider value={{isAuthenticated, user, login, logout, updateUserContext, deleteUser}}>
             {children}
         </AuthContext.Provider>
     );

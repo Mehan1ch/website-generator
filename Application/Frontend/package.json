@@ -7,8 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "orval": "orval --config orval.config.ts"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@craftjs/core": "^0.2.12",

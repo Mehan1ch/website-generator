@@ -143,13 +143,17 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * User
-         * @description Get the authenticated user.
+         * Get user
+         * @description Return the authenticated user's information.
          */
-        get: operations["user"];
+        get: operations["getUser"];
         put?: never;
         post?: never;
-        delete?: never;
+        /**
+         * Delete user
+         * @description Delete the authenticated user's account and all associated data.
+         */
+        delete: operations["deleteUser"];
         options?: never;
         head?: never;
         patch?: never;
@@ -518,7 +522,7 @@ export interface operations {
             };
         };
     };
-    user: {
+    getUser: {
         parameters: {
             query?: never;
             header?: never;
@@ -536,11 +540,11 @@ export interface operations {
                         data?: {
                             /** @example null */
                             id?: string;
-                            /** @example Martin Mayert */
+                            /** @example Alvera Kshlerin */
                             name?: string;
-                            /** @example lilla.wyman@example.com */
+                            /** @example carroll.lyla@example.com */
                             email?: string;
-                            /** @example 2025-10-18T22:41:59.000000Z */
+                            /** @example 2025-10-19T18:37:28.000000Z */
                             email_verified_at?: string;
                             /** @example null */
                             avatar?: string;
@@ -553,6 +557,16 @@ export interface operations {
                 };
             };
         };
+    };
+    deleteUser: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: never;
     };
     confirmPassword: {
         parameters: {

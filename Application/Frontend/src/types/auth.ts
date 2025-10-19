@@ -7,6 +7,7 @@ export type AuthContextType = {
     login: (credentials: LoginBody) => Promise<void>;
     logout: () => Promise<void>;
     updateUserContext: () => Promise<void>;
+    deleteUser: () => Promise<void>;
 }
 
 export type User = paths["/api/user"]["get"]["responses"]["200"]["content"]["application/json"]["data"];

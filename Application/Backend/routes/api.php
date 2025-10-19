@@ -1,14 +1,9 @@
 <?php
 
-use App\Http\Resources\UserResource;
-use Illuminate\Http\Request;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-/**
- * User
- *
- * Get the authenticated user.
- */
-Route::get('/user', function (Request $request) {
-    return new UserResource($request->user());
-})->middleware('auth:sanctum');
+Route::controller(UserController::class)->middleware('auth:sanctum')->group(function () {
+    Route::get('/user', 'show');
+    Route::delete('/user', 'destroy');
+});
