@@ -64,5 +64,6 @@ export default tseslint.config({
 - On the backend generate the OpenAPI client using `php artisan scribe:generate`
     - Alternatively `sail aritsan scribe:generate` for sail users.
 - Copy `.env.example` to `.env` and set the variables.
-- Generate the OpenAPI client using Orval with `npm run orval`
+- Generate the OpenAPI client using openapi-ts with
+  `npx openapi-typescript ./path/to/api/v1.yaml -o ./src/lib/api/v1.d.ts`
 - Start the development server using `npm run dev` or `yarn dev`.
