@@ -68,6 +68,7 @@ export function AuthProvider({children}: { children: ReactNode }) {
                     description: error.message
                 });
             }
+            throw error;
         }
         setUser(null);
         setIsAuthenticated(false);

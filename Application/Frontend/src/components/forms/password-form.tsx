@@ -7,10 +7,12 @@ import {Controller, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import {toast} from "sonner";
-import {useApi} from "@/hooks/use-api.tsx";
+import {APIError, useApi} from "@/hooks/use-api.tsx";
 import {UpdatePasswordBody, updatePasswordFormSchema} from "@/types/auth.ts";
 import {Field, FieldError, FieldGroup, FieldLabel} from "@/components/ui/field.tsx";
 import {Spinner} from "@/components/ui/spinner.tsx";
+import {useRouter} from "@tanstack/react-router";
+import {useAuth} from "@/hooks/use-auth.tsx";
 
 
 type PasswordFormProps = {
@@ -24,10 +26,20 @@ export function PasswordForm({
 
     const [loading, setLoading] = useState(false);
     const api = useApi();
+    const {logout} = useAuth();
+    const router = useRouter();
     const updatePasswordMutation = api.useMutation("put", "/user/password", {
-        onSuccess: () => {
-            setLoading(false);
-            toast.success("Password updated successfully, please login again!");
+        onSuccess: async () => {
+            try {
+                await logout();
+                toast.success("Password updated successfully, please login again!");
+                router.history.push("/login");
+            } catch (error) {
+                setLoading(false);
+                toast.error("Failed to logout after password update. Please logout manually.", {
+                    description: (error as APIError).message,
+                });
+            }
         },
         onError: (error) => {
             form.reset();
@@ -93,7 +105,7 @@ export function PasswordForm({
                                     control={form.control}
                                     render={({field, fieldState}) => (
                                         <Field data-invalid={fieldState.invalid}>
-                                            <FieldLabel htmlFor="password">Current Password</FieldLabel>
+                                            <FieldLabel htmlFor="password">Password</FieldLabel>
                                             <Input {...field}
                                                    id="password"
                                                    type="password"
@@ -112,7 +124,8 @@ export function PasswordForm({
                                     control={form.control}
                                     render={({field, fieldState}) => (
                                         <Field data-invalid={fieldState.invalid}>
-                                            <FieldLabel htmlFor="password_confirmation">Current Password</FieldLabel>
+                                            <FieldLabel htmlFor="password_confirmation">Password
+                                                Confirmation</FieldLabel>
                                             <Input {...field}
                                                    id="password_confirmation"
                                                    type="password"
