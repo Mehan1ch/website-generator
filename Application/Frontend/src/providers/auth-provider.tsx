@@ -14,8 +14,7 @@ export function AuthProvider({children}: { children: ReactNode }) {
     const logoutMutation = api.useMutation("post", "/logout");
     const deleteUserMutation = api.useMutation("delete", "/api/user");
     const userQuery = api.useQuery("get", "/api/user", {
-        enabled: false,
-        throwOnError: true,
+        enabled: false
     });
 
 
@@ -42,7 +41,8 @@ export function AuthProvider({children}: { children: ReactNode }) {
 
     const login = async (credentials: LoginBody) => {
         await loginMutation.mutateAsync({body: credentials});
-        const {data} = await userQuery.refetch();
+        const {data, error} = await userQuery.refetch();
+        if (error) throw error;
         const user: User = data!.data as User;
         setIsAuthenticated(true);
         setUser(user);
