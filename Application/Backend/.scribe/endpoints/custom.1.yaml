@@ -20,18 +20,14 @@
       required: true
       example: user@example.com
       type: string
+      format: email
     password:
       name: password
       description: The user's password.
       required: true
       example: password123
       type: string
-    remember:
-      name: remember
-      description: Whether to remember the user's session.
-      required: false
-      example: false
-      type: boolean
+      minLength: 8
   responses:
     - status: 200
       description: Login successful.
@@ -40,9 +36,11 @@
       description: Login failed - invalid credentials.
       content:
         {
-          "message": "The provided credentials are incorrect.",
-          "errors": {
-            "email": [ "The provided credentials are incorrect." ]
+          message: "The given data is invalid.",
+          errors: {
+            email: [
+              "These credentials do not match our records."
+            ]
           }
         }
 
@@ -81,46 +79,46 @@
       required: true
       example: John Doe
       type: string
+      maxLength: 255
     email:
       name: email
       description: The user's email address.
       required: true
       example: user@example.com
       type: string
+      format: email
+      maxLength: 255
     password:
       name: password
       description: The user's password (minimum 8 characters).
       required: true
       example: password123
       type: string
+      minLength: 8
     password_confirmation:
       name: password_confirmation
       description: Password confirmation.
       required: true
       example: password123
       type: string
+      minLength: 8
+      matches: password
   responses:
     - status: 201
       description: Registration successful.
-      content:
-        {
-          "user": {
-            "id": 1,
-            "name": "John Doe",
-            "email": "user@example.com",
-            "email_verified_at": null,
-            "created_at": "2024-01-01T00:00:00.000000Z",
-            "updated_at": "2024-01-01T00:00:00.000000Z"
-          },
-          "token": "1|abc123def456ghi789"
-        }
+      content: null
     - status: 422
       description: Validation failed.
       content:
         {
-          "message": "The given data was invalid.",
-          "errors": {
-            "email": [ "The email has already been taken." ]
+          message: "The given data is invalid.",
+          errors: {
+            email: [
+              "The email has already been taken."
+            ],
+            password: [
+              "The password must be at least 8 characters."
+            ]
           }
         }
 
@@ -144,20 +142,20 @@
       required: true
       example: user@example.com
       type: string
+      format: email
   responses:
     - status: 200
       description: Password reset link sent.
-      content:
-        {
-          "message": "We have emailed your password reset link!"
-        }
+      content: null
     - status: 422
-      description: 'Validation failed.'
+      description: Validation failed.
       content:
         {
-          "message": "The given data was invalid.",
-          "errors": {
-            "email": [ "We can't find a user with that email address." ]
+          message: "The given data is invalid.",
+          errors: {
+            email: [
+              "The email is invalid."
+            ],
           }
         }
 
@@ -173,36 +171,27 @@
     Content-Type: application/json
     Accept: application/json
   bodyParameters:
-    token:
-      name: token
-      description: The password reset token.
-      required: true
-      example: abc123def456ghi789
-      type: string
     email:
       name: email
       description: The user's email address.
       required: true
       example: user@example.com
       type: string
-    password:
-      name: password
-      description: The new password (minimum 8 characters).
-      required: true
-      example: newpassword123
-      type: string
-    password_confirmation:
-      name: password_confirmation
-      description: Password confirmation.
-      required: true
-      example: newpassword123
-      type: string
+      format: email
   responses:
     - status: 200
       description: Password reset successful.
+      content: null
+    - status: 422
+      description: Validation failed.
       content:
         {
-          "message": "Your password has been reset!"
+          message: "The given data is invalid.",
+          errors: {
+            email: [
+              "The email is invalid."
+            ],
+          }
         }
 
 # Email Verification Group
@@ -222,10 +211,7 @@
   responses:
     - status: 202
       description: 'Verification link sent.'
-      content:
-        {
-          "message": "verification-link-sent"
-        }
+      content: null
 
 - httpMethods:
     - GET
@@ -294,12 +280,24 @@
       required: true
       example: user@example.com
       type: string
+      format: email
   responses:
     - status: 200
       description: Profile updated successfully.
+      content: null
+    - status: 422
+      description: Profile update failed - validation error.
       content:
         {
-          "message": Profile updated successfully.
+          message: "The given data is invalid.",
+          errors: {
+            email: [
+              "The email has already been taken."
+            ],
+            password: [
+              "The password must be at least 8 characters."
+            ]
+          }
         }
 
 - httpMethods:
@@ -321,25 +319,41 @@
       required: true
       example: oldpassword123
       type: string
+      minLength: 8
     password:
       name: password
       description: The new password (minimum 8 characters).
       required: true
       example: newpassword123
       type: string
+      minLength: 8
     password_confirmation:
       name: password_confirmation
       description: Password confirmation.
       required: true
       example: newpassword123
       type: string
+      minLength: 8
+      matches: password
   responses:
     - status: 200
       description: Password updated successfully.
+      content: null
+    - status: 422
+      description: Password update failed - validation error.
       content:
         {
-          "message": "Password updated successfully."
+          message: "The given data is invalid.",
+          errors: {
+            current_password: [
+              "The current password is incorrect."
+            ],
+            password: [
+              "The password must be at least 8 characters."
+            ]
+          }
         }
+
 # Password Confirmation Group
 - httpMethods:
     - POST
@@ -361,20 +375,20 @@
       required: true
       example: password123
       type: string
+      minLength: 8
   responses:
     - status: 201
       description: Password confirmed successfully.
-      content:
-        {
-          "confirmed": true
-        }
+      content: null
     - status: 422
       description: Password confirmation failed.
       content:
         {
-          "message": "The provided password is incorrect.",
-          "errors": {
-            "password": [ "The provided password is incorrect." ]
+          message: "The given data is invalid.",
+          errors: {
+            password: [
+              "The password is incorrect."
+            ]
           }
         }
 
