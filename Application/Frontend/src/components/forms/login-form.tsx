@@ -1,22 +1,20 @@
 import {cn} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import {useForm} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useAuth} from "@/hooks/use-auth.tsx";
 import {Link, useRouter} from "@tanstack/react-router";
-import {LoginBody} from "@/api/models";
-import {loginBody} from "@/api/endpoints/authentication/authentication.zod.ts";
 import {ComponentPropsWithoutRef, useState} from "react";
 import {Spinner} from "@/components/ui/spinner.tsx";
-
-//TODO: replace UI with new simpler shadcn block
+import {LoginBody, loginFormSchema} from "@/types/auth.ts";
+import {Field, FieldDescription, FieldError, FieldGroup, FieldLabel} from "../ui/field";
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 
 type LoginFormProps = {
     redirect?: string;
     className?: string;
-} & ComponentPropsWithoutRef<"form">;
+} & ComponentPropsWithoutRef<"div">;
 
 export function LoginForm({
                               className,
@@ -28,8 +26,9 @@ export function LoginForm({
     const router = useRouter();
     const redirectTo: string = redirect || "/";
 
+
     const form = useForm<LoginBody>({
-        resolver: zodResolver(loginBody),
+        resolver: zodResolver(loginFormSchema),
         defaultValues: {
             email: "",
             password: "",
@@ -40,81 +39,79 @@ export function LoginForm({
 
     const onSubmit = async (data: LoginBody) => {
         setLoading(true);
-        const {isError, isSuccess} = await login(data);
-        if (isError) {
+        try {
+            await login(data);
+            router.history.push(redirect || "/");
+            return;
+        } catch {
             form.reset();
             setLoading(false);
-        }
-        if (isSuccess) {
-            router.history.push(redirect || "/");
         }
     };
 
     return (
-        <Form {...form} {...props}>
-            <form className={cn("flex flex-col gap-6", className)}
-                  onSubmit={form.handleSubmit(onSubmit)}
-            >
-                <div className="flex flex-col items-center gap-2 text-center">
-                    <h1 className="text-2xl font-bold">Login to your account</h1>
-                    <p className="text-balance text-sm text-muted-foreground">
+        <div className={cn("flex flex-col gap-6", className)} {...props}>
+            <Card>
+                <CardHeader>
+                    <CardTitle>Login to your account</CardTitle>
+                    <CardDescription>
                         Enter your email below to login to your account
-                    </p>
-                </div>
-                <div className="grid gap-6">
-                    <div className="grid gap-2">
-                        <FormField
-                            control={form.control}
-                            name="email"
-                            render={({field}) => (
-                                <FormItem>
-                                    <FormLabel>Email</FormLabel>
-                                    <FormControl>
-                                        <Input id="email" type="email" placeholder="m@example.com" required {...field}/>
-                                    </FormControl>
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
-                    </div>
-                    <div className="grid gap-2">
-
-                        <FormField
-                            control={form.control}
-                            name="password"
-                            render={({field}) => (
-                                <FormItem>
-                                    <div className="flex items-center">
-                                        <FormLabel>Password</FormLabel>
-                                        <a href="#" className="ml-auto text-sm underline-offset-4 hover:underline">
-                                            Forgot your password?
-                                        </a>
-                                    </div>
-                                    <FormControl>
-                                        <Input id="password" type="password" required {...field}/>
-                                    </FormControl>
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
-                    </div>
-                    <Button type="submit" className="w-full" disabled={loading}>
-                        {loading && <Spinner/>}
-                        Login
-                    </Button>
-                    <div
-                        className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-                    </div>
-                </div>
-                <div className="text-center text-sm">
-                    Don&apos;t have an account?{" "}
-                    <Link to={"/register"} className="underline underline-offset-4" search={{
-                        redirect: redirectTo
-                    }}>
-                        Sign up
-                    </Link>
-                </div>
-            </form>
-        </Form>
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <form onSubmit={form.handleSubmit(onSubmit)}>
+                        <FieldGroup>
+                            <Controller
+                                name="email"
+                                control={form.control}
+                                render={({field, fieldState}) => (
+                                    <Field data-invalid={fieldState.invalid}>
+                                        <FieldLabel htmlFor="email">Email address</FieldLabel>
+                                        <Input {...field}
+                                               id="email"
+                                               type="email"
+                                               placeholder="john.doe@example.com"
+                                               aria-invalid={fieldState.invalid}
+                                               required/>
+                                        {fieldState.invalid && (
+                                            <FieldError errors={[fieldState.error]}/>
+                                        )}
+                                    </Field>
+                                )}
+                            />
+                            <Controller
+                                name="password"
+                                control={form.control}
+                                render={({field, fieldState}) => (
+                                    <Field data-invalid={fieldState.invalid}>
+                                        <FieldLabel htmlFor="password">Password</FieldLabel>
+                                        <Input {...field}
+                                               id="password"
+                                               type="password"
+                                               aria-invalid={fieldState.invalid}
+                                               required/>
+                                        {fieldState.invalid && (
+                                            <FieldError errors={[fieldState.error]}/>
+                                        )}
+                                    </Field>
+                                )}
+                            />
+                            <Field>
+                                <Button type="submit" disabled={loading}>
+                                    {loading && <Spinner/>}
+                                    Login
+                                </Button>
+                                <FieldDescription className="text-center">
+                                    Don't have an account?{' '}
+                                    <Link to={"/register"} search={{redirect: redirectTo}}>
+                                        Sign up
+                                    </Link>
+                                </FieldDescription>
+                            </Field>
+                        </FieldGroup>
+                    </form>
+                </CardContent>
+            </Card>
+        </div>
     );
 }

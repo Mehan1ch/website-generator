@@ -1,123 +1,140 @@
-import {cn} from "@/lib/utils"
-import {Button} from "@/components/ui/button"
-import {Input} from "@/components/ui/input"
+import {cn} from "@/lib/utils";
+import {Button} from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
 import * as React from "react";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form"
-import {z} from "zod";
-import {useForm} from "react-hook-form";
+import {useState} from "react";
+import {Controller, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
+import {toast} from "sonner";
+import {useApi} from "@/hooks/use-api.tsx";
+import {UpdatePasswordBody, updatePasswordFormSchema} from "@/types/auth.ts";
+import {Field, FieldError, FieldGroup, FieldLabel} from "@/components/ui/field.tsx";
+import {Spinner} from "@/components/ui/spinner.tsx";
 
-const formSchema = z.object({
-    currentPassword: z.string().min(8, "Current password must be at least 8 characters long"),
-    newPassword: z.string().min(8, "New password must be at least 8 characters long"),
-    confirmPassword: z.string().min(8, "Confirm password must be at least 8 characters long"),
-})
 
 type PasswordFormProps = {
     className?: string;
-} & React.ComponentPropsWithoutRef<"form">;
-
-type PasswordFormSchema = {
-    currentPassword: string
-    newPassword: string
-    confirmPassword: string
-}
+} & React.ComponentPropsWithoutRef<"div">;
 
 export function PasswordForm({
                                  className,
                                  ...props
                              }: PasswordFormProps) {
 
-    const form = useForm<PasswordFormSchema>({
-        resolver: zodResolver(formSchema),
+    const [loading, setLoading] = useState(false);
+    const api = useApi();
+    const updatePasswordMutation = api.useMutation("put", "/user/password", {
+        onSuccess: () => {
+            setLoading(false);
+            toast.success("Password updated successfully, please login again!");
+        },
+        onError: (error) => {
+            form.reset();
+            setLoading(false);
+            toast.error("Failed to update password!", {
+                description: error.message
+            });
+        }
+    });
+
+
+    const form = useForm<UpdatePasswordBody>({
+        resolver: zodResolver(updatePasswordFormSchema),
         defaultValues: {
-            currentPassword: '',
-            newPassword: '',
-            confirmPassword: ''
+            current_password: '',
+            password: '',
+            password_confirmation: ''
         },
         mode: "onBlur",
         reValidateMode: "onBlur",
-    })
-
-    //TODO: implement useAPI hook and Tanstack query for better fetching
-    const onSubmit = async (data: PasswordFormSchema) => {
-        try {
-            //await login(data);
-            //router.history.push(redirect || "/");
-        } catch {
-            form.reset();
-        }
-    }
+    });
 
     return (
-        <Form {...form} {...props}>
+        <div {...props}>
             <form className={cn("flex flex-col gap-6", className)}
-                  onSubmit={form.handleSubmit(onSubmit)}
+                  onSubmit={form.handleSubmit((data) => {
+                      setLoading(true);
+                      updatePasswordMutation.mutate({body: data});
+                  })}
             >
                 <Card>
-                    <CardHeader>
-                        <CardTitle>Password</CardTitle>
-                        <CardDescription>
-                            Change your password here. After saving, you&apos;ll be logged
-                            out.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="grid gap-6">
-                        <div className="grid gap-3">
-                            <FormField
-                                control={form.control}
-                                name="currentPassword"
-                                render={({field}) => (
-                                    <FormItem>
-                                        <FormLabel>Current Password</FormLabel>
-                                        <FormControl>
-                                            <Input id="currentPassword" type="string"
-                                                   required {...field}/>
-                                        </FormControl>
-                                        <FormMessage/>
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-                        <div className="grid gap-3">
-                            <FormField
-                                control={form.control}
-                                name="newPassword"
-                                render={({field}) => (
-                                    <FormItem>
-                                        <FormLabel>New Password</FormLabel>
-                                        <FormControl>
-                                            <Input id="newPassword" type={"password"}
-                                                   required {...field}/>
-                                        </FormControl>
-                                        <FormMessage/>
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-                        <div className="grid gap-3">
-                            <FormField
-                                control={form.control}
-                                name="confirmPassword"
-                                render={({field}) => (
-                                    <FormItem>
-                                        <FormLabel>Confirm Password</FormLabel>
-                                        <FormControl>
-                                            <Input id={"confirmPassword"} type={"password"}
-                                                   required {...field}/>
-                                        </FormControl>
-                                        <FormMessage/>
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-                    </CardContent>
-                    <CardFooter>
-                        <Button type={"submit"}>Save password</Button>
-                    </CardFooter>
+                    <FieldGroup>
+                        <CardHeader>
+                            <CardTitle>Password</CardTitle>
+                            <CardDescription>
+                                Change your password here. After saving, you&apos;ll be logged
+                                out.
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent className="grid gap-6">
+                            <div className="grid gap-3">
+                                <Controller
+                                    name="current_password"
+                                    control={form.control}
+                                    render={({field, fieldState}) => (
+                                        <Field data-invalid={fieldState.invalid}>
+                                            <FieldLabel htmlFor="current_password">Current Password</FieldLabel>
+                                            <Input {...field}
+                                                   id="current_password"
+                                                   type="password"
+                                                   aria-invalid={fieldState.invalid}
+                                                   required/>
+                                            {fieldState.invalid && (
+                                                <FieldError errors={[fieldState.error]}/>
+                                            )}
+                                        </Field>
+                                    )}
+                                />
+                            </div>
+                            <div className="grid gap-3">
+                                <Controller
+                                    name="password"
+                                    control={form.control}
+                                    render={({field, fieldState}) => (
+                                        <Field data-invalid={fieldState.invalid}>
+                                            <FieldLabel htmlFor="password">Current Password</FieldLabel>
+                                            <Input {...field}
+                                                   id="password"
+                                                   type="password"
+                                                   aria-invalid={fieldState.invalid}
+                                                   required/>
+                                            {fieldState.invalid && (
+                                                <FieldError errors={[fieldState.error]}/>
+                                            )}
+                                        </Field>
+                                    )}
+                                />
+                            </div>
+                            <div className="grid gap-3">
+                                <Controller
+                                    name="password_confirmation"
+                                    control={form.control}
+                                    render={({field, fieldState}) => (
+                                        <Field data-invalid={fieldState.invalid}>
+                                            <FieldLabel htmlFor="password_confirmation">Current Password</FieldLabel>
+                                            <Input {...field}
+                                                   id="password_confirmation"
+                                                   type="password"
+                                                   aria-invalid={fieldState.invalid}
+                                                   required/>
+                                            {fieldState.invalid && (
+                                                <FieldError errors={[fieldState.error]}/>
+                                            )}
+                                        </Field>
+                                    )}
+                                />
+                            </div>
+                        </CardContent>
+                        <CardFooter>
+                            <Button type={"submit"} disabled={loading}>
+                                {loading && <Spinner/>}
+                                Save password
+                            </Button>
+                        </CardFooter>
+                    </FieldGroup>
                 </Card>
             </form>
-        </Form>
-    )
+        </div>
+    );
 }

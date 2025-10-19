@@ -1,22 +1,20 @@
 import {ReactNode, useEffect, useState} from "react";
 import {Spinner} from "@/components/ui/spinner.tsx";
-import {LoginBody, RegisterBody} from "@/api/models";
-import {useGetCSRFCookie} from "@/api/endpoints/csrf-protection/csrf-protection.gen.ts";
-import {useLogin, useLogout, useRegister} from "@/api/endpoints/authentication/authentication.gen.ts";
 import {toast} from "sonner";
 import {AuthContext} from "@/contexts/auth-context";
-import {User} from "@/types/auth.ts";
-import {useUser} from "@/api/endpoints/endpoints/endpoints.gen.ts";
+import {LoginBody, User} from "@/types/auth.ts";
+import {APIError, useApi} from "@/hooks/use-api.tsx";
 
 export function AuthProvider({children}: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const csrfQuery = useGetCSRFCookie({query: {enabled: false}});
-    const loginMutation = useLogin();
-    const logoutMutation = useLogout();
-    const registerMutation = useRegister();
-    const userQuery = useUser({query: {enabled: false}});
+    const api = useApi();
+    const loginMutation = api.useMutation("post", "/login");
+    const logoutMutation = api.useMutation("post", "/logout");
+    const userQuery = api.useQuery("get", "/api/user", {
+        enabled: false,
+    });
 
 
     // Restore auth state on app load
@@ -41,55 +39,53 @@ export function AuthProvider({children}: { children: ReactNode }) {
     }
 
     const login = async (credentials: LoginBody) => {
-        await csrfQuery.refetch();
-        await loginMutation.mutateAsync({data: credentials});
-        const {data, isError} = await userQuery.refetch();
-
-        if (loginMutation.isError || isError || !data) {
-            toast.error("Login failed!");
-            return {isSuccess: false, isError: true};
+        try {
+            await loginMutation.mutateAsync({body: credentials});
+        } catch (error) {
+            if (error instanceof APIError) {
+                toast.error("Login failed!", {
+                    description: error.message
+                });
+            }
+            throw error;
         }
-
-        const userData: User = data.data as User;
-
+        const {data} = await userQuery.refetch();
+        const user: User = data!.data as User;
         setIsAuthenticated(true);
-        setUser(userData);
-        localStorage.setItem('user', JSON.stringify(data));
+        setUser(user);
+        localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('isAuthenticated', 'true');
         toast.success("Login successful!");
-        return {isSuccess: true, isError: false};
     };
 
 
     const logout = async () => {
-        await logoutMutation.mutateAsync();
-        if (logoutMutation.isError) {
-            toast.error("Logout failed!");
-            return {isSuccess: false, isError: true};
+        try {
+            await logoutMutation.mutateAsync({});
+        } catch (error) {
+            if (error instanceof APIError) {
+                toast.error("Logout failed!", {
+                    description: error.message
+                });
+            }
         }
         setUser(null);
         setIsAuthenticated(false);
         localStorage.removeItem('user');
         localStorage.removeItem('isAuthenticated');
         toast.success("Logout successful!");
-        return {isSuccess: false, isError: false};
     };
 
-    const register = async (credentials: RegisterBody) => {
-        await csrfQuery.refetch();
-        await registerMutation.mutateAsync({
-            data: credentials
-        });
-        if (registerMutation.isError) {
-            toast.error("Registration failed!");
-            return {isSuccess: true, isError: false};
-        }
-        toast.success("Registration successful! Please log in.");
-        return {isSuccess: true, isError: false};
+    const updateUserContext = async () => {
+        const {data, error} = await userQuery.refetch();
+        if (error || !data) throw error;
+        const user: User = data.data as User;
+        setUser(user);
+        localStorage.setItem('user', JSON.stringify(user));
     };
 
     return (
-        <AuthContext.Provider value={{isAuthenticated, user, login, logout, register}}>
+        <AuthContext.Provider value={{isAuthenticated, user, login, logout, updateUserContext}}>
             {children}
         </AuthContext.Provider>
     );

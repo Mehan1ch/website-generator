@@ -1,7 +1,6 @@
-import {createFileRoute, Link, redirect} from '@tanstack/react-router'
-import {GalleryVerticalEnd} from "lucide-react"
-
-import {LoginForm} from "@/components/forms/login-form.tsx"
+import {createFileRoute, Link, redirect} from '@tanstack/react-router';
+import {GalleryVerticalEnd} from "lucide-react";
+import {LoginForm} from "@/components/forms/login-form.tsx";
 
 export const Route = createFileRoute('/_auth/login')({
     validateSearch: (search) => ({
@@ -10,36 +9,30 @@ export const Route = createFileRoute('/_auth/login')({
     beforeLoad: ({context, search}) => {
         // Redirect if already authenticated
         if (context.auth.isAuthenticated) {
-            throw redirect({to: search.redirect, replace: true})
+            throw redirect({to: search.redirect, replace: true});
         }
     },
     component: Login,
-})
+});
 
 function Login() {
-    const {redirect} = Route.useSearch()
-    const {VITE_APP_NAME} = import.meta.env
+    const {redirect} = Route.useSearch();
+    const {VITE_APP_NAME} = import.meta.env;
 
     return (
-        <div className="grid min-h-svh lg:grid-cols-2">
-            <div className="flex flex-col gap-4 p-6 md:p-10">
-                <div className="flex justify-center gap-2 md:justify-start">
-                    <Link to={"/"} search={{redirect: redirect}} className="flex items-center gap-2 font-medium">
-                        <div
-                            className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                            <GalleryVerticalEnd className="size-4"/>
-                        </div>
-                        {VITE_APP_NAME}
-                    </Link>
-                </div>
-                <div className="flex flex-1 items-center justify-center">
-                    <div className="w-full max-w-xs">
-                        <LoginForm redirect={redirect}/>
+        <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
+            <div className="flex w-full max-w-sm flex-col gap-6">
+                <Link to={"/"} search={{
+                    redirect: redirect || "/",
+                }} className="flex items-center gap-2 self-center font-medium">
+                    <div
+                        className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
+                        <GalleryVerticalEnd className="size-4"/>
                     </div>
-                </div>
-            </div>
-            <div className="relative hidden bg-primary lg:block">
+                    {VITE_APP_NAME}
+                </Link>
+                <LoginForm redirect={redirect}/>
             </div>
         </div>
-    )
+    );
 }
