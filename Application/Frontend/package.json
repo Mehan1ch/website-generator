@@ -67,7 +67,6 @@
     "globals": "^15.15.0",
     "msw": "^2.11.5",
     "openapi-typescript": "^7.10.1",
-    "orval": "^7.13.2",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
     "vite": "^6.2.0"
