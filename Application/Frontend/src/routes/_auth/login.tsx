@@ -1,11 +1,10 @@
 import {createFileRoute, Link, redirect} from '@tanstack/react-router';
 import {GalleryVerticalEnd} from "lucide-react";
 import {LoginForm} from "@/components/forms/login-form.tsx";
+import {redirectOnlySearchSchema} from "@/types/search.ts";
 
 export const Route = createFileRoute('/_auth/login')({
-    validateSearch: (search) => ({
-        redirect: (search.redirect as string) || '/',
-    }),
+    validateSearch: redirectOnlySearchSchema,
     beforeLoad: ({context, search}) => {
         // Redirect if already authenticated
         if (context.auth.isAuthenticated) {
