@@ -24,9 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        ResetPassword::createUrlUsing(function (string $email, string $token) {
+        ResetPassword::createUrlUsing(function ($user, string $token) {
             $frontendUrl = config('app.frontend_url');
-            return "{$frontendUrl}/reset-password?token={$token}&email={$email}";
+            return "{$frontendUrl}/reset-password?token={$token}&email={$user->email}";
         });
         if (class_exists(Scribe::class)) {
             Scribe::beforeResponseCall(function () {
