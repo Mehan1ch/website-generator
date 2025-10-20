@@ -3,82 +3,86 @@ import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {Controller, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {useAuth} from "@/hooks/use-auth.tsx";
 import {Link, useRouter} from "@tanstack/react-router";
 import {ComponentPropsWithoutRef, useState} from "react";
 import {Spinner} from "@/components/ui/spinner.tsx";
-import {LoginBody, loginFormSchema} from "@/types/auth.ts";
 import {Field, FieldDescription, FieldError, FieldGroup, FieldLabel} from "../ui/field";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
+import {useApi} from "@/hooks/use-api.tsx";
 import {toast} from "sonner";
-import {APIError} from "@/hooks/use-api.tsx";
+import {ResetPasswordBody, resetPasswordFormSchema} from "@/types/auth.ts";
 
-type LoginFormProps = {
+type ResetPasswordFormProps = {
     redirect?: string;
     className?: string;
+    token?: string;
+    email?: string;
 } & ComponentPropsWithoutRef<"div">;
 
-export function LoginForm({
-                              className,
-                              redirect,
-                              ...props
-                          }: LoginFormProps) {
-    const {login} = useAuth();
+export function ResetPasswordForm({
+                                      redirect,
+                                      className,
+                                      token,
+                                      email,
+                                      ...props
+                                  }: ResetPasswordFormProps) {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const redirectTo: string = redirect || "/";
+    const api = useApi();
+    const resetPasswordMutation = api.useMutation(
+        "post",
+        "/reset-password",
+        {
+            onSuccess: () => {
+                setLoading(false);
+                toast.success("Password reset link sent successfully!");
+                router.history.push("/");
+            },
+            onError: (error) => {
+                setLoading(false);
+                toast.error("Error in password reset!", {description: error.message});
+            }
+        }
+    );
 
 
-    const form = useForm<LoginBody>({
-        resolver: zodResolver(loginFormSchema),
+    const form = useForm<ResetPasswordBody>({
+        resolver: zodResolver(resetPasswordFormSchema),
         defaultValues: {
-            email: "",
+            email: email,
             password: "",
+            password_confirmation: "",
+            token: token,
         },
         mode: "onBlur",
         reValidateMode: "onBlur",
     });
 
-    const onSubmit = async (data: LoginBody) => {
-        setLoading(true);
-        try {
-            await login(data);
-            toast.success("Successfully logged in");
-            router.history.push(redirect || "/");
-        } catch (error) {
-            toast.error("Login failed!", {description: (error as APIError).message});
-            form.reset();
-            setLoading(false);
-        }
-    };
-
     return (
         <div className={cn("flex flex-col gap-6", className)} {...props}>
             <Card>
                 <CardHeader>
-                    <CardTitle>Login to your account</CardTitle>
+                    <CardTitle>Reset Password</CardTitle>
                     <CardDescription>
-                        Enter your email below to login to your account
+                        Reset your password by entering your email and new password below.
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <form onSubmit={form.handleSubmit(onSubmit)}>
+                    <form onSubmit={form.handleSubmit((data) => {
+                        setLoading(true);
+                        resetPasswordMutation.mutate({body: data});
+                    })}>
                         <FieldGroup>
                             <Controller
                                 name="email"
                                 control={form.control}
                                 render={({field, fieldState}) => (
                                     <Field data-invalid={fieldState.invalid}>
-                                        <FieldLabel htmlFor="email">Email address</FieldLabel>
                                         <Input {...field}
                                                id="email"
-                                               type="email"
-                                               placeholder="john.doe@example.com"
-                                               aria-invalid={fieldState.invalid}
+                                               type="hidden"
                                                required/>
-                                        {fieldState.invalid && (
-                                            <FieldError errors={[fieldState.error]}/>
-                                        )}
                                     </Field>
                                 )}
                             />
@@ -87,14 +91,7 @@ export function LoginForm({
                                 control={form.control}
                                 render={({field, fieldState}) => (
                                     <Field data-invalid={fieldState.invalid}>
-                                        <div className="flex items-center">
-                                            <FieldLabel htmlFor="password">Password</FieldLabel>
-                                            <Link to={"/forgot-password"} search={{redirect: redirectTo}}
-                                                  className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                                            >
-                                                Forgot your password?
-                                            </Link>
-                                        </div>
+                                        <FieldLabel htmlFor="password">Password</FieldLabel>
                                         <Input {...field}
                                                id="password"
                                                type="password"
@@ -106,16 +103,43 @@ export function LoginForm({
                                     </Field>
                                 )}
                             />
-
+                            <Controller
+                                name="password_confirmation"
+                                control={form.control}
+                                render={({field, fieldState}) => (
+                                    <Field data-invalid={fieldState.invalid}>
+                                        <FieldLabel htmlFor="password_confirmation">Password Confirmation</FieldLabel>
+                                        <Input {...field}
+                                               id="password_confirmation"
+                                               type="password"
+                                               aria-invalid={fieldState.invalid}
+                                               required/>
+                                        {fieldState.invalid && (
+                                            <FieldError errors={[fieldState.error]}/>
+                                        )}
+                                    </Field>
+                                )}
+                            />
+                            <Controller
+                                name="token"
+                                control={form.control}
+                                render={({field, fieldState}) => (
+                                    <Field data-invalid={fieldState.invalid}>
+                                        <Input {...field}
+                                               id="token"
+                                               type="hidden"
+                                               required/>
+                                    </Field>
+                                )}
+                            />
                             <Field>
                                 <Button type="submit" disabled={loading}>
                                     {loading && <Spinner/>}
-                                    Login
+                                    Reset Password
                                 </Button>
                                 <FieldDescription className="text-center">
-                                    Don't have an account?{' '}
-                                    <Link to={"/register"} search={{redirect: redirectTo}}>
-                                        Sign up
+                                    <Link to={"/login"} search={{redirect: redirectTo}}>
+                                        Back to login
                                     </Link>
                                 </FieldDescription>
                             </Field>

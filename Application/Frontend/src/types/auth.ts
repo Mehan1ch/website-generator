@@ -45,3 +45,20 @@ export const updateProfileFormSchema = z.object({
 });
 
 export type UpdateProfileBody = z.infer<typeof updateProfileFormSchema>;
+
+export const forgotPasswordFormSchema = z.object({
+    email: z.email("Invalid email address"),
+});
+
+export type ForgotPasswordBody = z.infer<typeof forgotPasswordFormSchema>;
+
+export const resetPasswordFormSchema = z.object({
+    email: z.email("Invalid email address.").max(255, "Email must be at most 255 characters."),
+    password: z.string().min(8, "Password must be at least 8 characters long.").max(128, "Password must be at most 128 characters."),
+    password_confirmation: z.string().min(8, "Password confirmation must be at least 8 characters long.").max(128, "Password confirmation must be at most 128 characters."),
+    token: z.string().min(1, "Token is required."),
+}).refine((data) => data.password === data.password_confirmation, {
+    message: "Passwords do not match.",
+});
+
+export type ResetPasswordBody = z.infer<typeof resetPasswordFormSchema>;
