@@ -4,6 +4,7 @@ import {toast} from "sonner";
 import {AuthContext} from "@/contexts/auth-context";
 import {LoginBody, User} from "@/types/auth.ts";
 import {APIError, useApi} from "@/hooks/use-api.tsx";
+import {useQueryClient} from "@tanstack/react-query";
 
 export function AuthProvider({children}: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
@@ -13,9 +14,8 @@ export function AuthProvider({children}: { children: ReactNode }) {
     const loginMutation = api.useMutation("post", "/login");
     const logoutMutation = api.useMutation("post", "/logout");
     const deleteUserMutation = api.useMutation("delete", "/api/user");
-    const userQuery = api.useQuery("get", "/api/user", {
-        enabled: false
-    });
+    const queryClient = useQueryClient();
+    const userQueryOptions = api.queryOptions("get", "/api/user");
 
 
 // Restore auth state on app load
@@ -41,9 +41,9 @@ export function AuthProvider({children}: { children: ReactNode }) {
 
     const login = async (credentials: LoginBody) => {
         await loginMutation.mutateAsync({body: credentials});
-        const {data, error} = await userQuery.refetch();
-        if (error) throw error;
-        const user: User = data!.data as User;
+        const {data} = await queryClient.fetchQuery(userQueryOptions);
+        if (!data) throw new APIError("No user found!", {}, 404);
+        const user: User = data! as User;
         setIsAuthenticated(true);
         setUser(user);
         localStorage.setItem('user', JSON.stringify(user));
@@ -70,8 +70,9 @@ export function AuthProvider({children}: { children: ReactNode }) {
     };
 
     const updateUserContext = async () => {
-        const {data} = await userQuery.refetch();
-        const user: User = data!.data as User;
+        const {data} = await queryClient.fetchQuery(userQueryOptions);
+        if (!data) throw new APIError("No user found!", {}, 404);
+        const user: User = data! as User;
         setUser(user);
         localStorage.setItem('user', JSON.stringify(user));
     };
