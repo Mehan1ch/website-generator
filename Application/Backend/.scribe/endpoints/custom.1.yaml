@@ -178,6 +178,27 @@
       example: user@example.com
       type: string
       format: email
+    password:
+      name: password
+      description: The new password (minimum 8 characters).
+      required: true
+      example: newpassword123
+      type: string
+      minLength: 8
+    password_confirmation:
+      name: password_confirmation
+      description: Password confirmation.
+      required: true
+      example: newpassword123
+      type: string
+      minLength: 8
+      matches: password
+    token:
+      name: token
+      description: The password reset token.
+      required: true
+      example: reset_token_123
+      type: string
   responses:
     - status: 200
       description: Password reset successful.
@@ -236,19 +257,6 @@
       description: The verification hash.
       required: true
       example: abc123def456
-      type: string
-  queryParameters:
-    expires:
-      name: expires
-      description: Expiration timestamp.
-      required: true
-      example: 1640995200
-      type: integer
-    signature:
-      name: signature
-      description: URL signature.
-      required: true
-      example: def456ghi789
       type: string
   responses:
     - status: 204
