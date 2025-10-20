@@ -62,13 +62,7 @@ const middleware: Middleware = {
     },
     async onResponse({response}) {
         if (!response.ok) {
-            const responseJson = await response.json();
-            throw new APIError(responseJson.message, responseJson.errors, response.status);
-        }
-    },
-    async onError({error}) {
-        if (error instanceof APIError) {
-            if (error.status === 401 || error.status === 419) {
+            if (response.status === 401 || response.status === 419) {
                 // Clear auth state
                 localStorage.removeItem('user');
                 localStorage.setItem('isAuthenticated', 'false');
@@ -77,13 +71,15 @@ const middleware: Middleware = {
                 toast.error('Session expired. Please log in again.');
 
                 // Redirect to login
-                throw redirect({
+                redirect({
                     to: "/login",
                     search: {
                         redirect: location.href
                     }
                 });
             }
+            const responseJson = await response.json();
+            throw new APIError(responseJson.message, responseJson.errors, response.status);
         }
     },
 };
