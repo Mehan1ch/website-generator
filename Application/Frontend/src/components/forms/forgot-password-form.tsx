@@ -9,8 +9,8 @@ import {Spinner} from "@/components/ui/spinner.tsx";
 import {ForgotPasswordBody, forgotPasswordFormSchema} from "@/types/auth.ts";
 import {Field, FieldDescription, FieldError, FieldGroup, FieldLabel} from "../ui/field";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
-import {useApi} from "@/hooks/use-api.tsx";
 import {toast} from "sonner";
+import {api} from "@/lib/api/api-client.ts";
 
 type ForgotPasswordFormProps = {
     redirect?: string;
@@ -24,7 +24,6 @@ export function ForgotPasswordForm({
                                    }: ForgotPasswordFormProps) {
     const [loading, setLoading] = useState(false);
     const redirectTo: string = redirect || "/";
-    const api = useApi();
     const forgotPasswordMutation = api.useMutation(
         "post",
         "/forgot-password",

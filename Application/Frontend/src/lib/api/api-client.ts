@@ -88,9 +88,3 @@ const middleware: Middleware = {
 
 fetchClient.use(middleware);
 export const api = createClient(fetchClient);
-
-//TODO: check if this would be better as not a hook
-export const useApi = () => {
-
-    return api;
-};

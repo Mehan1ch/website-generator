@@ -19,6 +19,7 @@ function Index() {
     const router = useRouter();
     const {redirect} = Route.useSearch();
     return (
+        //TODO: use shadcn navigation menu here instead
         <div className="min-h-screen bg-background flex flex-col">
             {/* Top Bar */}
             <header className="w-full px-6 py-4 flex justify-between items-center bg-secondary shadow">

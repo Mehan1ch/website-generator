@@ -11,7 +11,7 @@ import {LoginBody, loginFormSchema} from "@/types/auth.ts";
 import {Field, FieldDescription, FieldError, FieldGroup, FieldLabel} from "../ui/field";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import {toast} from "sonner";
-import {APIError} from "@/hooks/use-api.tsx";
+import {APIError} from "@/lib/api/api-client.ts";
 
 type LoginFormProps = {
     redirect?: string;

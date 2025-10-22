@@ -1,8 +1,7 @@
 import {cn} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
-import * as React from "react";
-import {useState} from "react";
+import {ComponentPropsWithoutRef, useState} from "react";
 import {Controller, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useAuth} from "@/hooks/use-auth.tsx";
@@ -10,12 +9,12 @@ import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} f
 import {Spinner} from "@/components/ui/spinner.tsx";
 import {Field, FieldError, FieldGroup, FieldLabel} from "@/components/ui/field.tsx";
 import {toast} from "sonner";
-import {useApi} from "@/hooks/use-api.tsx";
 import {UpdateProfileBody, updateProfileFormSchema} from "@/types/auth.ts";
+import {api} from "@/lib/api/api-client.ts";
 
 type ProfileFormProps = {
     className?: string;
-} & React.ComponentPropsWithoutRef<"div">;
+} & ComponentPropsWithoutRef<"div">;
 
 
 export function ProfileForm({
@@ -25,7 +24,6 @@ export function ProfileForm({
 
     const {user, updateUserContext} = useAuth();
     const [loading, setLoading] = useState(false);
-    const api = useApi();
     const updateProfileMutation = api.useMutation("put", "/user/profile-information",
         {
             onSuccess: async () => {

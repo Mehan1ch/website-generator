@@ -3,14 +3,13 @@ import {Spinner} from "@/components/ui/spinner.tsx";
 import {toast} from "sonner";
 import {AuthContext} from "@/contexts/auth-context";
 import {LoginBody, User} from "@/types/auth.ts";
-import {APIError, useApi} from "@/hooks/use-api.tsx";
+import {api, APIError} from "@/lib/api/api-client.ts";
 import {useQueryClient} from "@tanstack/react-query";
 
 export function AuthProvider({children}: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const api = useApi();
     const loginMutation = api.useMutation("post", "/login");
     const logoutMutation = api.useMutation("post", "/logout");
     const deleteUserMutation = api.useMutation("delete", "/api/user");

@@ -1,5 +1,4 @@
-import * as React from "react";
-import {useState} from "react";
+import {ComponentPropsWithoutRef, useState} from "react";
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert.tsx";
 import {AlertCircleIcon} from "lucide-react";
@@ -17,13 +16,13 @@ import {
 import {cn} from "@/lib/utils.ts";
 import {useAuth} from "@/hooks/use-auth.tsx";
 import {toast} from "sonner";
-import {APIError} from "@/hooks/use-api.tsx";
 import {useRouter} from "@tanstack/react-router";
 import {Spinner} from "@/components/ui/spinner.tsx";
+import {APIError} from "@/lib/api/api-client.ts";
 
 type DeleteAccountFormProps = {
     className?: string;
-} & React.ComponentPropsWithoutRef<"div">;
+} & ComponentPropsWithoutRef<"div">;
 
 
 export function DeleteAccountForm({className, ...props}: DeleteAccountFormProps) {

@@ -8,9 +8,9 @@ import {ComponentPropsWithoutRef, useState} from "react";
 import {Spinner} from "@/components/ui/spinner.tsx";
 import {Field, FieldDescription, FieldError, FieldGroup, FieldLabel} from "../ui/field";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
-import {useApi} from "@/hooks/use-api.tsx";
 import {toast} from "sonner";
 import {ResetPasswordBody, resetPasswordFormSchema} from "@/types/auth.ts";
+import {api} from "@/lib/api/api-client.ts";
 
 type ResetPasswordFormProps = {
     redirect?: string;
@@ -29,7 +29,6 @@ export function ResetPasswordForm({
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const redirectTo: string = redirect || "/";
-    const api = useApi();
     const resetPasswordMutation = api.useMutation(
         "post",
         "/reset-password",

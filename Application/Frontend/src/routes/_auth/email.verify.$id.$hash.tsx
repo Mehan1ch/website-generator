@@ -1,10 +1,10 @@
 import {createFileRoute, redirect, useNavigate} from '@tanstack/react-router';
-import {api} from "@/hooks/use-api.tsx";
 import {redirectOnlySearchSchema} from "@/types/search.ts";
 import {z} from "zod";
 import {BadgeCheckIcon, BadgeXIcon} from "lucide-react";
 import {Item, ItemActions, ItemContent, ItemMedia, ItemTitle} from "@/components/ui/item.tsx";
 import {Button} from "@/components/ui/button.tsx";
+import {api} from "@/lib/api/api-client.ts";
 
 const emailVerifySearchParams = redirectOnlySearchSchema.extend({
     expires: z.number().default(0),

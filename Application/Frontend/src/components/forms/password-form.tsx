@@ -6,12 +6,12 @@ import {Controller, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import {toast} from "sonner";
-import {APIError, useApi} from "@/hooks/use-api.tsx";
 import {UpdatePasswordBody, updatePasswordFormSchema} from "@/types/auth.ts";
 import {Field, FieldError, FieldGroup, FieldLabel} from "@/components/ui/field.tsx";
 import {Spinner} from "@/components/ui/spinner.tsx";
 import {useRouter} from "@tanstack/react-router";
 import {useAuth} from "@/hooks/use-auth.tsx";
+import {api, APIError} from "@/lib/api/api-client.ts";
 
 
 type PasswordFormProps = {
@@ -24,7 +24,6 @@ export function PasswordForm({
                              }: PasswordFormProps) {
 
     const [loading, setLoading] = useState(false);
-    const api = useApi();
     const {logout} = useAuth();
     const router = useRouter();
     const updatePasswordMutation = api.useMutation("put", "/user/password", {

@@ -3,20 +3,19 @@ import {Button} from "@/components/ui/button.tsx";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/components/ui/card.tsx";
 import {Field, FieldDescription, FieldError, FieldGroup, FieldLabel,} from "@/components/ui/field.tsx";
 import {Input} from "@/components/ui/input.tsx";
-import * as React from "react";
-import {useState} from "react";
+import {ComponentPropsWithoutRef, useState} from "react";
 import {Link, useRouter} from "@tanstack/react-router";
 import {Controller, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Spinner} from "@/components/ui/spinner.tsx";
 import {RegisterBody, registerFormSchema} from "@/types/auth.ts";
-import {useApi} from "@/hooks/use-api.tsx";
 import {toast} from "sonner";
+import {api} from "@/lib/api/api-client.ts";
 
 type SignupFormProps = {
     className?: string;
     redirect?: string;
-} & React.ComponentPropsWithoutRef<"div">;
+} & ComponentPropsWithoutRef<"div">;
 
 export function SignupForm({
                                className,
@@ -26,7 +25,6 @@ export function SignupForm({
 
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-    const api = useApi();
     const registerMutation = api.useMutation("post", "/register", {
         onSuccess: async () => {
             toast.success("Registration successful!");
