@@ -1,11 +1,11 @@
 import {createFileRoute} from '@tanstack/react-router';
 import {TypographyH4} from "@/components/ui/typography/typography-h4.tsx";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs.tsx";
-import {ProfileForm} from "@/components/forms/profile-form.tsx";
-import {PasswordForm} from "@/components/forms/password-form.tsx";
-import {DeleteAccountForm} from "@/components/forms/delete-account-form.tsx";
+import {ProfileForm} from "@/routes/_app/account/-components/profile-form.tsx";
+import {PasswordForm} from "@/routes/_app/account/-components/password-form.tsx";
+import {DeleteAccountForm} from "@/routes/_app/account/-components/delete-account-form.tsx";
 
-export const Route = createFileRoute('/_app/account')({
+export const Route = createFileRoute('/_app/account/')({
     beforeLoad: () => {
         return {
             getTitle: () => 'Account',

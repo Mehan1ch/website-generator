@@ -1,5 +1,5 @@
-import {Card, CardContent} from "@/components/ui/card"
-import {Button} from "@/components/ui/button"
+import {Card, CardContent} from "@/components/ui/card.tsx";
+import {Button} from "@/components/ui/button.tsx";
 import {useEditor} from "@craftjs/core";
 import {createElement} from "react";
 
@@ -19,7 +19,7 @@ export const SettingsPanel = () => {
 
         return {
             selected
-        }
+        };
     });
 
     return selected ? (
@@ -48,5 +48,5 @@ export const SettingsPanel = () => {
                 }
             </CardContent>
         </Card>
-    ) : null
-}
+    ) : null;
+};

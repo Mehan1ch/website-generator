@@ -3,7 +3,7 @@ import ContentEditable from "react-contenteditable";
 import {useEffect, useState} from "react";
 import {Form, FormControl, FormField, FormItem, FormLabel} from "@/components/ui/form.tsx";
 import {useForm} from "react-hook-form";
-import {Slider} from "../ui/slider";
+import {Slider} from "@/components/ui/slider.tsx";
 
 interface EditorTextProps {
     text: string;
@@ -30,7 +30,7 @@ export const EditorText = ({text, fontSize = 20, textAlign = "left"}: EditorText
 
     useEffect(() => {
         if (!hasSelectedNode) {
-            setEditable(false)
+            setEditable(false);
         }
     }, [hasSelectedNode]);
 
@@ -53,8 +53,8 @@ export const EditorText = ({text, fontSize = 20, textAlign = "left"}: EditorText
                 style={{fontSize: `${fontSize}px`, textAlign}}
             />
         </div>
-    )
-}
+    );
+};
 
 const TextSettings = () => {
     const {actions: {setProp}, fontSize} = useNode((node) => ({
@@ -64,7 +64,7 @@ const TextSettings = () => {
         defaultValues: {
             fontSize: fontSize
         }
-    })
+    });
 
     return (
         <>
@@ -93,8 +93,8 @@ const TextSettings = () => {
                 </form>
             </Form>
         </>
-    )
-}
+    );
+};
 
 EditorText.craft = {
     props: {
@@ -107,4 +107,4 @@ EditorText.craft = {
     related: {
         settings: TextSettings
     }
-}
+};

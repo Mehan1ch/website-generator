@@ -1,5 +1,3 @@
-import * as React from "react"
-
 import {
     Sidebar,
     SidebarContent,
@@ -13,7 +11,8 @@ import {
     SidebarMenuSubButton,
     SidebarMenuSubItem,
     SidebarRail,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar.tsx";
+import {ComponentProps} from "react";
 
 // This is sample data.
 const data = {
@@ -154,9 +153,9 @@ const data = {
             ],
         },
     ],
-}
+};
 
-export function EditorSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
+export function EditorSidebar({...props}: ComponentProps<typeof Sidebar>) {
     return (
         <Sidebar variant={"inset"} {...props}>
             <SidebarContent>
@@ -193,5 +192,5 @@ export function EditorSidebar({...props}: React.ComponentProps<typeof Sidebar>) 
             </SidebarContent>
             <SidebarRail/>
         </Sidebar>
-    )
+    );
 }

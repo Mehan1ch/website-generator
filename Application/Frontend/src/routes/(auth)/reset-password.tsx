@@ -1,7 +1,7 @@
 import {createFileRoute, Link, redirect} from '@tanstack/react-router';
 import {GalleryVerticalEnd} from "lucide-react";
 import {z} from "zod";
-import {ResetPasswordForm} from "@/components/forms/reset-password-form.tsx";
+import {ResetPasswordForm} from "@/routes/(auth)/-components/reset-password-form.tsx";
 
 
 const resetPasswordSearchSchema = z.object({
@@ -10,7 +10,7 @@ const resetPasswordSearchSchema = z.object({
     email: z.email().default(''),
 });
 
-export const Route = createFileRoute('/_auth/reset-password')({
+export const Route = createFileRoute('/(auth)/reset-password')({
     validateSearch: resetPasswordSearchSchema,
     beforeLoad: ({context, search}) => {
         // Redirect if already authenticated

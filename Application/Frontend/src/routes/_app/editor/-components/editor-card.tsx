@@ -1,8 +1,8 @@
-import {ContainerDefaultProps, ContainerSettings, EditorContainer} from "./editor-container"
-import {EditorText} from "./editor-text"
-import {EditorButton} from "@/components/editor/editor-button.tsx";
+import {ContainerDefaultProps, ContainerSettings, EditorContainer} from "./editor-container.tsx";
+import {EditorText} from "./editor-text.tsx";
+import {EditorButton} from "@/routes/_app/editor/-components/editor-button.tsx";
 import {Element, Node, useNode} from "@craftjs/core";
-import * as React from "react";
+import {ReactNode} from "react";
 
 
 interface EditorCardProps {
@@ -11,7 +11,7 @@ interface EditorCardProps {
 }
 
 interface EditorCardSectionProps {
-    children: React.ReactNode;
+    children: ReactNode;
 }
 
 export const EditorCardTop = ({children}: EditorCardSectionProps) => {
@@ -22,15 +22,15 @@ export const EditorCardTop = ({children}: EditorCardSectionProps) => {
         }} className="text-only">
             {children}
         </div>
-    )
-}
+    );
+};
 
 EditorCardTop.craft = {
     rules: {
         // Only accept Text
         canMoveIn: (incomingNodes: [Node]) => incomingNodes.every(incomingNode => incomingNode.data.type === EditorText)
     }
-}
+};
 
 export const EditorCardBottom = ({children}: EditorCardSectionProps) => {
     const {connectors: {connect}} = useNode();
@@ -40,15 +40,15 @@ export const EditorCardBottom = ({children}: EditorCardSectionProps) => {
         }}>
             {children}
         </div>
-    )
-}
+    );
+};
 
 EditorCardBottom.craft = {
     rules: {
         // Only accept Buttons
         canMoveIn: (incomingNodes: [Node]) => incomingNodes.every(incomingNode => incomingNode.data.type === EditorButton)
     }
-}
+};
 
 
 export const EditorCard = ({background, padding = 20}: EditorCardProps) => {
@@ -64,8 +64,8 @@ export const EditorCard = ({background, padding = 20}: EditorCardProps) => {
                 </EditorButton>
             </Element>
         </EditorContainer>
-    )
-}
+    );
+};
 
 EditorCard.craft = {
     props: ContainerDefaultProps,
@@ -73,4 +73,4 @@ EditorCard.craft = {
         // Since Card has the same settings as Container, we'll just reuse ContainerSettings
         settings: ContainerSettings
     }
-}
+};

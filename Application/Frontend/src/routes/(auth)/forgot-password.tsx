@@ -1,9 +1,9 @@
 import {createFileRoute, Link, redirect} from '@tanstack/react-router';
 import {GalleryVerticalEnd} from "lucide-react";
-import {ForgotPasswordForm} from "@/components/forms/forgot-password-form.tsx";
+import {ForgotPasswordForm} from "@/routes/(auth)/-components/forgot-password-form.tsx";
 import {redirectOnlySearchSchema} from "@/types/search.ts";
 
-export const Route = createFileRoute('/_auth/forgot-password')({
+export const Route = createFileRoute('/(auth)/forgot-password')({
     validateSearch: redirectOnlySearchSchema,
     beforeLoad: ({context, search}) => {
         // Redirect if already authenticated

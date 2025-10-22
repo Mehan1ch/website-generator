@@ -11,7 +11,7 @@ const emailVerifySearchParams = redirectOnlySearchSchema.extend({
     signature: z.string().min(1).default(""),
 });
 
-export const Route = createFileRoute('/_auth/email/verify/$id/$hash')({
+export const Route = createFileRoute('/(auth)/email/verify/$id/$hash')({
     validateSearch: emailVerifySearchParams,
     beforeLoad: ({search, context, params, location}) => {
         if (!context.auth.isAuthenticated) {

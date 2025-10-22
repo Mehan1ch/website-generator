@@ -2,7 +2,7 @@ import * as React from "react";
 import {Card} from "@/components/ui/card.tsx";
 import {useNode} from "@craftjs/core";
 import {useForm} from "react-hook-form";
-import {Form, FormControl, FormField, FormItem, FormLabel} from "../ui/form";
+import {Form, FormControl, FormField, FormItem, FormLabel} from "@/components/ui/form.tsx";
 import {ColorPicker} from "@/components/ui/color-picker.tsx";
 import {Slider} from "@/components/ui/slider.tsx";
 
@@ -17,13 +17,13 @@ export const EditorContainer = ({background, padding = 0, children}: EditorConta
     return (
         <Card
             ref={ref => {
-                connect(drag(ref!))
+                connect(drag(ref!));
             }}
             style={{margin: "5px 0", background, padding: `${padding}px`}}>
             {children}
         </Card>
-    )
-}
+    );
+};
 
 export const ContainerSettings = () => {
     const {background, padding, actions: {setProp}} = useNode(node => ({
@@ -50,7 +50,7 @@ export const ContainerSettings = () => {
                             <FormControl>
                                 <ColorPicker
                                     color={background || "#000"}
-                                    onChange={color => setProp((props: {
+                                    onChange={(color: string) => setProp((props: {
                                         background: string;
                                     }) => props.background = color)}
                                     value={""}/>
@@ -94,4 +94,4 @@ EditorContainer.craft = {
     related: {
         settings: ContainerSettings
     }
-}
+};

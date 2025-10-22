@@ -1,36 +1,34 @@
 import {createFileRoute, Link, redirect} from '@tanstack/react-router';
+import {SignupForm} from "@/routes/(auth)/-components/signup-form.tsx";
 import {GalleryVerticalEnd} from "lucide-react";
-import {LoginForm} from "@/components/forms/login-form.tsx";
 import {redirectOnlySearchSchema} from "@/types/search.ts";
 
-export const Route = createFileRoute('/_auth/login')({
+export const Route = createFileRoute('/(auth)/register')({
     validateSearch: redirectOnlySearchSchema,
     beforeLoad: ({context, search}) => {
-        // Redirect if already authenticated
         if (context.auth.isAuthenticated) {
-            throw redirect({to: search.redirect, replace: true});
+            throw redirect({to: search.redirect});
         }
     },
-    component: Login,
+    component: RouteComponent,
 });
 
-function Login() {
+function RouteComponent() {
     const {redirect} = Route.useSearch();
-    const {VITE_APP_NAME} = import.meta.env;
-
+    const appTitle = import.meta.env.VITE_APP_NAME || "Default App Title";
     return (
         <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
             <div className="flex w-full max-w-sm flex-col gap-6">
-                <Link to={"/"} search={{
-                    redirect: redirect || "/",
-                }} className="flex items-center gap-2 self-center font-medium">
+                <Link to={"/"} className="flex items-center gap-2 self-center font-medium" search={{
+                    redirect: redirect
+                }}>
                     <div
                         className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
                         <GalleryVerticalEnd className="size-4"/>
                     </div>
-                    {VITE_APP_NAME}
+                    {appTitle}
                 </Link>
-                <LoginForm redirect={redirect}/>
+                <SignupForm redirect={redirect}/>
             </div>
         </div>
     );

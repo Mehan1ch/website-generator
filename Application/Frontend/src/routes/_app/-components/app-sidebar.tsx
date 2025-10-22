@@ -1,8 +1,7 @@
-import * as React from "react"
-import {Globe, LayoutDashboard, PencilIcon} from "lucide-react"
+import {Globe, LayoutDashboard, PencilIcon} from "lucide-react";
 
-import {NavMain} from "@/components/sidebar/nav-main.tsx"
-import {NavUser} from "@/components/sidebar/nav-user.tsx"
+import {NavMain} from "@/components/sidebar/nav-main.tsx";
+import {NavUser} from "@/components/sidebar/nav-user.tsx";
 import {
     Sidebar,
     SidebarContent,
@@ -10,11 +9,12 @@ import {
     SidebarHeader,
     SidebarMenuButton,
     SidebarRail,
-} from "@/components/ui/sidebar.tsx"
+} from "@/components/ui/sidebar.tsx";
 import {useAuth} from "@/hooks/use-auth.tsx";
 import {useRouter} from "@tanstack/react-router";
 import {SideBarModeToggle} from "@/components/sidebar/side-bar-mode-toggle.tsx";
 import {NavSection} from "@/types/nav-section.ts";
+import {ComponentProps} from "react";
 
 
 const navMain: NavSection[] = [
@@ -35,7 +35,7 @@ const navMain: NavSection[] = [
     }
 ];
 
-export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({...props}: ComponentProps<typeof Sidebar>) {
     const appTitle = import.meta.env.VITE_APP_NAME || "Default App Title";
     const {user} = useAuth();
     const router = useRouter();
@@ -65,5 +65,5 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
             </SidebarFooter>
             <SidebarRail/>
         </Sidebar>
-    )
+    );
 }

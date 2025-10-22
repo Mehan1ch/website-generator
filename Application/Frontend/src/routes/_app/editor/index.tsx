@@ -1,23 +1,23 @@
-import {createFileRoute} from '@tanstack/react-router'
+import {createFileRoute} from '@tanstack/react-router';
 import {Card, CardContent} from "@/components/ui/card.tsx";
-import {Toolbox} from "@/components/editor/toolbox.tsx";
-import {SettingsPanel} from "@/components/editor/settings-panel.tsx";
 import {Editor, Element, Frame} from "@craftjs/core";
-import {EditorContainer} from '@/components/editor/editor-container';
-import {EditorButton} from '@/components/editor/editor-button';
-import {EditorText} from '@/components/editor/editor-text';
-import {EditorCard, EditorCardBottom, EditorCardTop} from "@/components/editor/editor-card.tsx";
-import {Topbar} from "@/components/editor/topbar.tsx";
+import {EditorCard, EditorCardBottom, EditorCardTop} from "@/routes/_app/editor/-components/editor-card.tsx";
+import {EditorContainer} from "@/routes/_app/editor/-components/editor-container.tsx";
+import {EditorButton} from "@/routes/_app/editor/-components/editor-button.tsx";
+import {EditorText} from "@/routes/_app/editor/-components/editor-text.tsx";
+import {Topbar} from "@/routes/_app/editor/-components/topbar.tsx";
+import {Toolbox} from "@/routes/_app/editor/-components/toolbox.tsx";
+import {SettingsPanel} from "@/routes/_app/editor/-components/settings-panel.tsx";
 
 
-export const Route = createFileRoute('/_app/editor')({
+export const Route = createFileRoute('/_app/editor/')({
     beforeLoad: () => {
         return {
             getTitle: () => 'Editor',
-        }
+        };
     },
     component: EditorPage,
-})
+});
 
 //TODO: Inspiration for final look can be taken from grapes js editor: https://grapesjs.com/demo.html
 
@@ -50,5 +50,5 @@ function EditorPage() {
                 </div>
             </div>
         </Editor>
-    </div>
+    </div>;
 }

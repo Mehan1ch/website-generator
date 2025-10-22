@@ -2,10 +2,9 @@ import {Button} from "@/components/ui/button.tsx";
 import * as React from "react";
 import {useNode} from "@craftjs/core";
 import {useForm} from "react-hook-form";
-import {Form, FormControl, FormField, FormItem, FormLabel} from "../ui/form";
-import {RadioGroup, RadioGroupItem} from "../ui/radio-group";
+import {Form, FormControl, FormField, FormItem, FormLabel} from "@/components/ui/form.tsx";
+import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group.tsx";
 
-// TODO: colocate this file with other editor components next to the editor route for better structure
 // https://tanstack.com/router/latest/docs/framework/react/routing/routing-concepts#excluding-files-and-folders-from-routes
 type EditorButtonProps = {
     size: "sm" | "lg" | "default" | "icon" | null | undefined;
@@ -20,13 +19,13 @@ export const EditorButton = ({size, variant = "default", color, children}: Edito
     return (
         <Button
             ref={ref => {
-                connect(drag(ref!))
+                connect(drag(ref!));
             }}
             size={size} variant={variant} color={color}>
             {children}
         </Button>
-    )
-}
+    );
+};
 
 export const ButtonSettings = () => {
     const {actions: {setProp}, props} = useNode((node) => ({
@@ -132,4 +131,4 @@ EditorButton.craft = {
     related: {
         settings: ButtonSettings
     }
-}
+};

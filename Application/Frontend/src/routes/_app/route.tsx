@@ -1,6 +1,6 @@
-import {createFileRoute, Outlet, redirect, useRouterState} from '@tanstack/react-router'
+import {createFileRoute, Outlet, redirect, useRouterState} from '@tanstack/react-router';
 import {SidebarInset, SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar.tsx";
-import {AppSidebar} from "@/components/sidebar/app/app-sidebar.tsx";
+import {AppSidebar} from "@/routes/_app/-components/app-sidebar.tsx";
 import {Separator} from "@/components/ui/separator.tsx";
 import {
     Breadcrumb,
@@ -18,16 +18,16 @@ export const Route = createFileRoute('/_app')({
                 search: {
                     redirect: location.href,
                 },
-            })
+            });
         }
     },
 
     component: AppLayout,
-})
+});
 
 function AppLayout() {
 
-    const matches = useRouterState({select: (s) => s.matches})
+    const matches = useRouterState({select: (s) => s.matches});
 
     const breadcrumbs = matches
         .filter((match) => match.context.getTitle)
@@ -35,8 +35,8 @@ function AppLayout() {
             return {
                 title: context.getTitle(),
                 path: pathname,
-            }
-        }).filter((breadcrumb) => breadcrumb.path !== "/")
+            };
+        }).filter((breadcrumb) => breadcrumb.path !== "/");
 
     return <SidebarProvider name={"App"}>
         <AppSidebar/>
@@ -66,5 +66,5 @@ function AppLayout() {
                 <Outlet/>
             </div>
         </SidebarInset>
-    </SidebarProvider>
+    </SidebarProvider>;
 }

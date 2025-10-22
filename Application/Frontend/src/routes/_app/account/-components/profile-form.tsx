@@ -1,6 +1,6 @@
-import {cn} from "@/lib/utils";
-import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
+import {cn} from "@/lib/utils.ts";
+import {Button} from "@/components/ui/button.tsx";
+import {Input} from "@/components/ui/input.tsx";
 import {ComponentPropsWithoutRef, useState} from "react";
 import {Controller, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";

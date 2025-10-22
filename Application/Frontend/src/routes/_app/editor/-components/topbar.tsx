@@ -1,5 +1,5 @@
-import {Button} from "../ui/button"
-import {Switch} from "../ui/switch"
+import {Button} from "@/components/ui/button.tsx";
+import {Switch} from "@/components/ui/switch.tsx";
 import {useEditor} from "@craftjs/core";
 import {toast} from "sonner";
 import copy from "copy-to-clipboard";
@@ -49,7 +49,7 @@ export const Topbar = () => {
                         onClick={() => {
                             const json = query.serialize();
                             copy(lz.encodeBase64(lz.compress(json)));
-                            toast.info("State copied to clipboard")
+                            toast.info("State copied to clipboard");
                         }}
                     >
                         Serialize JSON to clipboard
@@ -93,5 +93,5 @@ export const Topbar = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};

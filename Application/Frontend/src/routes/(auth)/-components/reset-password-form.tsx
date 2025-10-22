@@ -1,12 +1,12 @@
-import {cn} from "@/lib/utils";
-import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
+import {cn} from "@/lib/utils.ts";
+import {Button} from "@/components/ui/button.tsx";
+import {Input} from "@/components/ui/input.tsx";
 import {Controller, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Link, useRouter} from "@tanstack/react-router";
 import {ComponentPropsWithoutRef, useState} from "react";
 import {Spinner} from "@/components/ui/spinner.tsx";
-import {Field, FieldDescription, FieldError, FieldGroup, FieldLabel} from "../ui/field";
+import {Field, FieldDescription, FieldError, FieldGroup, FieldLabel} from "@/components/ui/field.tsx";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import {toast} from "sonner";
 import {ResetPasswordBody, resetPasswordFormSchema} from "@/types/auth.ts";
