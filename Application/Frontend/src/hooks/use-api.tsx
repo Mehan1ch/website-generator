@@ -16,7 +16,7 @@ export class APIError extends Error {
     }
 }
 
-const baseUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:80/";
+const baseUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost";
 
 const fetchClient = createFetchClient<paths>({
     baseUrl: baseUrl,
@@ -62,30 +62,35 @@ const middleware: Middleware = {
     },
     async onResponse({response}) {
         if (!response.ok) {
-            if (response.status === 401 || response.status === 419) {
-                // Clear auth state
-                localStorage.removeItem('user');
-                localStorage.setItem('isAuthenticated', 'false');
-
-                // Show notification
-                toast.error('Session expired. Please log in again.');
-
-                // Redirect to login
-                redirect({
-                    to: "/login",
-                    search: {
-                        redirect: location.href
-                    }
-                });
-            }
             const responseJson = await response.json();
             throw new APIError(responseJson.message, responseJson.errors, response.status);
         }
     },
+    async onError({error}) {
+        if ((error as APIError).status === 401 || (error as APIError).status === 419) {
+            // Clear auth state
+            localStorage.removeItem('user');
+            localStorage.setItem('isAuthenticated', 'false');
+
+            // Show notification
+            toast.error('Session expired. Please log in again.');
+
+            // Redirect to login
+            throw redirect({
+                to: "/login",
+                search: {
+                    redirect: location.href
+                }
+            });
+        }
+    }
 };
 
 fetchClient.use(middleware);
+export const api = createClient(fetchClient);
+
+//TODO: check if this would be better as not a hook
 export const useApi = () => {
 
-    return createClient(fetchClient);
+    return api;
 };

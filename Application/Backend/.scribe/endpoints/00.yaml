@@ -28,7 +28,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"id":null,"name":"Alvera Kshlerin","email":"carroll.lyla@example.com","email_verified_at":"2025-10-19T18:37:28.000000Z","avatar":null,"created_at":null,"updated_at":null}}'
+        content: '{"data":{"id":null,"name":"Amalia Schoen","email":"emil58@example.net","email_verified_at":"2025-10-21T20:14:02.000000Z","avatar":null,"created_at":null,"updated_at":null}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json

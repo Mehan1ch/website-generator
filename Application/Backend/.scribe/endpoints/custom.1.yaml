@@ -245,6 +245,19 @@
   headers:
     Accept: application/json
     Authorization: Bearer {token}
+  queryParameters:
+    expires:
+      name: expires
+      description: The expiration timestamp of the verification link.
+      required: true
+      example: 1712345678
+      type: integer
+    signature:
+      name: signature
+      description: The signature of the verification link.
+      required: true
+      example: abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890
+      type: string
   urlParameters:
     id:
       name: id

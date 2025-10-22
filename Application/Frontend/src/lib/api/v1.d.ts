@@ -484,13 +484,13 @@ export interface operations {
         parameters: {
             query: {
                 /**
-                 * @description Expiration timestamp.
-                 * @example 1640995200
+                 * @description The expiration timestamp of the verification link.
+                 * @example 1712345678
                  */
                 expires: number;
                 /**
-                 * @description URL signature.
-                 * @example def456ghi789
+                 * @description The signature of the verification link.
+                 * @example abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890
                  */
                 signature: string;
             };
@@ -540,11 +540,11 @@ export interface operations {
                         data?: {
                             /** @example null */
                             id?: string;
-                            /** @example Alvera Kshlerin */
+                            /** @example Amalia Schoen */
                             name?: string;
-                            /** @example carroll.lyla@example.com */
+                            /** @example emil58@example.net */
                             email?: string;
-                            /** @example 2025-10-19T18:37:28.000000Z */
+                            /** @example 2025-10-21T20:14:02.000000Z */
                             email_verified_at?: string;
                             /** @example null */
                             avatar?: string;
@@ -708,6 +708,21 @@ export interface operations {
                      * @example user@example.com
                      */
                     email: string;
+                    /**
+                     * @description The new password (minimum 8 characters).
+                     * @example newpassword123
+                     */
+                    password: string;
+                    /**
+                     * @description Password confirmation.
+                     * @example newpassword123
+                     */
+                    password_confirmation: string;
+                    /**
+                     * @description The password reset token.
+                     * @example reset_token_123
+                     */
+                    token: string;
                 };
             };
         };

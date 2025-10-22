@@ -11,16 +11,15 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteRouteImport } from './routes/_app/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthVerifyEmailRouteImport } from './routes/_auth/verify-email'
 import { Route as AuthResetPasswordRouteImport } from './routes/_auth/reset-password'
 import { Route as AuthRegisterRouteImport } from './routes/_auth/register'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as AuthForgotPasswordRouteImport } from './routes/_auth/forgot-password'
-import { Route as AuthConfirmPasswordRouteImport } from './routes/_auth/confirm-password'
 import { Route as AppWebsitesRouteImport } from './routes/_app/websites'
 import { Route as AppEditorRouteImport } from './routes/_app/editor'
 import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
 import { Route as AppAccountRouteImport } from './routes/_app/account'
+import { Route as AuthEmailVerifyIdHashRouteImport } from './routes/_auth/email.verify.$id.$hash'
 
 const AppRouteRoute = AppRouteRouteImport.update({
   id: '/_app',
@@ -29,11 +28,6 @@ const AppRouteRoute = AppRouteRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthVerifyEmailRoute = AuthVerifyEmailRouteImport.update({
-  id: '/_auth/verify-email',
-  path: '/verify-email',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthResetPasswordRoute = AuthResetPasswordRouteImport.update({
@@ -56,11 +50,6 @@ const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthConfirmPasswordRoute = AuthConfirmPasswordRouteImport.update({
-  id: '/_auth/confirm-password',
-  path: '/confirm-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AppWebsitesRoute = AppWebsitesRouteImport.update({
   id: '/websites',
   path: '/websites',
@@ -81,6 +70,11 @@ const AppAccountRoute = AppAccountRouteImport.update({
   path: '/account',
   getParentRoute: () => AppRouteRoute,
 } as any)
+const AuthEmailVerifyIdHashRoute = AuthEmailVerifyIdHashRouteImport.update({
+  id: '/_auth/email/verify/$id/$hash',
+  path: '/email/verify/$id/$hash',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -88,12 +82,11 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AppDashboardRoute
   '/editor': typeof AppEditorRoute
   '/websites': typeof AppWebsitesRoute
-  '/confirm-password': typeof AuthConfirmPasswordRoute
   '/forgot-password': typeof AuthForgotPasswordRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
   '/reset-password': typeof AuthResetPasswordRoute
-  '/verify-email': typeof AuthVerifyEmailRoute
+  '/email/verify/$id/$hash': typeof AuthEmailVerifyIdHashRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -101,12 +94,11 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AppDashboardRoute
   '/editor': typeof AppEditorRoute
   '/websites': typeof AppWebsitesRoute
-  '/confirm-password': typeof AuthConfirmPasswordRoute
   '/forgot-password': typeof AuthForgotPasswordRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
   '/reset-password': typeof AuthResetPasswordRoute
-  '/verify-email': typeof AuthVerifyEmailRoute
+  '/email/verify/$id/$hash': typeof AuthEmailVerifyIdHashRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -116,12 +108,11 @@ export interface FileRoutesById {
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/editor': typeof AppEditorRoute
   '/_app/websites': typeof AppWebsitesRoute
-  '/_auth/confirm-password': typeof AuthConfirmPasswordRoute
   '/_auth/forgot-password': typeof AuthForgotPasswordRoute
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/register': typeof AuthRegisterRoute
   '/_auth/reset-password': typeof AuthResetPasswordRoute
-  '/_auth/verify-email': typeof AuthVerifyEmailRoute
+  '/_auth/email/verify/$id/$hash': typeof AuthEmailVerifyIdHashRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,12 +122,11 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/editor'
     | '/websites'
-    | '/confirm-password'
     | '/forgot-password'
     | '/login'
     | '/register'
     | '/reset-password'
-    | '/verify-email'
+    | '/email/verify/$id/$hash'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -144,12 +134,11 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/editor'
     | '/websites'
-    | '/confirm-password'
     | '/forgot-password'
     | '/login'
     | '/register'
     | '/reset-password'
-    | '/verify-email'
+    | '/email/verify/$id/$hash'
   id:
     | '__root__'
     | '/'
@@ -158,23 +147,21 @@ export interface FileRouteTypes {
     | '/_app/dashboard'
     | '/_app/editor'
     | '/_app/websites'
-    | '/_auth/confirm-password'
     | '/_auth/forgot-password'
     | '/_auth/login'
     | '/_auth/register'
     | '/_auth/reset-password'
-    | '/_auth/verify-email'
+    | '/_auth/email/verify/$id/$hash'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRouteRoute: typeof AppRouteRouteWithChildren
-  AuthConfirmPasswordRoute: typeof AuthConfirmPasswordRoute
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
   AuthResetPasswordRoute: typeof AuthResetPasswordRoute
-  AuthVerifyEmailRoute: typeof AuthVerifyEmailRoute
+  AuthEmailVerifyIdHashRoute: typeof AuthEmailVerifyIdHashRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -191,13 +178,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_auth/verify-email': {
-      id: '/_auth/verify-email'
-      path: '/verify-email'
-      fullPath: '/verify-email'
-      preLoaderRoute: typeof AuthVerifyEmailRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_auth/reset-password': {
@@ -228,13 +208,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_auth/confirm-password': {
-      id: '/_auth/confirm-password'
-      path: '/confirm-password'
-      fullPath: '/confirm-password'
-      preLoaderRoute: typeof AuthConfirmPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_app/websites': {
       id: '/_app/websites'
       path: '/websites'
@@ -263,6 +236,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAccountRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/_auth/email/verify/$id/$hash': {
+      id: '/_auth/email/verify/$id/$hash'
+      path: '/email/verify/$id/$hash'
+      fullPath: '/email/verify/$id/$hash'
+      preLoaderRoute: typeof AuthEmailVerifyIdHashRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -287,12 +267,11 @@ const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRouteRoute: AppRouteRouteWithChildren,
-  AuthConfirmPasswordRoute: AuthConfirmPasswordRoute,
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthRegisterRoute: AuthRegisterRoute,
   AuthResetPasswordRoute: AuthResetPasswordRoute,
-  AuthVerifyEmailRoute: AuthVerifyEmailRoute,
+  AuthEmailVerifyIdHashRoute: AuthEmailVerifyIdHashRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
