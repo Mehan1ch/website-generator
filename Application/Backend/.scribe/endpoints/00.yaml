@@ -28,13 +28,44 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"id":null,"name":"Amalia Schoen","email":"emil58@example.net","email_verified_at":"2025-10-21T20:14:02.000000Z","avatar":null,"created_at":null,"updated_at":null}}'
+        content: '{"data":{"id":null,"name":"Donnie Hansen","email":"jhomenick@example.net","email_verified_at":"2025-10-23T22:02:56.000000Z","avatar":null,"created_at":null,"updated_at":null}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           vary: Origin
         description: null
         custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/user/avatar
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Upload avatar'
+      description: "Upload and set the authenticated user's avatar image."
+      authenticated: false
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
     responseFields: []
     auth: []
     controller: null

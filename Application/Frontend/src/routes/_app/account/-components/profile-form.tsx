@@ -9,7 +9,7 @@ import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} f
 import {Spinner} from "@/components/ui/spinner.tsx";
 import {Field, FieldError, FieldGroup, FieldLabel} from "@/components/ui/field.tsx";
 import {toast} from "sonner";
-import {UpdateProfileBody, updateProfileFormSchema} from "@/types/auth.ts";
+import {UpdateProfileBody, updateProfileFormSchema} from "@/types/account.ts";
 import {api} from "@/lib/api/api-client.ts";
 
 type ProfileFormProps = {
@@ -22,12 +22,12 @@ export function ProfileForm({
                                 ...props
                             }: ProfileFormProps) {
 
-    const {user, updateUserContext} = useAuth();
+    const {user, fetchUserContext} = useAuth();
     const [loading, setLoading] = useState(false);
     const updateProfileMutation = api.useMutation("put", "/user/profile-information",
         {
             onSuccess: async () => {
-                await updateUserContext();
+                await fetchUserContext();
                 setLoading(false);
                 toast.success("Profile updated successfully!");
             },

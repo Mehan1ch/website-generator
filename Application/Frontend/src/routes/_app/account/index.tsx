@@ -4,6 +4,8 @@ import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs.tsx
 import {ProfileForm} from "@/routes/_app/account/-components/profile-form.tsx";
 import {PasswordForm} from "@/routes/_app/account/-components/password-form.tsx";
 import {DeleteAccountForm} from "@/routes/_app/account/-components/delete-account-form.tsx";
+import {EmailVerificationBadge} from "@/routes/_app/account/-components/email-verification-badge.tsx";
+import {AvatarForm} from "@/routes/_app/account/-components/avatar-form.tsx";
 
 export const Route = createFileRoute('/_app/account/')({
     beforeLoad: () => {
@@ -16,6 +18,7 @@ export const Route = createFileRoute('/_app/account/')({
 
 function Account() {
 
+
     return <div className="m-2 p-4">
         <header className="flex h-16 shrink-0 items-center gap-2">
             <div>
@@ -27,11 +30,19 @@ function Account() {
             <Tabs defaultValue="profile">
                 <TabsList>
                     <TabsTrigger value="profile">Profile</TabsTrigger>
+                    <TabsTrigger value="avatar">Avatar</TabsTrigger>
+                    <TabsTrigger value="verification">Verification</TabsTrigger>
                     <TabsTrigger value="password">Password</TabsTrigger>
                     <TabsTrigger value="delete">Delete</TabsTrigger>
                 </TabsList>
                 <TabsContent value="profile">
                     <ProfileForm/>
+                </TabsContent>
+                <TabsContent value="avatar">
+                    <AvatarForm/>
+                </TabsContent>
+                <TabsContent value="verification">
+                    <EmailVerificationBadge/>
                 </TabsContent>
                 <TabsContent value="password">
                     <PasswordForm/>

@@ -159,6 +159,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/user/avatar": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Upload avatar
+         * @description Upload and set the authenticated user's avatar image.
+         */
+        post: operations["uploadAvatar"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/user/confirm-password": {
         parameters: {
             query?: never;
@@ -540,11 +560,11 @@ export interface operations {
                         data?: {
                             /** @example null */
                             id?: string;
-                            /** @example Amalia Schoen */
+                            /** @example Dorothea Anderson */
                             name?: string;
-                            /** @example emil58@example.net */
+                            /** @example jacobs.dean@example.com */
                             email?: string;
-                            /** @example 2025-10-21T20:14:02.000000Z */
+                            /** @example 2025-10-23T20:24:53.000000Z */
                             email_verified_at?: string;
                             /** @example null */
                             avatar?: string;
@@ -566,6 +586,26 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
+        responses: never;
+    };
+    uploadAvatar: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    /**
+                     * Format: binary
+                     * @description Must be an image.
+                     */
+                    avatar: string;
+                };
+            };
+        };
         responses: never;
     };
     confirmPassword: {

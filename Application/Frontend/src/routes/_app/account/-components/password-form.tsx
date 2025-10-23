@@ -6,7 +6,7 @@ import {Controller, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import {toast} from "sonner";
-import {UpdatePasswordBody, updatePasswordFormSchema} from "@/types/auth.ts";
+import {UpdatePasswordBody, updatePasswordFormSchema} from "@/types/account.ts";
 import {Field, FieldError, FieldGroup, FieldLabel} from "@/components/ui/field.tsx";
 import {Spinner} from "@/components/ui/spinner.tsx";
 import {useRouter} from "@tanstack/react-router";

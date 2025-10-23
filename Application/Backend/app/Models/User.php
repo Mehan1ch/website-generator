@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use Database\Factories\UserFactory;
+use DateTime;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,6 +14,16 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
+
+/**
+ * @property string $name
+ * @property string $email
+ * @property string $password
+ * @property-read string|null $avatar
+ * @property DateTime|null $email_verified_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ */
 class User extends Authenticatable implements MustVerifyEmail, HasMedia
 {
     /** @use HasFactory<UserFactory> */
@@ -54,21 +65,14 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
 
     public function getAvatarAttribute(): ?string
     {
-        $media = $this->getFirstMedia('avatar');
-        return $media?->getUrl('thumb');
+        return $this->getFirstMedia('avatar')?->getUrl();
     }
 
     public function registerMediaCollections(): void
     {
         $this
             ->addMediaCollection('avatar')
-            ->singleFile()
-            ->registerMediaConversions(function (Media $media) {
-                $this
-                    ->addMediaConversion('thumb')
-                    ->width(50)
-                    ->height(50);
-            });
+            ->singleFile();
     }
 
 }
