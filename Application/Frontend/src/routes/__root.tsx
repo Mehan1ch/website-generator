@@ -1,7 +1,8 @@
-import {createRootRouteWithContext, Link, Outlet} from '@tanstack/react-router'
+import {createRootRouteWithContext, Outlet} from '@tanstack/react-router';
 import {QueryClient} from "@tanstack/react-query";
 import {TanStackRouterDevtools} from "@tanstack/react-router-devtools";
 import {AuthContextType} from "@/types/auth.ts";
+import {NotFoundRouteComponent} from "@/components/not-found.tsx";
 
 interface RouterContext {
     queryClient: QueryClient,
@@ -16,13 +17,5 @@ export const Route = createRootRouteWithContext<RouterContext>()({
             <TanStackRouterDevtools position={"bottom-right"}/>
         </>
     ),
-    notFoundComponent: () => {
-        //TODO: better looking 404 page
-        return (
-            <div>
-                <p>This is the notFoundComponent configured on root route</p>
-                <Link to="/" search={{redirect: "/"}}>Start Over</Link>
-            </div>
-        )
-    },
-})
+    notFoundComponent: () => <NotFoundRouteComponent/>
+});
