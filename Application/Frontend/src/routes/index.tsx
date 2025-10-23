@@ -1,10 +1,18 @@
 import "../index.css";
-import {createFileRoute, Link, useRouter} from "@tanstack/react-router";
+import {createFileRoute, Link} from "@tanstack/react-router";
 import {Button} from "@/components/ui/button";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
-import {ModeToggle} from "@/components/ui/mode-toggle.tsx";
 import {TypographyH3} from "@/components/ui/typography/typography-h3.tsx";
 import {useAuth} from "@/hooks/use-auth.tsx";
+import {
+    NavigationMenu,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    navigationMenuTriggerStyle
+} from "@/components/ui/navigation-menu.tsx";
+import {useIsMobile} from "@/hooks/use-mobile.ts";
+import {ModeToggle} from "@/components/ui/mode-toggle.tsx";
 
 export const Route = createFileRoute("/")({
     validateSearch: (search) => ({
@@ -16,43 +24,40 @@ export const Route = createFileRoute("/")({
 function Index() {
     const {VITE_APP_NAME} = import.meta.env;
     const {isAuthenticated} = useAuth();
-    const router = useRouter();
     const {redirect} = Route.useSearch();
+    const isMobile = useIsMobile();
+    //TODO: better index page when done
     return (
-        //TODO: use shadcn navigation menu here instead
-        <div className="min-h-screen bg-background flex flex-col">
-            {/* Top Bar */}
-            <header className="w-full px-6 py-4 flex justify-between items-center bg-secondary shadow">
+        <div className="min-h-screen flex flex-col">
+            <header className="w-full px-6 py-4 flex justify-between items-center shadow">
                 <TypographyH3>
                     {VITE_APP_NAME}
                 </TypographyH3>
-                <div className="space-x-2 align-middle">
-                    <div className="inline align-bottom">
+                <NavigationMenu viewport={isMobile}>
+                    <NavigationMenuList>
                         <ModeToggle/>
-                    </div>
-                    {!isAuthenticated ? (
-                        <>
-                            <Button onClick={() => router.navigate({
-                                to: "/login",
-                                search: {redirect: redirect}
-                            })}>
-                                Login
-                            </Button>
-                            <Button onClick={() => router.navigate({
-                                to: "/register",
-                                search: {redirect: redirect}
-                            })}>Register</Button>
-                        </>
-                    ) : (
-                        <Button onClick={() => router.navigate({
-                            to: "/dashboard",
-                            search: {redirect: redirect}
-                        })}>Go to Dashboard
-                        </Button>
-                    )
-                    }
-
-                </div>
+                        {!isAuthenticated ? (
+                            <>
+                                <NavigationMenuItem>
+                                    <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+                                        <Link to={"/login"}>Login</Link>
+                                    </NavigationMenuLink>
+                                </NavigationMenuItem>
+                                <NavigationMenuItem>
+                                    <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+                                        <Link to={"/register"}>Register</Link>
+                                    </NavigationMenuLink>
+                                </NavigationMenuItem>
+                            </>
+                        ) : (
+                            <NavigationMenuItem>
+                                <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+                                    <Link to={"/dashboard"}>Dashboard</Link>
+                                </NavigationMenuLink>
+                            </NavigationMenuItem>
+                        )}
+                    </NavigationMenuList>
+                </NavigationMenu>
             </header>
             <main className="flex-grow flex items-center justify-center">
                 <Card className="max-w-lg w-full bg-secondary shadow">
