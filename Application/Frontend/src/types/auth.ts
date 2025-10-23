@@ -6,7 +6,8 @@ export type AuthContextType = {
     isAuthenticated: boolean;
     login: (credentials: LoginBody) => Promise<void>;
     logout: () => Promise<void>;
-    updateUserContext: () => Promise<void>;
+    register: (credentials: RegisterBody) => Promise<void>;
+    fetchUserContext: () => Promise<void>;
     deleteUser: () => Promise<void>;
 }
 

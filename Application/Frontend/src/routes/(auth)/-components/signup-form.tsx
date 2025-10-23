@@ -10,7 +10,8 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Spinner} from "@/components/ui/spinner.tsx";
 import {RegisterBody, registerFormSchema} from "@/types/auth.ts";
 import {toast} from "sonner";
-import {api} from "@/lib/api/api-client.ts";
+import {APIError} from "@/lib/api/api-client.ts";
+import {useAuth} from "@/hooks/use-auth.tsx";
 
 type SignupFormProps = {
     className?: string;
@@ -25,19 +26,7 @@ export function SignupForm({
 
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-    const registerMutation = api.useMutation("post", "/register", {
-        onSuccess: async () => {
-            toast.success("Registration successful!");
-            router.history.push("/");
-        },
-        onError: async (error) => {
-            toast.error("Registration failed!", {
-                description: error.message
-            });
-            form.reset();
-            setLoading(false);
-        },
-    });
+    const {register} = useAuth();
 
     const form = useForm<RegisterBody>({
         resolver: zodResolver(registerFormSchema),
@@ -51,6 +40,19 @@ export function SignupForm({
         reValidateMode: "onBlur",
     });
 
+    const onSubmit = async (data: RegisterBody) => {
+        setLoading(true);
+        try {
+            await register(data);
+            toast.success("Registration successful!");
+            router.history.push(redirect || "/");
+        } catch (error) {
+            toast.error("Registration failed!", {description: (error as APIError).message});
+            form.reset();
+            setLoading(false);
+        }
+    };
+
     return (
         <div className={cn("flex flex-col gap-6", className)} {...props}>
             <Card>
@@ -61,10 +63,7 @@ export function SignupForm({
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <form onSubmit={form.handleSubmit((data) => {
-                        setLoading(true);
-                        registerMutation.mutate({body: data});
-                    })}>
+                    <form onSubmit={form.handleSubmit(onSubmit)}>
                         <FieldGroup>
                             <Controller
                                 name="name"
@@ -157,5 +156,6 @@ export function SignupForm({
                 </CardContent>
             </Card>
         </div>
-    );
+    )
+        ;
 }

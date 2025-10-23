@@ -2,7 +2,7 @@ import {ReactNode, useEffect, useState} from "react";
 import {Spinner} from "@/components/ui/spinner.tsx";
 import {toast} from "sonner";
 import {AuthContext} from "@/contexts/auth-context";
-import {LoginBody, User} from "@/types/auth.ts";
+import {LoginBody, RegisterBody, User} from "@/types/auth.ts";
 import {api, APIError} from "@/lib/api/api-client.ts";
 import {useQueryClient} from "@tanstack/react-query";
 
@@ -11,6 +11,7 @@ export function AuthProvider({children}: { children: ReactNode }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const loginMutation = api.useMutation("post", "/login");
+    const registerMutation = api.useMutation("post", "/register");
     const logoutMutation = api.useMutation("post", "/logout");
     const deleteUserMutation = api.useMutation("delete", "/api/user");
     const queryClient = useQueryClient();
@@ -40,13 +41,7 @@ export function AuthProvider({children}: { children: ReactNode }) {
 
     const login = async (credentials: LoginBody) => {
         await loginMutation.mutateAsync({body: credentials});
-        const {data} = await queryClient.fetchQuery(userQueryOptions);
-        if (!data) throw new APIError("No user found!", {}, 404);
-        const user: User = data! as User;
-        setIsAuthenticated(true);
-        setUser(user);
-        localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('isAuthenticated', 'true');
+        await fetchUserContext();
     };
 
 
@@ -68,12 +63,20 @@ export function AuthProvider({children}: { children: ReactNode }) {
         });
     };
 
-    const updateUserContext = async () => {
+    const register = async (credentials: RegisterBody) => {
+        await registerMutation.mutateAsync({body: credentials});
+        await fetchUserContext();
+    };
+
+
+    const fetchUserContext = async () => {
         const {data} = await queryClient.fetchQuery(userQueryOptions);
         if (!data) throw new APIError("No user found!", {}, 404);
         const user: User = data! as User;
         setUser(user);
+        setIsAuthenticated(true);
         localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('isAuthenticated', 'true');
     };
 
     const deleteUser = async () => {
@@ -91,7 +94,8 @@ export function AuthProvider({children}: { children: ReactNode }) {
     };
 
     return (
-        <AuthContext.Provider value={{isAuthenticated, user, login, logout, updateUserContext, deleteUser}}>
+        <AuthContext.Provider
+            value={{isAuthenticated, user, login, logout, register, fetchUserContext, deleteUser}}>
             {children}
         </AuthContext.Provider>
     );

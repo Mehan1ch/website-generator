@@ -5,6 +5,7 @@ import {BadgeCheckIcon, BadgeXIcon} from "lucide-react";
 import {Item, ItemActions, ItemContent, ItemMedia, ItemTitle} from "@/components/ui/item.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {api} from "@/lib/api/api-client.ts";
+import {Spinner} from "@/components/ui/spinner.tsx";
 
 const emailVerifySearchParams = redirectOnlySearchSchema.extend({
     expires: z.number().default(0),
@@ -54,37 +55,25 @@ function VerifyEmail() {
     const search = Route.useSearch();
     const params = Route.useParams();
     const navigate = useNavigate({from: Route.path});
-    try {
-        api.useSuspenseQuery("get", "/email/verify/{id}/{hash}", {
-            params: {
-                query: {
-                    expires: search.expires,
-                    signature: search.signature,
-                },
-                path: {
-                    id: parseInt(params.id),
-                    hash: params.hash,
-                }
+    const {isError, isLoading} = api.useSuspenseQuery("get", "/email/verify/{id}/{hash}", {
+        params: {
+            query: {
+                expires: search.expires,
+                signature: search.signature,
+            },
+            path: {
+                id: parseInt(params.id),
+                hash: params.hash,
             }
-        });
-        return (
-            <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
-                <Item variant="outline" size="default" className="bg-background">
-                    <ItemMedia>
-                        <BadgeCheckIcon className="size-5"/>
-                    </ItemMedia>
-                    <ItemContent>
-                        <ItemTitle>Your profile has been verified.</ItemTitle>
-                    </ItemContent>
-                    <ItemActions>
-                        <Button onClick={async () => {
-                            await navigate({to: "/account"});
-                        }}>Go to account settings</Button>
-                    </ItemActions>
-                </Item>
-            </div>
-        );
-    } catch (error) {
+        }
+    });
+    if (isLoading) {
+        return <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
+            <Spinner/> Loading
+        </div>;
+    }
+
+    if (isError) {
         return <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
             <Item variant="outline" size="default" className="bg-background">
                 <ItemMedia>
@@ -101,4 +90,22 @@ function VerifyEmail() {
             </Item>
         </div>;
     }
+
+    return (
+        <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
+            <Item variant="outline" size="default" className="bg-background">
+                <ItemMedia>
+                    <BadgeCheckIcon className="size-5"/>
+                </ItemMedia>
+                <ItemContent>
+                    <ItemTitle>Your profile has been verified.</ItemTitle>
+                </ItemContent>
+                <ItemActions>
+                    <Button onClick={async () => {
+                        await navigate({to: "/account"});
+                    }}>Go to account settings</Button>
+                </ItemActions>
+            </Item>
+        </div>
+    );
 }
