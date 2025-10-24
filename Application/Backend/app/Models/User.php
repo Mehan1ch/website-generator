@@ -6,13 +6,13 @@ use Carbon\Carbon;
 use Database\Factories\UserFactory;
 use DateTime;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 
 /**
@@ -63,9 +63,11 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         ];
     }
 
-    public function getAvatarAttribute(): ?string
+    public function avatar(): Attribute
     {
-        return $this->getFirstMedia('avatar')?->getUrl();
+        return Attribute::make(
+            get: fn() => $this->getFirstMedia('avatar')?->getUrl()
+        );
     }
 
     public function registerMediaCollections(): void

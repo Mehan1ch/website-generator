@@ -46,10 +46,7 @@ export const resetPasswordFormSchema = z.object({
 
 export type ResetPasswordBody = z.infer<typeof resetPasswordFormSchema>;
 export const avatarFormSchema = z.object({
-    avatar: z.union([
-        z.file().min(1).max(2048 * 2048).mime("image/png"),
-        z.string().optional()
-    ])
+    avatar: z.file().min(1).max(2048 * 2048).mime("image/png"),
 });
 
 export type AvatarBody = z.infer<typeof avatarFormSchema>;

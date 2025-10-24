@@ -159,7 +159,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/user/avatar": {
+    "/api/avatar": {
         parameters: {
             query?: never;
             header?: never;
@@ -169,10 +169,10 @@ export interface paths {
         get?: never;
         put?: never;
         /**
-         * Upload avatar
+         * Post avatar
          * @description Upload and set the authenticated user's avatar image.
          */
-        post: operations["uploadAvatar"];
+        post: operations["postAvatar"];
         delete?: never;
         options?: never;
         head?: never;
@@ -560,11 +560,11 @@ export interface operations {
                         data?: {
                             /** @example null */
                             id?: string;
-                            /** @example Dorothea Anderson */
+                            /** @example Ciara Nolan DVM */
                             name?: string;
-                            /** @example jacobs.dean@example.com */
+                            /** @example pwatsica@example.org */
                             email?: string;
-                            /** @example 2025-10-23T20:24:53.000000Z */
+                            /** @example 2025-10-24T20:40:22.000000Z */
                             email_verified_at?: string;
                             /** @example null */
                             avatar?: string;
@@ -588,7 +588,7 @@ export interface operations {
         requestBody?: never;
         responses: never;
     };
-    uploadAvatar: {
+    postAvatar: {
         parameters: {
             query?: never;
             header?: never;
@@ -600,7 +600,7 @@ export interface operations {
                 "multipart/form-data": {
                     /**
                      * Format: binary
-                     * @description Must be an image.
+                     * @description Must be a file. Must be an image. Must not be greater than 2048 kilobytes.
                      */
                     avatar: string;
                 };
