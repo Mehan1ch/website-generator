@@ -1,18 +1,18 @@
-name: Endpoints
+name: Users
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/user
+    uri: api/v1/user
     metadata:
-      groupName: Endpoints
+      groupName: Users
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: 'Get user'
       description: "Return the authenticated user's information."
-      authenticated: false
+      authenticated: true
       deprecated: false
       custom: []
     headers:
@@ -28,7 +28,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"id":null,"name":"Ciara Nolan DVM","email":"pwatsica@example.org","email_verified_at":"2025-10-24T20:40:22.000000Z","avatar":null,"created_at":null,"updated_at":null}}'
+        content: '{"data":{"id":null,"name":"Dr. Dedric Lubowitz","email":"corwin.duane@example.org","email_verified_at":"2025-10-24T22:00:12.000000Z","avatar":null,"created_at":null,"updated_at":null}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -44,15 +44,15 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: api/user
+    uri: api/v1/user
     metadata:
-      groupName: Endpoints
+      groupName: Users
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: 'Delete user'
       description: "Delete the authenticated user's account and all associated data."
-      authenticated: false
+      authenticated: true
       deprecated: false
       custom: []
     headers:
@@ -65,48 +65,6 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/avatar
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Post avatar'
-      description: "Upload and set the authenticated user's avatar image."
-      authenticated: false
-      deprecated: false
-      custom: []
-    headers:
-      Content-Type: multipart/form-data
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      avatar:
-        name: avatar
-        description: 'Must be a file. Must be an image. Must not be greater than 2048 kilobytes.'
-        required: true
-        example: null
-        type: file
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanBodyParameters: []
-    fileParameters:
-      avatar: null
     responses: []
     responseFields: []
     auth: []

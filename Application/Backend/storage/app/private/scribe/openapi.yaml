@@ -1,0 +1,716 @@
+openapi: 3.0.3
+info:
+  title: 'Website Generator API Documentation'
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+tags:
+  -
+    name: Authentication
+    description: 'Authentication endpoints provided by Laravel Fortify'
+  -
+    name: Avatars
+    description: ''
+  -
+    name: 'CSRF Protection'
+    description: 'CSRF token management for SPA authentication'
+  -
+    name: 'Email Verification'
+    description: 'Email verification endpoints'
+  -
+    name: 'Password Confirmation'
+    description: 'Password confirmation endpoints for sensitive operations'
+  -
+    name: 'Password Management'
+    description: 'Password reset and management endpoints'
+  -
+    name: 'User Profile'
+    description: null
+  -
+    name: Users
+    description: ''
+paths:
+  /login:
+    post:
+      summary: Login
+      operationId: login
+      description: 'Authenticate a user and return a Sanctum token.'
+      parameters: []
+      responses:
+        200:
+          description: 'Login successful.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+        422:
+          description: 'Login failed - invalid credentials.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data is invalid.'
+                  errors:
+                    email:
+                      - 'These credentials do not match our records.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data is invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'These credentials do not match our records.'
+                        items:
+                          type: string
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: "The user's email address."
+                  example: user@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: "The user's password."
+                  example: password123
+                  nullable: false
+              required:
+                - email
+                - password
+      security: []
+  /logout:
+    post:
+      summary: Logout
+      operationId: logout
+      description: 'Log out the authenticated user and revoke their tokens.'
+      parameters: []
+      responses:
+        204:
+          description: 'Logout successful.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+      tags:
+        - Authentication
+  /register:
+    post:
+      summary: Register
+      operationId: register
+      description: 'Register a new user account.'
+      parameters: []
+      responses:
+        201:
+          description: 'Registration successful.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+        422:
+          description: 'Validation failed.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data is invalid.'
+                  errors:
+                    email:
+                      - 'The email has already been taken.'
+                    password:
+                      - 'The password must be at least 8 characters.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data is invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The email has already been taken.'
+                        items:
+                          type: string
+                      password:
+                        type: array
+                        example:
+                          - 'The password must be at least 8 characters.'
+                        items:
+                          type: string
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: "The user's full name."
+                  example: 'John Doe'
+                  nullable: false
+                email:
+                  type: string
+                  description: "The user's email address."
+                  example: user@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: "The user's password (minimum 8 characters)."
+                  example: password123
+                  nullable: false
+                password_confirmation:
+                  type: string
+                  description: 'Password confirmation.'
+                  example: password123
+                  nullable: false
+              required:
+                - name
+                - email
+                - password
+                - password_confirmation
+      security: []
+  /api/v1/avatar:
+    post:
+      summary: 'Post avatar'
+      operationId: postAvatar
+      description: "Upload and set the authenticated user's avatar image."
+      parameters: []
+      responses: {  }
+      tags:
+        - Avatars
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                avatar:
+                  type: string
+                  format: binary
+                  description: 'Must be a file. Must be an image. Must not be greater than 2048 kilobytes.'
+                  nullable: false
+              required:
+                - avatar
+  /sanctum/csrf-cookie:
+    get:
+      summary: 'Get CSRF Cookie'
+      operationId: getCSRFCookie
+      description: 'Initialize CSRF protection by setting the XSRF-TOKEN cookie for SPA authentication.'
+      parameters:
+        -
+          in: header
+          name: Referer
+          description: ''
+          example: 'https://yourapp.com'
+          schema:
+            type: string
+      responses:
+        204:
+          description: 'CSRF cookie set successfully.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+      tags:
+        - 'CSRF Protection'
+      security: []
+  /email/verification-notification:
+    post:
+      summary: 'Resend Verification Email'
+      operationId: resendVerificationEmail
+      description: 'Resend email verification notification.'
+      parameters: []
+      responses:
+        202:
+          description: 'Verification link sent.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+      tags:
+        - 'Email Verification'
+  '/email/verify/{id}/{hash}':
+    get:
+      summary: 'Verify Email'
+      operationId: verifyEmail
+      description: 'Verify user email address.'
+      parameters:
+        -
+          in: query
+          name: expires
+          description: 'The expiration timestamp of the verification link.'
+          example: 1712345678
+          required: true
+          schema:
+            type: integer
+            description: 'The expiration timestamp of the verification link.'
+            example: 1712345678
+            nullable: false
+        -
+          in: query
+          name: signature
+          description: 'The signature of the verification link.'
+          example: abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890
+          required: true
+          schema:
+            type: string
+            description: 'The signature of the verification link.'
+            example: abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890
+            nullable: false
+      responses:
+        204:
+          description: 'Email verified successfully.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+      tags:
+        - 'Email Verification'
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The user ID.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+      -
+        in: path
+        name: hash
+        description: 'The verification hash.'
+        example: abc123def456
+        required: true
+        schema:
+          type: string
+  /user/confirm-password:
+    post:
+      summary: 'Confirm Password'
+      operationId: confirmPassword
+      description: "Confirm the user's password for sensitive operations."
+      parameters: []
+      responses:
+        201:
+          description: 'Password confirmed successfully.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+        422:
+          description: 'Password confirmation failed.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data is invalid.'
+                  errors:
+                    password:
+                      - 'The password is incorrect.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data is invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      password:
+                        type: array
+                        example:
+                          - 'The password is incorrect.'
+                        items:
+                          type: string
+      tags:
+        - 'Password Confirmation'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  description: "The user's current password."
+                  example: password123
+                  nullable: false
+              required:
+                - password
+  /user/confirmed-password-status:
+    get:
+      summary: 'Get Password Confirmation Status'
+      operationId: getPasswordConfirmationStatus
+      description: "Check if the user's password has been recently confirmed."
+      parameters: []
+      responses:
+        200:
+          description: 'Password confirmation status retrieved.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  confirmed: true
+                  seconds_until_expiration: 10800
+                properties:
+                  confirmed:
+                    type: boolean
+                    example: true
+                  seconds_until_expiration:
+                    type: integer
+                    example: 10800
+      tags:
+        - 'Password Confirmation'
+  /forgot-password:
+    post:
+      summary: 'Forgot Password'
+      operationId: forgotPassword
+      description: "Send a password reset link to the user's email."
+      parameters: []
+      responses:
+        200:
+          description: 'Password reset link sent.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+        422:
+          description: 'Validation failed.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data is invalid.'
+                  errors:
+                    email:
+                      - 'The email is invalid.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data is invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The email is invalid.'
+                        items:
+                          type: string
+      tags:
+        - 'Password Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: "The user's email address."
+                  example: user@example.com
+                  nullable: false
+              required:
+                - email
+      security: []
+  /reset-password:
+    post:
+      summary: 'Reset Password'
+      operationId: resetPassword
+      description: "Reset the user's password using a reset token."
+      parameters: []
+      responses:
+        200:
+          description: 'Password reset successful.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+        422:
+          description: 'Validation failed.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data is invalid.'
+                  errors:
+                    email:
+                      - 'The email is invalid.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data is invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The email is invalid.'
+                        items:
+                          type: string
+      tags:
+        - 'Password Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: "The user's email address."
+                  example: user@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: 'The new password (minimum 8 characters).'
+                  example: newpassword123
+                  nullable: false
+                password_confirmation:
+                  type: string
+                  description: 'Password confirmation.'
+                  example: newpassword123
+                  nullable: false
+                token:
+                  type: string
+                  description: 'The password reset token.'
+                  example: reset_token_123
+                  nullable: false
+              required:
+                - email
+                - password
+                - password_confirmation
+                - token
+      security: []
+  /user/profile-information:
+    put:
+      summary: 'Update Profile'
+      operationId: updateProfile
+      description: "Update the authenticated user's profile information."
+      parameters: []
+      responses:
+        200:
+          description: 'Profile updated successfully.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+        422:
+          description: 'Profile update failed - validation error.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data is invalid.'
+                  errors:
+                    email:
+                      - 'The email has already been taken.'
+                    password:
+                      - 'The password must be at least 8 characters.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data is invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The email has already been taken.'
+                        items:
+                          type: string
+                      password:
+                        type: array
+                        example:
+                          - 'The password must be at least 8 characters.'
+                        items:
+                          type: string
+      tags:
+        - 'User Profile'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: "The user's full name."
+                  example: 'John Doe'
+                  nullable: false
+                email:
+                  type: string
+                  description: "The user's email address."
+                  example: user@example.com
+                  nullable: false
+              required:
+                - name
+                - email
+  /user/password:
+    put:
+      summary: 'Update Password'
+      operationId: updatePassword
+      description: "Update the authenticated user's password."
+      parameters: []
+      responses:
+        200:
+          description: 'Password updated successfully.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+        422:
+          description: 'Password update failed - validation error.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data is invalid.'
+                  errors:
+                    current_password:
+                      - 'The current password is incorrect.'
+                    password:
+                      - 'The password must be at least 8 characters.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data is invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      current_password:
+                        type: array
+                        example:
+                          - 'The current password is incorrect.'
+                        items:
+                          type: string
+                      password:
+                        type: array
+                        example:
+                          - 'The password must be at least 8 characters.'
+                        items:
+                          type: string
+      tags:
+        - 'User Profile'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                current_password:
+                  type: string
+                  description: "The user's current password."
+                  example: oldpassword123
+                  nullable: false
+                password:
+                  type: string
+                  description: 'The new password (minimum 8 characters).'
+                  example: newpassword123
+                  nullable: false
+                password_confirmation:
+                  type: string
+                  description: 'Password confirmation.'
+                  example: newpassword123
+                  nullable: false
+              required:
+                - current_password
+                - password
+                - password_confirmation
+  /api/v1/user:
+    get:
+      summary: 'Get user'
+      operationId: getUser
+      description: "Return the authenticated user's information."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: null
+                    name: 'Dr. Dedric Lubowitz'
+                    email: corwin.duane@example.org
+                    email_verified_at: '2025-10-24T22:00:12.000000Z'
+                    avatar: null
+                    created_at: null
+                    updated_at: null
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: null
+                      name:
+                        type: string
+                        example: 'Dr. Dedric Lubowitz'
+                      email:
+                        type: string
+                        example: corwin.duane@example.org
+                      email_verified_at:
+                        type: string
+                        example: '2025-10-24T22:00:12.000000Z'
+                      avatar:
+                        type: string
+                        example: null
+                      created_at:
+                        type: string
+                        example: null
+                      updated_at:
+                        type: string
+                        example: null
+      tags:
+        - Users
+    delete:
+      summary: 'Delete user'
+      operationId: deleteUser
+      description: "Delete the authenticated user's account and all associated data."
+      parameters: []
+      responses: {  }
+      tags:
+        - Users

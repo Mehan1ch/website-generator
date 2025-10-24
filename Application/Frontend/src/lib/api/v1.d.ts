@@ -64,6 +64,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/avatar": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Post avatar
+         * @description Upload and set the authenticated user's avatar image.
+         */
+        post: operations["postAvatar"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/sanctum/csrf-cookie": {
         parameters: {
             query?: never;
@@ -129,50 +149,6 @@ export interface paths {
         get: operations["verifyEmail"];
         put?: never;
         post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/user": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get user
-         * @description Return the authenticated user's information.
-         */
-        get: operations["getUser"];
-        put?: never;
-        post?: never;
-        /**
-         * Delete user
-         * @description Delete the authenticated user's account and all associated data.
-         */
-        delete: operations["deleteUser"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/avatar": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Post avatar
-         * @description Upload and set the authenticated user's avatar image.
-         */
-        post: operations["postAvatar"];
         delete?: never;
         options?: never;
         head?: never;
@@ -294,6 +270,30 @@ export interface paths {
         put: operations["updatePassword"];
         post?: never;
         delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/user": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get user
+         * @description Return the authenticated user's information.
+         */
+        get: operations["getUser"];
+        put?: never;
+        post?: never;
+        /**
+         * Delete user
+         * @description Delete the authenticated user's account and all associated data.
+         */
+        delete: operations["deleteUser"];
         options?: never;
         head?: never;
         patch?: never;
@@ -457,6 +457,26 @@ export interface operations {
             };
         };
     };
+    postAvatar: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    /**
+                     * Format: binary
+                     * @description Must be a file. Must be an image. Must not be greater than 2048 kilobytes.
+                     */
+                    avatar: string;
+                };
+            };
+        };
+        responses: never;
+    };
     getCSRFCookie: {
         parameters: {
             query?: never;
@@ -541,72 +561,6 @@ export interface operations {
                 };
             };
         };
-    };
-    getUser: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: {
-                            /** @example null */
-                            id?: string;
-                            /** @example Ciara Nolan DVM */
-                            name?: string;
-                            /** @example pwatsica@example.org */
-                            email?: string;
-                            /** @example 2025-10-24T20:40:22.000000Z */
-                            email_verified_at?: string;
-                            /** @example null */
-                            avatar?: string;
-                            /** @example null */
-                            created_at?: string;
-                            /** @example null */
-                            updated_at?: string;
-                        };
-                    };
-                };
-            };
-        };
-    };
-    deleteUser: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: never;
-    };
-    postAvatar: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "multipart/form-data": {
-                    /**
-                     * Format: binary
-                     * @description Must be a file. Must be an image. Must not be greater than 2048 kilobytes.
-                     */
-                    avatar: string;
-                };
-            };
-        };
-        responses: never;
     };
     confirmPassword: {
         parameters: {
@@ -924,5 +878,51 @@ export interface operations {
                 };
             };
         };
+    };
+    getUser: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: {
+                            /** @example null */
+                            id?: string;
+                            /** @example Dr. Dedric Lubowitz */
+                            name?: string;
+                            /** @example corwin.duane@example.org */
+                            email?: string;
+                            /** @example 2025-10-24T22:00:12.000000Z */
+                            email_verified_at?: string;
+                            /** @example null */
+                            avatar?: string;
+                            /** @example null */
+                            created_at?: string;
+                            /** @example null */
+                            updated_at?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    deleteUser: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: never;
     };
 }

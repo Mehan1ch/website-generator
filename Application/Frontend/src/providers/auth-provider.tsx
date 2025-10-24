@@ -13,9 +13,9 @@ export function AuthProvider({children}: { children: ReactNode }) {
     const loginMutation = api.useMutation("post", "/login");
     const registerMutation = api.useMutation("post", "/register");
     const logoutMutation = api.useMutation("post", "/logout");
-    const deleteUserMutation = api.useMutation("delete", "/api/user");
+    const deleteUserMutation = api.useMutation("delete", "/api/v1/user");
     const queryClient = useQueryClient();
-    const userQueryOptions = api.queryOptions("get", "/api/user");
+    const userQueryOptions = api.queryOptions("get", "/api/v1/user");
 
 
 // Restore auth state on app load

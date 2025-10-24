@@ -1,9 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Resources\UserResource;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\V1\UserResource;
 
+/**
+ * User Controller
+ *
+ * Handles user-related operations such as retrieving and deleting user information.
+ * @group Users
+ * @authenticated
+ */
 class UserController extends Controller
 {
 

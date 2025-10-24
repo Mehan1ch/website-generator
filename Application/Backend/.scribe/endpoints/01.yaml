@@ -1,0 +1,45 @@
+name: Avatars
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/avatar
+    metadata:
+      groupName: Avatars
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Post avatar'
+      description: "Upload and set the authenticated user's avatar image."
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Content-Type: multipart/form-data
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      avatar:
+        name: avatar
+        description: 'Must be a file. Must be an image. Must not be greater than 2048 kilobytes.'
+        required: true
+        example: null
+        type: file
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters: []
+    fileParameters:
+      avatar: null
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

@@ -32,7 +32,7 @@ export function AvatarForm({
 
     const [loading, setLoading] = useState(false);
     const {user, fetchUserContext} = useAuth();
-    const avatarMutation = api.useMutation("post", "/api/avatar", {
+    const avatarMutation = api.useMutation("post", "/api/v1/avatar", {
             header: {
                 "Content-Type": "multipart/form-data"
             },

@@ -11,7 +11,7 @@ export type AuthContextType = {
     deleteUser: () => Promise<void>;
 }
 
-export type User = paths["/api/user"]["get"]["responses"]["200"]["content"]["application/json"]["data"];
+export type User = paths["/api/v1/user"]["get"]["responses"]["200"]["content"]["application/json"]["data"];
 
 export const loginFormSchema = z.object({
     email: z.email("Invalid email address.").max(255, "Email must be at most 255 characters."),
@@ -37,3 +37,26 @@ export const registerFormSchema = z.object({
 });
 
 export type RegisterBody = z.infer<typeof registerFormSchema>;
+
+export const forgotPasswordFormSchema = z.object({
+    email: z.email("Invalid email address"),
+});
+
+export type ForgotPasswordBody = z.infer<typeof forgotPasswordFormSchema>;
+
+export const resetPasswordFormSchema = z.object({
+    email: z.email("Invalid email address.").max(255, "Email must be at most 255 characters."),
+    password: z.string().min(8, "Password must be at least 8 characters long.").max(128, "Password must be at most 128 characters."),
+    password_confirmation: z.string().min(8, "Password confirmation must be at least 8 characters long.").max(128, "Password confirmation must be at most 128 characters."),
+    token: z.string().min(1, "Token is required."),
+}).superRefine((data, ctx) => {
+    if (data.password !== data.password_confirmation) {
+        ctx.addIssue({
+            code: "custom",
+            message: "Passwords do not match.",
+            path: ["password_confirmation"],
+        });
+    }
+});
+
+export type ResetPasswordBody = z.infer<typeof resetPasswordFormSchema>;
