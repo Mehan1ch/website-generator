@@ -673,9 +673,9 @@ paths:
                 example:
                   data:
                     id: null
-                    name: 'Dr. Dedric Lubowitz'
-                    email: corwin.duane@example.org
-                    email_verified_at: '2025-10-24T22:00:12.000000Z'
+                    name: 'Dillon Stroman Jr.'
+                    email: sgoldner@example.net
+                    email_verified_at: '2025-10-24T22:20:23.000000Z'
                     avatar: null
                     created_at: null
                     updated_at: null
@@ -688,13 +688,13 @@ paths:
                         example: null
                       name:
                         type: string
-                        example: 'Dr. Dedric Lubowitz'
+                        example: 'Dillon Stroman Jr.'
                       email:
                         type: string
-                        example: corwin.duane@example.org
+                        example: sgoldner@example.net
                       email_verified_at:
                         type: string
-                        example: '2025-10-24T22:00:12.000000Z'
+                        example: '2025-10-24T22:20:23.000000Z'
                       avatar:
                         type: string
                         example: null

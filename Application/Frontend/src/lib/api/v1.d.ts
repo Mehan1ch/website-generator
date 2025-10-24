@@ -897,11 +897,11 @@ export interface operations {
                         data?: {
                             /** @example null */
                             id?: string;
-                            /** @example Dr. Dedric Lubowitz */
+                            /** @example Dillon Stroman Jr. */
                             name?: string;
-                            /** @example corwin.duane@example.org */
+                            /** @example sgoldner@example.net */
                             email?: string;
-                            /** @example 2025-10-24T22:00:12.000000Z */
+                            /** @example 2025-10-24T22:20:23.000000Z */
                             email_verified_at?: string;
                             /** @example null */
                             avatar?: string;

@@ -28,7 +28,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"id":null,"name":"Dr. Dedric Lubowitz","email":"corwin.duane@example.org","email_verified_at":"2025-10-24T22:00:12.000000Z","avatar":null,"created_at":null,"updated_at":null}}'
+        content: '{"data":{"id":null,"name":"Dillon Stroman Jr.","email":"sgoldner@example.net","email_verified_at":"2025-10-24T22:20:23.000000Z","avatar":null,"created_at":null,"updated_at":null}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
