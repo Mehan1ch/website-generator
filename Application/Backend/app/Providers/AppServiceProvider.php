@@ -2,12 +2,14 @@
 
 namespace App\Providers;
 
+use App\Enums\RolesEnum;
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Knuckles\Scribe\Scribe;
@@ -53,5 +55,11 @@ class AppServiceProvider extends ServiceProvider
                 Auth::login($user);
             });
         }
+
+        // Implicitly grant "Super Admin" role all permissions
+        // This works in the app by using gate-related functions like auth()->user->can() and @can()
+        Gate::before(function ($user, $ability) {
+            return $user->hasRole(RolesEnum::SUPER_ADMIN) ? true : null;
+        });
     }
 }
