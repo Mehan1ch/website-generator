@@ -65,6 +65,11 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         ];
     }
 
+    /**
+     * Get the user's avatar URL.
+     *
+     * @return Attribute<string|null>
+     */
     public function avatar(): Attribute
     {
         return Attribute::make(
@@ -72,6 +77,11 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         );
     }
 
+    /**
+     * Register the media collections for the user.
+     *
+     * @return void
+     */
     public function registerMediaCollections(): void
     {
         $this
