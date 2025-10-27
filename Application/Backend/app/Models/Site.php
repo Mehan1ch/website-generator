@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Overtrue\LaravelVersionable\Versionable;
+use Overtrue\LaravelVersionable\VersionStrategy;
 
 /**
  * @property string $name
@@ -21,7 +23,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Site extends Model
 {
 
-    use SoftDeletes, Prunable;
+    use SoftDeletes, Prunable, Versionable;
+
+    protected $versionStrategy = VersionStrategy::SNAPSHOT;
+    public string $versionModel = SiteVersion::class;
+
+    /**
+     * Versionable attributes
+     *
+     * @var array
+     */
+    protected $versionable = ['name', 'subdomain', 'description'];
 
     /**
      * The attributes that are mass assignable.

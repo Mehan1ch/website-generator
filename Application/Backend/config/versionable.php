@@ -5,7 +5,7 @@ return [
      * Keep versions, you can redefine in target model.
      * Default: 0 - Keep all versions.
      */
-    'keep_versions' => 0,
+    'keep_versions' => 10,
 
     /*
      * User foreign key name of versions table.

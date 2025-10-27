@@ -16,7 +16,6 @@ return new class extends Migration {
             $table->string('url')->unique();
             $table->longText('content')->nullable();
             $table->foreignUuid("site_id")->constrained("sites")->onDelete('cascade');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

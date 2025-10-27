@@ -3,11 +3,8 @@
 namespace App\Models;
 
 use App\Casts\AsCompressedBase64;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string $title
@@ -18,8 +15,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Page extends Model
 {
-
-    use SoftDeletes, Prunable;
 
     /**
      * The attributes that are mass assignable.
@@ -50,15 +45,5 @@ class Page extends Model
     public function site(): BelongsTo
     {
         return $this->belongsTo(Site::class);
-    }
-
-    /**
-     * Get the prunable model query.
-     *
-     * @return Builder<int, static>
-     */
-    public function prunable(): Builder
-    {
-        return static::where('deleted_at', '<=', now()->subMonth());
     }
 }

@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Enums\RolesEnum;
 use Carbon\Carbon;
 use Database\Factories\UserFactory;
 use DateTime;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -26,7 +29,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-class User extends Authenticatable implements MustVerifyEmail, HasMedia
+class User extends Authenticatable implements MustVerifyEmail, HasMedia, FilamentUser
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, HasApiTokens, InteractsWithMedia, HasUuids, HasRoles;
@@ -89,4 +92,14 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
             ->singleFile();
     }
 
+    /**
+     * Determine if the user can access the Filament admin panel.
+     *
+     * @param Panel $panel
+     * @return bool
+     */
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->hasRole(RolesEnum::ADMIN);
+    }
 }
