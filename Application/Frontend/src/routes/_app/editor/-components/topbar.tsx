@@ -3,7 +3,7 @@ import {Switch} from "@/components/ui/switch.tsx";
 import {useEditor} from "@craftjs/core";
 import {toast} from "sonner";
 import copy from "copy-to-clipboard";
-import lz from "lzutf8";
+import lz from "lz-string";
 import {useState} from "react";
 import {
     Dialog,
@@ -48,7 +48,8 @@ export const Topbar = () => {
                     <Button
                         onClick={() => {
                             const json = query.serialize();
-                            copy(lz.encodeBase64(lz.compress(json)));
+                            console.log(json);
+                            copy(lz.compressToBase64(json));
                             toast.info("State copied to clipboard");
                         }}
                     >
@@ -82,7 +83,7 @@ export const Topbar = () => {
                                 </DialogClose>
                                 <Button
                                     onClick={() => {
-                                        const json = lz.decompress(lz.decodeBase64(stateToLoad as string));
+                                        const json = lz.decompressFromBase64(stateToLoad as string);
                                         actions.deserialize(json);
                                         toast.info("State loaded");
                                     }}

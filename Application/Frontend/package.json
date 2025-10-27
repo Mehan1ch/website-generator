@@ -36,7 +36,7 @@
     "copy-to-clipboard": "^3.3.3",
     "dotenv": "^17.2.3",
     "lucide-react": "^0.488.0",
-    "lzutf8": "^0.6.3",
+    "lz-string": "^1.5.0",
     "next-themes": "^0.4.6",
     "openapi-fetch": "^0.15.0",
     "openapi-react-query": "^0.5.1",
