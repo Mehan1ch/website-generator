@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d5bc64fde869e3478c709e14e84a56e2",
+    "content-hash": "0c6c58edc768bf8a1ec20b000156f8cb",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -4502,6 +4502,82 @@
                 }
             ],
             "time": "2025-07-17T11:15:13+00:00"
+        },
+        {
+            "name": "mansoor/filament-versionable",
+            "version": "v4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mansoorkhan96/filament-versionable.git",
+                "reference": "8941bb2d4560a00894c539708e664b74fa02bccf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mansoorkhan96/filament-versionable/zipball/8941bb2d4560a00894c539708e664b74fa02bccf",
+                "reference": "8941bb2d4560a00894c539708e664b74fa02bccf",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^4.0",
+                "illuminate/contracts": "^10.0|^11.0|^12.0",
+                "overtrue/laravel-versionable": "^5.5.0",
+                "php": "^8.2",
+                "spatie/laravel-package-tools": "^1.15.0"
+            },
+            "require-dev": {
+                "larastan/larastan": "3.0",
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^7.9|^8.8.0",
+                "orchestra/testbench": "^9.0|^10.0",
+                "pestphp/pest": "^3.7",
+                "pestphp/pest-plugin-arch": "^3.0",
+                "pestphp/pest-plugin-laravel": "^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "FilamentVersionable": "Mansoor\\FilamentVersionable\\Facades\\FilamentVersionable"
+                    },
+                    "providers": [
+                        "Mansoor\\FilamentVersionable\\FilamentVersionableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mansoor\\FilamentVersionable\\": "src/",
+                    "Mansoor\\FilamentVersionable\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mansoor Ahmed",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Effortlessly manage revisions of your Eloquent models in Filament.",
+            "homepage": "https://github.com/mansoorkhan96/filament-versionable",
+            "keywords": [
+                "filament-versionable",
+                "laravel",
+                "mansoor"
+            ],
+            "support": {
+                "issues": "https://github.com/mansoorkhan96/filament-versionable/issues",
+                "source": "https://github.com/mansoorkhan96/filament-versionable"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/mansoor",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-08-08T05:49:53+00:00"
         },
         {
             "name": "masterminds/html5",
