@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\AsCompressedBase64;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,6 +27,15 @@ class Schema extends Model
         'name',
         'description',
         'content',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, class-string>
+     */
+    protected $casts = [
+        'content' => AsCompressedBase64::class,
     ];
 
 
