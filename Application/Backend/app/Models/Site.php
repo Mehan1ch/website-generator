@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\States\SiteState;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Overtrue\LaravelVersionable\Versionable;
 use Overtrue\LaravelVersionable\VersionStrategy;
+use Spatie\ModelStates\HasStates;
 
 /**
  * @property string $name
@@ -23,7 +25,7 @@ use Overtrue\LaravelVersionable\VersionStrategy;
 class Site extends Model
 {
 
-    use SoftDeletes, Prunable, Versionable;
+    use SoftDeletes, Prunable, Versionable, HasStates;
 
     protected $versionStrategy = VersionStrategy::SNAPSHOT;
     public string $versionModel = SiteVersion::class;
@@ -44,6 +46,15 @@ class Site extends Model
         'name',
         'subdomain',
         'description',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array <string, class-string>
+     */
+    protected $casts = [
+        'state' => SiteState::class,
     ];
 
     /**

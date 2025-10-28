@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum RolesEnum: string
+enum Roles: string
 {
     case USER = 'user';
     case ADMIN = 'admin';
@@ -11,9 +11,9 @@ enum RolesEnum: string
     public function label(): string
     {
         return match ($this) {
-            RolesEnum::USER => 'Users',
-            RolesEnum::ADMIN => 'Administrators',
-            RolesEnum::SUPER_ADMIN => 'Super Administrators',
+            Roles::USER => 'Users',
+            Roles::ADMIN => 'Administrators',
+            Roles::SUPER_ADMIN => 'Super Administrators',
         };
     }
 }

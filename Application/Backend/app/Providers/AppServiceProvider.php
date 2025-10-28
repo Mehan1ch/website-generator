@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Enums\RolesEnum;
+use App\Enums\Roles;
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Notifications\VerifyEmail;
@@ -59,7 +59,7 @@ class AppServiceProvider extends ServiceProvider
         // Implicitly grant "Super Admin" role all permissions
         // This works in the app by using gate-related functions like auth()->user->can() and @can()
         Gate::before(function ($user, $ability) {
-            return $user->hasRole(RolesEnum::SUPER_ADMIN) ? true : null;
+            return $user->hasRole(Roles::SUPER_ADMIN) ? true : null;
         });
     }
 }
