@@ -4,19 +4,17 @@ namespace Database\Seeders;
 
 use App\Enums\Roles;
 use App\Models\User;
-
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 /**
- * Class DatabaseSeeder
+ * Class TestSeeder
  * @package Database\Seeders
- * @description Seeder class to set up initial data for the application.
+ * @description Seeder class to set up data for testing purposes.
  */
-class DatabaseSeeder extends Seeder
+class TestSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      */
     public function run(): void
     {
