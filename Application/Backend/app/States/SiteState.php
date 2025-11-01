@@ -17,6 +17,7 @@ abstract class SiteState extends State
     public static function config(): StateConfig
     {
         return parent::config()
+            ->default(Draft::class)
             ->allowTransition([Draft::class, Archived::class], Published::class)
             ->allowTransition(Published::class, Draft::class)
             ->allowTransition(Published::class, Archived::class);

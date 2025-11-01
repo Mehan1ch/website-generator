@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\Casts\AsCompressedBase64;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Prunable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Builder;
 class Schema extends Model
 {
 
-    use SoftDeletes, Prunable;
+    use HasFactory, HasUuids;
 
     /**
      * The attributes that are mass assignable.
@@ -37,15 +37,4 @@ class Schema extends Model
     protected $casts = [
         'content' => AsCompressedBase64::class,
     ];
-
-
-    /**
-     * Get the prunable model query.
-     *
-     * @return Builder<int, static>
-     */
-    public function prunable(): Builder
-    {
-        return static::where('deleted_at', '<=', now()->subMonth());
-    }
 }

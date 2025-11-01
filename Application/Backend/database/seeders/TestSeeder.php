@@ -20,6 +20,10 @@ class TestSeeder extends Seeder
     {
         $this->call([
             RolesPermissionsSeeder::class,
+            UserSeeder::class,
+            SchemaSeeder::class,
+            SiteSeeder::class,
+            PageSeeder::class,
         ]);
 
         // Create super admin user, change password after creation needed

@@ -5,37 +5,39 @@ namespace App\Models;
 use App\States\SiteState;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Overtrue\LaravelVersionable\Versionable;
-use Overtrue\LaravelVersionable\VersionStrategy;
 use Spatie\ModelStates\HasStates;
+use Spatie\ModelStates\HasStatesContract;
 
 /**
+ * @property string $id
  * @property string $name
  * @property string $subdomain
  * @property string|null $description
  * @property int $user_id
- * @property-read User $users
+ * @property SiteState $state
+ * @property-read User $user
  * @property-read Collection<int, Page> $pages
  */
-class Site extends Model
+class Site extends Model implements HasStatesContract
 {
 
-    use SoftDeletes, Prunable, Versionable, HasStates;
+    use HasStates, HasFactory, HasUuids;
 
-    protected $versionStrategy = VersionStrategy::SNAPSHOT;
-    public string $versionModel = SiteVersion::class;
+    // use SoftDeletes, Prunable, Versionable; // TODO: Uncomment to enable soft deletes, pruning, and versioning
+    // protected $versionStrategy = VersionStrategy::SNAPSHOT;
+    // public string $versionModel = SiteVersion::class;
 
     /**
      * Versionable attributes
      *
      * @var array
      */
-    protected $versionable = ['name', 'subdomain', 'description'];
+//    protected $versionable = ['name', 'subdomain', 'description'];
 
     /**
      * The attributes that are mass assignable.
@@ -57,12 +59,21 @@ class Site extends Model
         'state' => SiteState::class,
     ];
 
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::deleting(function ($site) {
+            $site->pages()->delete();
+        });
+    }
+
     /**
      * Get the user that owns the site.
      *
      * @return BelongsTo<User>
      */
-    public function users(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -82,8 +93,8 @@ class Site extends Model
      *
      * @return Builder<int, static>
      */
-    public function prunable(): Builder
-    {
-        return static::where('deleted_at', '<=', now()->subMonth());
-    }
+//    public function prunable(): Builder
+//    {
+//        return static::where('deleted_at', '<=', now()->subMonth());
+//    }
 }
