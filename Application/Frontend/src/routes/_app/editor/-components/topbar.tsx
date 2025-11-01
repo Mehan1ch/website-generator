@@ -48,7 +48,6 @@ export const Topbar = () => {
                     <Button
                         onClick={() => {
                             const json = query.serialize();
-                            console.log(json);
                             copy(lz.compressToBase64(json));
                             toast.info("State copied to clipboard");
                         }}
