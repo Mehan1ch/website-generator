@@ -62,13 +62,22 @@ class SiteVersion extends Version
         // Revert pages
         if (!empty($this->contents['pages'])) {
             foreach ($this->contents['pages'] as $pageId => $pageContents) {
-                $page = $this->versionable->pages()->find($pageId);
+                $page = $this->versionable->pages->find($pageId);
                 if ($page) {
                     [$content, $title, $url] = $pageContents;
                     $page->content = $content;
                     $page->title = $title;
                     $page->url = $url;
                     $page->save();
+                }
+                if (!$page) {
+                    // Page does not exist, create a new one
+                    [$content, $title, $url] = $pageContents;
+                    $this->versionable->pages->create([
+                        'content' => $content,
+                        'title' => $title,
+                        'url' => $url,
+                    ]);
                 }
             }
         }
