@@ -3,10 +3,13 @@
 namespace App\Providers;
 
 use App\Enums\Roles;
+use App\Models\Page;
+use App\Models\Site;
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
@@ -49,10 +52,18 @@ class AppServiceProvider extends ServiceProvider
         });
 
         if (class_exists(Scribe::class)) {
-            Scribe::beforeResponseCall(function () {
+            $user = User::factory()->create();
+            $user->assignRole(Roles::SUPER_ADMIN);
+            Scribe::beforeResponseCall(function () use ($user) {
                 // Customise the request however you want (e.g. custom authentication)
-                $user = User::factory()->make();
-                Auth::login($user);
+                Auth::guard('web')->login($user);
+            });
+            Scribe::afterResponseCall(function () use ($user) {
+                // Clean up after the request
+                Auth::guard('web')->logout($user);
+            });
+            Scribe::afterGenerating(function () use ($user) {
+                $user->delete();
             });
         }
 

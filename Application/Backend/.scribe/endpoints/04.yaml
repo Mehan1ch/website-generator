@@ -1,0 +1,325 @@
+name: Pages
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/site/{site_id}/page/{page_id}'
+    metadata:
+      custom: []
+      groupName: Pages
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Page for Site'
+      description: 'Display the specified page for a specific site.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      site_id:
+        custom: []
+        name: site_id
+        description: 'The ID of the site.'
+        required: true
+        example: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      page_id:
+        custom: []
+        name: page_id
+        description: 'The ID of the page.'
+        required: true
+        example: 019a46a4-dd5d-7013-aea6-092974abf409
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      site_id: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+      page_id: 019a46a4-dd5d-7013-aea6-092974abf409
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":"019a46b8-ebd7-7082-80f6-d1f36b9913b1","title":"Rem quam amet numquam.","url":"\/laborum-voluptas-saepe-ab-ullam","content":"N4IgSg8hAqIFygC4E8AOBTeoBO6DOA9gDYBu6AJgHICGAtpnCAKLkCWiB2AwgQHaLVWvdNhABfADQhWeLtV4lqeeImwBXdFNTYCqZQhAAjagGMA1gHMda3uXggAxOmcgt1cm14X4AVkkg2PFQiamQaensWdk4efkFhUSkTNTwOWix\/AAtWD3ReeAAzaiI8TRBeAnJ8eABtEAB1AE0AQQArAFlkAgAFAEcAWhAAXSkiITMKSkrqhDF\/JrbOnoGsEBQMVdxCUkm6BmY2DmxodAAPRHEpGTkFJULi0q0dPVXEM4vGAAl0IiICAAIAO6cIjkACErhABT4iAAyqwAF4MABMAAZ\/IFgqFwvsokcTudIclUgR0rM3Lh+PZIDBIdlcvk4EUSmUKlV9DURiAxrwJlRpvpgHMxEA==","site_id":"019a46a4-dbe3-70c4-bd08-5a72f7e702b2","created_at":"2025-11-02T22:38:35.000000Z","updated_at":"2025-11-02T22:38:35.000000Z"}}'
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "Page not found for the specified site."
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/v1/site/{site_id}/page'
+    metadata:
+      custom: []
+      groupName: Pages
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create Page for Site'
+      description: 'Store a newly created page for a specific site.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      site_id:
+        custom: []
+        name: site_id
+        description: 'The ID of the site.'
+        required: true
+        example: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      site_id: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      title:
+        custom: []
+        name: title
+        description: 'The title of the page. Must not be greater than 255 characters.'
+        required: true
+        example: 'My personal homepage'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      url:
+        custom: []
+        name: url
+        description: 'The URL slug for the post. Must not be greater than 255 characters.'
+        required: true
+        example: my-first-post
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      content:
+        custom: []
+        name: content
+        description: 'The content of the schema, base64 encoded and lz compressed JSON.'
+        required: false
+        example: eJzT0yMAAGTvBe8=
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      title: 'My personal homepage'
+      url: my-first-post
+      content: eJzT0yMAAGTvBe8=
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: '{"data":{"id":"019a46b8-ebea-726c-983f-e30a14b08470","title":"Eius et animi quos velit et.","url":"\/accusantium-harum-mollitia-modi-deserunt-aut-ab","content":"N4IgSg8hAqIFygC4E8AOBTeoBO6DOA9gDYBu6AJgHICGAtpnCAKLkCWiB2AwgQHaLVWvdNhABfADQhWeLtV4lqeeImwBXdFNTYCqZQhAAjagGMA1gHMda3uXggAxOmcgt1cm14X4AVkkg2PFQiamQaensWdk4efkFhUSkTNTwOWix\/AAtWD3ReeAAzaiI8TRBeAnJ8eABtEAB1AE0AQQArAFlkAgAFAEcAWhAAXSkiITMKSkrqhDF\/JrbOnoGsEBQMVdxCUkm6BmY2DmxodAAPRHEpGTkFJULi0q0dPVXEM4vGAAl0IiICAAIAO6cIjkACErhABT4iAAyqwAF4MABMAAZ\/IFgqFwvsokcTudIclUgR0rM3Lh+PZIDBIdlcvk4EUSmUKlV9DURiAxrwJlRpvpgHMxEA==","site_id":"019a46a4-dbfa-71cb-9304-ba64b118e822","created_at":"2025-11-02T22:38:35.000000Z","updated_at":"2025-11-02T22:38:35.000000Z"}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+    uri: 'api/v1/site/{site_id}/page/{page_id}'
+    metadata:
+      custom: []
+      groupName: Pages
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update Page for Site'
+      description: 'Update the specified page for a specific site.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      site_id:
+        custom: []
+        name: site_id
+        description: 'The ID of the site.'
+        required: true
+        example: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      page_id:
+        custom: []
+        name: page_id
+        description: 'The ID of the page.'
+        required: true
+        example: 019a46a4-dd5d-7013-aea6-092974abf409
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      site_id: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+      page_id: 019a46a4-dd5d-7013-aea6-092974abf409
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      title:
+        custom: []
+        name: title
+        description: 'The title of the page. Must not be greater than 255 characters.'
+        required: true
+        example: 'My personal homepage'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      url:
+        custom: []
+        name: url
+        description: 'The URL slug for the post. Must not be greater than 255 characters.'
+        required: true
+        example: my-first-post
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      content:
+        custom: []
+        name: content
+        description: 'The content of the schema, base64 encoded and lz compressed JSON.'
+        required: false
+        example: eJzT0yMAAGTvBe8=
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      title: 'My personal homepage'
+      url: my-first-post
+      content: eJzT0yMAAGTvBe8=
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":"019a46b8-ebfd-73a8-8d56-e34b1b6a162c","title":"Eius et animi quos velit et.","url":"\/perspiciatis-quo-omnis-nostrum-aut-adipisci-quidem-nostrum-qui","content":"N4IgSg8hAqIFygC4E8AOBTeoBO6DOA9gDYBu6AJgHICGAtpnCAKLkCWiB2AwgQHaLVWvdNhABfADQhWeLtV4lqeeImwBXdFNTYCqZQhAAjagGMA1gHMda3uXggAxOmcgt1cm14X4AVkkg2PFQiamQaensWdk4efkFhUSkTNTwOWix\/AAtWD3ReeAAzaiI8TRBeAnJ8eABtEAB1AE0AQQArAFlkAgAFAEcAWhAAXSkiITMKSkrqhDF\/JrbOnoGsEBQMVdxCUkm6BmY2DmxodAAPRHEpGTkFJULi0q0dPVXEM4vGAAl0IiICAAIAO6cIjkACErhABT4iAAyqwAF4MABMAAZ\/IFgqFwvsokcTudIclUgR0rM3Lh+PZIDBIdlcvk4EUSmUKlV9DURiAxrwJlRpvpgHMxEA==","site_id":"019a46a4-dbf1-7323-9262-8cbe92c06c11","created_at":"2025-11-02T22:38:35.000000Z","updated_at":"2025-11-02T22:38:35.000000Z"}}'
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+           "message": "Page not found for the specified site."
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/site/{site_id}/page/{page_id}'
+    metadata:
+      custom: []
+      groupName: Pages
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete Page for Site'
+      description: 'Remove the specified page from a specific site.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      site_id:
+        custom: []
+        name: site_id
+        description: 'The ID of the site.'
+        required: true
+        example: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      page_id:
+        custom: []
+        name: page_id
+        description: 'The ID of the page.'
+        required: true
+        example: 019a46a4-dd5d-7013-aea6-092974abf409
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      site_id: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+      page_id: 019a46a4-dd5d-7013-aea6-092974abf409
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 204
+        content: '{}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null

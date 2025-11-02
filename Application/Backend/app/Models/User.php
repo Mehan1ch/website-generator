@@ -12,6 +12,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -21,10 +22,13 @@ use Spatie\Permission\Traits\HasRoles;
 
 
 /**
+ * @property string $id
  * @property string $name
  * @property string $email
  * @property string $password
  * @property-read string|null $avatar
+ * @property string|null $remember_token
+ * @property-read Site $sites
  * @property DateTime|null $email_verified_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -68,6 +72,16 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, Filamen
         ];
     }
 
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::deleting(function (User $user) {
+            $user->sites()->delete();
+            $user->clearMediaCollection('avatar');
+        });
+    }
+
     /**
      * Get the user's avatar URL.
      *
@@ -101,5 +115,15 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, Filamen
     public function canAccessPanel(Panel $panel): bool
     {
         return $this->hasRole(Roles::ADMIN);
+    }
+
+    /**
+     * Get the sites for the user.
+     *
+     * @return HasMany<Site>
+     */
+    public function sites(): HasMany
+    {
+        return $this->hasMany(Site::class);
     }
 }

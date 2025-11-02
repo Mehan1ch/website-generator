@@ -24,4 +24,21 @@ class AvatarRequest extends FormRequest
     {
         return ['avatar' => ['required', 'file', 'image', 'mimes:jpeg,jpg,png,gif,webp', 'max:2048']];
     }
+
+    /**
+     * Define the body parameters for API documentation.
+     *
+     * @return array
+     */
+    public function bodyParameters(): array
+    {
+        return [
+            'avatar' => [
+                'description' => 'The avatar image file to upload. Accepted formats are jpeg, jpg, png, gif, and webp. Maximum file size is 2MB.',
+                'type' => 'file',
+                'required' => true,
+                'example' => null,
+            ],
+        ];
+    }
 }

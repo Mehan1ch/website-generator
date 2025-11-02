@@ -1,0 +1,326 @@
+name: Sites
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/site
+    metadata:
+      custom: []
+      groupName: Sites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Sites'
+      description: 'Display all sites for the authenticated user.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":"019a46b8-eb2e-71c3-a306-44694ef4a051","name":"Rempel, Gulgowski and O''Kon","subdomain":"ernser","state":"draft"},{"id":"019a46b8-eb32-70bf-b8b5-b015f8a3f0c8","name":"Swift Inc","subdomain":"price","state":"draft"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/site/{site_id}'
+    metadata:
+      custom: []
+      groupName: Sites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Site'
+      description: 'Display the specified site.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      site_id:
+        custom: []
+        name: site_id
+        description: 'The ID of the site.'
+        required: true
+        example: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      site_id: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":"019a46b8-eb42-72c2-925c-e500f35faca5","name":"Leuschke, Bauch and Fritsch","subdomain":"okeefe","description":null,"user_id":"019a46a6-e724-738b-b3b9-3594b050a0b0","state":"draft","pages":{"data":[{"id":"019a46b8-eb46-717e-94ca-82bd5c991740","title":"Et consequatur aut dolores enim.","url":"\/tempora-ex-voluptatem-laboriosam-praesentium-quis"}]}}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/site
+    metadata:
+      custom: []
+      groupName: Sites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create Site'
+      description: 'Store a newly created site for the authenticated user.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: 'The name of the site. Must not be greater than 255 characters.'
+        required: true
+        example: 'My Personal Site'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      subdomain:
+        custom: []
+        name: subdomain
+        description: 'The subdomain for the site. Must not be greater than 255 characters.'
+        required: true
+        example: mypersonalsite
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      description:
+        custom: []
+        name: description
+        description: 'A brief description of the site.'
+        required: false
+        example: 'This is my personal website where I share my projects and blog posts.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      state:
+        custom: []
+        name: state
+        description: 'The state of the site. Allowed values: archived,draft,published.'
+        required: true
+        example: draft
+        type: string
+        enumValues:
+          - archived
+          - draft
+          - published
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      name: 'My Personal Site'
+      subdomain: mypersonalsite
+      description: 'This is my personal website where I share my projects and blog posts.'
+      state: draft
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: '{"data":{"id":"019a46b8-ebbc-7251-8c6a-02ef632934fc","name":"Bailey Inc","subdomain":"crooks","description":"Et fugiat sunt nihil accusantium.","user_id":"019a46a5-0c8a-7034-b893-4db7d4b46b5d","state":"draft","pages":{"data":[]}}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+    uri: 'api/v1/site/{site_id}'
+    metadata:
+      custom: []
+      groupName: Sites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update Site'
+      description: 'Update the specified site.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      site_id:
+        custom: []
+        name: site_id
+        description: 'The ID of the site.'
+        required: true
+        example: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      site_id: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: 'The name of the site. Must not be greater than 255 characters.'
+        required: true
+        example: 'My Personal Site'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      subdomain:
+        custom: []
+        name: subdomain
+        description: 'The subdomain for the site. Must not be greater than 255 characters.'
+        required: true
+        example: mypersonalsite
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      description:
+        custom: []
+        name: description
+        description: 'A brief description of the site.'
+        required: false
+        example: 'This is my personal website where I share my projects and blog posts.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      state:
+        custom: []
+        name: state
+        description: 'The state of the site. Allowed values: archived,draft,published.'
+        required: true
+        example: draft
+        type: string
+        enumValues:
+          - archived
+          - draft
+          - published
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      name: 'My Personal Site'
+      subdomain: mypersonalsite
+      description: 'This is my personal website where I share my projects and blog posts.'
+      state: draft
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":"019a46b8-ebc7-73be-a190-c78bc2073d7c","name":"Ritchie Group","subdomain":"stracke","description":null,"user_id":"019a46b4-f2aa-71cb-b1fb-c92a5d92ac31","state":"published","pages":{"data":[]}}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/site/{site_id}'
+    metadata:
+      custom: []
+      groupName: Sites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete Site'
+      description: 'Remove the specified site.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      site_id:
+        custom: []
+        name: site_id
+        description: 'The ID of the site.'
+        required: true
+        example: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      site_id: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 204
+        content: '{}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null

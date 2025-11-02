@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 use Spatie\ModelStates\HasStates;
 use Spatie\ModelStates\HasStatesContract;
 
@@ -22,6 +23,8 @@ use Spatie\ModelStates\HasStatesContract;
  * @property SiteState $state
  * @property-read User $user
  * @property-read Collection<int, Page> $pages
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  */
 class Site extends Model implements HasStatesContract
 {

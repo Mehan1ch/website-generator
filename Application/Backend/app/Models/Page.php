@@ -8,18 +8,22 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 use Spatie\MediaLibrary\MediaCollections\File;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
+ * @property string $id
  * @property string $title
  * @property string $url
  * @property string $content
  * @property int $site_id
  * @property-read Site $site
  * @property-read Media|null $staticHTML
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  */
 class Page extends Model implements HasMedia
 {
@@ -61,6 +65,9 @@ class Page extends Model implements HasMedia
          * $site->state->transitionTo(Draft::class);
          * });
          */
+        static::deleting(function ($page) {
+            $page->clearMediaCollection('static_html');
+        });
     }
 
     /**

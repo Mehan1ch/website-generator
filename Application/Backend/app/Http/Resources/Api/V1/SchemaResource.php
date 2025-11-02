@@ -2,14 +2,14 @@
 
 namespace App\Http\Resources\Api\V1;
 
-use App\Models\User;
+use App\Models\Schema;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @mixin User
+ * @mixin Schema
  */
-class UserResource extends JsonResource
+class SchemaResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -21,11 +21,10 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'email' => $this->email,
-            'email_verified_at' => $this->email_verified_at,
-            'avatar' => $this->avatar,
+            'description' => $this->description,
+            'content' => $this->content,
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'updated_at' => $this->updated_at,
         ];
     }
 }

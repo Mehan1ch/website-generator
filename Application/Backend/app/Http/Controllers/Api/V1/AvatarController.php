@@ -20,6 +20,9 @@ class AvatarController extends Controller
      * Post avatar
      *
      * Upload and set the authenticated user's avatar image.
+     * @response 201 {"message": "Avatar uploaded successfully."}
+     * @response 400 {"message": "File does not exist.", "error": "..."}
+     * @response 400 {"message": "File is too big.", "error": "..."}
      */
     public function store(AvatarRequest $request)
     {

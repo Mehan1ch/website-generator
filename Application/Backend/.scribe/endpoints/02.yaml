@@ -1,0 +1,296 @@
+name: Schemas
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/schema
+    metadata:
+      custom: []
+      groupName: Schemas
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Schemas'
+      description: 'Display all schemas with pagination.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":"019a46b8-eb03-733e-83e5-0c1a0db7b01a","name":"architecto"},{"id":"019a46b8-eb09-7346-a352-73d8c599e23f","name":"quos"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/schema/{schema_id}'
+    metadata:
+      custom: []
+      groupName: Schemas
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Schema'
+      description: 'Display the specified schema.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      schema_id:
+        custom: []
+        name: schema_id
+        description: 'The ID of the schema.'
+        required: true
+        example: 019a46a4-db86-72c0-8ffd-6673749552b4
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      schema_id: 019a46a4-db86-72c0-8ffd-6673749552b4
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":"019a46b8-eb0f-7179-a080-8021c2ecb377","name":"sunt","description":"Harum mollitia modi deserunt aut ab provident perspiciatis quo.","content":"","created_at":"2025-11-02T22:38:35.000000Z","updated_at":"2025-11-02T22:38:35.000000Z"}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/schema
+    metadata:
+      custom: []
+      groupName: Schemas
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create Schema'
+      description: 'Store a newly created schema.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: 'The name of the schema. Must not be greater than 255 characters.'
+        required: true
+        example: 'Portfolio Schema'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      description:
+        custom: []
+        name: description
+        description: 'A brief description of the schema.'
+        required: false
+        example: 'A webpage schema for a personal portfolio site.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      content:
+        custom: []
+        name: content
+        description: 'The content of the schema, base64 encoded and lz compressed JSON.'
+        required: false
+        example: eJzT0yMAAGTvBe8=
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      name: 'Portfolio Schema'
+      description: 'A webpage schema for a personal portfolio site.'
+      content: eJzT0yMAAGTvBe8=
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: '{"data":{"id":"019a46b8-eb17-70ff-8b96-6734ad3a5a76","name":"architecto","description":null,"content":"N4IgSg8hAqIFygC4E8AOBTeoBO6DOA9gDYBu6AJgHICGAtpnCAKLkCWiB2AwgQHaLVWvdNhABfADQhWeLtV4lqeeImwBXdFNTYCqZQhAAjagGMA1gHMda3uXggAxOmcgt1cm14X4AVkkg2PFQiamQaensWdk4efkFhUSkTNTwOWix\/AAtWD3ReeAAzaiI8TRBeAnJ8eABtEAB1AE0AQQArAFlkAgAFAEcAWhAAXSkiITMKSkrqhDF\/JrbOnoGsEBQMVdxCUkm6BmY2DmxodAAPRHEpGTkFJULi0q0dPVXEM4vGAAl0IiICAAIAO6cIjkACErhABT4iAAyqwAF4MABMAAZ\/IFgqFwvsokcTudIclUgR0rM3Lh+PZIDBIdlcvk4EUSmUKlV9DURiAxrwJlRpvpgHMxEA==","created_at":"2025-11-02T22:38:35.000000Z","updated_at":"2025-11-02T22:38:35.000000Z"}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+    uri: 'api/v1/schema/{schema_id}'
+    metadata:
+      custom: []
+      groupName: Schemas
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update Schema'
+      description: 'Update the specified schema.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      schema_id:
+        custom: []
+        name: schema_id
+        description: 'The ID of the schema.'
+        required: true
+        example: 019a46a4-db86-72c0-8ffd-6673749552b4
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      schema_id: 019a46a4-db86-72c0-8ffd-6673749552b4
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: 'The name of the schema. Must not be greater than 255 characters.'
+        required: true
+        example: 'Portfolio Schema'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      description:
+        custom: []
+        name: description
+        description: 'A brief description of the schema.'
+        required: false
+        example: 'A webpage schema for a personal portfolio site.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      content:
+        custom: []
+        name: content
+        description: 'The content of the schema, base64 encoded and lz compressed JSON.'
+        required: false
+        example: eJzT0yMAAGTvBe8=
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      name: 'Portfolio Schema'
+      description: 'A webpage schema for a personal portfolio site.'
+      content: eJzT0yMAAGTvBe8=
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":"019a46b8-eb20-7384-a30b-024d8152c3f9","name":"architecto","description":null,"content":"N4IgSg8hAqIFygC4E8AOBTeoBO6DOA9gDYBu6AJgHICGAtpnCAKLkCWiB2AwgQHaLVWvdNhABfADQhWeLtV4lqeeImwBXdFNTYCqZQhAAjagGMA1gHMda3uXggAxOmcgt1cm14X4AVkkg2PFQiamQaensWdk4efkFhUSkTNTwOWix\/AAtWD3ReeAAzaiI8TRBeAnJ8eABtEAB1AE0AQQArAFlkAgAFAEcAWhAAXSkiITMKSkrqhDF\/JrbOnoGsEBQMVdxCUkm6BmY2DmxodAAPRHEpGTkFJULi0q0dPVXEM4vGAAl0IiICAAIAO6cIjkACErhABT4iAAyqwAF4MABMAAZ\/IFgqFwvsokcTudIclUgR0rM3Lh+PZIDBIdlcvk4EUSmUKlV9DURiAxrwJlRpvpgHMxEA==","created_at":"2025-11-02T22:38:35.000000Z","updated_at":"2025-11-02T22:38:35.000000Z"}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/schema/{schema_id}'
+    metadata:
+      custom: []
+      groupName: Schemas
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete Schema'
+      description: 'Remove the specified schema.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      schema_id:
+        custom: []
+        name: schema_id
+        description: 'The ID of the schema.'
+        required: true
+        example: 019a46a4-db86-72c0-8ffd-6673749552b4
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      schema_id: 019a46a4-db86-72c0-8ffd-6673749552b4
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 204
+        content: '{}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null

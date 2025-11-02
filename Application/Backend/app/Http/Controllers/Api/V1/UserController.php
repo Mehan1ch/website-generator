@@ -19,6 +19,8 @@ class UserController extends Controller
      * Get user
      *
      * Return the authenticated user's information.
+     * @apiResource App\Http\Resources\Api\V1\UserResource
+     * @apiResourceModel App\Models\User
      */
     public function show()
     {
@@ -30,6 +32,7 @@ class UserController extends Controller
      * Delete user
      *
      * Delete the authenticated user's account and all associated data.
+     * @response 204 No Content
      */
     public function destroy()
     {
@@ -37,6 +40,4 @@ class UserController extends Controller
         $user->delete();
         return response()->noContent();
     }
-
-
 }

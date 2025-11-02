@@ -2,14 +2,15 @@
 
 namespace App\Http\Resources\Api\V1;
 
-use App\Models\User;
+use App\Http\Resources\Api\V1\Collections\PageCollection;
+use App\Models\Site;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @mixin User
+ * @mixin Site
  */
-class UserResource extends JsonResource
+class SiteResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -21,11 +22,11 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'email' => $this->email,
-            'email_verified_at' => $this->email_verified_at,
-            'avatar' => $this->avatar,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'subdomain' => $this->subdomain,
+            'description' => $this->description,
+            'user_id' => $this->user_id,
+            'state' => $this->state,
+            'pages' => new PageCollection($this->pages),
         ];
     }
 }
