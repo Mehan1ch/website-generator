@@ -30,6 +30,7 @@ class RolesPermissionsSeeder extends Seeder
 
 
         $adminOnlyPermissions = [
+            Permissions::ACCESS_ADMIN_PANEL->value,
             Permissions::VIEW_ANY_USERS->value,
             Permissions::DELETE_USERS->value,
             Permissions::RESTORE_USERS->value,

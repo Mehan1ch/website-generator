@@ -4,6 +4,7 @@ namespace App\Enums;
 
 enum Permissions: string
 {
+    case ACCESS_ADMIN_PANEL = 'access_admin_panel';
     case VIEW_ANY_USERS = 'view_any_users';
     case VIEW_USERS = 'view_users';
     case CREATE_USERS = 'create_users';

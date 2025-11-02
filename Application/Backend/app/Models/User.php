@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Permissions;
 use App\Enums\Roles;
 use Carbon\Carbon;
 use Database\Factories\UserFactory;
@@ -114,7 +115,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, Filamen
      */
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->hasRole(Roles::ADMIN);
+        return $this->can(Permissions::ACCESS_ADMIN_PANEL->value);
     }
 
     /**
