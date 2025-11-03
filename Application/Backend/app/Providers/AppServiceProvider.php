@@ -62,9 +62,7 @@ class AppServiceProvider extends ServiceProvider
                 // Clean up after the request
                 Auth::guard('web')->logout($user);
             });
-            Scribe::afterGenerating(function () use ($user) {
-                $user->delete();
-            });
+            $user->delete();
         }
 
         // Implicitly grant "Super Admin" role all permissions
