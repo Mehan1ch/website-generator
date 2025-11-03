@@ -18,7 +18,6 @@ return new class extends Migration {
             $table->string('state');
             $table->text('description')->nullable();
             $table->foreignUuid("user_id")->constrained("users")->onDelete('cascade');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

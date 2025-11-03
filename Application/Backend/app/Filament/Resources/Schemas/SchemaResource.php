@@ -15,12 +15,15 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class SchemaResource extends Resource
 {
     protected static ?string $model = Schema1::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::Document;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Site Management';
 
     protected static ?string $recordTitleAttribute = 'name';
 

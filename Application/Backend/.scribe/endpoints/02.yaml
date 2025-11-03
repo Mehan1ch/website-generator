@@ -30,7 +30,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":[{"id":"019a46b8-eb03-733e-83e5-0c1a0db7b01a","name":"architecto"},{"id":"019a46b8-eb09-7346-a352-73d8c599e23f","name":"quos"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
+        content: '{"data":[{"id":"019a4735-6b05-70fb-a2fb-30f0f28fe653","name":"architecto"},{"id":"019a4735-6b0b-72f2-85f4-da114446d8de","name":"quos"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
         headers: []
         description: ''
     responseFields: []
@@ -62,14 +62,14 @@ endpoints:
         name: schema_id
         description: 'The ID of the schema.'
         required: true
-        example: 019a46a4-db86-72c0-8ffd-6673749552b4
+        example: 019a4734-8d93-719c-bcbb-83e4cd5d207c
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      schema_id: 019a46a4-db86-72c0-8ffd-6673749552b4
+      schema_id: 019a4734-8d93-719c-bcbb-83e4cd5d207c
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -79,7 +79,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019a46b8-eb0f-7179-a080-8021c2ecb377","name":"sunt","description":"Harum mollitia modi deserunt aut ab provident perspiciatis quo.","content":"","created_at":"2025-11-02T22:38:35.000000Z","updated_at":"2025-11-02T22:38:35.000000Z"}}'
+        content: '{"data":{"id":"019a4735-6b16-700d-8ea4-1b361201a340","name":"sunt","description":"Harum mollitia modi deserunt aut ab provident perspiciatis quo.","content":"","created_at":"2025-11-03T00:54:34.000000Z","updated_at":"2025-11-03T00:54:34.000000Z"}}'
         headers: []
         description: ''
     responseFields: []
@@ -152,7 +152,7 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"019a46b8-eb17-70ff-8b96-6734ad3a5a76","name":"architecto","description":null,"content":"N4IgSg8hAqIFygC4E8AOBTeoBO6DOA9gDYBu6AJgHICGAtpnCAKLkCWiB2AwgQHaLVWvdNhABfADQhWeLtV4lqeeImwBXdFNTYCqZQhAAjagGMA1gHMda3uXggAxOmcgt1cm14X4AVkkg2PFQiamQaensWdk4efkFhUSkTNTwOWix\/AAtWD3ReeAAzaiI8TRBeAnJ8eABtEAB1AE0AQQArAFlkAgAFAEcAWhAAXSkiITMKSkrqhDF\/JrbOnoGsEBQMVdxCUkm6BmY2DmxodAAPRHEpGTkFJULi0q0dPVXEM4vGAAl0IiICAAIAO6cIjkACErhABT4iAAyqwAF4MABMAAZ\/IFgqFwvsokcTudIclUgR0rM3Lh+PZIDBIdlcvk4EUSmUKlV9DURiAxrwJlRpvpgHMxEA==","created_at":"2025-11-02T22:38:35.000000Z","updated_at":"2025-11-02T22:38:35.000000Z"}}'
+        content: '{"data":{"id":"019a4735-6b1f-734e-a115-cd40cb128925","name":"architecto","description":null,"content":"N4IgSg8hAqIFygC4E8AOBTeoBO6DOA9gDYBu6AJgHICGAtpnCAKLkCWiB2AwgQHaLVWvdNhABfADQhWeLtV4lqeeImwBXdFNTYCqZQhAAjagGMA1gHMda3uXggAxOmcgt1cm14X4AVkkg2PFQiamQaensWdk4efkFhUSkTNTwOWix\/AAtWD3ReeAAzaiI8TRBeAnJ8eABtEAB1AE0AQQArAFlkAgAFAEcAWhAAXSkiITMKSkrqhDF\/JrbOnoGsEBQMVdxCUkm6BmY2DmxodAAPRHEpGTkFJULi0q0dPVXEM4vGAAl0IiICAAIAO6cIjkACErhABT4iAAyqwAF4MABMAAZ\/IFgqFwvsokcTudIclUgR0rM3Lh+PZIDBIdlcvk4EUSmUKlV9DURiAxrwJlRpvpgHMxEA==","created_at":"2025-11-03T00:54:34.000000Z","updated_at":"2025-11-03T00:54:34.000000Z"}}'
         headers: []
         description: ''
     responseFields: []
@@ -184,14 +184,14 @@ endpoints:
         name: schema_id
         description: 'The ID of the schema.'
         required: true
-        example: 019a46a4-db86-72c0-8ffd-6673749552b4
+        example: 019a4734-8d93-719c-bcbb-83e4cd5d207c
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      schema_id: 019a46a4-db86-72c0-8ffd-6673749552b4
+      schema_id: 019a4734-8d93-719c-bcbb-83e4cd5d207c
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -237,7 +237,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019a46b8-eb20-7384-a30b-024d8152c3f9","name":"architecto","description":null,"content":"N4IgSg8hAqIFygC4E8AOBTeoBO6DOA9gDYBu6AJgHICGAtpnCAKLkCWiB2AwgQHaLVWvdNhABfADQhWeLtV4lqeeImwBXdFNTYCqZQhAAjagGMA1gHMda3uXggAxOmcgt1cm14X4AVkkg2PFQiamQaensWdk4efkFhUSkTNTwOWix\/AAtWD3ReeAAzaiI8TRBeAnJ8eABtEAB1AE0AQQArAFlkAgAFAEcAWhAAXSkiITMKSkrqhDF\/JrbOnoGsEBQMVdxCUkm6BmY2DmxodAAPRHEpGTkFJULi0q0dPVXEM4vGAAl0IiICAAIAO6cIjkACErhABT4iAAyqwAF4MABMAAZ\/IFgqFwvsokcTudIclUgR0rM3Lh+PZIDBIdlcvk4EUSmUKlV9DURiAxrwJlRpvpgHMxEA==","created_at":"2025-11-02T22:38:35.000000Z","updated_at":"2025-11-02T22:38:35.000000Z"}}'
+        content: '{"data":{"id":"019a4735-6b29-71ae-9ed9-79902d6215dc","name":"architecto","description":null,"content":"N4IgSg8hAqIFygC4E8AOBTeoBO6DOA9gDYBu6AJgHICGAtpnCAKLkCWiB2AwgQHaLVWvdNhABfADQhWeLtV4lqeeImwBXdFNTYCqZQhAAjagGMA1gHMda3uXggAxOmcgt1cm14X4AVkkg2PFQiamQaensWdk4efkFhUSkTNTwOWix\/AAtWD3ReeAAzaiI8TRBeAnJ8eABtEAB1AE0AQQArAFlkAgAFAEcAWhAAXSkiITMKSkrqhDF\/JrbOnoGsEBQMVdxCUkm6BmY2DmxodAAPRHEpGTkFJULi0q0dPVXEM4vGAAl0IiICAAIAO6cIjkACErhABT4iAAyqwAF4MABMAAZ\/IFgqFwvsokcTudIclUgR0rM3Lh+PZIDBIdlcvk4EUSmUKlV9DURiAxrwJlRpvpgHMxEA==","created_at":"2025-11-03T00:54:34.000000Z","updated_at":"2025-11-03T00:54:34.000000Z"}}'
         headers: []
         description: ''
     responseFields: []
@@ -269,14 +269,14 @@ endpoints:
         name: schema_id
         description: 'The ID of the schema.'
         required: true
-        example: 019a46a4-db86-72c0-8ffd-6673749552b4
+        example: 019a4734-8d93-719c-bcbb-83e4cd5d207c
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      schema_id: 019a46a4-db86-72c0-8ffd-6673749552b4
+      schema_id: 019a4734-8d93-719c-bcbb-83e4cd5d207c
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

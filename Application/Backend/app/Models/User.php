@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Database\Factories\UserFactory;
 use DateTime;
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -34,7 +35,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-class User extends Authenticatable implements MustVerifyEmail, HasMedia, FilamentUser
+class User extends Authenticatable implements MustVerifyEmail, HasMedia, FilamentUser, HasAvatar
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, HasApiTokens, InteractsWithMedia, HasUuids, HasRoles;
@@ -76,6 +77,10 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, Filamen
     protected static function boot(): void
     {
         parent::boot();
+
+        static::creating(function ($user) {
+            $user->assignRole(Roles::USER->value);
+        });
 
         static::deleting(function (User $user) {
             $user->sites()->delete();
@@ -126,5 +131,15 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, Filamen
     public function sites(): HasMany
     {
         return $this->hasMany(Site::class);
+    }
+
+    /**
+     * Get the URL of the user's avatar for Filament.
+     *
+     * @return string|null
+     */
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar;
     }
 }

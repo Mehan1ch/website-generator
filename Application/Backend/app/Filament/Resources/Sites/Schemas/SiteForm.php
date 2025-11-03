@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Sites\Schemas;
 
+use A909M\FilamentStateFusion\Forms\Components\StateFusionToggleButtons;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -17,7 +18,7 @@ class SiteForm
                     ->required(),
                 TextInput::make('subdomain')
                     ->required(),
-                TextInput::make('state')
+                StateFusionToggleButtons::make('state')
                     ->required(),
                 Textarea::make('description')
                     ->columnSpanFull(),

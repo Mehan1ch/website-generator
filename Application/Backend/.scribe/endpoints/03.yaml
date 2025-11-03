@@ -30,7 +30,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":[{"id":"019a46b8-eb2e-71c3-a306-44694ef4a051","name":"Rempel, Gulgowski and O''Kon","subdomain":"ernser","state":"draft"},{"id":"019a46b8-eb32-70bf-b8b5-b015f8a3f0c8","name":"Swift Inc","subdomain":"price","state":"draft"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
+        content: '{"data":[{"id":"019a4735-6b34-7148-b182-50a433ab9264","name":"Rempel, Gulgowski and O''Kon","subdomain":"ernser","state":"archived"},{"id":"019a4735-6b37-7053-a073-50c9e3e3a8be","name":"Swift Inc","subdomain":"price","state":"draft"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
         headers: []
         description: ''
     responseFields: []
@@ -62,14 +62,14 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+        example: 019a4734-8de4-7222-83d7-d6cceb291097
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+      site_id: 019a4734-8de4-7222-83d7-d6cceb291097
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -79,7 +79,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019a46b8-eb42-72c2-925c-e500f35faca5","name":"Leuschke, Bauch and Fritsch","subdomain":"okeefe","description":null,"user_id":"019a46a6-e724-738b-b3b9-3594b050a0b0","state":"draft","pages":{"data":[{"id":"019a46b8-eb46-717e-94ca-82bd5c991740","title":"Et consequatur aut dolores enim.","url":"\/tempora-ex-voluptatem-laboriosam-praesentium-quis"}]}}}'
+        content: '{"data":{"id":"019a4735-6b4c-7109-a849-c048a3c93f77","name":"Leuschke, Bauch and Fritsch","subdomain":"okeefe","description":null,"user_id":"019a4734-8d53-71f6-b172-a39fcf3d9e9b","state":"archived","pages":{"data":[{"id":"019a4735-6b51-70bf-a52c-623d387f1fbe","title":"Et consequatur aut dolores enim.","url":"\/tempora-ex-voluptatem-laboriosam-praesentium-quis"}]}}}'
         headers: []
         description: ''
     responseFields: []
@@ -167,7 +167,7 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"019a46b8-ebbc-7251-8c6a-02ef632934fc","name":"Bailey Inc","subdomain":"crooks","description":"Et fugiat sunt nihil accusantium.","user_id":"019a46a5-0c8a-7034-b893-4db7d4b46b5d","state":"draft","pages":{"data":[]}}}'
+        content: '{"data":{"id":"019a4735-6bfb-73e2-a66f-381da97b207d","name":"Bailey Inc","subdomain":"crooks","description":"Et fugiat sunt nihil accusantium.","user_id":"019a4734-8d63-71c9-b738-caf405a839bd","state":"draft","pages":{"data":[]}}}'
         headers: []
         description: ''
     responseFields: []
@@ -199,14 +199,14 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+        example: 019a4734-8de4-7222-83d7-d6cceb291097
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+      site_id: 019a4734-8de4-7222-83d7-d6cceb291097
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -267,7 +267,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019a46b8-ebc7-73be-a190-c78bc2073d7c","name":"Ritchie Group","subdomain":"stracke","description":null,"user_id":"019a46b4-f2aa-71cb-b1fb-c92a5d92ac31","state":"published","pages":{"data":[]}}}'
+        content: '{"data":{"id":"019a4735-6c0c-706f-a06d-9d9aee022103","name":"Bailey Inc","subdomain":"okuneva","description":null,"user_id":"019a4734-8d2c-71d0-b5b4-cdc9488f3729","state":"archived","pages":{"data":[]}}}'
         headers: []
         description: ''
     responseFields: []
@@ -299,14 +299,14 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+        example: 019a4734-8de4-7222-83d7-d6cceb291097
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019a46a4-dbd4-70b3-b2f4-6d5dbf80b49d
+      site_id: 019a4734-8de4-7222-83d7-d6cceb291097
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

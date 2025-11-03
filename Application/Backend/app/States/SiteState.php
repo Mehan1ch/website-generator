@@ -2,13 +2,16 @@
 
 namespace App\States;
 
+use A909M\FilamentStateFusion\Concerns\StateFusionInfo;
+use A909M\FilamentStateFusion\Contracts\HasFilamentStateFusion;
 use Spatie\ModelStates\Exceptions\InvalidConfig;
 use Spatie\ModelStates\State;
 use Spatie\ModelStates\StateConfig;
 
-//TODO: Label, color, icon, description, interfaces, and filament plugin for state library
-abstract class SiteState extends State
+abstract class SiteState extends State implements HasFilamentStateFusion
 {
+    use StateFusionInfo;
+
     /**
      * Configure the state transitions.
      *

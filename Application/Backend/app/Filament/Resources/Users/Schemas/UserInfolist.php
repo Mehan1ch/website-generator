@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
+use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 
@@ -36,7 +37,10 @@ class UserInfolist
                     ->placeholder('-'),
                 TextEntry::make('roles.name')
                     ->label('Roles')
+                    ->badge()
                     ->placeholder('-'),
+                SpatieMediaLibraryImageEntry::make('avatar')
+                    ->collection('avatar')
             ]);
     }
 }

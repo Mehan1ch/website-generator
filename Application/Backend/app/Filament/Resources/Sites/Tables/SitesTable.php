@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\Sites\Tables;
 
+use A909M\FilamentStateFusion\Actions\StateFusionActionGroup;
+use A909M\FilamentStateFusion\Tables\Filters\StateFusionSelectFilter;
+use App\States\SiteState;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -22,8 +25,7 @@ class SitesTable
                     ->searchable(),
                 TextColumn::make('subdomain')
                     ->searchable(),
-                TextColumn::make('state')
-                    ->searchable(),
+                TextColumn::make('state'),
                 TextColumn::make('user.name')
                     ->searchable(),
                 TextColumn::make('deleted_at')
@@ -40,9 +42,10 @@ class SitesTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                StateFusionSelectFilter::make('state'),
             ])
             ->recordActions([
+                StateFusionActionGroup::generate('state', SiteState::class),
                 ViewAction::make(),
                 EditAction::make(),
             ])
