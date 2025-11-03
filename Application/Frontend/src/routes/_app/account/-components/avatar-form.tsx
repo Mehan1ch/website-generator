@@ -1,7 +1,7 @@
 import {cn} from "@/lib/utils.ts";
 import {Button} from "@/components/ui/button.tsx";
 import {Input} from "@/components/ui/input.tsx";
-import {ComponentPropsWithoutRef, useState} from "react";
+import {ComponentPropsWithoutRef, useEffect, useRef, useState} from "react";
 import {Controller, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {
@@ -32,12 +32,22 @@ export function AvatarForm({
 
     const [loading, setLoading] = useState(false);
     const {user, fetchUserContext} = useAuth();
+
+    // native file input ref and object URL ref for cleanup
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
+    const objectUrlRef = useRef<string | null>(null);
+
+    // preview: either the selected file object URL or user's current avatar
+    const [preview, setPreview] = useState<string | null>(user?.avatar ?? null);
+
+
     const avatarMutation = api.useMutation("post", "/api/v1/avatar", {
             header: {
                 "Content-Type": "multipart/form-data"
             },
             onSuccess: async () => {
                 await fetchUserContext();
+                clearFileInputAndPreview();
                 setLoading(false);
                 toast.success("Avatar updated successfully!");
             },
@@ -46,10 +56,35 @@ export function AvatarForm({
                     description: (error as APIError).message
                 });
                 form.reset();
+                clearFileInputAndPreview();
                 setLoading(false);
             }
         }
     );
+
+    useEffect(() => {
+        // keep preview in sync if user changes (e.g. after fetchUserContext)
+        setPreview(user?.avatar ?? null);
+    }, [user?.avatar]);
+
+    useEffect(() => {
+        return () => {
+            if (objectUrlRef.current) {
+                URL.revokeObjectURL(objectUrlRef.current);
+                objectUrlRef.current = null;
+            }
+        };
+    }, []);
+
+    // helper to clear native input + preview
+    const clearFileInputAndPreview = () => {
+        if (fileInputRef.current) fileInputRef.current.value = "";
+        if (objectUrlRef.current) {
+            URL.revokeObjectURL(objectUrlRef.current);
+            objectUrlRef.current = null;
+        }
+        setPreview(user?.avatar ?? null);
+    };
 
 
     const form = useForm<AvatarBody>({
@@ -66,6 +101,7 @@ export function AvatarForm({
         console.log(data);
         if (!data.avatar) {
             setLoading(false);
+            clearFileInputAndPreview();
             form.reset();
             return;
         }
@@ -87,7 +123,7 @@ export function AvatarForm({
                             </CardDescription>
                             <CardAction>
                                 <Avatar className="h-8 w-8 rounded-lg">
-                                    <AvatarImage src={user?.avatar} alt={user?.name}/>
+                                    <AvatarImage src={preview!} alt={user?.name}/>
                                     <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                                 </Avatar>
                             </CardAction>
@@ -103,12 +139,28 @@ export function AvatarForm({
                                             <Input
                                                 id="avatar"
                                                 type="file"
-                                                ref={field.ref}
+                                                ref={(el) => {
+                                                    field.ref(el);
+                                                    fileInputRef.current = el;
+                                                }}
                                                 accept="image/*"
                                                 aria-invalid={fieldState.invalid}
                                                 onChange={(e) => {
                                                     const file = e.target.files?.[0];
-                                                    field.onChange(file);
+                                                    // revoke previous object URL
+                                                    if (objectUrlRef.current) {
+                                                        URL.revokeObjectURL(objectUrlRef.current);
+                                                        objectUrlRef.current = null;
+                                                    }
+                                                    if (file) {
+                                                        const url = URL.createObjectURL(file);
+                                                        objectUrlRef.current = url;
+                                                        setPreview(url);
+                                                        field.onChange(file);
+                                                    } else {
+                                                        setPreview(user?.avatar ?? null);
+                                                        field.onChange(undefined);
+                                                    }
                                                 }}
                                                 required/>
                                             {fieldState.invalid && (
