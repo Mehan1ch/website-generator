@@ -1,0 +1,20 @@
+services:
+  react:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: '${NODE_ENV:-development}'
+      VITE_APP_NAME: '${VITE_APP_NAME}'
+      VITE_BACKEND_URL: '${VITE_BACKEND_URL}'
+      OPENAPI_SPEC_PATH: '${OPENAPI_SPEC_PATH}'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    ports:
+      - "5173:5173"
+    networks:
+      - sail
+networks:
+  sail:
+    external: true
+    name: sail

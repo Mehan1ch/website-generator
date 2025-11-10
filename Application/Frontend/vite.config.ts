@@ -1,6 +1,6 @@
-import path from "path"
-import {defineConfig} from 'vite'
-import tanstackRouter from '@tanstack/router-plugin/vite'
+import path from "path";
+import {defineConfig} from 'vite';
+import tanstackRouter from '@tanstack/router-plugin/vite';
 import react from "@vitejs/plugin-react-swc";
 import tailwindcss from "@tailwindcss/vite";
 
@@ -20,4 +20,11 @@ export default defineConfig({
             "@": path.resolve(__dirname, "./src"),
         },
     },
-})
+    server: {
+        watch: {
+            usePolling: true,
+        },
+        host: true,
+        port: 5173,
+    },
+});
