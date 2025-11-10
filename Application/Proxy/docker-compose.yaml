@@ -1,0 +1,20 @@
+services:
+  kube:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: '${NODE_ENV:-development}'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    volumes:
+      - '.:/usr/src/app'
+      - './kube/config:/home/node/.kube/config'
+    ports:
+      - '3000:3000'
+    networks:
+      - sail
+networks:
+  sail:
+    external: true
+    name: sail
