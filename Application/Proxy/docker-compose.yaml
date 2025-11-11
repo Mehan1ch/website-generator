@@ -9,6 +9,7 @@ services:
       - 'host.docker.internal:host-gateway'
     volumes:
       - '.:/usr/src/app'
+      - '/usr/src/app/node_modules'
       - './kube/config:/home/node/.kube/config'
     ports:
       - '3000:3000'

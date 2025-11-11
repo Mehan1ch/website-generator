@@ -13,8 +13,8 @@ RUN npm ci
 
 USER node
 
-COPY . .
+COPY ./src .
 
 EXPOSE 3000
 
-CMD node src/index.ts --watch
+CMD npm run dev

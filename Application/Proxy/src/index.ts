@@ -1,41 +1,34 @@
-import Fastify from 'fastify';
+import {siteDeploymentRoutes} from "./routes/siteDeployment.js";
+import Fastify from "fastify";
 
-
-export const app = Fastify({
+export const server = Fastify({
     logger: true
 });
 
-await app.register(import('@fastify/swagger'));
+await server.register(import('@fastify/swagger'));
 
-await app.register(import('@fastify/swagger-ui'), {
+await server.register(import('@fastify/swagger-ui'), {
     routePrefix: '/documentation',
     uiConfig: {
         docExpansion: 'full',
         deepLinking: false
     },
-    uiHooks: {
-        onRequest: function (request, reply, next) {
-            next();
-        },
-        preHandler: function (request, reply, next) {
-            next();
-        }
-    },
+    uiHooks: {},
     staticCSP: true,
-    transformStaticCSP: (header) => header,
-    transformSpecification: (swaggerObject, request, reply) => {
-        return swaggerObject;
-    },
     transformSpecificationClone: true
 });
 
+server.register(siteDeploymentRoutes);
+
+await server.ready();
+server.swagger();
 
 try {
-    await app.listen({
+    await server.listen({
         host: "0.0.0.0",
         port: 3000
     });
 } catch (err) {
-    app.log.error(err);
+    server.log.error(err);
     process.exit(1);
 }
