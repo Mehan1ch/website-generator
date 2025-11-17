@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Page;
 use App\Models\Site;
 use Illuminate\Database\Seeder;
 

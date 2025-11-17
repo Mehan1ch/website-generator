@@ -13,10 +13,11 @@ return new class extends Migration {
         Schema::create('pages', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title');
-            $table->string('url')->unique();
+            $table->string('url');
             $table->longText('content')->nullable();
             $table->foreignUuid("site_id")->constrained("sites")->onDelete('cascade');
             $table->timestamps();
+            $table->unique(["site_id", "url"]);
         });
     }
 

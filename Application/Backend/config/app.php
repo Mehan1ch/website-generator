@@ -123,6 +123,45 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    'frontend_url' => env('APP_FRONTEND_URL', 'http://localhost:5173')
+    /*
+    |--------------------------------------------------------------------------
+    | Frontend Application URL
+    |--------------------------------------------------------------------------
+    |
+    | The URL of the frontend application, used for generating links
+    | in notifications and other communications.
+    |
+    */
+    'frontend_url' => env('APP_FRONTEND_URL', 'http://localhost:5173'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Kube Proxy Application URL
+    |--------------------------------------------------------------------------
+    |
+    | The URL of the kube proxy application, used for deploying sites and communicating
+    | with the Kubernetes cluster.
+    |
+    */
+    'kube_proxy_url' => env('APP_KUBE_PROXY_URL', 'http://localhost:3000'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Kube Domain
+    |--------------------------------------------------------------------------
+    |
+    | The domain used for deployed sites in the Kubernetes cluster.
+    |
+    */
+    'kube_domain' => env('APP_KUBE_DOMAIN', 'localhost'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Kube Namespace
+    |--------------------------------------------------------------------------
+    |
+    | The Kubernetes namespace where the sites will be deployed.
+    |
+    */
+    'kube_namespace' => env('APP_KUBE_NAMESPACE', 'default')
 ];

@@ -21,8 +21,8 @@ abstract class SiteState extends State implements HasFilamentStateFusion
     {
         return parent::config()
             ->default(Draft::class)
-            ->allowTransition([Draft::class, Archived::class], Published::class)
-            ->allowTransition(Published::class, Draft::class)
-            ->allowTransition(Published::class, Archived::class);
+            ->ignoreSameState()
+            ->allowTransition(Draft::class, Published::class, ToPublished::class)
+            ->allowTransition(Published::class, Draft::class);
     }
 }

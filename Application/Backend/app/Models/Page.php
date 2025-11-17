@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use LZCompressor\LZString;
 use Spatie\MediaLibrary\MediaCollections\File;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -19,6 +20,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string $title
  * @property string $url
  * @property string $content
+ * @property-read string $contentReadable
  * @property int $site_id
  * @property-read Site $site
  * @property-read Media|null $staticHTML
@@ -41,30 +43,20 @@ class Page extends Model implements HasMedia
         'site_id',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, class-string>
-     */
-    protected $casts = [
-        'content' => AsCompressedBase64::class,
-    ];
-
     protected static function boot(): void
     {
         parent::boot();
-        // TODO: enable site state transition on page create/update when versioning is sorted out
-        /**
-         * static::creating(function (Page $model) {
-         * $site = $model->site;
-         * $site->state->transitionTo(Draft::class);
-         * });
-         *
-         * static::updating(function (Page $model) {
-         * $site = $model->site;
-         * $site->state->transitionTo(Draft::class);
-         * });
-         */
+
+        //TODO: this has to be rethought
+        /*
+        static::creating(function (Page $page) {
+            $page->site->state->transitionTo(Draft::class);
+        });
+
+        static::updating(function (Page $page) {
+            $page->site->state->transitionTo(Draft::class);
+        });*/
+
         static::deleting(function ($page) {
             $page->clearMediaCollection('static_html');
         });
@@ -88,7 +80,34 @@ class Page extends Model implements HasMedia
     public function staticHTML(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->getFirstMedia('static_html')
+            get: function (): ?string {
+                $url = $this->getFirstMedia('static_html')?->getUrl();
+
+                if ($url === null) {
+                    return null;
+                }
+
+                $base = config('filesystems.disks.s3.url', '');
+
+                if ($base !== '' && str_starts_with($url, $base)) {
+                    return substr($url, strlen($base));
+                }
+
+                return $url;
+            }
+        );
+    }
+
+    /**
+     * Get the content attribute in a readable format.
+     *
+     * @return Attribute<string>
+     */
+    public function contentReadable(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => LZString::decompressFromBase64($this->content),
+            set: fn(string $value) => $this->content = LZString::compressToBase64($value)
         );
     }
 
@@ -96,6 +115,7 @@ class Page extends Model implements HasMedia
     {
         $this
             ->addMediaCollection('static_html')
+            ->singleFile()
             ->acceptsFile(function (File $file) {
                 return $file->mimeType === 'text/html';
             });;

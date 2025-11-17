@@ -12,6 +12,8 @@ class PageSeeder extends Seeder
      */
     public function run(): void
     {
+        // Disable event listeners to prevent side effects during seeding
+        Page::flushEventListeners();
         Page::factory()->count(fake()->numberBetween(50, 100))->create();
     }
 }

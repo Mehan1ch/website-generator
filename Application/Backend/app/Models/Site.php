@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\States\Draft;
 use App\States\SiteState;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 use Spatie\ModelStates\HasStates;
 use Spatie\ModelStates\HasStatesContract;
 
@@ -25,6 +27,7 @@ use Spatie\ModelStates\HasStatesContract;
  * @property-read Collection<int, Page> $pages
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property Carbon|null $published_at
  */
 class Site extends Model implements HasStatesContract
 {
@@ -51,6 +54,7 @@ class Site extends Model implements HasStatesContract
         'name',
         'subdomain',
         'description',
+        'published_at'
     ];
 
     /**
@@ -65,6 +69,13 @@ class Site extends Model implements HasStatesContract
     protected static function boot(): void
     {
         parent::boot();
+
+        //TODO: this has to be rethought
+        /*
+        static::updating(function (Site $site) {
+            Log::warning("óó");
+            $site->state->transitionTo(Draft::class);
+        });*/
 
         static::deleting(function ($site) {
             $site->pages()->delete();

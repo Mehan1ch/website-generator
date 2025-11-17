@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Site;
 use App\Models\User;
-use App\States\SiteState;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,12 +18,19 @@ class SiteFactory extends Factory
      */
     public function definition(): array
     {
+        $state = Site::getStatesFor("state")->random();
+        if ($state === "published") {
+            $publishedAt = $this->faker->dateTimeBetween('-1 years');
+        } else {
+            $publishedAt = $this->faker->boolean() ? $this->faker->dateTimeBetween('-1 years') : null;
+        }
         return [
             'name' => $this->faker->company(),
             'subdomain' => $this->faker->unique()->domainWord(),
             'description' => $this->faker->optional()->sentence(),
-            'state' => Site::getStatesFor("state")->random(),
+            'state' => $state,
             'user_id' => User::all()->random()->id,
+            'published_at' => $publishedAt,
         ];
     }
 }

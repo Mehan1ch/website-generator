@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\AvatarController;
+use App\Http\Controllers\Api\V1\DeploymentController;
 use App\Http\Controllers\Api\V1\PageController;
 use App\Http\Controllers\Api\V1\SchemaController;
 use App\Http\Controllers\Api\V1\SiteController;
@@ -39,4 +40,12 @@ Route::controller(PageController::class)->middleware(['auth:sanctum', 'verified'
     Route::post('site/{site}/page', 'store')->can('create', Page::class);
     Route::put('site/{site}/page/{page}', 'update')->can('update', 'page');
     Route::delete('site/{site}/page/{page}', 'destroy')->can('delete', 'page');
+});
+
+Route::controller(DeploymentController::class)->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/site/{site}/deployment', 'show')->can('view', 'site');
+    Route::post('/site/{site}/deployment', 'store')->can('update', 'site');
+    Route::put('/site/{site}/deployment', 'update')->can('update', 'site');
+    Route::delete('/site/{site}/deployment', 'destroy')->can('update', 'site');
+    Route::post('/site/{site}/deployment/restart', 'restart')->can('update', 'site');;
 });

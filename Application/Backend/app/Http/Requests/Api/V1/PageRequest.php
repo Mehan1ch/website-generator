@@ -2,8 +2,11 @@
 
 namespace App\Http\Requests\Api\V1;
 
+use App\Models\Page;
+use App\Models\Site;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PageRequest extends FormRequest
 {
@@ -20,11 +23,18 @@ class PageRequest extends FormRequest
      *
      * @return array<string, ValidationRule|array|string>
      */
-    public function rules(): array
+    public function rules(Site $site, ?Page $page): array
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'url' => ['required', 'string', 'max:255', 'unique:pages,url'],
+            'url' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('pages', 'url')
+                    ->where('site_id', $site->id)
+                    ->ignore($page), // For updates
+            ],
             'content' => ['nullable', 'string'],
         ];
     }
@@ -39,15 +49,15 @@ class PageRequest extends FormRequest
         return [
             'content' => [
                 'description' => 'The content of the schema, base64 encoded and lz compressed JSON',
-                'example' => 'eJzT0yMAAGTvBe8=',
+                'example' => 'eJzT0yMAAGTvBe8 = ',
             ],
             'title' => [
-                'description' => 'The title of the page.',
+                'description' => 'The title of the page . ',
                 'example' => 'My personal homepage'
             ],
             'url' => [
-                'description' => 'The URL slug for the post.',
-                'example' => 'my-first-post',
+                'description' => 'The URL slug for the post . ',
+                'example' => 'my - first - post',
             ],
         ];
     }

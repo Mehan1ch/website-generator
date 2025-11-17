@@ -23,12 +23,10 @@ class SiteRequest extends FormRequest
      */
     public function rules(): array
     {
-        $states = Site::getStatesFor('state')->toArray();
         return [
             'name' => ['required', 'string', 'max:255'],
             'subdomain' => ['required', 'string', 'max:255', 'unique:sites,subdomain'],
             'description' => ['nullable', 'string'],
-            'state' => ['required', 'string', 'in:' . implode(',', $states)],
         ];
     }
 
@@ -39,8 +37,6 @@ class SiteRequest extends FormRequest
      */
     public function bodyParameters(): array
     {
-        $states = Site::getStatesFor('state')->toArray();
-        $defaultState = Site::getDefaultStateFor('state');
         return [
             'name' => [
                 'description' => 'The name of the site.',
@@ -53,10 +49,6 @@ class SiteRequest extends FormRequest
             'description' => [
                 'description' => 'A brief description of the site.',
                 'example' => 'This is my personal website where I share my projects and blog posts.'
-            ],
-            'state' => [
-                'description' => 'The state of the site. Allowed values: ' . implode(',', $states),
-                'example' => $defaultState,
             ],
         ];
     }
