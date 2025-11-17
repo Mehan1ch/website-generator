@@ -27,10 +27,10 @@ class DeploymentRequest {
         };
     };
 
+    //TODO: css is needed in the image, place to /assets/style.css
     createDeploymentRequest = (resource: DeploymentResource): AppsV1ApiCreateNamespacedDeploymentRequest => {
-        // Build newline-separated "path|url" entries for the initContainer to consume.
-        // Example entry: "/about|https://minio.local/bucket/about/index.html"
-        const pagesEnvValue = resource.pages.map(p => `${p.path}|${p.htmlUrl}`).join("\n");
+        const awsUrl = process.env.AWS_URL || "http://host.docker.internal:9000";
+        const pagesEnvValue = resource.pages.map(p => `${p.path}|${awsUrl + p.htmlUrl}`).join("\n");
 
         return {
             body: {

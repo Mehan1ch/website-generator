@@ -1,9 +1,11 @@
 export const CreateSiteDeploymentRequest = {
     type: 'object',
+    required: ['name', 'subDomain', 'domain', 'pages'],
     properties: {
         name: {type: 'string'},
         subDomain: {type: 'string'},
         domain: {type: 'string'},
+        namespace: {type: 'string'},
         pages: {
             type: 'array',
             items: {
@@ -19,6 +21,7 @@ export const CreateSiteDeploymentRequest = {
 
 const DefaultSiteDeploymentRequest = {
     type: 'object',
+    required: ['name'],
     properties: {
         name: {type: 'string'},
         namespace: {type: 'string'},

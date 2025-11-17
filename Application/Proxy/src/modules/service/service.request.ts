@@ -17,6 +17,9 @@ class ServiceRequest {
                 kind: "Service",
                 metadata: {
                     name: resource.name,
+                    labels: {
+                        app: resource.name
+                    }
                 },
                 spec: {
                     selector: {

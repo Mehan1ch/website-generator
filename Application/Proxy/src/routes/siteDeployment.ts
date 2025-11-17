@@ -9,10 +9,10 @@ import {siteDeploymentController} from "../modules/siteDeployment/siteDeployment
 import type {FastifyInstance, RouteShorthandOptions} from "fastify";
 
 export const siteDeploymentRoutes = (server: FastifyInstance, _: RouteShorthandOptions, done: (err?: Error | undefined) => void) => {
-    server.get('/deploy/:namespace/:name', ReadSiteDeploymentOptions, siteDeploymentController.readSiteDeployment);
-    server.post('/deploy', CreateSiteDeploymentOptions, siteDeploymentController.createSiteDeployment);
-    server.put('/deploy/:namespace/:name', UpdateSiteDeploymentOptions, siteDeploymentController.updateSiteDeployment);
-    server.delete('/deploy/:namespace/:name', DeleteSiteDeploymentOptions, siteDeploymentController.deleteSiteDeployment);
-    server.post('/deploy/:namespace/:name/restart', RestartSiteDeploymentOptions, siteDeploymentController.restartSiteDeployment);
+    server.get('/deployment/:namespace/:name', ReadSiteDeploymentOptions, siteDeploymentController.readSiteDeployment);
+    server.post('/deployment', CreateSiteDeploymentOptions, siteDeploymentController.createSiteDeployment);
+    server.put('/deployment', UpdateSiteDeploymentOptions, siteDeploymentController.updateSiteDeployment);
+    server.delete('/deployment/:namespace/:name', DeleteSiteDeploymentOptions, siteDeploymentController.deleteSiteDeployment);
+    server.post('/deployment/:namespace/:name/restart', RestartSiteDeploymentOptions, siteDeploymentController.restartSiteDeployment);
     done();
 };
