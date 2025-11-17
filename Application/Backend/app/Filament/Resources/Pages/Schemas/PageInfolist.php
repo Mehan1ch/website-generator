@@ -15,7 +15,8 @@ class PageInfolist
                     ->label('ID'),
                 TextEntry::make('title'),
                 TextEntry::make('url'),
-                TextEntry::make('content')
+                TextEntry::make('contentReadable')
+                    ->label("Content")
                     ->placeholder('-')
                     ->columnSpanFull(),
                 TextEntry::make('site.name')

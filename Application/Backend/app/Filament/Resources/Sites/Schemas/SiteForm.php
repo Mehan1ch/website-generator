@@ -18,12 +18,12 @@ class SiteForm
                     ->required(),
                 TextInput::make('subdomain')
                     ->required(),
-                StateFusionToggleButtons::make('state')
-                    ->required(),
+                //StateFusionToggleButtons::make('state')->required(),
                 Textarea::make('description')
                     ->columnSpanFull(),
                 Select::make('user_id')
                     ->relationship('user', 'name')
+                    ->searchable()
                     ->required(),
             ]);
     }

@@ -20,18 +20,19 @@ class SitesTable
             ->columns([
                 TextColumn::make('id')
                     ->label('ID')
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('name')
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('subdomain')
-                    ->searchable(),
-                TextColumn::make('state'),
-                TextColumn::make('user.name')
-                    ->searchable(),
-                TextColumn::make('deleted_at')
-                    ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->searchable(),
+                TextColumn::make('state')
+                    ->sortable(),
+                TextColumn::make('user.name')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -40,19 +41,23 @@ class SitesTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('published_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                StateFusionSelectFilter::make('state'),
-            ])
-            ->recordActions([
-                StateFusionActionGroup::generate('state', SiteState::class),
-                ViewAction::make(),
-                EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
-            ]);
+        StateFusionSelectFilter::make('state'),
+    ])
+        ->recordActions([
+            //StateFusionActionGroup::generate('state', SiteState::class),
+            ViewAction::make(),
+            EditAction::make(),
+        ])
+        ->toolbarActions([
+            BulkActionGroup::make([
+                DeleteBulkAction::make(),
+            ]),
+        ]);
     }
 }

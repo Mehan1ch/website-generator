@@ -17,12 +17,16 @@ class PagesTable
             ->columns([
                 TextColumn::make('id')
                     ->label('ID')
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('title')
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('url')
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('site.name')
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

@@ -6,6 +6,7 @@ use App\Filament\Resources\Pages\PageResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
+use LZCompressor\LZString;
 
 class EditPage extends EditRecord
 {
@@ -17,5 +18,12 @@ class EditPage extends EditRecord
             ViewAction::make(),
             DeleteAction::make(),
         ];
+    }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['content'] = LZString::compressToBase64($data['content']);
+
+        return $data;
     }
 }

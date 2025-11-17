@@ -21,7 +21,7 @@ class SchemaResource extends Resource
 {
     protected static ?string $model = Schema1::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::Document;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::ClipboardDocument;
 
     protected static string|UnitEnum|null $navigationGroup = 'Site Management';
 

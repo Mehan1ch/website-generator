@@ -21,7 +21,7 @@ class PageResource extends Resource
 {
     protected static ?string $model = Page::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::Bookmark;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::Document;
 
     protected static string|UnitEnum|null $navigationGroup = 'Site Management';
 
