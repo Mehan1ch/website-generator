@@ -70,6 +70,13 @@ class Site extends Model implements HasStatesContract
     {
         parent::boot();
 
+        static::creating(function (Site $site) {
+            $site->pages()->create([
+                'title' => 'Home',
+                'url' => '/',
+            ]);
+        });
+
         //TODO: this has to be rethought
         /*
         static::updating(function (Site $site) {
