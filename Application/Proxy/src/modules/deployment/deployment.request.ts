@@ -10,7 +10,8 @@ import {
     V1DeploymentSpec,
     V1ObjectMeta,
     V1PodSpec,
-    V1PodTemplateSpec
+    V1PodTemplateSpec,
+    V1ResourceRequirements
 } from "@kubernetes/client-node";
 import type {DeploymentResource} from "./deployment.type.js";
 
@@ -94,7 +95,11 @@ class DeploymentRequest {
                                     ports: [{containerPort: 80}],
                                     volumeMounts: [
                                         {name: "site-data", mountPath: "/usr/share/nginx/html"}
-                                    ]
+                                    ],
+                                    resources: {
+                                        requests: {cpu: "100m", memory: "200Mi"},
+                                        limits: {cpu: "500m", memory: "500Mi"},
+                                    } as V1ResourceRequirements
                                 }
                             ] as V1Container[]
                         } as V1PodSpec
@@ -106,7 +111,10 @@ class DeploymentRequest {
     };
 
     updateDeploymentRequest = (options: DeploymentResource): AppsV1ApiReplaceNamespacedDeploymentRequest => {
-        return this.createDeploymentRequest(options) as AppsV1ApiReplaceNamespacedDeploymentRequest;
+        return {
+            ...this.createDeploymentRequest(options),
+            name: options.name
+        } as AppsV1ApiReplaceNamespacedDeploymentRequest;
     };
 
     deleteDeploymentRequest = (resource: DefaultResource): AppsV1ApiDeleteNamespacedDeploymentRequest => {
@@ -120,17 +128,15 @@ class DeploymentRequest {
         return {
             name: resource.name,
             namespace: resource.namespace || "default",
-            body: {
-                spec: {
-                    template: {
-                        metadata: {
-                            annotations: {
-                                "kubectl.kubernetes.io/restartedAt": new Date().toISOString()
-                            }
-                        }
+            body: [
+                {
+                    op: "replace",
+                    path: "/spec/template/metadata/annotations",
+                    value: {
+                        "kubectl.kubernetes.io/restartedAt": new Date().toISOString()
                     }
                 }
-            }
+            ],
         };
     };
 }

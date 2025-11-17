@@ -9,9 +9,9 @@ import type {SiteDeploymentBody} from "./siteDeployment.type.js";
 class SiteDeploymentController {
 
     readSiteDeployment = async (request: FastifyRequest, reply: FastifyReply) => {
-        const body = request.params as DefaultResource;
+        const params = request.params as DefaultResource;
         try {
-            const deployment = await deploymentService.readDeployment(body);
+            const deployment = await deploymentService.readDeployment(params);
             reply.status(200).send(deployment);
         } catch (err: unknown) {
             console.error('Error during site deployment read:', err);
@@ -44,6 +44,7 @@ class SiteDeploymentController {
         const body = request.body as SiteDeploymentBody;
         try {
             await deploymentService.updateDeployment(body);
+            reply.status(200).send({message: 'Site deployment updated successfully'});
         } catch (err: unknown) {
             console.error('Error during site deployment update:', err);
             reply.status(400).send({
@@ -55,11 +56,11 @@ class SiteDeploymentController {
     };
 
     deleteSiteDeployment = async (request: FastifyRequest, reply: FastifyReply) => {
-        const body = request.params as IngressResource;
+        const params = request.params as IngressResource;
         try {
-            await ingressService.deleteIngress(body);
-            await serviceService.deleteService(body);
-            await deploymentService.deleteDeployment(body);
+            await ingressService.deleteIngress(params);
+            await serviceService.deleteService(params);
+            await deploymentService.deleteDeployment(params);
             reply.status(200).send({message: 'Site deployment deleted successfully'});
         } catch (err: unknown) {
             console.error('Error during site deployment deletion:', err);
@@ -72,9 +73,9 @@ class SiteDeploymentController {
     };
 
     restartSiteDeployment = async (request: FastifyRequest, reply: FastifyReply) => {
-        const body = request.params as DefaultResource;
+        const params = request.params as DefaultResource;
         try {
-            await deploymentService.restartDeployment(body);
+            await deploymentService.restartDeployment(params);
             reply.status(200).send({message: 'Site deployment restarted successfully'});
         } catch (err: unknown) {
             console.error('Error during site deployment restart:', err);
