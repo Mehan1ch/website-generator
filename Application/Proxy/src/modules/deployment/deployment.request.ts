@@ -27,9 +27,8 @@ class DeploymentRequest {
         };
     };
 
-    //TODO: css is needed in the image, place to /assets/style.css
     createDeploymentRequest = (resource: DeploymentResource): AppsV1ApiCreateNamespacedDeploymentRequest => {
-        const awsUrl = process.env.AWS_URL || "http://host.docker.internal:9000";
+        const awsUrl = process.env.AWS_URL || "http://host.docker.internal:9000/laravel";
         const pagesEnvValue = resource.pages.map(p => `${p.path}|${awsUrl + p.htmlUrl}`).join("\n");
 
         return {
@@ -58,19 +57,22 @@ class DeploymentRequest {
                         } as V1ObjectMeta,
                         spec: {
                             volumes: [
-                                {name: "site-data", emptyDir: {}}
+                                {name: "site-data", emptyDir: {}},
+                                {
+                                    name: "site-assets", configMap: {
+                                        name: process.env.CSS_CONFIGMAP_NAME || "css-configmap"
+                                    }
+                                }
                             ],
                             initContainers: [
                                 {
                                     name: "fetch-pages",
                                     image: "curlimages/curl:8.2.1",
-                                    // provide the pages list via env; shell will iterate lines
                                     env: [
                                         {name: "PAGES", value: pagesEnvValue}
                                     ],
                                     command: ["sh", "-c"],
                                     args: [
-                                        // iterate PAGES (lines like "path|url"), create dirs, curl into index.html
                                         'IFS=$\'\\n\'; ' +
                                         'for entry in $PAGES; do ' +
                                         '  path="${entry%%|*}"; url="${entry#*|}"; ' +

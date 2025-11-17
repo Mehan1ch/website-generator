@@ -3,6 +3,7 @@ import type {DefaultResource} from "../../types/types.js";
 import {appsApi} from "../api/api.module.js";
 import {deploymentRequest} from "./deployment.request.js";
 import type {DeploymentResource} from "./deployment.type.js";
+import {assetService} from "../asset/asset.service.js";
 
 class DeploymentService {
     constructor(private readonly api: AppsV1Api) {
@@ -15,11 +16,13 @@ class DeploymentService {
 
     createDeployment = async (resource: DeploymentResource) => {
         const createDeploymentRequest = deploymentRequest.createDeploymentRequest(resource);
+        await assetService.ensureSiteAssetsConfigMapExists(resource.namespace);
         return await this.api.createNamespacedDeployment(createDeploymentRequest);
     };
 
     updateDeployment = async (resource: DeploymentResource) => {
         const updateDeploymentRequest = deploymentRequest.updateDeploymentRequest(resource);
+        await assetService.ensureSiteAssetsConfigMapExists(resource.namespace);
         return await this.api.replaceNamespacedDeployment(updateDeploymentRequest);
     };
 

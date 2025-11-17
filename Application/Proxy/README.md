@@ -20,6 +20,11 @@ A small proxy app to use the Kubernetes JS client library to expose Kubernetes A
        ```bash
        docker-compose up -d
        ```
+    4. If needed open the kubernetes cluster proxy, eg:
+
+       ```bash
+       kubectl proxy --address=0.0.0.0 --port=8080
+       ```
 
 - Next Steps:
     - Run the frontend service (see the frontend README for instructions).
