@@ -18,4 +18,11 @@ class EditSchema extends EditRecord
             DeleteAction::make(),
         ];
     }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['content'] = base64_encode(gzdeflate($data['content']));
+
+        return $data;
+    }
 }

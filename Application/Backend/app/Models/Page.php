@@ -20,7 +20,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string $title
  * @property string $url
  * @property string $content
- * @property-read string $contentReadable
+ * @property string $contentReadable
  * @property int $site_id
  * @property-read Site $site
  * @property Media|null $staticHTML
@@ -115,8 +115,8 @@ class Page extends Model implements HasMedia
     public function contentReadable(): Attribute
     {
         return Attribute::make(
-            get: fn() => base64_decode(gzuncompress($this->content)),
-            set: fn(string $value) => $this->content = base64_encode(gzcompress($value))
+            get: fn() => $this->content === null ? null : gzinflate(base64_decode($this->content)),
+            set: fn(string $value) => $this->content = base64_encode(gzdeflate($value))
         );
     }
 

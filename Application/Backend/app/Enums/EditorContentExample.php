@@ -4,6 +4,6 @@ namespace App\Enums;
 
 enum EditorContentExample: string
 {
-    case ENCODED = 'eJyNkVFLQzEMhf+K1FefFBF8naIvOtCJoPUhLtks65LS9g7nuP/d5FZhMCd7S5OTc/q1buPdw3g88e5Sq7pO1KpMReKK8B6W1vHuGkOVPBKuEJiyd/2Jd6GMgFdQVFFzR9pJWVJpFu8wXcyzdIyDwTGROpkEEAPPtXluHhhKirDeH6SaaVeqLM3WNj4CIrGeZhCLhbIgWeird09yd3NR6suVzt90FAMvlOJHsOltf1tzEPWEPusO8G/4FnEddLp2SzHK0bPkiMP9Z0rzGL7M8+x0P3TL2eFNkImbcfuqf9/gT+refQM076gI';
-    case ORIGINAL = '{"ROOT":{"type":{"resolvedName":"EditorContainer"},"isCanvas":true,"props":{"background":"#eee","padding":5},"displayName":"EditorContainer","custom":{},"hidden":false,"nodes":["UoMG7stZDn"],"linkedNodes":{}},"UoMG7stZDn":{"type":{"resolvedName":"EditorText"},"isCanvas":false,"props":{"text":"Hello World","fontSize":32},"displayName":"EditorText","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}}}';
+    case ENCODED = 'hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n';
+    case ORIGINAL = '{"ROOT":{"type":{"resolvedName":"EditorContainer"},"isCanvas":true,"props":{"background":"#eee","padding":5},"displayName":"EditorContainer","custom":{},"hidden":false,"nodes":["Im08yZIspb"],"linkedNodes":{}},"Im08yZIspb":{"type":{"resolvedName":"EditorText"},"isCanvas":false,"props":{"text":"Hi world!","fontSize":36},"displayName":"EditorText","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}}}';
 }

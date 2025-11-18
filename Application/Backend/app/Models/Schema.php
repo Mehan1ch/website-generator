@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Casts\AsCompressedBase64;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +15,7 @@ use Illuminate\Support\Carbon;
  * @property string|null $content
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property string $contentReadable
  */
 class Schema extends Model
 {
@@ -33,11 +34,15 @@ class Schema extends Model
     ];
 
     /**
-     * The attributes that should be cast.
+     * Get the content attribute in a readable format.
      *
-     * @var array<string, class-string>
+     * @return Attribute<string>
      */
-    protected $casts = [
-        'content' => AsCompressedBase64::class,
-    ];
+    public function contentReadable(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->content === null ? null : gzinflate(base64_decode($this->content)),
+            set: fn(string $value) => $this->content = base64_encode(gzdeflate($value))
+        );
+    }
 }

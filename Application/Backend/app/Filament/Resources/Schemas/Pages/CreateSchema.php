@@ -8,4 +8,10 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateSchema extends CreateRecord
 {
     protected static string $resource = SchemaResource::class;
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['content'] = base64_encode(gzdeflate($data['content']));
+        return $data;
+    }
 }

@@ -75,7 +75,7 @@ class PageController extends Controller
         }
 
         $htmlCompressed = array_first($request->safe()->only(['html']));
-        $htmlUnCompressed = base64_decode(gzuncompress($htmlCompressed));
+        $htmlUnCompressed = gzdeflate(base64_decode($htmlCompressed));
         $sanitized = $this->htmlSanitizerService->sanitize($htmlUnCompressed);
         $page->staticHTML = $sanitized;
 
