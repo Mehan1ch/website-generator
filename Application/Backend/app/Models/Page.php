@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use App\Casts\AsCompressedBase64;
+use App\States\Draft;
+use Exception;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -47,15 +48,21 @@ class Page extends Model implements HasMedia
     {
         parent::boot();
 
-        //TODO: this has to be rethought
-        /*
-        static::creating(function (Page $page) {
+        static::created(function (Page $page) {
             $page->site->state->transitionTo(Draft::class);
         });
 
         static::updating(function (Page $page) {
             $page->site->state->transitionTo(Draft::class);
-        });*/
+
+            if (!$page->isDirty('url')) {
+                return;
+            }
+            // Prevent changing the homepage URL
+            if ($page->getOriginal('url') === "/" && $page->url !== "/") {
+                throw new Exception("The homepage URL '/' cannot be changed to a different URL.");
+            }
+        });
 
         static::deleting(function ($page) {
             $page->clearMediaCollection('static_html');

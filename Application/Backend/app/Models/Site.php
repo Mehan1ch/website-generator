@@ -54,7 +54,6 @@ class Site extends Model implements HasStatesContract
         'name',
         'subdomain',
         'description',
-        'published_at'
     ];
 
     /**
@@ -70,19 +69,19 @@ class Site extends Model implements HasStatesContract
     {
         parent::boot();
 
-        static::creating(function (Site $site) {
+        static::created(function (Site $site) {
             $site->pages()->create([
                 'title' => 'Home',
                 'url' => '/',
             ]);
         });
 
-        //TODO: this has to be rethought
-        /*
         static::updating(function (Site $site) {
-            Log::warning("óó");
-            $site->state->transitionTo(Draft::class);
-        });*/
+            // Only transition to Draft state if certain attributes have changed, others are automatic
+            if ($site->isDirty(['name', 'subdomain', 'description'])) {
+                $site->state->transitionTo(Draft::class);
+            }
+        });
 
         static::deleting(function ($site) {
             $site->pages()->delete();
