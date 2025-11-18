@@ -16,7 +16,7 @@ export function renderToStaticHTML(JSONStateString: string) {
       <html lang="en">
         <head>
           <meta charSet="UTF-8" />
-          <link rel="stylesheet" href="index.css">
+          <link rel="stylesheet" href="/index.css">
         </head>
         <body>
           ${div.innerHTML}

@@ -3,7 +3,6 @@ import {Switch} from "@/components/ui/switch.tsx";
 import {useEditor} from "@craftjs/core";
 import {toast} from "sonner";
 import copy from "copy-to-clipboard";
-import lz from "lz-string";
 import {useState} from "react";
 import {
     Dialog,
@@ -17,6 +16,7 @@ import {
 } from "@/components/ui/dialog.tsx";
 import {Label} from "@/components/ui/label.tsx";
 import {Input} from "@/components/ui/input.tsx";
+import {compressAndEncodeBase64, decodeBase64AndDecompress} from "@/routes/_app/editor/-utils/compress.ts";
 
 export const Topbar = () => {
     const {actions, query, enabled} = useEditor((state) => ({
@@ -46,9 +46,11 @@ export const Topbar = () => {
                 </Label>
                 <div className={"items-center px-2"}>
                     <Button
-                        onClick={() => {
+                        onClick={async () => {
                             const json = query.serialize();
-                            copy(lz.compressToBase64(json));
+                            console.log(json);
+                            console.log(await compressAndEncodeBase64(json));
+                            copy(await compressAndEncodeBase64(json));
                             toast.info("State copied to clipboard");
                         }}
                     >
@@ -81,8 +83,8 @@ export const Topbar = () => {
                                     <Button variant="outline">Cancel</Button>
                                 </DialogClose>
                                 <Button
-                                    onClick={() => {
-                                        const json = lz.decompressFromBase64(stateToLoad as string);
+                                    onClick={async () => {
+                                        const json = await decodeBase64AndDecompress(stateToLoad as string);
                                         actions.deserialize(json);
                                         toast.info("State loaded");
                                     }}
