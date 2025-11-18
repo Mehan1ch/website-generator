@@ -1,4 +1,4 @@
-import {Globe, LayoutDashboard, PencilIcon} from "lucide-react";
+import {Globe, LayoutDashboard, LayoutTemplateIcon, PencilIcon} from "lucide-react";
 
 import {NavMain} from "@/components/sidebar/nav-main.tsx";
 import {NavUser} from "@/components/sidebar/nav-user.tsx";
@@ -22,6 +22,11 @@ const navMain: NavSection[] = [
         title: "Dashboard",
         url: "/dashboard",
         icon: LayoutDashboard,
+    },
+    {
+        title: "Schemas",
+        url: "/schemas",
+        icon: LayoutTemplateIcon,
     },
     {
         title: "Websites",
