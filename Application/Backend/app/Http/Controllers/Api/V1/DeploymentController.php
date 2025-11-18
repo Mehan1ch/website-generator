@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\V1\SiteDeploymentError;
 use App\Models\Site;
 use App\Services\DeploymentService;
-use Illuminate\Http\Request;
 
 /**
  * Deployment Controller
@@ -28,10 +27,17 @@ class DeploymentController extends Controller
     }
 
     /**
-     * Initiate a new deployment for the specified site.
+     * Store site deployment.
      *
-     * @apiResource App\Http\Resources\Api\V1\SiteDeploymentError
-     * @apiResource App\Http\Resources\Api\V1\SiteDeploymentResponse
+     * Initiate a new deployment for the specified site.
+     * @response 200 {
+     *     "message": "Deployment created successfully.",
+     * }
+     * @responsse 400 {
+     *     "message": "Failed to create deployment.",
+     *     "error": "Detailed error information."
+     * }
+     *
      */
     public function store(Site $site)
     {
@@ -44,10 +50,20 @@ class DeploymentController extends Controller
 
 
     /**
-     * Retrieve the deployment status for the specified site.
+     * Get site deployment.
      *
-     * @apiResource App\Http\Resources\Api\V1\SiteDeploymentError
-     * @apiResource App\Http\Resources\Api\V1\SiteDeploymentResponse
+     * Get the deployment status of the specified site.
+     * @response 200 {
+     *     apiVersion: "1.0",
+     *     kind: "deployment",
+     *     metadata: {}
+     *     spec: {}
+     *     status: {}
+     * }
+     * @responsse 400 {
+     *     "message": "Failed to fetch deployment.",
+     *     "error": "Detailed error information."
+     * }
      */
     public function show(Site $site)
     {
@@ -59,12 +75,18 @@ class DeploymentController extends Controller
     }
 
     /**
-     * Restart the deployment for the specified site.
+     * Update site deployment.
      *
-     * @apiResource App\Http\Resources\Api\V1\SiteDeploymentError
-     * @apiResource App\Http\Resources\Api\V1\SiteDeploymentResponse
+     * Update the deployment of the specified site.
+     * @response 200 {
+     *     "message": "Deployment updated successfully.",
+     * }
+     * @responsse 400 {
+     *     "message": "Failed to update deployment.",
+     *     "error": "Detailed error information."
+     * }
      */
-    public function update(Request $request, Site $site)
+    public function update(Site $site)
     {
         $response = $this->deploymentService->update($site);
         if ($response instanceof SiteDeploymentError) {
@@ -74,10 +96,16 @@ class DeploymentController extends Controller
     }
 
     /**
-     * Delete the deployment.
+     * Delete site deployment.
      *
-     * @apiResource App\Http\Resources\Api\V1\SiteDeploymentError
-     * @apiResource App\Http\Resources\Api\V1\SiteDeploymentResponse
+     * Delete the deployment of the specified site.
+     * @response 204 {
+     *     "message": "Deployment deleted successfully.",
+     * }
+     * @responsse 400 {
+     *     "message": "Failed to delete deployment.",
+     *     "error": "Detailed error information."
+     * }
      */
     public function destroy(Site $site)
     {
@@ -85,17 +113,22 @@ class DeploymentController extends Controller
         if ($response instanceof SiteDeploymentError) {
             return response($response, 400);
         }
-        return response($response, 200);
+        return response($response, 204);
     }
 
     /**
-     * Restart the deployment.
+     * Restart site deployment.
      *
      * Restart the deployment of the specified site.
-     * @apiResource App\Http\Resources\Api\V1\SiteDeploymentError
-     * @apiResource App\Http\Resources\Api\V1\SiteDeploymentResponse
+     * @response 200 {
+     *     "message": "Deployment restarted successfully.",
+     * }
+     * @responsse 400 {
+     *     "message": "Failed to restart deployment.",
+     *     "error": "Detailed error information."
+     * }
      */
-    public function restart(Request $request, Site $site)
+    public function restart(Site $site)
     {
         $response = $this->deploymentService->restart($site);
         if ($response instanceof SiteDeploymentError) {

@@ -25,7 +25,7 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019a4734-8de4-7222-83d7-d6cceb291097
+        example: 019a9895-2af4-73e4-96e4-25649a8734cd
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -36,15 +36,15 @@ endpoints:
         name: page_id
         description: 'The ID of the page.'
         required: true
-        example: 019a4734-8f1b-71ec-838e-ef60792a7be0
+        example: 019a9895-2afb-706d-a246-c9dad48e46cd
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019a4734-8de4-7222-83d7-d6cceb291097
-      page_id: 019a4734-8f1b-71ec-838e-ef60792a7be0
+      site_id: 019a9895-2af4-73e4-96e4-25649a8734cd
+      page_id: 019a9895-2afb-706d-a246-c9dad48e46cd
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -54,7 +54,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019a4735-6c1e-729e-92fb-cf5b734dfc56","title":"Fugiat sunt nihil accusantium harum mollitia.","url":"\/aut-ab-provident-perspiciatis-quo-omnis-nostrum-aut","content":"","site_id":"019a4734-8df3-704c-89e2-489b85772968","created_at":"2025-11-03T00:54:34.000000Z","updated_at":"2025-11-03T00:54:34.000000Z"}}'
+        content: '{"data":{"id":"019a98d9-3bf4-7356-8fe0-a42de48878f8","title":"Deserunt aut ab provident perspiciatis quo omnis nostrum.","url":"\/quidem-nostrum-qui-commodi-incidunt-iure-odit","content":null,"site_id":"019a9895-2ba0-70c9-9675-810498c977b2","created_at":"2025-11-18T21:22:44.000000Z","updated_at":"2025-11-18T21:22:44.000000Z"}}'
         headers: []
         description: ''
       -
@@ -95,21 +95,21 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019a4734-8de4-7222-83d7-d6cceb291097
+        example: 019a9895-2af4-73e4-96e4-25649a8734cd
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019a4734-8de4-7222-83d7-d6cceb291097
+      site_id: 019a9895-2af4-73e4-96e4-25649a8734cd
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
       title:
         custom: []
         name: title
-        description: 'The title of the page. Must not be greater than 255 characters.'
+        description: 'The title of the page . . Must not be greater than 255 characters.'
         required: true
         example: 'My personal homepage'
         type: string
@@ -120,35 +120,23 @@ endpoints:
       url:
         custom: []
         name: url
-        description: 'The URL slug for the post. Must not be greater than 255 characters.'
+        description: 'The URL slug for the post . . Must not be greater than 255 characters.'
         required: true
-        example: my-first-post
+        example: 'my - first - post'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      content:
-        custom: []
-        name: content
-        description: 'The content of the schema, base64 encoded and lz compressed JSON.'
-        required: false
-        example: eJzT0yMAAGTvBe8=
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
     cleanBodyParameters:
       title: 'My personal homepage'
-      url: my-first-post
-      content: eJzT0yMAAGTvBe8=
+      url: 'my - first - post'
     fileParameters: []
     responses:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"019a4735-6c41-71cd-81e4-0c6c5d284cb3","title":"Eius et animi quos velit et.","url":"\/accusantium-harum-mollitia-modi-deserunt-aut-ab","content":"N4IgSg8hAqIFygC4E8AOBTeoBO6DOA9gDYBu6AJgHICGAtpnCAKLkCWiB2AwgQHaLVWvdNhABfADQhWeLtV4lqeeImwBXdFNTYCqZQhAAjagGMA1gHMda3uXggAxOmcgt1cm14X4AVkkg2PFQiamQaensWdk4efkFhUSkTNTwOWix\/AAtWD3ReeAAzaiI8TRBeAnJ8eABtEAB1AE0AQQArAFlkAgAFAEcAWhAAXSkiITMKSkrqhDF\/JrbOnoGsEBQMVdxCUkm6BmY2DmxodAAPRHEpGTkFJULi0q0dPVXEM4vGAAl0IiICAAIAO6cIjkACErhABT4iAAyqwAF4MABMAAZ\/IFgqFwvsokcTudIclUgR0rM3Lh+PZIDBIdlcvk4EUSmUKlV9DURiAxrwJlRpvpgHMxEA==","site_id":"019a4734-8e20-7355-ad5c-a907aff3367c","created_at":"2025-11-03T00:54:34.000000Z","updated_at":"2025-11-03T00:54:34.000000Z"}}'
+        content: '{"data":{"id":"019a98d9-3c07-7389-a530-65a7f3093ea1","title":"Eius et animi quos velit et.","url":"\/accusantium-harum-mollitia-modi-deserunt-aut-ab","content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","site_id":"019a9895-2c0e-7101-bc55-3d1978dfdf0c","created_at":"2025-11-18T21:22:44.000000Z","updated_at":"2025-11-18T21:22:44.000000Z"}}'
         headers: []
         description: ''
     responseFields: []
@@ -180,7 +168,7 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019a4734-8de4-7222-83d7-d6cceb291097
+        example: 019a9895-2af4-73e4-96e4-25649a8734cd
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -191,22 +179,22 @@ endpoints:
         name: page_id
         description: 'The ID of the page.'
         required: true
-        example: 019a4734-8f1b-71ec-838e-ef60792a7be0
+        example: 019a9895-2afb-706d-a246-c9dad48e46cd
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019a4734-8de4-7222-83d7-d6cceb291097
-      page_id: 019a4734-8f1b-71ec-838e-ef60792a7be0
+      site_id: 019a9895-2af4-73e4-96e4-25649a8734cd
+      page_id: 019a9895-2afb-706d-a246-c9dad48e46cd
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
       title:
         custom: []
         name: title
-        description: 'The title of the page. Must not be greater than 255 characters.'
+        description: 'The title of the page . . Must not be greater than 255 characters.'
         required: true
         example: 'My personal homepage'
         type: string
@@ -217,9 +205,9 @@ endpoints:
       url:
         custom: []
         name: url
-        description: 'The URL slug for the post. Must not be greater than 255 characters.'
+        description: 'The URL slug for the post . . Must not be greater than 255 characters.'
         required: true
-        example: my-first-post
+        example: 'my - first - post'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -228,24 +216,36 @@ endpoints:
       content:
         custom: []
         name: content
-        description: 'The content of the schema, base64 encoded and lz compressed JSON.'
-        required: false
-        example: eJzT0yMAAGTvBe8=
+        description: 'The content of the schema, base64 encoded and zlib compressed JSON.'
+        required: true
+        example: 'eJzT0yMAAGTvBe8 = '
         type: string
         enumValues: []
         exampleWasSpecified: false
-        nullable: true
+        nullable: false
+        deprecated: false
+      html:
+        custom: []
+        name: html
+        description: 'The HTML content of the page base64 encoded and zlib compressed.'
+        required: true
+        example: 'eJzT0yMAAGTvBe8 = '
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
         deprecated: false
     cleanBodyParameters:
       title: 'My personal homepage'
-      url: my-first-post
-      content: eJzT0yMAAGTvBe8=
+      url: 'my - first - post'
+      content: 'eJzT0yMAAGTvBe8 = '
+      html: 'eJzT0yMAAGTvBe8 = '
     fileParameters: []
     responses:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019a4735-6c5f-715b-ab47-7fd1c146a881","title":"Eius et animi quos velit et.","url":"\/perspiciatis-quo-omnis-nostrum-aut-adipisci-quidem-nostrum-qui","content":"N4IgSg8hAqIFygC4E8AOBTeoBO6DOA9gDYBu6AJgHICGAtpnCAKLkCWiB2AwgQHaLVWvdNhABfADQhWeLtV4lqeeImwBXdFNTYCqZQhAAjagGMA1gHMda3uXggAxOmcgt1cm14X4AVkkg2PFQiamQaensWdk4efkFhUSkTNTwOWix\/AAtWD3ReeAAzaiI8TRBeAnJ8eABtEAB1AE0AQQArAFlkAgAFAEcAWhAAXSkiITMKSkrqhDF\/JrbOnoGsEBQMVdxCUkm6BmY2DmxodAAPRHEpGTkFJULi0q0dPVXEM4vGAAl0IiICAAIAO6cIjkACErhABT4iAAyqwAF4MABMAAZ\/IFgqFwvsokcTudIclUgR0rM3Lh+PZIDBIdlcvk4EUSmUKlV9DURiAxrwJlRpvpgHMxEA==","site_id":"019a4734-8e2f-73da-90ae-aacc68c46957","created_at":"2025-11-03T00:54:34.000000Z","updated_at":"2025-11-03T00:54:34.000000Z"}}'
+        content: '{"data":{"id":"019a98d9-3c19-72aa-a9d0-86ff32dcc42d","title":"Eius et animi quos velit et.","url":"\/perspiciatis-quo-omnis-nostrum-aut-adipisci-quidem-nostrum-qui","content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","site_id":"019a9895-2b09-7056-a4bf-4bdf3d0fcb80","created_at":"2025-11-18T21:22:44.000000Z","updated_at":"2025-11-18T21:22:44.000000Z"}}'
         headers: []
         description: ''
       -
@@ -286,7 +286,7 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019a4734-8de4-7222-83d7-d6cceb291097
+        example: 019a9895-2af4-73e4-96e4-25649a8734cd
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -297,15 +297,15 @@ endpoints:
         name: page_id
         description: 'The ID of the page.'
         required: true
-        example: 019a4734-8f1b-71ec-838e-ef60792a7be0
+        example: 019a9895-2afb-706d-a246-c9dad48e46cd
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019a4734-8de4-7222-83d7-d6cceb291097
-      page_id: 019a4734-8f1b-71ec-838e-ef60792a7be0
+      site_id: 019a9895-2af4-73e4-96e4-25649a8734cd
+      page_id: 019a9895-2afb-706d-a246-c9dad48e46cd
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
