@@ -28,9 +28,7 @@ class StoreDeploymentAction extends Action
             ->modalIconColor('success')
             ->modalDescription('Are you sure you want to deploy this site?')
             ->action(function (Site $record): void {
-                Log::info('Starting deployment for site ID: ' . $record->id);
                 $response = DeploymentService::store($record);
-                Log::info("Response from deployment service: " . $response->toPrettyJson());
                 switch (get_class($response)) {
                     case SiteDeploymentError::class:
                         Notification::make()

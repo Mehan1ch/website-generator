@@ -10,10 +10,8 @@ use App\States\Draft;
 use App\States\Published;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 use Spatie\ModelStates\Exceptions\CouldNotPerformTransition;
 
-//TODO: app.css is not being included in the deployment payload. Fix this.
 class DeploymentService
 {
     /**
@@ -45,7 +43,6 @@ class DeploymentService
     public static function store(Site $site): SiteDeploymentError|SiteDeploymentResponse
     {
         $path = DeploymentService::buildPath("/deployment");
-        Log::info("Deployment path: " . $path);
         $siteResource = new SiteDeploymentResource($site);
         if ($siteResource->pages->isEmpty()) {
             return new SiteDeploymentError((object)[
@@ -53,7 +50,6 @@ class DeploymentService
                 'error' => ['No pages found for deployment.'],
             ]);
         }
-        Log::info("Deployment resource: " . $siteResource->toPrettyJson());
         return DeploymentService::deployWithStateTransition($site, fn() => Http::post($path, $siteResource), Published::class);
     }
 
@@ -124,7 +120,6 @@ class DeploymentService
     {
         try {
             $response = $requestCallback();
-            Log::info("Deployment request response: " . $response);
 
             if ($response->failed()) {
                 return new SiteDeploymentError((object)$response->json());
@@ -132,7 +127,6 @@ class DeploymentService
 
             return new SiteDeploymentResponse((object)$response->json());
         } catch (ConnectionException $e) {
-            Log::info("Deployment connection error: " . $e->getMessage());
             return new SiteDeploymentError((object)[
                 'message' => 'Could not connect to deployment server.',
                 'error' => [$e->getMessage()],
@@ -160,7 +154,6 @@ class DeploymentService
 
         $response = DeploymentService::makeRequest($requestCallback);
 
-        Log::info("Deployment response received for site ID: $site->id, response:" . $response->toJson());
 
         if ($response instanceof SiteDeploymentError) {
             return $response;
@@ -181,7 +174,6 @@ class DeploymentService
             ]);
         }
 
-        Log::info("Site state transitioned to $state for $site->id, check: $site->state");
 
         return $response;
     }
