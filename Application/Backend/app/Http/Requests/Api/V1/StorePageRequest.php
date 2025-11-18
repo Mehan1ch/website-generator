@@ -8,7 +8,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class PageRequest extends FormRequest
+class StorePageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -35,7 +35,6 @@ class PageRequest extends FormRequest
                     ->where('site_id', $site->id)
                     ->ignore($page), // For updates
             ],
-            'content' => ['nullable', 'string'],
         ];
     }
 
@@ -47,10 +46,6 @@ class PageRequest extends FormRequest
     public function bodyParameters(): array
     {
         return [
-            'content' => [
-                'description' => 'The content of the schema, base64 encoded and lz compressed JSON',
-                'example' => 'eJzT0yMAAGTvBe8 = ',
-            ],
             'title' => [
                 'description' => 'The title of the page . ',
                 'example' => 'My personal homepage'

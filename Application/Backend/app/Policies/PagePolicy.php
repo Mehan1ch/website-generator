@@ -89,6 +89,9 @@ class PagePolicy
      */
     public function forceDelete(User $user, Page $page): Response
     {
+        if ($page->url === '/') {
+            return Response::deny("The homepage cannot be deleted.");
+        }
         if ($user->can(Permissions::FORCE_DELETE_PAGES)) {
             return $page->site->user_id === $user->id
                 ? Response::allow()

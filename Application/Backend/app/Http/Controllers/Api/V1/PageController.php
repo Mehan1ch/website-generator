@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\PageRequest;
+use App\Http\Requests\Api\V1\StorePageRequest;
+use App\Http\Requests\Api\V1\UpdatePageRequest;
 use App\Http\Resources\Api\V1\PageResource;
 use App\Models\Page;
 use App\Models\Site;
+use App\Services\HTMLSanitizerService;
 
 /**
  * Page Controller
@@ -17,6 +19,10 @@ use App\Models\Site;
  */
 class PageController extends Controller
 {
+    public function __construct(protected HTMLSanitizerService $htmlSanitizerService)
+    {
+    }
+
     /**
      * Create Page for Site
      *
@@ -24,7 +30,7 @@ class PageController extends Controller
      * @apiResource App\Http\Resources\Api\V1\PageResource status=201
      * @apiResourceModel App\Models\Page
      */
-    public function store(PageRequest $request, Site $site)
+    public function store(StorePageRequest $request, Site $site)
     {
         $site->pages()->create($request->validated());
         return response()->json(new PageResource($site), 201);
@@ -60,14 +66,21 @@ class PageController extends Controller
      *  "message": "Page not found for the specified site."
      * }
      */
-    public function update(PageRequest $request, Site $site, Page $page)
+    public function update(UpdatePageRequest $request, Site $site, Page $page)
     {
         if (!$site->pages->contains($page)) {
             return response([
                 'message' => 'Page not found for the specified site.'
             ], 404);
         }
-        $page->update($request->validated());
+
+        $htmlCompressed = array_first($request->safe()->only(['html']));
+        $htmlUnCompressed = base64_decode(gzuncompress($htmlCompressed));
+        $sanitized = $this->htmlSanitizerService->sanitize($htmlUnCompressed);
+        $page->staticHTML = $sanitized;
+
+        $validated = $request->safe()->except(['html']);
+        $page->update($validated);
         return new PageResource($page);
     }
 

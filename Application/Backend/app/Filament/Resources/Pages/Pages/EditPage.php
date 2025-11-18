@@ -22,7 +22,7 @@ class EditPage extends EditRecord
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        $data['content'] = LZString::compressToBase64($data['content']);
+        $data['content'] = base64_encode(gzcompress($data['content']));
 
         return $data;
     }

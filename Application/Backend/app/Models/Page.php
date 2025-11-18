@@ -24,7 +24,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property-read string $contentReadable
  * @property int $site_id
  * @property-read Site $site
- * @property-read Media|null $staticHTML
+ * @property Media|null $staticHTML
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
@@ -101,7 +101,10 @@ class Page extends Model implements HasMedia
                 }
 
                 return $url;
-            }
+            },
+            set: fn(string $html) => $this->addMediaFromString($html)
+                ->setFileName($this->url . '.html')
+                ->toMediaCollection('static_html')
         );
     }
 
@@ -113,8 +116,8 @@ class Page extends Model implements HasMedia
     public function contentReadable(): Attribute
     {
         return Attribute::make(
-            get: fn() => LZString::decompressFromBase64($this->content),
-            set: fn(string $value) => $this->content = LZString::compressToBase64($value)
+            get: fn() => base64_decode(gzuncompress($this->content)),
+            set: fn(string $value) => $this->content = base64_encode(gzcompress($value))
         );
     }
 

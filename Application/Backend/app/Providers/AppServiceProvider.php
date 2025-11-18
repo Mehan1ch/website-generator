@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Enums\Roles;
 use App\Models\User;
+use App\Services\DeploymentService;
+use App\Services\HTMLSanitizerService;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Support\Carbon;
@@ -21,7 +23,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(DeploymentService::class, function ($app) {
+            return new DeploymentService();
+        });
+        $this->app->singleton(HTMLSanitizerService::class, function () {
+            return new HTMLSanitizerService();
+        });
     }
 
     /**
