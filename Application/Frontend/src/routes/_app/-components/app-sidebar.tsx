@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/sidebar.tsx";
 import {useAuth} from "@/hooks/use-auth.tsx";
 import {useRouter} from "@tanstack/react-router";
-import {SideBarModeToggle} from "@/components/sidebar/side-bar-mode-toggle.tsx";
 import {NavSection} from "@/types/nav-section.ts";
 import {ComponentProps} from "react";
 
@@ -65,7 +64,6 @@ export function AppSidebar({...props}: ComponentProps<typeof Sidebar>) {
                 <NavMain items={navMain}/>
             </SidebarContent>
             <SidebarFooter>
-                <SideBarModeToggle/>
                 <NavUser user={user!}/>
             </SidebarFooter>
             <SidebarRail/>

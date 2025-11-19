@@ -62,3 +62,40 @@ endpoints:
     controller: null
     method: null
     route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: api/v1/avatar
+    metadata:
+      custom: []
+      groupName: Avatars
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete avatar'
+      description: "Remove the authenticated user's avatar image."
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 204
+        content: '{}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null

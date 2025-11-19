@@ -78,7 +78,11 @@ export interface paths {
          * @description Upload and set the authenticated user's avatar image.
          */
         post: operations["postAvatar"];
-        delete?: never;
+        /**
+         * Delete avatar
+         * @description Remove the authenticated user's avatar image.
+         */
+        delete: operations["deleteAvatar"];
         options?: never;
         head?: never;
         patch?: never;
@@ -98,6 +102,70 @@ export interface paths {
         get: operations["getCSRFCookie"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/site/{site_id}/deployment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 */
+                site_id: string;
+            };
+            cookie?: never;
+        };
+        /**
+         * Get site deployment.
+         * @description Get the deployment status of the specified site.
+         */
+        get: operations["getSiteDeployment"];
+        /**
+         * Update site deployment.
+         * @description Update the deployment of the specified site.
+         */
+        put: operations["updateSiteDeployment"];
+        /**
+         * Store site deployment.
+         * @description Initiate a new deployment for the specified site.
+         */
+        post: operations["storeSiteDeployment"];
+        /**
+         * Delete site deployment.
+         * @description Delete the deployment of the specified site.
+         */
+        delete: operations["deleteSiteDeployment"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/site/{site_id}/deployment/restart": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 */
+                site_id: string;
+            };
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Restart site deployment.
+         * @description Restart the deployment of the specified site.
+         */
+        post: operations["restartSiteDeployment"];
         delete?: never;
         options?: never;
         head?: never;
@@ -149,6 +217,71 @@ export interface paths {
         get: operations["verifyEmail"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/site/{site_id}/page/{page_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 */
+                site_id: string;
+                /**
+                 * @description The ID of the page.
+                 * @example 019a9895-2afb-706d-a246-c9dad48e46cd
+                 */
+                page_id: string;
+            };
+            cookie?: never;
+        };
+        /**
+         * Get Page for Site
+         * @description Display the specified page for a specific site.
+         */
+        get: operations["getPageForSite"];
+        /**
+         * Update Page for Site
+         * @description Update the specified page for a specific site.
+         */
+        put: operations["updatePageForSite"];
+        post?: never;
+        /**
+         * Delete Page for Site
+         * @description Remove the specified page from a specific site.
+         */
+        delete: operations["deletePageForSite"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/site/{site_id}/page": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 */
+                site_id: string;
+            };
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Create Page for Site
+         * @description Store a newly created page for a specific site.
+         */
+        post: operations["createPageForSite"];
         delete?: never;
         options?: never;
         head?: never;
@@ -230,6 +363,122 @@ export interface paths {
          */
         post: operations["resetPassword"];
         delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/schema": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Schemas
+         * @description Display all schemas with pagination.
+         */
+        get: operations["getSchemas"];
+        put?: never;
+        /**
+         * Create Schema
+         * @description Store a newly created schema.
+         */
+        post: operations["createSchema"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/schema/{schema_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the schema.
+                 * @example 019a9895-2a79-70fa-be63-3dbaedcf4d6f
+                 */
+                schema_id: string;
+            };
+            cookie?: never;
+        };
+        /**
+         * Get Schema
+         * @description Display the specified schema.
+         */
+        get: operations["getSchema"];
+        /**
+         * Update Schema
+         * @description Update the specified schema.
+         */
+        put: operations["updateSchema"];
+        post?: never;
+        /**
+         * Delete Schema
+         * @description Remove the specified schema.
+         */
+        delete: operations["deleteSchema"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/site": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Sites
+         * @description Display all sites for the authenticated user.
+         */
+        get: operations["getSites"];
+        put?: never;
+        /**
+         * Create Site
+         * @description Store a newly created site for the authenticated user.
+         */
+        post: operations["createSite"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/site/{site_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 */
+                site_id: string;
+            };
+            cookie?: never;
+        };
+        /**
+         * Get Site
+         * @description Display the specified site.
+         */
+        get: operations["getSite"];
+        /**
+         * Update Site
+         * @description Update the specified site.
+         */
+        put: operations["updateSite"];
+        post?: never;
+        /**
+         * Delete Site
+         * @description Remove the specified site.
+         */
+        delete: operations["deleteSite"];
         options?: never;
         head?: never;
         patch?: never;
@@ -469,13 +718,62 @@ export interface operations {
                 "multipart/form-data": {
                     /**
                      * Format: binary
-                     * @description Must be a file. Must be an image. Must not be greater than 2048 kilobytes.
+                     * @description The avatar image file to upload. Accepted formats are jpeg, jpg, png, gif, and webp. Maximum file size is 2MB. Must be a file. Must be an image. Must not be greater than 2048 kilobytes.
                      */
                     avatar: string;
                 };
             };
         };
-        responses: never;
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @example Avatar uploaded successfully. */
+                        message?: string;
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @example File does not exist. */
+                        message?: string;
+                        /** @example ... */
+                        error?: string;
+                    } | {
+                        /** @example File is too big. */
+                        message?: string;
+                        /** @example ... */
+                        error?: string;
+                    };
+                };
+            };
+        };
+    };
+    deleteAvatar: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": Record<string, never>;
+                };
+            };
+        };
     };
     getCSRFCookie: {
         parameters: {
@@ -496,6 +794,131 @@ export interface operations {
                 };
                 content: {
                     "application/json": Record<string, never> | null;
+                };
+            };
+        };
+    };
+    getSiteDeployment: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 */
+                site_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+        };
+    };
+    updateSiteDeployment: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 */
+                site_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+        };
+    };
+    storeSiteDeployment: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 */
+                site_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+        };
+    };
+    deleteSiteDeployment: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 */
+                site_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+        };
+    };
+    restartSiteDeployment: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 */
+                site_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
                 };
             };
         };
@@ -558,6 +981,234 @@ export interface operations {
                 };
                 content: {
                     "application/json": Record<string, never> | null;
+                };
+            };
+        };
+    };
+    getPageForSite: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 */
+                site_id: string;
+                /**
+                 * @description The ID of the page.
+                 * @example 019a9895-2afb-706d-a246-c9dad48e46cd
+                 */
+                page_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: {
+                            /** @example 019a994c-df03-732d-86c8-649c94fa81f8 */
+                            id?: string;
+                            /** @example Deserunt aut ab provident perspiciatis quo omnis nostrum. */
+                            title?: string;
+                            /** @example /quidem-nostrum-qui-commodi-incidunt-iure-odit */
+                            url?: string;
+                            /** @example null */
+                            content?: string;
+                            /** @example 019a9895-2be7-7183-966c-8e1fc9e90178 */
+                            site_id?: string;
+                            /** @example 2025-11-18T23:29:03.000000Z */
+                            created_at?: string;
+                            /** @example 2025-11-18T23:29:03.000000Z */
+                            updated_at?: string;
+                        };
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @example Page not found for the specified site. */
+                        message?: string;
+                    };
+                };
+            };
+        };
+    };
+    updatePageForSite: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 */
+                site_id: string;
+                /**
+                 * @description The ID of the page.
+                 * @example 019a9895-2afb-706d-a246-c9dad48e46cd
+                 */
+                page_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description The title of the page . . Must not be greater than 255 characters.
+                     * @example My personal homepage
+                     */
+                    title: string;
+                    /**
+                     * @description The URL slug for the post . . Must not be greater than 255 characters.
+                     * @example my - first - post
+                     */
+                    url: string;
+                    /**
+                     * @description The content of the schema, base64 encoded and zlib compressed JSON.
+                     * @example eJzT0yMAAGTvBe8 =
+                     */
+                    content: string;
+                    /**
+                     * @description The HTML content of the page base64 encoded and zlib compressed.
+                     * @example eJzT0yMAAGTvBe8 =
+                     */
+                    html: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: {
+                            /** @example 019a994c-df2d-720b-838c-72e76bf4a114 */
+                            id?: string;
+                            /** @example Eius et animi quos velit et. */
+                            title?: string;
+                            /** @example /perspiciatis-quo-omnis-nostrum-aut-adipisci-quidem-nostrum-qui */
+                            url?: string;
+                            /** @example hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n */
+                            content?: string;
+                            /** @example 019a9895-2bc3-715e-9ead-4d8e34744209 */
+                            site_id?: string;
+                            /** @example 2025-11-18T23:29:03.000000Z */
+                            created_at?: string;
+                            /** @example 2025-11-18T23:29:03.000000Z */
+                            updated_at?: string;
+                        };
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @example Page not found for the specified site. */
+                        message?: string;
+                    };
+                };
+            };
+        };
+    };
+    deletePageForSite: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 */
+                site_id: string;
+                /**
+                 * @description The ID of the page.
+                 * @example 019a9895-2afb-706d-a246-c9dad48e46cd
+                 */
+                page_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": Record<string, never>;
+                };
+            };
+        };
+    };
+    createPageForSite: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 */
+                site_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description The title of the page . . Must not be greater than 255 characters.
+                     * @example My personal homepage
+                     */
+                    title: string;
+                    /**
+                     * @description The URL slug for the post . . Must not be greater than 255 characters.
+                     * @example my - first - post
+                     */
+                    url: string;
+                };
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: {
+                            /** @example 019a994c-df19-7290-b102-426facbc5605 */
+                            id?: string;
+                            /** @example Eius et animi quos velit et. */
+                            title?: string;
+                            /** @example /accusantium-harum-mollitia-modi-deserunt-aut-ab */
+                            url?: string;
+                            /** @example hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n */
+                            content?: string;
+                            /** @example 019a9895-2b09-7056-a4bf-4bdf3d0fcb80 */
+                            site_id?: string;
+                            /** @example 2025-11-18T23:29:03.000000Z */
+                            created_at?: string;
+                            /** @example 2025-11-18T23:29:03.000000Z */
+                            updated_at?: string;
+                        };
+                    };
                 };
             };
         };
@@ -752,6 +1403,644 @@ export interface operations {
             };
         };
     };
+    getSchemas: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @example [
+                         *       {
+                         *         "id": "019a994c-ddd5-7120-961b-9f8277416346",
+                         *         "name": "architecto"
+                         *       },
+                         *       {
+                         *         "id": "019a994c-dddc-71d0-af1b-1cc2cfe8749f",
+                         *         "name": "quos"
+                         *       }
+                         *     ]
+                         */
+                        data?: {
+                            /** @example 019a994c-ddd5-7120-961b-9f8277416346 */
+                            id?: string;
+                            /** @example architecto */
+                            name?: string;
+                        }[];
+                        links?: {
+                            /** @example /?page=1 */
+                            first?: string;
+                            /** @example /?page=1 */
+                            last?: string;
+                            /** @example null */
+                            prev?: string;
+                            /** @example null */
+                            next?: string;
+                        };
+                        meta?: {
+                            /** @example 1 */
+                            current_page?: number;
+                            /** @example 1 */
+                            from?: number;
+                            /** @example 1 */
+                            last_page?: number;
+                            /**
+                             * @example [
+                             *       {
+                             *         "url": null,
+                             *         "label": "&laquo; Previous",
+                             *         "page": null,
+                             *         "active": false
+                             *       },
+                             *       {
+                             *         "url": "/?page=1",
+                             *         "label": "1",
+                             *         "page": 1,
+                             *         "active": true
+                             *       },
+                             *       {
+                             *         "url": null,
+                             *         "label": "Next &raquo;",
+                             *         "page": null,
+                             *         "active": false
+                             *       }
+                             *     ]
+                             */
+                            links?: {
+                                /** @example null */
+                                url?: string;
+                                /** @example &laquo; Previous */
+                                label?: string;
+                                /** @example null */
+                                page?: string;
+                                /** @example false */
+                                active?: boolean;
+                            }[];
+                            /** @example / */
+                            path?: string;
+                            /** @example 15 */
+                            per_page?: number;
+                            /** @example 2 */
+                            to?: number;
+                            /** @example 2 */
+                            total?: number;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    createSchema: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description The name of the schema. Must not be greater than 255 characters.
+                     * @example Portfolio Schema
+                     */
+                    name: string;
+                    /**
+                     * @description A brief description of the schema.
+                     * @example A webpage schema for a personal portfolio site.
+                     */
+                    description?: string | null;
+                    /**
+                     * @description The content of the schema, base64 encoded and lz compressed JSON.
+                     * @example eJzT0yMAAGTvBe8=
+                     */
+                    content?: string | null;
+                };
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: {
+                            /** @example 019a994c-ddea-704d-b368-8fe4f3113db8 */
+                            id?: string;
+                            /** @example architecto */
+                            name?: string;
+                            /** @example null */
+                            description?: string;
+                            /** @example hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n */
+                            content?: string;
+                            /** @example 2025-11-18T23:29:02.000000Z */
+                            created_at?: string;
+                            /** @example 2025-11-18T23:29:02.000000Z */
+                            updated_at?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    getSchema: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the schema.
+                 * @example 019a9895-2a79-70fa-be63-3dbaedcf4d6f
+                 */
+                schema_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: {
+                            /** @example 019a994c-dde4-72a7-b322-66db7c2daabc */
+                            id?: string;
+                            /** @example sunt */
+                            name?: string;
+                            /** @example Harum mollitia modi deserunt aut ab provident perspiciatis quo. */
+                            description?: string;
+                            /** @example null */
+                            content?: string;
+                            /** @example 2025-11-18T23:29:02.000000Z */
+                            created_at?: string;
+                            /** @example 2025-11-18T23:29:02.000000Z */
+                            updated_at?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    updateSchema: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the schema.
+                 * @example 019a9895-2a79-70fa-be63-3dbaedcf4d6f
+                 */
+                schema_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description The name of the schema. Must not be greater than 255 characters.
+                     * @example Portfolio Schema
+                     */
+                    name: string;
+                    /**
+                     * @description A brief description of the schema.
+                     * @example A webpage schema for a personal portfolio site.
+                     */
+                    description?: string | null;
+                    /**
+                     * @description The content of the schema, base64 encoded and lz compressed JSON.
+                     * @example eJzT0yMAAGTvBe8=
+                     */
+                    content?: string | null;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: {
+                            /** @example 019a994c-ddee-7028-ba90-233ca79cb123 */
+                            id?: string;
+                            /** @example architecto */
+                            name?: string;
+                            /** @example null */
+                            description?: string;
+                            /** @example hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n */
+                            content?: string;
+                            /** @example 2025-11-18T23:29:02.000000Z */
+                            created_at?: string;
+                            /** @example 2025-11-18T23:29:02.000000Z */
+                            updated_at?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    deleteSchema: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the schema.
+                 * @example 019a9895-2a79-70fa-be63-3dbaedcf4d6f
+                 */
+                schema_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": Record<string, never>;
+                };
+            };
+        };
+    };
+    getSites: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @example [
+                         *       {
+                         *         "id": "019a994c-ddf7-720d-b02b-439f245fa088",
+                         *         "name": "O'Kon and Sons",
+                         *         "subdomain": "dach",
+                         *         "state": "draft"
+                         *       },
+                         *       {
+                         *         "id": "019a994c-de01-717f-85f9-004ad124dee0",
+                         *         "name": "Marquardt Inc",
+                         *         "subdomain": "hirthe",
+                         *         "state": "draft"
+                         *       }
+                         *     ]
+                         */
+                        data?: {
+                            /** @example 019a994c-ddf7-720d-b02b-439f245fa088 */
+                            id?: string;
+                            /** @example O'Kon and Sons */
+                            name?: string;
+                            /** @example dach */
+                            subdomain?: string;
+                            /** @example draft */
+                            state?: string;
+                        }[];
+                        links?: {
+                            /** @example /?page=1 */
+                            first?: string;
+                            /** @example /?page=1 */
+                            last?: string;
+                            /** @example null */
+                            prev?: string;
+                            /** @example null */
+                            next?: string;
+                        };
+                        meta?: {
+                            /** @example 1 */
+                            current_page?: number;
+                            /** @example 1 */
+                            from?: number;
+                            /** @example 1 */
+                            last_page?: number;
+                            /**
+                             * @example [
+                             *       {
+                             *         "url": null,
+                             *         "label": "&laquo; Previous",
+                             *         "page": null,
+                             *         "active": false
+                             *       },
+                             *       {
+                             *         "url": "/?page=1",
+                             *         "label": "1",
+                             *         "page": 1,
+                             *         "active": true
+                             *       },
+                             *       {
+                             *         "url": null,
+                             *         "label": "Next &raquo;",
+                             *         "page": null,
+                             *         "active": false
+                             *       }
+                             *     ]
+                             */
+                            links?: {
+                                /** @example null */
+                                url?: string;
+                                /** @example &laquo; Previous */
+                                label?: string;
+                                /** @example null */
+                                page?: string;
+                                /** @example false */
+                                active?: boolean;
+                            }[];
+                            /** @example / */
+                            path?: string;
+                            /** @example 15 */
+                            per_page?: number;
+                            /** @example 2 */
+                            to?: number;
+                            /** @example 2 */
+                            total?: number;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    createSite: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description The name of the site. Must not be greater than 255 characters.
+                     * @example My Personal Site
+                     */
+                    name: string;
+                    /**
+                     * @description The subdomain for the site. Must not be greater than 255 characters.
+                     * @example mypersonalsite
+                     */
+                    subdomain: string;
+                    /**
+                     * @description A brief description of the site.
+                     * @example This is my personal website where I share my projects and blog posts.
+                     */
+                    description?: string | null;
+                };
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: {
+                            /** @example 019a994c-dee7-7002-b963-fde8abf767db */
+                            id?: string;
+                            /** @example Bailey Ltd */
+                            name?: string;
+                            /** @example okuneva */
+                            subdomain?: string;
+                            /** @example null */
+                            description?: string;
+                            /** @example 019a9895-2a09-71fc-b27a-d4cc6b6966f7 */
+                            user_id?: string;
+                            /** @example draft */
+                            state?: string;
+                            pages?: {
+                                /**
+                                 * @example [
+                                 *       {
+                                 *         "id": "019a994c-dee8-704b-b1cb-2b0a1b10a1b1",
+                                 *         "title": "Home",
+                                 *         "url": "/"
+                                 *       }
+                                 *     ]
+                                 */
+                                data?: {
+                                    /** @example 019a994c-dee8-704b-b1cb-2b0a1b10a1b1 */
+                                    id?: string;
+                                    /** @example Home */
+                                    title?: string;
+                                    /** @example / */
+                                    url?: string;
+                                }[];
+                            };
+                            /** @example 2025-11-18T23:29:03.000000Z */
+                            created_at?: string;
+                            /** @example 2025-11-18T23:29:03.000000Z */
+                            updated_at?: string;
+                            /** @example 2024-12-19 11:04:52 */
+                            published_at?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    getSite: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 */
+                site_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: {
+                            /** @example 019a994c-de09-71f3-b040-5d4d9b5f63c3 */
+                            id?: string;
+                            /** @example Fritsch-O'Keefe */
+                            name?: string;
+                            /** @example predovic */
+                            subdomain?: string;
+                            /** @example Consequatur aut dolores enim non facere tempora. */
+                            description?: string;
+                            /** @example 019a9895-29c4-7006-8661-55e3cf3023fc */
+                            user_id?: string;
+                            /** @example draft */
+                            state?: string;
+                            pages?: {
+                                /**
+                                 * @example [
+                                 *       {
+                                 *         "id": "019a994c-de0a-70fa-bfd4-5b998fd29aa6",
+                                 *         "title": "Home",
+                                 *         "url": "/"
+                                 *       },
+                                 *       {
+                                 *         "id": "019a994c-de0e-7005-9cf8-0790b7dd15e1",
+                                 *         "title": "Voluptatem laboriosam praesentium quis adipisci.",
+                                 *         "url": "/deleniti-distinctio-eum-doloremque-id-aut"
+                                 *       }
+                                 *     ]
+                                 */
+                                data?: {
+                                    /** @example 019a994c-de0a-70fa-bfd4-5b998fd29aa6 */
+                                    id?: string;
+                                    /** @example Home */
+                                    title?: string;
+                                    /** @example / */
+                                    url?: string;
+                                }[];
+                            };
+                            /** @example 2025-11-18T23:29:02.000000Z */
+                            created_at?: string;
+                            /** @example 2025-11-18T23:29:02.000000Z */
+                            updated_at?: string;
+                            /** @example 2025-05-26 09:03:38 */
+                            published_at?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    updateSite: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 */
+                site_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description The name of the site. Must not be greater than 255 characters.
+                     * @example My Personal Site
+                     */
+                    name: string;
+                    /**
+                     * @description The subdomain for the site. Must not be greater than 255 characters.
+                     * @example mypersonalsite
+                     */
+                    subdomain: string;
+                    /**
+                     * @description A brief description of the site.
+                     * @example This is my personal website where I share my projects and blog posts.
+                     */
+                    description?: string | null;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: {
+                            /** @example 019a994c-def1-7124-888e-789a5faaf8d8 */
+                            id?: string;
+                            /** @example Bailey Ltd */
+                            name?: string;
+                            /** @example rempel */
+                            subdomain?: string;
+                            /** @example Sunt nihil accusantium harum mollitia. */
+                            description?: string;
+                            /** @example 019a9895-2a40-7149-b803-c9944f65e3d3 */
+                            user_id?: string;
+                            /** @example draft */
+                            state?: string;
+                            pages?: {
+                                /**
+                                 * @example [
+                                 *       {
+                                 *         "id": "019a994c-def1-7124-888e-789a609dbfb9",
+                                 *         "title": "Home",
+                                 *         "url": "/"
+                                 *       }
+                                 *     ]
+                                 */
+                                data?: {
+                                    /** @example 019a994c-def1-7124-888e-789a609dbfb9 */
+                                    id?: string;
+                                    /** @example Home */
+                                    title?: string;
+                                    /** @example / */
+                                    url?: string;
+                                }[];
+                            };
+                            /** @example 2025-11-18T23:29:03.000000Z */
+                            created_at?: string;
+                            /** @example 2025-11-18T23:29:03.000000Z */
+                            updated_at?: string;
+                            /** @example null */
+                            published_at?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    deleteSite: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 */
+                site_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": Record<string, never>;
+                };
+            };
+        };
+    };
     updateProfile: {
         parameters: {
             query?: never;
@@ -895,19 +2184,19 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example null */
+                            /** @example 019a994c-dd9d-703f-ade1-17269d1272eb */
                             id?: string;
-                            /** @example Dillon Stroman Jr. */
+                            /** @example Donnie Kassulke */
                             name?: string;
-                            /** @example sgoldner@example.net */
+                            /** @example xabernathy@example.net */
                             email?: string;
-                            /** @example 2025-10-24T22:20:23.000000Z */
+                            /** @example 2025-11-18T23:29:02.000000Z */
                             email_verified_at?: string;
                             /** @example null */
                             avatar?: string;
-                            /** @example null */
+                            /** @example 2025-11-18T23:29:02.000000Z */
                             created_at?: string;
-                            /** @example null */
+                            /** @example 2025-11-18T23:29:02.000000Z */
                             updated_at?: string;
                         };
                     };
@@ -923,6 +2212,15 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
-        responses: never;
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+        };
     };
 }

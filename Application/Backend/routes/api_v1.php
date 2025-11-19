@@ -17,6 +17,7 @@ Route::controller(UserController::class)->middleware('auth:sanctum')->group(func
 
 Route::controller(AvatarController::class)->middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/avatar', 'store');
+    Route::delete('/avatar', 'destroy');
 });
 
 Route::controller(SchemaController::class)->middleware(['auth:sanctum', 'verified'])->group(function () {

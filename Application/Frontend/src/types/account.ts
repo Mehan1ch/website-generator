@@ -22,10 +22,3 @@ export const updateProfileFormSchema = z.object({
 });
 
 export type UpdateProfileBody = z.infer<typeof updateProfileFormSchema>;
-
-
-export const avatarFormSchema = z.object({
-    avatar: z.file().min(1).max(2048 * 2048).mime("image/png"),
-});
-
-export type AvatarBody = z.infer<typeof avatarFormSchema>;

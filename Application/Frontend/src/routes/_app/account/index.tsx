@@ -1,11 +1,12 @@
 import {createFileRoute} from '@tanstack/react-router';
 import {TypographyH4} from "@/components/ui/typography/typography-h4.tsx";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs.tsx";
+import Appearance from "@/routes/_app/account/-components/appearance.tsx";
 import {ProfileForm} from "@/routes/_app/account/-components/profile-form.tsx";
-import {PasswordForm} from "@/routes/_app/account/-components/password-form.tsx";
-import {DeleteAccountForm} from "@/routes/_app/account/-components/delete-account-form.tsx";
+import {AvatarUpload} from "@/routes/_app/account/-components/avatar-upload.tsx";
 import {EmailVerificationBadge} from "@/routes/_app/account/-components/email-verification-badge.tsx";
-import {AvatarForm} from "@/routes/_app/account/-components/avatar-form.tsx";
+import {DeleteAccountForm} from "@/routes/_app/account/-components/delete-account-form.tsx";
+import PasswordForm from "@/routes/_app/account/-components/password-form.tsx";
 
 export const Route = createFileRoute('/_app/account/')({
     beforeLoad: () => {
@@ -17,8 +18,6 @@ export const Route = createFileRoute('/_app/account/')({
 });
 
 function Account() {
-
-
     return <div className="m-2 p-4">
         <header className="flex h-16 shrink-0 items-center gap-2">
             <div>
@@ -27,19 +26,23 @@ function Account() {
             </div>
         </header>
         <div className="flex lg:w-1/2 w-full flex-col gap-6">
-            <Tabs defaultValue="profile">
+            <Tabs defaultValue="appearance">
                 <TabsList>
+                    <TabsTrigger value="appearance">Appearance</TabsTrigger>
                     <TabsTrigger value="profile">Profile</TabsTrigger>
                     <TabsTrigger value="avatar">Avatar</TabsTrigger>
                     <TabsTrigger value="verification">Verification</TabsTrigger>
                     <TabsTrigger value="password">Password</TabsTrigger>
                     <TabsTrigger value="delete">Delete</TabsTrigger>
                 </TabsList>
+                <TabsContent value="appearance">
+                    <Appearance/>
+                </TabsContent>
                 <TabsContent value="profile">
                     <ProfileForm/>
                 </TabsContent>
                 <TabsContent value="avatar">
-                    <AvatarForm/>
+                    <AvatarUpload/>
                 </TabsContent>
                 <TabsContent value="verification">
                     <EmailVerificationBadge/>

@@ -1,7 +1,7 @@
-import {ComponentPropsWithoutRef, useState} from "react";
-import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
+import {useState} from "react";
+import {Card, CardContent, CardFooter} from "@/components/ui/card.tsx";
 import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert.tsx";
-import {AlertCircleIcon} from "lucide-react";
+import {AlertCircleIcon, AlertTriangle, Trash} from "lucide-react";
 import {Button} from "@/components/ui/button.tsx";
 import {
     Dialog,
@@ -13,19 +13,13 @@ import {
     DialogTitle,
     DialogTrigger
 } from "@/components/ui/dialog.tsx";
-import {cn} from "@/lib/utils.ts";
 import {useAuth} from "@/hooks/use-auth.tsx";
 import {toast} from "sonner";
 import {useRouter} from "@tanstack/react-router";
-import {Spinner} from "@/components/ui/spinner.tsx";
 import {APIError} from "@/lib/api/api-client.ts";
+import {Spinner} from "@/components/ui/spinner.tsx";
 
-type DeleteAccountFormProps = {
-    className?: string;
-} & ComponentPropsWithoutRef<"div">;
-
-
-export function DeleteAccountForm({className, ...props}: DeleteAccountFormProps) {
+export function DeleteAccountForm() {
     const [loading, setLoading] = useState(false);
     const {deleteUser} = useAuth();
     const router = useRouter();
@@ -46,14 +40,17 @@ export function DeleteAccountForm({className, ...props}: DeleteAccountFormProps)
 
 
     return (
-        <div className={cn("flex flex-col gap-6", className)} {...props}>
-            <Card>
-                <CardHeader>
-                    <CardTitle>Delete account</CardTitle>
-                    <CardDescription>
-                        Delete your account and all of its resources
-                    </CardDescription>
-                </CardHeader>
+        <div className="mx-auto max-w-5xl p-6">
+            <Card className="bg-card border p-8">
+                <div className="border-b pb-6">
+                    <h2 className="text-2xl font-semibold tracking-tight flex items-center gap-2">
+                        <Trash className="h-6 w-6"/>
+                        Delete Account
+                    </h2>
+                    <p className="text-muted-foreground mt-2 text-sm">
+                        Delete your account and all associated data permanently.
+                    </p>
+                </div>
                 <CardContent className="grid gap-2">
                     <Alert variant={"destructive"}>
                         <AlertCircleIcon/>
@@ -66,22 +63,47 @@ export function DeleteAccountForm({className, ...props}: DeleteAccountFormProps)
                 <CardFooter>
                     <Dialog>
                         <DialogTrigger asChild>
-                            <Button variant="outline">Delete account</Button>
+                            <Button variant="destructive">Delete account</Button>
                         </DialogTrigger>
-                        <DialogContent className="sm:max-w-[425px]">
+                        <DialogContent className="sm:max-w-md">
                             <DialogHeader>
-                                <DialogTitle>Delete account</DialogTitle>
-                                <DialogDescription>
-                                    Are you sure you want to delete your account? This action cannot be undone.
+                                <div className="flex items-center gap-3 mb-2">
+                                    <div className="p-2 bg-destructive/10 rounded-full">
+                                        <AlertTriangle className="h-6 w-6 text-destructive"/>
+                                    </div>
+                                    <DialogTitle className="text-xl">Delete account</DialogTitle>
+                                </div>
+                                <DialogDescription className="text-base">
+                                    This will permanently delete <strong>your user</strong> and all associated data.
                                 </DialogDescription>
                             </DialogHeader>
-                            <DialogFooter>
-                                <DialogClose asChild>
-                                    <Button variant="outline">Cancel</Button>
+
+                            <Alert variant="destructive" className="mt-4">
+                                <AlertTriangle className="h-4 w-4"/>
+                                <AlertDescription className="text-sm">
+                                    This action is irreversible. The following will be deleted:
+                                    <ul className="list-disc list-inside mt-2 space-y-1">
+                                        <li>All of your websites</li>
+                                        <li>All of your pages</li>
+                                        <li>All of their deployments</li>
+                                    </ul>
+                                </AlertDescription>
+                            </Alert>
+
+                            <DialogFooter className="gap-2 sm:gap-0 mt-6">
+                                <DialogClose asChild className="mx-2">
+                                    <Button variant="outline">
+                                        Cancel
+                                    </Button>
                                 </DialogClose>
-                                <Button type="submit" disabled={loading} onClick={onSubmit}>
+                                <Button
+                                    className="mx-2"
+                                    variant="destructive"
+                                    onClick={onSubmit}
+                                    disabled={loading}
+                                >
                                     {loading && <Spinner/>}
-                                    Confirm
+                                    {loading ? "Deleting..." : "Delete account"}
                                 </Button>
                             </DialogFooter>
                         </DialogContent>

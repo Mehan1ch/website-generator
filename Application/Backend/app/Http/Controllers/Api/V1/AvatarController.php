@@ -36,4 +36,17 @@ class AvatarController extends Controller
         }
         return response()->json(['message' => 'Avatar uploaded successfully.'], 201);
     }
+
+    /**
+     * Delete avatar
+     *
+     * Remove the authenticated user's avatar image.
+     * @response 204 {}
+     */
+    public function destroy()
+    {
+        $user = auth()->user();
+        $user->clearMediaCollection('avatar');
+        return response()->noContent();
+    }
 }
