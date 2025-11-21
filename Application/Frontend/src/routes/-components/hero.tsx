@@ -1,6 +1,7 @@
 import {Link} from "@tanstack/react-router";
 import {Announcement, AnnouncementTag, AnnouncementTitle} from "@/components/ui/announcement.tsx";
 import {Button} from "@/components/ui/button.tsx";
+import BlurText from "@/components/ui/blur-text.tsx";
 
 const {VITE_APP_NAME} = import.meta.env;
 export const Hero = () => (
@@ -10,9 +11,14 @@ export const Hero = () => (
                 <AnnouncementTag>v1.0.0</AnnouncementTag>
                 <AnnouncementTitle>{VITE_APP_NAME}</AnnouncementTitle>
             </Announcement>
-            <h1 className="mb-0 text-balance font-medium text-6xl md:text-7xl xl:text-[5.25rem]">
-                The best way to build your website
-            </h1>
+
+            <BlurText
+                text="The best way to build your website"
+                className="mb-0 justify-center align-middle text-center font-medium text-6xl md:text-7xl xl:text-[5.25rem]"
+                delay={150}
+                animateBy="words"
+                direction="top"
+            />
             <p className="mt-0 mb-0 text-balance text-lg text-muted-foreground">
                 Build and deploy static websites with an interactive editor.
                 Design visually, edit collaboratively, and ship live sites in one click — an end-to-end SaaS solution

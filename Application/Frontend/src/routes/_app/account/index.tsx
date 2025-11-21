@@ -1,12 +1,12 @@
 import {createFileRoute} from '@tanstack/react-router';
 import {TypographyH4} from "@/components/ui/typography/typography-h4.tsx";
-import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs.tsx";
 import Appearance from "@/routes/_app/account/-components/appearance.tsx";
 import {ProfileForm} from "@/routes/_app/account/-components/profile-form.tsx";
 import {AvatarUpload} from "@/routes/_app/account/-components/avatar-upload.tsx";
 import {EmailVerificationBadge} from "@/routes/_app/account/-components/email-verification-badge.tsx";
 import {DeleteAccountForm} from "@/routes/_app/account/-components/delete-account-form.tsx";
 import PasswordForm from "@/routes/_app/account/-components/password-form.tsx";
+import {Tabs, TabsContent, TabsContents, TabsList, TabsTrigger} from "@/components/ui/tabs";
 
 export const Route = createFileRoute('/_app/account/')({
     beforeLoad: () => {
@@ -35,24 +35,26 @@ function Account() {
                     <TabsTrigger value="password">Password</TabsTrigger>
                     <TabsTrigger value="delete">Delete</TabsTrigger>
                 </TabsList>
-                <TabsContent value="appearance">
-                    <Appearance/>
-                </TabsContent>
-                <TabsContent value="profile">
-                    <ProfileForm/>
-                </TabsContent>
-                <TabsContent value="avatar">
-                    <AvatarUpload/>
-                </TabsContent>
-                <TabsContent value="verification">
-                    <EmailVerificationBadge/>
-                </TabsContent>
-                <TabsContent value="password">
-                    <PasswordForm/>
-                </TabsContent>
-                <TabsContent value="delete">
-                    <DeleteAccountForm/>
-                </TabsContent>
+                <TabsContents>
+                    <TabsContent value="appearance">
+                        <Appearance/>
+                    </TabsContent>
+                    <TabsContent value="profile">
+                        <ProfileForm/>
+                    </TabsContent>
+                    <TabsContent value="avatar">
+                        <AvatarUpload/>
+                    </TabsContent>
+                    <TabsContent value="verification">
+                        <EmailVerificationBadge/>
+                    </TabsContent>
+                    <TabsContent value="password">
+                        <PasswordForm/>
+                    </TabsContent>
+                    <TabsContent value="delete">
+                        <DeleteAccountForm/>
+                    </TabsContent>
+                </TabsContents>
             </Tabs>
         </div>
     </div>;
