@@ -2,24 +2,24 @@
 
 namespace App\States;
 
+use App\Models\Schema;
 use App\Models\Site;
-use Illuminate\Support\Facades\Log;
 use Spatie\ModelStates\Transition;
 
 class ToPublished extends Transition
 {
-    private Site $site;
+    private Site|Schema $model;
 
-    public function __construct(Site $site)
+    public function __construct(Site|Schema $model)
     {
-        $this->site = $site;
+        $this->model = $model;
     }
 
     public function handle(): Site
     {
-        $this->site->published_at = now();
-        $this->site->state = new Published($this->site);
-        $this->site->save();
-        return $this->site;
+        $this->model->published_at = now();
+        $this->model->state = new Published($this->model);
+        $this->model->save();
+        return $this->model;
     }
 }

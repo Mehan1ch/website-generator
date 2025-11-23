@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Schemas\Schemas;
 
+use A909M\FilamentStateFusion\Forms\Components\StateFusionToggleButtons;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 
@@ -17,9 +18,11 @@ class SchemaInfolist
                 TextEntry::make('description')
                     ->placeholder('-')
                     ->columnSpanFull(),
-                TextEntry::make('content')
+                TextEntry::make('contentReadable')
+                    ->label("Content")
                     ->placeholder('-')
                     ->columnSpanFull(),
+                TextEntry::make('state')->badge(),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

@@ -21,13 +21,14 @@ class SiteController extends Controller
      * Get Sites
      *
      * Display all sites for the authenticated user.
+     * @queryParam page integer The page number. Example: 1
      * @apiResourceCollection App\Http\Resources\Api\V1\Collections\SiteCollection
      * @apiResourceModel App\Models\Site paginate=15
      */
     public function index()
     {
 
-        return new SiteCollection(Site::where('user_id', auth()->id())->paginate());
+        return new SiteCollection(Site::query()->where('user_id', auth()->id())->paginate());
     }
 
     /**

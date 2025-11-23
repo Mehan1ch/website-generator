@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Enums\EditorContentExample;
 use App\Models\Schema;
+use App\States\PublishingState;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,6 +23,7 @@ class SchemaFactory extends Factory
             'name' => $this->faker->word(),
             'description' => $this->faker->optional()->sentence(),
             'content' => $this->faker->optional()->randomElement([EditorContentExample::ENCODED->value]),
+            'state' => Schema::getStatesFor('state')->random(),
         ];
     }
 }

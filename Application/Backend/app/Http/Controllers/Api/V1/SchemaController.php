@@ -7,6 +7,7 @@ use App\Http\Requests\Api\V1\SchemaRequest;
 use App\Http\Resources\Api\V1\Collections\SchemaCollection;
 use App\Http\Resources\Api\V1\SchemaResource;
 use App\Models\Schema;
+use App\States\Draft;
 use Illuminate\Http\Request;
 
 /**
@@ -24,10 +25,11 @@ class SchemaController extends Controller
      * Display all schemas with pagination.
      * @apiResourceCollection App\Http\Resources\Api\V1\Collections\SchemaCollection
      * @apiResourceModel App\Models\Schema paginate=15
+     * @queryParam page integer The page number. Example: 1
      */
     public function index()
     {
-        return new SchemaCollection(Schema::paginate());
+        return new SchemaCollection(Schema::query()->where("schemas.state", "!=", Draft::class)->paginate());
     }
 
     /**

@@ -9,7 +9,7 @@ use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
 use Illuminate\Contracts\Support\Htmlable;
 
-class Published extends SiteState implements HasLabel, HasIcon, HasDescription, HasColor
+class Published extends PublishingState implements HasLabel, HasIcon, HasDescription, HasColor
 {
     public static string $name = 'published';
 

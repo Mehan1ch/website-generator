@@ -19,6 +19,11 @@ class SchemaCollection extends ResourceCollection
                 return [
                     'id' => $schema->id,
                     'name' => $schema->name,
+                    "description" => $schema->description,
+                    "state" => $schema->state,
+                    "created_at" => $schema->created_at,
+                    "updated_at" => $schema->updated_at,
+                    "published_at" => $schema->published_at,
                 ];
             })
         ];

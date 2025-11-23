@@ -2,9 +2,7 @@
 
 namespace App\Filament\Resources\Sites\Tables;
 
-use A909M\FilamentStateFusion\Actions\StateFusionActionGroup;
 use A909M\FilamentStateFusion\Tables\Filters\StateFusionSelectFilter;
-use App\States\SiteState;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -50,7 +48,7 @@ class SitesTable
         StateFusionSelectFilter::make('state'),
     ])
         ->recordActions([
-            //StateFusionActionGroup::generate('state', SiteState::class),
+            //StateFusionActionGroup::generate('state', PublishingState::class),
             ViewAction::make(),
             EditAction::make(),
         ])

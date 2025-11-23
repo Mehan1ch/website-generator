@@ -14,7 +14,9 @@ return new class extends Migration {
             $table->uuid('id')->primary();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->string('state');
             $table->longText('content')->nullable();
+            $table->date('published_at')->nullable();
             $table->timestamps();
         });
     }

@@ -2,25 +2,31 @@
 
 namespace App\Models;
 
+use App\States\Draft;
+use App\States\PublishingState;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Spatie\ModelStates\HasStates;
+use Spatie\ModelStates\HasStatesContract;
 
 /**
  * @property string $id
  * @property string $name
  * @property string|null $description
  * @property string|null $content
+ * @property PublishingState $state
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property Carbon|null $published_at
  * @property string $contentReadable
  */
-class Schema extends Model
+class Schema extends Model implements HasStatesContract
 {
 
-    use HasFactory, HasUuids;
+    use HasFactory, HasUuids, HasStates;
 
     /**
      * The attributes that are mass assignable.
@@ -32,6 +38,27 @@ class Schema extends Model
         'description',
         'content',
     ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array <string, class-string>
+     */
+    protected $casts = [
+        'state' => PublishingState::class,
+    ];
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::updating(function (Site $site) {
+            // Only transition to Draft state if certain attributes have changed, others are automatic
+            if ($site->isDirty(['name', 'content', 'description'])) {
+                $site->state->transitionTo(Draft::class);
+            }
+        });
+    }
 
     /**
      * Get the content attribute in a readable format.

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\States\Draft;
-use App\States\SiteState;
+use App\States\PublishingState;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Log;
 use Spatie\ModelStates\HasStates;
 use Spatie\ModelStates\HasStatesContract;
 
@@ -22,7 +21,7 @@ use Spatie\ModelStates\HasStatesContract;
  * @property string $subdomain
  * @property string|null $description
  * @property int $user_id
- * @property SiteState $state
+ * @property PublishingState $state
  * @property-read User $user
  * @property-read Collection<int, Page> $pages
  * @property Carbon|null $created_at
@@ -62,7 +61,7 @@ class Site extends Model implements HasStatesContract
      * @var array <string, class-string>
      */
     protected $casts = [
-        'state' => SiteState::class,
+        'state' => PublishingState::class,
     ];
 
     protected static function boot(): void

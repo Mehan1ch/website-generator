@@ -8,7 +8,7 @@ use Spatie\ModelStates\Exceptions\InvalidConfig;
 use Spatie\ModelStates\State;
 use Spatie\ModelStates\StateConfig;
 
-abstract class SiteState extends State implements HasFilamentStateFusion
+abstract class PublishingState extends State implements HasFilamentStateFusion
 {
     use StateFusionInfo;
 

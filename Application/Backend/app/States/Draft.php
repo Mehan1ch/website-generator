@@ -9,14 +9,14 @@ use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
 use Illuminate\Contracts\Support\Htmlable;
 
-class Draft extends SiteState implements HasLabel, HasIcon, HasDescription, HasColor
+class Draft extends PublishingState implements HasLabel, HasIcon, HasDescription, HasColor
 {
     public static string $name = 'draft';
 
 
     public function getColor(): string|array|null
     {
-        return 'secondary';
+        return 'primary';
     }
 
     public function getDescription(): string|Htmlable|null

@@ -12,6 +12,6 @@ class SchemaSeeder extends Seeder
      */
     public function run(): void
     {
-        Schema::factory()->count(fake()->numberBetween(10, 20))->create();
+        Schema::factory()->count(fake()->numberBetween(15, 50))->create();
     }
 }

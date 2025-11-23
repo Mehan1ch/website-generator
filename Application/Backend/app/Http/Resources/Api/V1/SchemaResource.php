@@ -23,8 +23,10 @@ class SchemaResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'content' => $this->content,
+            'state' => $this->state,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'published_at' => $this->published_at,
         ];
     }
 }

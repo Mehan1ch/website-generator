@@ -18,7 +18,7 @@ class ViewSite extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            //StateFusionActionGroup::generate('state', SiteState::class),
+            //StateFusionActionGroup::generate('state', PublishingState::class),
             EditAction::make(),
             ActionGroup::make([
                 StoreDeploymentAction::make('Deploy'),
