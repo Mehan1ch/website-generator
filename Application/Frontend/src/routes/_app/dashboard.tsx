@@ -1,18 +1,19 @@
-import {createFileRoute} from '@tanstack/react-router'
+import {createFileRoute} from '@tanstack/react-router';
+import {RouteTitle} from "@/components/blocks/route-title.tsx";
 
 export const Route = createFileRoute('/_app/dashboard')({
     beforeLoad: () => {
         return {
             getTitle: () => 'Dashboard',
-        }
+        };
     },
     component: Dashboard,
-})
+});
 
 function Dashboard() {
     return (
-        <div className="flex flex-1 items-center justify-center">
-            <h1 className="text-2xl font-bold">Welcome to the Dashboard</h1>
-        </div>
+        <RouteTitle title={"Dashboard"}
+                    description={"Welcome to your dashboard. Here you can find an overview of your activities."}/>
+
     );
 }

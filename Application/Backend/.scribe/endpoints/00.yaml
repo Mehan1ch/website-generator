@@ -30,7 +30,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019a994c-dd9d-703f-ade1-17269d1272eb","name":"Donnie Kassulke","email":"xabernathy@example.net","email_verified_at":"2025-11-18T23:29:02.000000Z","avatar":null,"created_at":"2025-11-18T23:29:02.000000Z","updated_at":"2025-11-18T23:29:02.000000Z"}}'
+        content: '{"data":{"id":"019ab312-b3d8-7135-a08e-b4514c87808f","name":"Dessie Corwin","email":"qdurgan@example.net","email_verified_at":"2025-11-23T23:35:38.000000Z","avatar":null,"is_admin":false,"created_at":"2025-11-23T23:35:38.000000Z","updated_at":"2025-11-23T23:35:38.000000Z"}}'
         headers: []
         description: ''
     responseFields: []

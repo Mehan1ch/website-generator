@@ -5,7 +5,7 @@ import {BadgeCheckIcon, BadgeXIcon} from "lucide-react";
 import {Item, ItemActions, ItemContent, ItemMedia, ItemTitle} from "@/components/ui/item.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {api} from "@/lib/api/api-client.ts";
-import {Spinner} from "@/components/ui/spinner.tsx";
+import {Loading} from "@/components/blocks/loading.tsx";
 
 const emailVerifySearchParams = redirectOnlySearchSchema.extend({
     expires: z.number().default(0),
@@ -68,9 +68,7 @@ function VerifyEmail() {
         }
     });
     if (isLoading) {
-        return <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
-            <Spinner/> Loading
-        </div>;
+        return <Loading/>;
     }
 
     if (isError) {

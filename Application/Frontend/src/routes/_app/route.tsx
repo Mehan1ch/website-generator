@@ -1,4 +1,4 @@
-import {createFileRoute, Outlet, redirect, useRouterState} from '@tanstack/react-router';
+import {createFileRoute, Link, Outlet, redirect, useRouterState} from '@tanstack/react-router';
 import {SidebarInset, SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar.tsx";
 import {AppSidebar} from "@/routes/_app/-components/app-sidebar.tsx";
 import {Separator} from "@/components/ui/separator.tsx";
@@ -9,6 +9,7 @@ import {
     BreadcrumbList,
     BreadcrumbSeparator
 } from "@/components/ui/breadcrumb.tsx";
+import {Fragment} from "react";
 
 export const Route = createFileRoute('/_app')({
     beforeLoad: async ({location, context}) => {
@@ -49,20 +50,22 @@ function AppLayout() {
                 <Breadcrumb>
                     <BreadcrumbList>
                         {breadcrumbs.map((breadcrumb, index) => (
-                            <>
-                                <BreadcrumbItem key={index}
-                                                className={index === breadcrumbs.length - 1 ? "hidden md:block" : ""}>
-                                    <BreadcrumbLink href={breadcrumb.path}>
-                                        {breadcrumb.title}
+                            <Fragment key={index}>
+                                <BreadcrumbItem
+                                    className={index === breadcrumbs.length - 1 ? "hidden md:block" : ""}>
+                                    <BreadcrumbLink asChild={true}>
+                                        <Link to={breadcrumb.path}>
+                                            {breadcrumb.title}
+                                        </Link>
                                     </BreadcrumbLink>
                                 </BreadcrumbItem>
                                 {(index < breadcrumbs.length - 1) && <BreadcrumbSeparator className="hidden md:block"/>}
-                            </>
+                            </Fragment>
                         ))}
                     </BreadcrumbList>
                 </Breadcrumb>
             </header>
-            <div>
+            <div className={"m-4 p-4 space-y-4"}>
                 <Outlet/>
             </div>
         </SidebarInset>

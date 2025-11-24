@@ -51,7 +51,7 @@ export function AppSidebar({...props}: ComponentProps<typeof Sidebar>) {
                 <SidebarMenuButton size="lg" asChild onClick={() => router.navigate({to: "/dashboard"})}>
                     <div>
                         <div
-                            className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                            className="bg-sidebar-foreground text-sidebar flex aspect-square size-8 items-center justify-center rounded-lg">
                             <Globe className="size-4"/>
                         </div>
                         <div className="flex flex-col gap-0.5 leading-none">

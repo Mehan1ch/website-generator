@@ -21,8 +21,20 @@ endpoints:
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
+    queryParameters:
+      page:
+        custom: []
+        name: page
+        description: 'The page number.'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      page: 1
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -30,7 +42,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":[{"id":"019a994c-ddd5-7120-961b-9f8277416346","name":"architecto"},{"id":"019a994c-dddc-71d0-af1b-1cc2cfe8749f","name":"quos"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
+        content: '{"data":[{"id":"019ab312-b40c-73b6-983d-e2ce87f41145","name":"architecto","description":null,"state":"published","created_at":"2025-11-23T23:35:38.000000Z","updated_at":"2025-11-23T23:35:38.000000Z","published_at":null},{"id":"019ab312-b410-706d-a696-8b4c3f3a0776","name":"quos","description":null,"state":"draft","created_at":"2025-11-23T23:35:38.000000Z","updated_at":"2025-11-23T23:35:38.000000Z","published_at":null}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
         headers: []
         description: ''
     responseFields: []
@@ -62,14 +74,14 @@ endpoints:
         name: schema_id
         description: 'The ID of the schema.'
         required: true
-        example: 019a9895-2a79-70fa-be63-3dbaedcf4d6f
+        example: 019ab311-9adf-7002-83ff-95c00ca3753e
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      schema_id: 019a9895-2a79-70fa-be63-3dbaedcf4d6f
+      schema_id: 019ab311-9adf-7002-83ff-95c00ca3753e
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -79,7 +91,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019a994c-dde4-72a7-b322-66db7c2daabc","name":"sunt","description":"Harum mollitia modi deserunt aut ab provident perspiciatis quo.","content":null,"created_at":"2025-11-18T23:29:02.000000Z","updated_at":"2025-11-18T23:29:02.000000Z"}}'
+        content: '{"data":{"id":"019ab312-b419-738e-be0b-0c2a0e0bd86c","name":"sunt","description":"Harum mollitia modi deserunt aut ab provident perspiciatis quo.","content":null,"state":"draft","created_at":"2025-11-23T23:35:38.000000Z","updated_at":"2025-11-23T23:35:38.000000Z","published_at":null}}'
         headers: []
         description: ''
     responseFields: []
@@ -152,7 +164,7 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"019a994c-ddea-704d-b368-8fe4f3113db8","name":"architecto","description":null,"content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","created_at":"2025-11-18T23:29:02.000000Z","updated_at":"2025-11-18T23:29:02.000000Z"}}'
+        content: '{"data":{"id":"019ab312-b420-7015-b838-98c184ed79b8","name":"architecto","description":null,"content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","state":"draft","created_at":"2025-11-23T23:35:38.000000Z","updated_at":"2025-11-23T23:35:38.000000Z","published_at":null}}'
         headers: []
         description: ''
     responseFields: []
@@ -184,14 +196,14 @@ endpoints:
         name: schema_id
         description: 'The ID of the schema.'
         required: true
-        example: 019a9895-2a79-70fa-be63-3dbaedcf4d6f
+        example: 019ab311-9adf-7002-83ff-95c00ca3753e
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      schema_id: 019a9895-2a79-70fa-be63-3dbaedcf4d6f
+      schema_id: 019ab311-9adf-7002-83ff-95c00ca3753e
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -237,7 +249,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019a994c-ddee-7028-ba90-233ca79cb123","name":"architecto","description":null,"content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","created_at":"2025-11-18T23:29:02.000000Z","updated_at":"2025-11-18T23:29:02.000000Z"}}'
+        content: '{"data":{"id":"019ab312-b425-71cc-b3df-00932984e232","name":"architecto","description":null,"content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","state":"draft","created_at":"2025-11-23T23:35:38.000000Z","updated_at":"2025-11-23T23:35:38.000000Z","published_at":null}}'
         headers: []
         description: ''
     responseFields: []
@@ -269,14 +281,14 @@ endpoints:
         name: schema_id
         description: 'The ID of the schema.'
         required: true
-        example: 019a9895-2a79-70fa-be63-3dbaedcf4d6f
+        example: 019ab311-9adf-7002-83ff-95c00ca3753e
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      schema_id: 019a9895-2a79-70fa-be63-3dbaedcf4d6f
+      schema_id: 019ab311-9adf-7002-83ff-95c00ca3753e
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

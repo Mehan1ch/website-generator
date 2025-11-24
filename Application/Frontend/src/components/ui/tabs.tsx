@@ -3,8 +3,8 @@
 import * as React from 'react';
 import {type HTMLMotionProps, motion, type Transition} from 'motion/react';
 
-import {cn} from '@/lib/utils.ts';
-import {MotionHighlight, MotionHighlightItem,} from "@/components/ui/motion-highlight.tsx";
+import {cn} from '@/lib/utils';
+import {MotionHighlight, MotionHighlightItem,} from "@/components/ui/motion-highlight";
 
 // Tabs Component
 type TabsContextType<T extends string> = {

@@ -1,5 +1,4 @@
 import {createFileRoute} from '@tanstack/react-router';
-import {TypographyH4} from "@/components/ui/typography/typography-h4.tsx";
 import Appearance from "@/routes/_app/account/-components/appearance.tsx";
 import {ProfileForm} from "@/routes/_app/account/-components/profile-form.tsx";
 import {AvatarUpload} from "@/routes/_app/account/-components/avatar-upload.tsx";
@@ -7,6 +6,7 @@ import {EmailVerificationBadge} from "@/routes/_app/account/-components/email-ve
 import {DeleteAccountForm} from "@/routes/_app/account/-components/delete-account-form.tsx";
 import PasswordForm from "@/routes/_app/account/-components/password-form.tsx";
 import {Tabs, TabsContent, TabsContents, TabsList, TabsTrigger} from "@/components/ui/tabs";
+import {RouteTitle} from "@/components/blocks/route-title.tsx";
 
 export const Route = createFileRoute('/_app/account/')({
     beforeLoad: () => {
@@ -18,13 +18,8 @@ export const Route = createFileRoute('/_app/account/')({
 });
 
 function Account() {
-    return <div className="m-2 p-4">
-        <header className="flex h-16 shrink-0 items-center gap-2">
-            <div>
-                <TypographyH4>Settings</TypographyH4>
-                <p className="text-muted-foreground">Manage your profile and account settings</p>
-            </div>
-        </header>
+    return <div>
+        <RouteTitle title={"Settings"} description={"Manage your profile and account settings"}/>
         <div className="flex lg:w-1/2 w-full flex-col gap-6">
             <Tabs defaultValue="appearance">
                 <TabsList>

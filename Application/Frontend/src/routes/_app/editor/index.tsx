@@ -24,7 +24,7 @@ export const Route = createFileRoute('/_app/editor/')({
 
 function EditorPage() {
 
-    return <div className="flex-1 m-4">
+    return <div>
         <Editor
             resolver={EDITOR_RESOLVER}>
             <Topbar/>

@@ -115,7 +115,7 @@ export interface paths {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 * @example 019ab311-9b23-7181-9f47-68579ef957c3
                  */
                 site_id: string;
             };
@@ -153,7 +153,7 @@ export interface paths {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 * @example 019ab311-9b23-7181-9f47-68579ef957c3
                  */
                 site_id: string;
             };
@@ -230,12 +230,12 @@ export interface paths {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 * @example 019ab311-9b23-7181-9f47-68579ef957c3
                  */
                 site_id: string;
                 /**
                  * @description The ID of the page.
-                 * @example 019a9895-2afb-706d-a246-c9dad48e46cd
+                 * @example 019ab311-9b28-7268-a54f-057c218f186f
                  */
                 page_id: string;
             };
@@ -269,7 +269,7 @@ export interface paths {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 * @example 019ab311-9b23-7181-9f47-68579ef957c3
                  */
                 site_id: string;
             };
@@ -399,7 +399,7 @@ export interface paths {
             path: {
                 /**
                  * @description The ID of the schema.
-                 * @example 019a9895-2a79-70fa-be63-3dbaedcf4d6f
+                 * @example 019ab311-9adf-7002-83ff-95c00ca3753e
                  */
                 schema_id: string;
             };
@@ -457,7 +457,7 @@ export interface paths {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 * @example 019ab311-9b23-7181-9f47-68579ef957c3
                  */
                 site_id: string;
             };
@@ -805,7 +805,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 * @example 019ab311-9b23-7181-9f47-68579ef957c3
                  */
                 site_id: string;
             };
@@ -830,7 +830,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 * @example 019ab311-9b23-7181-9f47-68579ef957c3
                  */
                 site_id: string;
             };
@@ -855,7 +855,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 * @example 019ab311-9b23-7181-9f47-68579ef957c3
                  */
                 site_id: string;
             };
@@ -880,7 +880,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 * @example 019ab311-9b23-7181-9f47-68579ef957c3
                  */
                 site_id: string;
             };
@@ -905,7 +905,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 * @example 019ab311-9b23-7181-9f47-68579ef957c3
                  */
                 site_id: string;
             };
@@ -992,12 +992,12 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 * @example 019ab311-9b23-7181-9f47-68579ef957c3
                  */
                 site_id: string;
                 /**
                  * @description The ID of the page.
-                 * @example 019a9895-2afb-706d-a246-c9dad48e46cd
+                 * @example 019ab311-9b28-7268-a54f-057c218f186f
                  */
                 page_id: string;
             };
@@ -1012,7 +1012,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019a994c-df03-732d-86c8-649c94fa81f8 */
+                            /** @example 019ab312-b4fa-722f-b081-7ad04b139f26 */
                             id?: string;
                             /** @example Deserunt aut ab provident perspiciatis quo omnis nostrum. */
                             title?: string;
@@ -1020,11 +1020,11 @@ export interface operations {
                             url?: string;
                             /** @example null */
                             content?: string;
-                            /** @example 019a9895-2be7-7183-966c-8e1fc9e90178 */
+                            /** @example 019ab311-9b91-73d5-ace7-3b3cc162824d */
                             site_id?: string;
-                            /** @example 2025-11-18T23:29:03.000000Z */
+                            /** @example 2025-11-23T23:35:39.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-18T23:29:03.000000Z */
+                            /** @example 2025-11-23T23:35:39.000000Z */
                             updated_at?: string;
                         };
                     };
@@ -1050,12 +1050,12 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 * @example 019ab311-9b23-7181-9f47-68579ef957c3
                  */
                 site_id: string;
                 /**
                  * @description The ID of the page.
-                 * @example 019a9895-2afb-706d-a246-c9dad48e46cd
+                 * @example 019ab311-9b28-7268-a54f-057c218f186f
                  */
                 page_id: string;
             };
@@ -1095,7 +1095,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019a994c-df2d-720b-838c-72e76bf4a114 */
+                            /** @example 019ab312-b523-70fd-90e2-2fdea5d233f2 */
                             id?: string;
                             /** @example Eius et animi quos velit et. */
                             title?: string;
@@ -1103,11 +1103,11 @@ export interface operations {
                             url?: string;
                             /** @example hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n */
                             content?: string;
-                            /** @example 019a9895-2bc3-715e-9ead-4d8e34744209 */
+                            /** @example 019ab311-9b7c-7170-b4bb-64784e13b2e9 */
                             site_id?: string;
-                            /** @example 2025-11-18T23:29:03.000000Z */
+                            /** @example 2025-11-23T23:35:39.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-18T23:29:03.000000Z */
+                            /** @example 2025-11-23T23:35:39.000000Z */
                             updated_at?: string;
                         };
                     };
@@ -1133,12 +1133,12 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 * @example 019ab311-9b23-7181-9f47-68579ef957c3
                  */
                 site_id: string;
                 /**
                  * @description The ID of the page.
-                 * @example 019a9895-2afb-706d-a246-c9dad48e46cd
+                 * @example 019ab311-9b28-7268-a54f-057c218f186f
                  */
                 page_id: string;
             };
@@ -1163,7 +1163,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 * @example 019ab311-9b23-7181-9f47-68579ef957c3
                  */
                 site_id: string;
             };
@@ -1193,7 +1193,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019a994c-df19-7290-b102-426facbc5605 */
+                            /** @example 019ab312-b50f-7005-9b45-ce5a9c45cbb1 */
                             id?: string;
                             /** @example Eius et animi quos velit et. */
                             title?: string;
@@ -1201,11 +1201,11 @@ export interface operations {
                             url?: string;
                             /** @example hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n */
                             content?: string;
-                            /** @example 019a9895-2b09-7056-a4bf-4bdf3d0fcb80 */
+                            /** @example 019ab311-9b57-7384-a75e-39f9a04def8b */
                             site_id?: string;
-                            /** @example 2025-11-18T23:29:03.000000Z */
+                            /** @example 2025-11-23T23:35:39.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-18T23:29:03.000000Z */
+                            /** @example 2025-11-23T23:35:39.000000Z */
                             updated_at?: string;
                         };
                     };
@@ -1405,7 +1405,13 @@ export interface operations {
     };
     getSchemas: {
         parameters: {
-            query?: never;
+            query?: {
+                /**
+                 * @description The page number.
+                 * @example 1
+                 */
+                page?: number;
+            };
             header?: never;
             path?: never;
             cookie?: never;
@@ -1421,20 +1427,40 @@ export interface operations {
                         /**
                          * @example [
                          *       {
-                         *         "id": "019a994c-ddd5-7120-961b-9f8277416346",
-                         *         "name": "architecto"
+                         *         "id": "019ab312-b40c-73b6-983d-e2ce87f41145",
+                         *         "name": "architecto",
+                         *         "description": null,
+                         *         "state": "published",
+                         *         "created_at": "2025-11-23T23:35:38.000000Z",
+                         *         "updated_at": "2025-11-23T23:35:38.000000Z",
+                         *         "published_at": null
                          *       },
                          *       {
-                         *         "id": "019a994c-dddc-71d0-af1b-1cc2cfe8749f",
-                         *         "name": "quos"
+                         *         "id": "019ab312-b410-706d-a696-8b4c3f3a0776",
+                         *         "name": "quos",
+                         *         "description": null,
+                         *         "state": "draft",
+                         *         "created_at": "2025-11-23T23:35:38.000000Z",
+                         *         "updated_at": "2025-11-23T23:35:38.000000Z",
+                         *         "published_at": null
                          *       }
                          *     ]
                          */
                         data?: {
-                            /** @example 019a994c-ddd5-7120-961b-9f8277416346 */
+                            /** @example 019ab312-b40c-73b6-983d-e2ce87f41145 */
                             id?: string;
                             /** @example architecto */
                             name?: string;
+                            /** @example null */
+                            description?: string;
+                            /** @example published */
+                            state?: string;
+                            /** @example 2025-11-23T23:35:38.000000Z */
+                            created_at?: string;
+                            /** @example 2025-11-23T23:35:38.000000Z */
+                            updated_at?: string;
+                            /** @example null */
+                            published_at?: string;
                         }[];
                         links?: {
                             /** @example /?page=1 */
@@ -1535,7 +1561,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019a994c-ddea-704d-b368-8fe4f3113db8 */
+                            /** @example 019ab312-b420-7015-b838-98c184ed79b8 */
                             id?: string;
                             /** @example architecto */
                             name?: string;
@@ -1543,10 +1569,14 @@ export interface operations {
                             description?: string;
                             /** @example hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n */
                             content?: string;
-                            /** @example 2025-11-18T23:29:02.000000Z */
+                            /** @example draft */
+                            state?: string;
+                            /** @example 2025-11-23T23:35:38.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-18T23:29:02.000000Z */
+                            /** @example 2025-11-23T23:35:38.000000Z */
                             updated_at?: string;
+                            /** @example null */
+                            published_at?: string;
                         };
                     };
                 };
@@ -1560,7 +1590,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the schema.
-                 * @example 019a9895-2a79-70fa-be63-3dbaedcf4d6f
+                 * @example 019ab311-9adf-7002-83ff-95c00ca3753e
                  */
                 schema_id: string;
             };
@@ -1575,7 +1605,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019a994c-dde4-72a7-b322-66db7c2daabc */
+                            /** @example 019ab312-b419-738e-be0b-0c2a0e0bd86c */
                             id?: string;
                             /** @example sunt */
                             name?: string;
@@ -1583,10 +1613,14 @@ export interface operations {
                             description?: string;
                             /** @example null */
                             content?: string;
-                            /** @example 2025-11-18T23:29:02.000000Z */
+                            /** @example draft */
+                            state?: string;
+                            /** @example 2025-11-23T23:35:38.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-18T23:29:02.000000Z */
+                            /** @example 2025-11-23T23:35:38.000000Z */
                             updated_at?: string;
+                            /** @example null */
+                            published_at?: string;
                         };
                     };
                 };
@@ -1600,7 +1634,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the schema.
-                 * @example 019a9895-2a79-70fa-be63-3dbaedcf4d6f
+                 * @example 019ab311-9adf-7002-83ff-95c00ca3753e
                  */
                 schema_id: string;
             };
@@ -1635,7 +1669,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019a994c-ddee-7028-ba90-233ca79cb123 */
+                            /** @example 019ab312-b425-71cc-b3df-00932984e232 */
                             id?: string;
                             /** @example architecto */
                             name?: string;
@@ -1643,10 +1677,14 @@ export interface operations {
                             description?: string;
                             /** @example hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n */
                             content?: string;
-                            /** @example 2025-11-18T23:29:02.000000Z */
+                            /** @example draft */
+                            state?: string;
+                            /** @example 2025-11-23T23:35:38.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-18T23:29:02.000000Z */
+                            /** @example 2025-11-23T23:35:38.000000Z */
                             updated_at?: string;
+                            /** @example null */
+                            published_at?: string;
                         };
                     };
                 };
@@ -1660,7 +1698,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the schema.
-                 * @example 019a9895-2a79-70fa-be63-3dbaedcf4d6f
+                 * @example 019ab311-9adf-7002-83ff-95c00ca3753e
                  */
                 schema_id: string;
             };
@@ -1680,7 +1718,13 @@ export interface operations {
     };
     getSites: {
         parameters: {
-            query?: never;
+            query?: {
+                /**
+                 * @description The page number.
+                 * @example 1
+                 */
+                page?: number;
+            };
             header?: never;
             path?: never;
             cookie?: never;
@@ -1696,13 +1740,13 @@ export interface operations {
                         /**
                          * @example [
                          *       {
-                         *         "id": "019a994c-ddf7-720d-b02b-439f245fa088",
+                         *         "id": "019ab312-b42e-70fb-9887-1904194b3410",
                          *         "name": "O'Kon and Sons",
                          *         "subdomain": "dach",
                          *         "state": "draft"
                          *       },
                          *       {
-                         *         "id": "019a994c-de01-717f-85f9-004ad124dee0",
+                         *         "id": "019ab312-b436-73a5-937b-33e388eba932",
                          *         "name": "Marquardt Inc",
                          *         "subdomain": "hirthe",
                          *         "state": "draft"
@@ -1710,7 +1754,7 @@ export interface operations {
                          *     ]
                          */
                         data?: {
-                            /** @example 019a994c-ddf7-720d-b02b-439f245fa088 */
+                            /** @example 019ab312-b42e-70fb-9887-1904194b3410 */
                             id?: string;
                             /** @example O'Kon and Sons */
                             name?: string;
@@ -1818,7 +1862,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019a994c-dee7-7002-b963-fde8abf767db */
+                            /** @example 019ab312-b4e2-71c9-9bc0-8224dccd040e */
                             id?: string;
                             /** @example Bailey Ltd */
                             name?: string;
@@ -1826,7 +1870,7 @@ export interface operations {
                             subdomain?: string;
                             /** @example null */
                             description?: string;
-                            /** @example 019a9895-2a09-71fc-b27a-d4cc6b6966f7 */
+                            /** @example 019ab311-a15c-73f4-8167-7113e5acb769 */
                             user_id?: string;
                             /** @example draft */
                             state?: string;
@@ -1834,14 +1878,14 @@ export interface operations {
                                 /**
                                  * @example [
                                  *       {
-                                 *         "id": "019a994c-dee8-704b-b1cb-2b0a1b10a1b1",
+                                 *         "id": "019ab312-b4e3-7042-b342-ed522d4d96a8",
                                  *         "title": "Home",
                                  *         "url": "/"
                                  *       }
                                  *     ]
                                  */
                                 data?: {
-                                    /** @example 019a994c-dee8-704b-b1cb-2b0a1b10a1b1 */
+                                    /** @example 019ab312-b4e3-7042-b342-ed522d4d96a8 */
                                     id?: string;
                                     /** @example Home */
                                     title?: string;
@@ -1849,11 +1893,11 @@ export interface operations {
                                     url?: string;
                                 }[];
                             };
-                            /** @example 2025-11-18T23:29:03.000000Z */
+                            /** @example 2025-11-23T23:35:38.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-18T23:29:03.000000Z */
+                            /** @example 2025-11-23T23:35:38.000000Z */
                             updated_at?: string;
-                            /** @example 2024-12-19 11:04:52 */
+                            /** @example null */
                             published_at?: string;
                         };
                     };
@@ -1868,7 +1912,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 * @example 019ab311-9b23-7181-9f47-68579ef957c3
                  */
                 site_id: string;
             };
@@ -1883,7 +1927,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019a994c-de09-71f3-b040-5d4d9b5f63c3 */
+                            /** @example 019ab312-b43f-7045-a754-511f93c82a92 */
                             id?: string;
                             /** @example Fritsch-O'Keefe */
                             name?: string;
@@ -1891,7 +1935,7 @@ export interface operations {
                             subdomain?: string;
                             /** @example Consequatur aut dolores enim non facere tempora. */
                             description?: string;
-                            /** @example 019a9895-29c4-7006-8661-55e3cf3023fc */
+                            /** @example 019ab311-9ac3-7024-ac17-e29237dd2bfd */
                             user_id?: string;
                             /** @example draft */
                             state?: string;
@@ -1899,19 +1943,19 @@ export interface operations {
                                 /**
                                  * @example [
                                  *       {
-                                 *         "id": "019a994c-de0a-70fa-bfd4-5b998fd29aa6",
+                                 *         "id": "019ab312-b440-73ad-aaf3-098f85f86e13",
                                  *         "title": "Home",
                                  *         "url": "/"
                                  *       },
                                  *       {
-                                 *         "id": "019a994c-de0e-7005-9cf8-0790b7dd15e1",
+                                 *         "id": "019ab312-b443-726a-a2bf-404b0d9f06b4",
                                  *         "title": "Voluptatem laboriosam praesentium quis adipisci.",
                                  *         "url": "/deleniti-distinctio-eum-doloremque-id-aut"
                                  *       }
                                  *     ]
                                  */
                                 data?: {
-                                    /** @example 019a994c-de0a-70fa-bfd4-5b998fd29aa6 */
+                                    /** @example 019ab312-b440-73ad-aaf3-098f85f86e13 */
                                     id?: string;
                                     /** @example Home */
                                     title?: string;
@@ -1919,11 +1963,11 @@ export interface operations {
                                     url?: string;
                                 }[];
                             };
-                            /** @example 2025-11-18T23:29:02.000000Z */
+                            /** @example 2025-11-23T23:35:38.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-18T23:29:02.000000Z */
+                            /** @example 2025-11-23T23:35:38.000000Z */
                             updated_at?: string;
-                            /** @example 2025-05-26 09:03:38 */
+                            /** @example 2025-05-31 09:10:14 */
                             published_at?: string;
                         };
                     };
@@ -1938,7 +1982,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 * @example 019ab311-9b23-7181-9f47-68579ef957c3
                  */
                 site_id: string;
             };
@@ -1973,7 +2017,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019a994c-def1-7124-888e-789a5faaf8d8 */
+                            /** @example 019ab312-b4ea-72b0-8d41-96b433386e33 */
                             id?: string;
                             /** @example Bailey Ltd */
                             name?: string;
@@ -1981,7 +2025,7 @@ export interface operations {
                             subdomain?: string;
                             /** @example Sunt nihil accusantium harum mollitia. */
                             description?: string;
-                            /** @example 019a9895-2a40-7149-b803-c9944f65e3d3 */
+                            /** @example 019ab311-a15c-73f4-8167-7113e5acb769 */
                             user_id?: string;
                             /** @example draft */
                             state?: string;
@@ -1989,14 +2033,14 @@ export interface operations {
                                 /**
                                  * @example [
                                  *       {
-                                 *         "id": "019a994c-def1-7124-888e-789a609dbfb9",
+                                 *         "id": "019ab312-b4eb-73d4-a7f7-96862ed07317",
                                  *         "title": "Home",
                                  *         "url": "/"
                                  *       }
                                  *     ]
                                  */
                                 data?: {
-                                    /** @example 019a994c-def1-7124-888e-789a609dbfb9 */
+                                    /** @example 019ab312-b4eb-73d4-a7f7-96862ed07317 */
                                     id?: string;
                                     /** @example Home */
                                     title?: string;
@@ -2004,11 +2048,11 @@ export interface operations {
                                     url?: string;
                                 }[];
                             };
-                            /** @example 2025-11-18T23:29:03.000000Z */
+                            /** @example 2025-11-23T23:35:38.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-18T23:29:03.000000Z */
+                            /** @example 2025-11-23T23:35:38.000000Z */
                             updated_at?: string;
-                            /** @example null */
+                            /** @example 2024-12-24 11:11:27 */
                             published_at?: string;
                         };
                     };
@@ -2023,7 +2067,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019a9895-2af4-73e4-96e4-25649a8734cd
+                 * @example 019ab311-9b23-7181-9f47-68579ef957c3
                  */
                 site_id: string;
             };
@@ -2184,19 +2228,21 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019a994c-dd9d-703f-ade1-17269d1272eb */
+                            /** @example 019ab312-b3d8-7135-a08e-b4514c87808f */
                             id?: string;
-                            /** @example Donnie Kassulke */
+                            /** @example Dessie Corwin */
                             name?: string;
-                            /** @example xabernathy@example.net */
+                            /** @example qdurgan@example.net */
                             email?: string;
-                            /** @example 2025-11-18T23:29:02.000000Z */
+                            /** @example 2025-11-23T23:35:38.000000Z */
                             email_verified_at?: string;
                             /** @example null */
                             avatar?: string;
-                            /** @example 2025-11-18T23:29:02.000000Z */
+                            /** @example false */
+                            is_admin?: boolean;
+                            /** @example 2025-11-23T23:35:38.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-18T23:29:02.000000Z */
+                            /** @example 2025-11-23T23:35:38.000000Z */
                             updated_at?: string;
                         };
                     };
