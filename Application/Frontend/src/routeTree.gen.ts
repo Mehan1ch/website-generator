@@ -23,7 +23,9 @@ import { Route as AppSchemasIndexRouteImport } from './routes/_app/schemas/index
 import { Route as AppEditorIndexRouteImport } from './routes/_app/editor/index'
 import { Route as AppAccountIndexRouteImport } from './routes/_app/account/index'
 import { Route as AppSchemasCreateRouteImport } from './routes/_app/schemas/create'
-import { Route as AppSchemasIdRouteImport } from './routes/_app/schemas/$id'
+import { Route as AppSchemasSchemaIdIndexRouteImport } from './routes/_app/schemas/$schemaId/index'
+import { Route as AppSchemasSchemaIdEditRouteImport } from './routes/_app/schemas/$schemaId/edit'
+import { Route as AppSchemasSchemaIdDesignRouteImport } from './routes/_app/schemas/$schemaId/design'
 import { Route as authEmailVerifyIdHashRouteImport } from './routes/(auth)/email.verify.$id.$hash'
 
 const AppRouteRoute = AppRouteRouteImport.update({
@@ -95,11 +97,22 @@ const AppSchemasCreateRoute = AppSchemasCreateRouteImport.update({
   path: '/create',
   getParentRoute: () => AppSchemasRouteRoute,
 } as any)
-const AppSchemasIdRoute = AppSchemasIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
+const AppSchemasSchemaIdIndexRoute = AppSchemasSchemaIdIndexRouteImport.update({
+  id: '/$schemaId/',
+  path: '/$schemaId/',
   getParentRoute: () => AppSchemasRouteRoute,
 } as any)
+const AppSchemasSchemaIdEditRoute = AppSchemasSchemaIdEditRouteImport.update({
+  id: '/$schemaId/edit',
+  path: '/$schemaId/edit',
+  getParentRoute: () => AppSchemasRouteRoute,
+} as any)
+const AppSchemasSchemaIdDesignRoute =
+  AppSchemasSchemaIdDesignRouteImport.update({
+    id: '/$schemaId/design',
+    path: '/$schemaId/design',
+    getParentRoute: () => AppSchemasRouteRoute,
+  } as any)
 const authEmailVerifyIdHashRoute = authEmailVerifyIdHashRouteImport.update({
   id: '/(auth)/email/verify/$id/$hash',
   path: '/email/verify/$id/$hash',
@@ -115,12 +128,14 @@ export interface FileRoutesByFullPath {
   '/register': typeof authRegisterRoute
   '/reset-password': typeof authResetPasswordRoute
   '/dashboard': typeof AppDashboardRoute
-  '/schemas/$id': typeof AppSchemasIdRoute
   '/schemas/create': typeof AppSchemasCreateRoute
   '/account': typeof AppAccountIndexRoute
   '/editor': typeof AppEditorIndexRoute
   '/schemas/': typeof AppSchemasIndexRoute
   '/websites/': typeof AppWebsitesIndexRoute
+  '/schemas/$schemaId/design': typeof AppSchemasSchemaIdDesignRoute
+  '/schemas/$schemaId/edit': typeof AppSchemasSchemaIdEditRoute
+  '/schemas/$schemaId': typeof AppSchemasSchemaIdIndexRoute
   '/email/verify/$id/$hash': typeof authEmailVerifyIdHashRoute
 }
 export interface FileRoutesByTo {
@@ -130,12 +145,14 @@ export interface FileRoutesByTo {
   '/register': typeof authRegisterRoute
   '/reset-password': typeof authResetPasswordRoute
   '/dashboard': typeof AppDashboardRoute
-  '/schemas/$id': typeof AppSchemasIdRoute
   '/schemas/create': typeof AppSchemasCreateRoute
   '/account': typeof AppAccountIndexRoute
   '/editor': typeof AppEditorIndexRoute
   '/schemas': typeof AppSchemasIndexRoute
   '/websites': typeof AppWebsitesIndexRoute
+  '/schemas/$schemaId/design': typeof AppSchemasSchemaIdDesignRoute
+  '/schemas/$schemaId/edit': typeof AppSchemasSchemaIdEditRoute
+  '/schemas/$schemaId': typeof AppSchemasSchemaIdIndexRoute
   '/email/verify/$id/$hash': typeof authEmailVerifyIdHashRoute
 }
 export interface FileRoutesById {
@@ -149,12 +166,14 @@ export interface FileRoutesById {
   '/(auth)/register': typeof authRegisterRoute
   '/(auth)/reset-password': typeof authResetPasswordRoute
   '/_app/dashboard': typeof AppDashboardRoute
-  '/_app/schemas/$id': typeof AppSchemasIdRoute
   '/_app/schemas/create': typeof AppSchemasCreateRoute
   '/_app/account/': typeof AppAccountIndexRoute
   '/_app/editor/': typeof AppEditorIndexRoute
   '/_app/schemas/': typeof AppSchemasIndexRoute
   '/_app/websites/': typeof AppWebsitesIndexRoute
+  '/_app/schemas/$schemaId/design': typeof AppSchemasSchemaIdDesignRoute
+  '/_app/schemas/$schemaId/edit': typeof AppSchemasSchemaIdEditRoute
+  '/_app/schemas/$schemaId/': typeof AppSchemasSchemaIdIndexRoute
   '/(auth)/email/verify/$id/$hash': typeof authEmailVerifyIdHashRoute
 }
 export interface FileRouteTypes {
@@ -168,12 +187,14 @@ export interface FileRouteTypes {
     | '/register'
     | '/reset-password'
     | '/dashboard'
-    | '/schemas/$id'
     | '/schemas/create'
     | '/account'
     | '/editor'
     | '/schemas/'
     | '/websites/'
+    | '/schemas/$schemaId/design'
+    | '/schemas/$schemaId/edit'
+    | '/schemas/$schemaId'
     | '/email/verify/$id/$hash'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -183,12 +204,14 @@ export interface FileRouteTypes {
     | '/register'
     | '/reset-password'
     | '/dashboard'
-    | '/schemas/$id'
     | '/schemas/create'
     | '/account'
     | '/editor'
     | '/schemas'
     | '/websites'
+    | '/schemas/$schemaId/design'
+    | '/schemas/$schemaId/edit'
+    | '/schemas/$schemaId'
     | '/email/verify/$id/$hash'
   id:
     | '__root__'
@@ -201,12 +224,14 @@ export interface FileRouteTypes {
     | '/(auth)/register'
     | '/(auth)/reset-password'
     | '/_app/dashboard'
-    | '/_app/schemas/$id'
     | '/_app/schemas/create'
     | '/_app/account/'
     | '/_app/editor/'
     | '/_app/schemas/'
     | '/_app/websites/'
+    | '/_app/schemas/$schemaId/design'
+    | '/_app/schemas/$schemaId/edit'
+    | '/_app/schemas/$schemaId/'
     | '/(auth)/email/verify/$id/$hash'
   fileRoutesById: FileRoutesById
 }
@@ -320,11 +345,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppSchemasCreateRouteImport
       parentRoute: typeof AppSchemasRouteRoute
     }
-    '/_app/schemas/$id': {
-      id: '/_app/schemas/$id'
-      path: '/$id'
-      fullPath: '/schemas/$id'
-      preLoaderRoute: typeof AppSchemasIdRouteImport
+    '/_app/schemas/$schemaId/': {
+      id: '/_app/schemas/$schemaId/'
+      path: '/$schemaId'
+      fullPath: '/schemas/$schemaId'
+      preLoaderRoute: typeof AppSchemasSchemaIdIndexRouteImport
+      parentRoute: typeof AppSchemasRouteRoute
+    }
+    '/_app/schemas/$schemaId/edit': {
+      id: '/_app/schemas/$schemaId/edit'
+      path: '/$schemaId/edit'
+      fullPath: '/schemas/$schemaId/edit'
+      preLoaderRoute: typeof AppSchemasSchemaIdEditRouteImport
+      parentRoute: typeof AppSchemasRouteRoute
+    }
+    '/_app/schemas/$schemaId/design': {
+      id: '/_app/schemas/$schemaId/design'
+      path: '/$schemaId/design'
+      fullPath: '/schemas/$schemaId/design'
+      preLoaderRoute: typeof AppSchemasSchemaIdDesignRouteImport
       parentRoute: typeof AppSchemasRouteRoute
     }
     '/(auth)/email/verify/$id/$hash': {
@@ -338,15 +377,19 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppSchemasRouteRouteChildren {
-  AppSchemasIdRoute: typeof AppSchemasIdRoute
   AppSchemasCreateRoute: typeof AppSchemasCreateRoute
   AppSchemasIndexRoute: typeof AppSchemasIndexRoute
+  AppSchemasSchemaIdDesignRoute: typeof AppSchemasSchemaIdDesignRoute
+  AppSchemasSchemaIdEditRoute: typeof AppSchemasSchemaIdEditRoute
+  AppSchemasSchemaIdIndexRoute: typeof AppSchemasSchemaIdIndexRoute
 }
 
 const AppSchemasRouteRouteChildren: AppSchemasRouteRouteChildren = {
-  AppSchemasIdRoute: AppSchemasIdRoute,
   AppSchemasCreateRoute: AppSchemasCreateRoute,
   AppSchemasIndexRoute: AppSchemasIndexRoute,
+  AppSchemasSchemaIdDesignRoute: AppSchemasSchemaIdDesignRoute,
+  AppSchemasSchemaIdEditRoute: AppSchemasSchemaIdEditRoute,
+  AppSchemasSchemaIdIndexRoute: AppSchemasSchemaIdIndexRoute,
 }
 
 const AppSchemasRouteRouteWithChildren = AppSchemasRouteRoute._addFileChildren(

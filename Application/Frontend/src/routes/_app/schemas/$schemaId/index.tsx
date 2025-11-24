@@ -5,18 +5,18 @@ import {Loading} from "@/components/blocks/loading.tsx";
 import SchemaDetail from "@/routes/_app/schemas/-components/schema-detail.tsx";
 import {Schema} from "@/types/schema.ts";
 
-export const Route = createFileRoute('/_app/schemas/$id')({
+export const Route = createFileRoute('/_app/schemas/$schemaId/')({
     beforeLoad: ({params}) => {
         return {
-            getTitle: () => `${params.id}`,
+            getTitle: () => `${params.schemaId}`,
         };
     },
     loader: async ({context: {queryClient}, params}) => {
-        const {id} = params;
+        const {schemaId} = params;
         const schemaQueryOptions = api.queryOptions("get", "/api/v1/schema/{schema_id}", {
             params: {
                 path: {
-                    schema_id: id,
+                    schema_id: schemaId,
                 }
             }
         });
@@ -26,15 +26,14 @@ export const Route = createFileRoute('/_app/schemas/$id')({
 });
 
 function SchemaRoute() {
-    const {id} = Route.useParams();
-    const {error, isLoading, data} = api.useSuspenseQuery("get", "/api/v1/schema/{schema_id}", {
+    const {schemaId} = Route.useParams();
+    const {error, isLoading, data} = api.useQuery("get", "/api/v1/schema/{schema_id}", {
         params: {
             path: {
-                schema_id: id,
+                schema_id: schemaId,
             }
         }
     });
-    const schema = data.data as Schema;
 
     if (error) {
         toast.error("Failed to load schemas.", {
@@ -43,9 +42,10 @@ function SchemaRoute() {
         throw error;
     }
 
-    if (isLoading) {
+    if (!data || isLoading) {
         return <Loading/>;
     }
 
+    const schema = data.data as Schema;
     return <SchemaDetail schema={schema}/>;
 }

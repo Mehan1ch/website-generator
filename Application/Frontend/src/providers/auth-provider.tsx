@@ -1,10 +1,10 @@
 import {ReactNode, useEffect, useState} from "react";
-import {Spinner} from "@/components/ui/spinner.tsx";
 import {toast} from "sonner";
 import {AuthContext} from "@/contexts/auth-context";
 import {LoginBody, RegisterBody, User} from "@/types/auth.ts";
 import {api, APIError} from "@/lib/api/api-client.ts";
 import {useQueryClient} from "@tanstack/react-query";
+import {Loading} from "@/components/blocks/loading.tsx";
 
 export function AuthProvider({children}: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
@@ -32,10 +32,7 @@ export function AuthProvider({children}: { children: ReactNode }) {
 // Show loading state while checking auth
     if (isLoading) {
         return (
-            <div className="flex flex-col items-center justify-center min-h-screen space-y-4">
-                <Spinner/>
-                <p className="text-muted-foreground">Loading...</p>
-            </div>
+            <Loading/>
         );
     }
 

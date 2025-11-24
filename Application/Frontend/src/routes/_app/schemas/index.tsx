@@ -40,16 +40,14 @@ export const Route = createFileRoute('/_app/schemas/')({
 function SchemaIndexRoute() {
     const {user} = useAuth();
     const {page} = Route.useSearch();
-    const {error, isLoading, data,} = api.useSuspenseQuery("get", "/api/v1/schema", {
+    const {error, isLoading, data} = api.useQuery("get", "/api/v1/schema", {
         params: {
             query: {
                 page: page,
             }
         }
     });
-    const schemaCollectionResponse: SchemaCollectionResponse = data;
-    const schemas: SchemaCollectionItem[] = schemaCollectionResponse?.data || [];
-    console.log(schemaCollectionResponse);
+
 
     if (error) {
         toast.error("Failed to load schemas.", {
@@ -58,10 +56,12 @@ function SchemaIndexRoute() {
         throw error;
     }
 
-    if (isLoading) {
+    if (!data || isLoading) {
         return <Loading/>;
     }
 
+    const schemaCollectionResponse: SchemaCollectionResponse = data;
+    const schemas: SchemaCollectionItem[] = schemaCollectionResponse?.data || [];
     if (schemas?.length > 0) {
         return <>
             <div className="mb-8 flex items-center justify-between">
