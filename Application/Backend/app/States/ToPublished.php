@@ -15,7 +15,7 @@ class ToPublished extends Transition
         $this->model = $model;
     }
 
-    public function handle(): Site
+    public function handle(): Site|Schema
     {
         $this->model->published_at = now();
         $this->model->state = new Published($this->model);

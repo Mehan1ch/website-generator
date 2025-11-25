@@ -6,9 +6,9 @@ export const Route = createFileRoute('/_app/websites')({
             getTitle: () => 'Websites',
         };
     },
-    component: RouteComponent,
+    component: WebsitesLayout,
 });
 
-function RouteComponent() {
-    return <div>Hello "/_app/websites"!</div>;
+function WebsitesLayout() {
+    return <Outlet/>;
 }

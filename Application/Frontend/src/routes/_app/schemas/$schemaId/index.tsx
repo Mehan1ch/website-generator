@@ -14,6 +14,7 @@ import {getDateString} from "@/lib/utils.ts";
 import {Separator} from "@/components/ui/separator.tsx";
 import {SchemaNotFound} from "@/routes/_app/schemas/$schemaId/-components/schema-not-found.tsx";
 import {SchemaPublishDialog} from "@/routes/_app/schemas/$schemaId/-components/schema-publish-dialog.tsx";
+import {useQueryClient} from "@tanstack/react-query";
 
 export const Route = createFileRoute('/_app/schemas/$schemaId/')({
     beforeLoad: () => {
@@ -48,6 +49,15 @@ function SchemaIndexComponent() {
     if (!schema) {
         return <SchemaNotFound/>;
     }
+
+    const schemaQueryOptions = api.queryOptions("get", "/api/v1/schema/{schema_id}", {
+        params: {
+            path: {
+                schema_id: schemaId,
+            }
+        }
+    });
+    const queryClient = useQueryClient();
     const router = useRouter();
     const {user} = useAuth();
     const deleteSchemaMutation = api.useMutation("delete", "/api/v1/schema/{schema_id}");
@@ -83,7 +93,10 @@ function SchemaIndexComponent() {
             }
         }), {
             loading: "Publishing schema...",
-            success: "Schema published successfully.",
+            success: () => {
+                queryClient.invalidateQueries(schemaQueryOptions);
+                return "Schema published successfully.";
+            },
             error: (error: APIError) => {
                 return {message: "Failed to publish schema.", description: error.message};
             }

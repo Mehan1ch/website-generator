@@ -21,12 +21,21 @@ import { Route as AppSchemasRouteRouteImport } from './routes/_app/schemas/route
 import { Route as AppWebsitesIndexRouteImport } from './routes/_app/websites/index'
 import { Route as AppSchemasIndexRouteImport } from './routes/_app/schemas/index'
 import { Route as AppAccountIndexRouteImport } from './routes/_app/account/index'
+import { Route as AppWebsitesCreateRouteImport } from './routes/_app/websites/create'
 import { Route as AppSchemasCreateRouteImport } from './routes/_app/schemas/create'
+import { Route as AppWebsitesSiteIdRouteRouteImport } from './routes/_app/websites/$siteId/route'
 import { Route as AppSchemasSchemaIdRouteRouteImport } from './routes/_app/schemas/$schemaId/route'
+import { Route as AppWebsitesSiteIdIndexRouteImport } from './routes/_app/websites/$siteId/index'
 import { Route as AppSchemasSchemaIdIndexRouteImport } from './routes/_app/schemas/$schemaId/index'
+import { Route as AppWebsitesSiteIdEditRouteImport } from './routes/_app/websites/$siteId/edit'
 import { Route as AppSchemasSchemaIdEditRouteImport } from './routes/_app/schemas/$schemaId/edit'
 import { Route as AppSchemasSchemaIdDesignRouteImport } from './routes/_app/schemas/$schemaId/design'
 import { Route as authEmailVerifyIdHashRouteImport } from './routes/(auth)/email.verify.$id.$hash'
+import { Route as AppWebsitesSiteIdPagesPageIdRouteRouteImport } from './routes/_app/websites/$siteId/pages.$pageId/route'
+import { Route as AppWebsitesSiteIdPagesPageIdIndexRouteImport } from './routes/_app/websites/$siteId/pages.$pageId/index'
+import { Route as AppWebsitesSiteIdPagesPageIdEditRouteImport } from './routes/_app/websites/$siteId/pages.$pageId/edit'
+import { Route as AppWebsitesSiteIdPagesPageIdDesignRouteImport } from './routes/_app/websites/$siteId/pages.$pageId/design'
+import { Route as AppWebsitesSiteIdPagesPageIdCreateRouteImport } from './routes/_app/websites/$siteId/pages.$pageId/create'
 
 const AppRouteRoute = AppRouteRouteImport.update({
   id: '/_app',
@@ -87,20 +96,40 @@ const AppAccountIndexRoute = AppAccountIndexRouteImport.update({
   path: '/account/',
   getParentRoute: () => AppRouteRoute,
 } as any)
+const AppWebsitesCreateRoute = AppWebsitesCreateRouteImport.update({
+  id: '/create',
+  path: '/create',
+  getParentRoute: () => AppWebsitesRouteRoute,
+} as any)
 const AppSchemasCreateRoute = AppSchemasCreateRouteImport.update({
   id: '/create',
   path: '/create',
   getParentRoute: () => AppSchemasRouteRoute,
+} as any)
+const AppWebsitesSiteIdRouteRoute = AppWebsitesSiteIdRouteRouteImport.update({
+  id: '/$siteId',
+  path: '/$siteId',
+  getParentRoute: () => AppWebsitesRouteRoute,
 } as any)
 const AppSchemasSchemaIdRouteRoute = AppSchemasSchemaIdRouteRouteImport.update({
   id: '/$schemaId',
   path: '/$schemaId',
   getParentRoute: () => AppSchemasRouteRoute,
 } as any)
+const AppWebsitesSiteIdIndexRoute = AppWebsitesSiteIdIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppWebsitesSiteIdRouteRoute,
+} as any)
 const AppSchemasSchemaIdIndexRoute = AppSchemasSchemaIdIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AppSchemasSchemaIdRouteRoute,
+} as any)
+const AppWebsitesSiteIdEditRoute = AppWebsitesSiteIdEditRouteImport.update({
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => AppWebsitesSiteIdRouteRoute,
 } as any)
 const AppSchemasSchemaIdEditRoute = AppSchemasSchemaIdEditRouteImport.update({
   id: '/edit',
@@ -118,6 +147,36 @@ const authEmailVerifyIdHashRoute = authEmailVerifyIdHashRouteImport.update({
   path: '/email/verify/$id/$hash',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppWebsitesSiteIdPagesPageIdRouteRoute =
+  AppWebsitesSiteIdPagesPageIdRouteRouteImport.update({
+    id: '/pages/$pageId',
+    path: '/pages/$pageId',
+    getParentRoute: () => AppWebsitesSiteIdRouteRoute,
+  } as any)
+const AppWebsitesSiteIdPagesPageIdIndexRoute =
+  AppWebsitesSiteIdPagesPageIdIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AppWebsitesSiteIdPagesPageIdRouteRoute,
+  } as any)
+const AppWebsitesSiteIdPagesPageIdEditRoute =
+  AppWebsitesSiteIdPagesPageIdEditRouteImport.update({
+    id: '/edit',
+    path: '/edit',
+    getParentRoute: () => AppWebsitesSiteIdPagesPageIdRouteRoute,
+  } as any)
+const AppWebsitesSiteIdPagesPageIdDesignRoute =
+  AppWebsitesSiteIdPagesPageIdDesignRouteImport.update({
+    id: '/design',
+    path: '/design',
+    getParentRoute: () => AppWebsitesSiteIdPagesPageIdRouteRoute,
+  } as any)
+const AppWebsitesSiteIdPagesPageIdCreateRoute =
+  AppWebsitesSiteIdPagesPageIdCreateRouteImport.update({
+    id: '/create',
+    path: '/create',
+    getParentRoute: () => AppWebsitesSiteIdPagesPageIdRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -129,14 +188,23 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof authResetPasswordRoute
   '/dashboard': typeof AppDashboardRoute
   '/schemas/$schemaId': typeof AppSchemasSchemaIdRouteRouteWithChildren
+  '/websites/$siteId': typeof AppWebsitesSiteIdRouteRouteWithChildren
   '/schemas/create': typeof AppSchemasCreateRoute
+  '/websites/create': typeof AppWebsitesCreateRoute
   '/account': typeof AppAccountIndexRoute
   '/schemas/': typeof AppSchemasIndexRoute
   '/websites/': typeof AppWebsitesIndexRoute
   '/schemas/$schemaId/design': typeof AppSchemasSchemaIdDesignRoute
   '/schemas/$schemaId/edit': typeof AppSchemasSchemaIdEditRoute
+  '/websites/$siteId/edit': typeof AppWebsitesSiteIdEditRoute
   '/schemas/$schemaId/': typeof AppSchemasSchemaIdIndexRoute
+  '/websites/$siteId/': typeof AppWebsitesSiteIdIndexRoute
+  '/websites/$siteId/pages/$pageId': typeof AppWebsitesSiteIdPagesPageIdRouteRouteWithChildren
   '/email/verify/$id/$hash': typeof authEmailVerifyIdHashRoute
+  '/websites/$siteId/pages/$pageId/create': typeof AppWebsitesSiteIdPagesPageIdCreateRoute
+  '/websites/$siteId/pages/$pageId/design': typeof AppWebsitesSiteIdPagesPageIdDesignRoute
+  '/websites/$siteId/pages/$pageId/edit': typeof AppWebsitesSiteIdPagesPageIdEditRoute
+  '/websites/$siteId/pages/$pageId/': typeof AppWebsitesSiteIdPagesPageIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -146,13 +214,20 @@ export interface FileRoutesByTo {
   '/reset-password': typeof authResetPasswordRoute
   '/dashboard': typeof AppDashboardRoute
   '/schemas/create': typeof AppSchemasCreateRoute
+  '/websites/create': typeof AppWebsitesCreateRoute
   '/account': typeof AppAccountIndexRoute
   '/schemas': typeof AppSchemasIndexRoute
   '/websites': typeof AppWebsitesIndexRoute
   '/schemas/$schemaId/design': typeof AppSchemasSchemaIdDesignRoute
   '/schemas/$schemaId/edit': typeof AppSchemasSchemaIdEditRoute
+  '/websites/$siteId/edit': typeof AppWebsitesSiteIdEditRoute
   '/schemas/$schemaId': typeof AppSchemasSchemaIdIndexRoute
+  '/websites/$siteId': typeof AppWebsitesSiteIdIndexRoute
   '/email/verify/$id/$hash': typeof authEmailVerifyIdHashRoute
+  '/websites/$siteId/pages/$pageId/create': typeof AppWebsitesSiteIdPagesPageIdCreateRoute
+  '/websites/$siteId/pages/$pageId/design': typeof AppWebsitesSiteIdPagesPageIdDesignRoute
+  '/websites/$siteId/pages/$pageId/edit': typeof AppWebsitesSiteIdPagesPageIdEditRoute
+  '/websites/$siteId/pages/$pageId': typeof AppWebsitesSiteIdPagesPageIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -166,14 +241,23 @@ export interface FileRoutesById {
   '/(auth)/reset-password': typeof authResetPasswordRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/schemas/$schemaId': typeof AppSchemasSchemaIdRouteRouteWithChildren
+  '/_app/websites/$siteId': typeof AppWebsitesSiteIdRouteRouteWithChildren
   '/_app/schemas/create': typeof AppSchemasCreateRoute
+  '/_app/websites/create': typeof AppWebsitesCreateRoute
   '/_app/account/': typeof AppAccountIndexRoute
   '/_app/schemas/': typeof AppSchemasIndexRoute
   '/_app/websites/': typeof AppWebsitesIndexRoute
   '/_app/schemas/$schemaId/design': typeof AppSchemasSchemaIdDesignRoute
   '/_app/schemas/$schemaId/edit': typeof AppSchemasSchemaIdEditRoute
+  '/_app/websites/$siteId/edit': typeof AppWebsitesSiteIdEditRoute
   '/_app/schemas/$schemaId/': typeof AppSchemasSchemaIdIndexRoute
+  '/_app/websites/$siteId/': typeof AppWebsitesSiteIdIndexRoute
+  '/_app/websites/$siteId/pages/$pageId': typeof AppWebsitesSiteIdPagesPageIdRouteRouteWithChildren
   '/(auth)/email/verify/$id/$hash': typeof authEmailVerifyIdHashRoute
+  '/_app/websites/$siteId/pages/$pageId/create': typeof AppWebsitesSiteIdPagesPageIdCreateRoute
+  '/_app/websites/$siteId/pages/$pageId/design': typeof AppWebsitesSiteIdPagesPageIdDesignRoute
+  '/_app/websites/$siteId/pages/$pageId/edit': typeof AppWebsitesSiteIdPagesPageIdEditRoute
+  '/_app/websites/$siteId/pages/$pageId/': typeof AppWebsitesSiteIdPagesPageIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -187,14 +271,23 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/dashboard'
     | '/schemas/$schemaId'
+    | '/websites/$siteId'
     | '/schemas/create'
+    | '/websites/create'
     | '/account'
     | '/schemas/'
     | '/websites/'
     | '/schemas/$schemaId/design'
     | '/schemas/$schemaId/edit'
+    | '/websites/$siteId/edit'
     | '/schemas/$schemaId/'
+    | '/websites/$siteId/'
+    | '/websites/$siteId/pages/$pageId'
     | '/email/verify/$id/$hash'
+    | '/websites/$siteId/pages/$pageId/create'
+    | '/websites/$siteId/pages/$pageId/design'
+    | '/websites/$siteId/pages/$pageId/edit'
+    | '/websites/$siteId/pages/$pageId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -204,13 +297,20 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/dashboard'
     | '/schemas/create'
+    | '/websites/create'
     | '/account'
     | '/schemas'
     | '/websites'
     | '/schemas/$schemaId/design'
     | '/schemas/$schemaId/edit'
+    | '/websites/$siteId/edit'
     | '/schemas/$schemaId'
+    | '/websites/$siteId'
     | '/email/verify/$id/$hash'
+    | '/websites/$siteId/pages/$pageId/create'
+    | '/websites/$siteId/pages/$pageId/design'
+    | '/websites/$siteId/pages/$pageId/edit'
+    | '/websites/$siteId/pages/$pageId'
   id:
     | '__root__'
     | '/'
@@ -223,14 +323,23 @@ export interface FileRouteTypes {
     | '/(auth)/reset-password'
     | '/_app/dashboard'
     | '/_app/schemas/$schemaId'
+    | '/_app/websites/$siteId'
     | '/_app/schemas/create'
+    | '/_app/websites/create'
     | '/_app/account/'
     | '/_app/schemas/'
     | '/_app/websites/'
     | '/_app/schemas/$schemaId/design'
     | '/_app/schemas/$schemaId/edit'
+    | '/_app/websites/$siteId/edit'
     | '/_app/schemas/$schemaId/'
+    | '/_app/websites/$siteId/'
+    | '/_app/websites/$siteId/pages/$pageId'
     | '/(auth)/email/verify/$id/$hash'
+    | '/_app/websites/$siteId/pages/$pageId/create'
+    | '/_app/websites/$siteId/pages/$pageId/design'
+    | '/_app/websites/$siteId/pages/$pageId/edit'
+    | '/_app/websites/$siteId/pages/$pageId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -329,12 +438,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAccountIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/_app/websites/create': {
+      id: '/_app/websites/create'
+      path: '/create'
+      fullPath: '/websites/create'
+      preLoaderRoute: typeof AppWebsitesCreateRouteImport
+      parentRoute: typeof AppWebsitesRouteRoute
+    }
     '/_app/schemas/create': {
       id: '/_app/schemas/create'
       path: '/create'
       fullPath: '/schemas/create'
       preLoaderRoute: typeof AppSchemasCreateRouteImport
       parentRoute: typeof AppSchemasRouteRoute
+    }
+    '/_app/websites/$siteId': {
+      id: '/_app/websites/$siteId'
+      path: '/$siteId'
+      fullPath: '/websites/$siteId'
+      preLoaderRoute: typeof AppWebsitesSiteIdRouteRouteImport
+      parentRoute: typeof AppWebsitesRouteRoute
     }
     '/_app/schemas/$schemaId': {
       id: '/_app/schemas/$schemaId'
@@ -343,12 +466,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppSchemasSchemaIdRouteRouteImport
       parentRoute: typeof AppSchemasRouteRoute
     }
+    '/_app/websites/$siteId/': {
+      id: '/_app/websites/$siteId/'
+      path: '/'
+      fullPath: '/websites/$siteId/'
+      preLoaderRoute: typeof AppWebsitesSiteIdIndexRouteImport
+      parentRoute: typeof AppWebsitesSiteIdRouteRoute
+    }
     '/_app/schemas/$schemaId/': {
       id: '/_app/schemas/$schemaId/'
       path: '/'
       fullPath: '/schemas/$schemaId/'
       preLoaderRoute: typeof AppSchemasSchemaIdIndexRouteImport
       parentRoute: typeof AppSchemasSchemaIdRouteRoute
+    }
+    '/_app/websites/$siteId/edit': {
+      id: '/_app/websites/$siteId/edit'
+      path: '/edit'
+      fullPath: '/websites/$siteId/edit'
+      preLoaderRoute: typeof AppWebsitesSiteIdEditRouteImport
+      parentRoute: typeof AppWebsitesSiteIdRouteRoute
     }
     '/_app/schemas/$schemaId/edit': {
       id: '/_app/schemas/$schemaId/edit'
@@ -370,6 +507,41 @@ declare module '@tanstack/react-router' {
       fullPath: '/email/verify/$id/$hash'
       preLoaderRoute: typeof authEmailVerifyIdHashRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_app/websites/$siteId/pages/$pageId': {
+      id: '/_app/websites/$siteId/pages/$pageId'
+      path: '/pages/$pageId'
+      fullPath: '/websites/$siteId/pages/$pageId'
+      preLoaderRoute: typeof AppWebsitesSiteIdPagesPageIdRouteRouteImport
+      parentRoute: typeof AppWebsitesSiteIdRouteRoute
+    }
+    '/_app/websites/$siteId/pages/$pageId/': {
+      id: '/_app/websites/$siteId/pages/$pageId/'
+      path: '/'
+      fullPath: '/websites/$siteId/pages/$pageId/'
+      preLoaderRoute: typeof AppWebsitesSiteIdPagesPageIdIndexRouteImport
+      parentRoute: typeof AppWebsitesSiteIdPagesPageIdRouteRoute
+    }
+    '/_app/websites/$siteId/pages/$pageId/edit': {
+      id: '/_app/websites/$siteId/pages/$pageId/edit'
+      path: '/edit'
+      fullPath: '/websites/$siteId/pages/$pageId/edit'
+      preLoaderRoute: typeof AppWebsitesSiteIdPagesPageIdEditRouteImport
+      parentRoute: typeof AppWebsitesSiteIdPagesPageIdRouteRoute
+    }
+    '/_app/websites/$siteId/pages/$pageId/design': {
+      id: '/_app/websites/$siteId/pages/$pageId/design'
+      path: '/design'
+      fullPath: '/websites/$siteId/pages/$pageId/design'
+      preLoaderRoute: typeof AppWebsitesSiteIdPagesPageIdDesignRouteImport
+      parentRoute: typeof AppWebsitesSiteIdPagesPageIdRouteRoute
+    }
+    '/_app/websites/$siteId/pages/$pageId/create': {
+      id: '/_app/websites/$siteId/pages/$pageId/create'
+      path: '/create'
+      fullPath: '/websites/$siteId/pages/$pageId/create'
+      preLoaderRoute: typeof AppWebsitesSiteIdPagesPageIdCreateRouteImport
+      parentRoute: typeof AppWebsitesSiteIdPagesPageIdRouteRoute
     }
   }
 }
@@ -408,11 +580,58 @@ const AppSchemasRouteRouteWithChildren = AppSchemasRouteRoute._addFileChildren(
   AppSchemasRouteRouteChildren,
 )
 
+interface AppWebsitesSiteIdPagesPageIdRouteRouteChildren {
+  AppWebsitesSiteIdPagesPageIdCreateRoute: typeof AppWebsitesSiteIdPagesPageIdCreateRoute
+  AppWebsitesSiteIdPagesPageIdDesignRoute: typeof AppWebsitesSiteIdPagesPageIdDesignRoute
+  AppWebsitesSiteIdPagesPageIdEditRoute: typeof AppWebsitesSiteIdPagesPageIdEditRoute
+  AppWebsitesSiteIdPagesPageIdIndexRoute: typeof AppWebsitesSiteIdPagesPageIdIndexRoute
+}
+
+const AppWebsitesSiteIdPagesPageIdRouteRouteChildren: AppWebsitesSiteIdPagesPageIdRouteRouteChildren =
+  {
+    AppWebsitesSiteIdPagesPageIdCreateRoute:
+      AppWebsitesSiteIdPagesPageIdCreateRoute,
+    AppWebsitesSiteIdPagesPageIdDesignRoute:
+      AppWebsitesSiteIdPagesPageIdDesignRoute,
+    AppWebsitesSiteIdPagesPageIdEditRoute:
+      AppWebsitesSiteIdPagesPageIdEditRoute,
+    AppWebsitesSiteIdPagesPageIdIndexRoute:
+      AppWebsitesSiteIdPagesPageIdIndexRoute,
+  }
+
+const AppWebsitesSiteIdPagesPageIdRouteRouteWithChildren =
+  AppWebsitesSiteIdPagesPageIdRouteRoute._addFileChildren(
+    AppWebsitesSiteIdPagesPageIdRouteRouteChildren,
+  )
+
+interface AppWebsitesSiteIdRouteRouteChildren {
+  AppWebsitesSiteIdEditRoute: typeof AppWebsitesSiteIdEditRoute
+  AppWebsitesSiteIdIndexRoute: typeof AppWebsitesSiteIdIndexRoute
+  AppWebsitesSiteIdPagesPageIdRouteRoute: typeof AppWebsitesSiteIdPagesPageIdRouteRouteWithChildren
+}
+
+const AppWebsitesSiteIdRouteRouteChildren: AppWebsitesSiteIdRouteRouteChildren =
+  {
+    AppWebsitesSiteIdEditRoute: AppWebsitesSiteIdEditRoute,
+    AppWebsitesSiteIdIndexRoute: AppWebsitesSiteIdIndexRoute,
+    AppWebsitesSiteIdPagesPageIdRouteRoute:
+      AppWebsitesSiteIdPagesPageIdRouteRouteWithChildren,
+  }
+
+const AppWebsitesSiteIdRouteRouteWithChildren =
+  AppWebsitesSiteIdRouteRoute._addFileChildren(
+    AppWebsitesSiteIdRouteRouteChildren,
+  )
+
 interface AppWebsitesRouteRouteChildren {
+  AppWebsitesSiteIdRouteRoute: typeof AppWebsitesSiteIdRouteRouteWithChildren
+  AppWebsitesCreateRoute: typeof AppWebsitesCreateRoute
   AppWebsitesIndexRoute: typeof AppWebsitesIndexRoute
 }
 
 const AppWebsitesRouteRouteChildren: AppWebsitesRouteRouteChildren = {
+  AppWebsitesSiteIdRouteRoute: AppWebsitesSiteIdRouteRouteWithChildren,
+  AppWebsitesCreateRoute: AppWebsitesCreateRoute,
   AppWebsitesIndexRoute: AppWebsitesIndexRoute,
 }
 

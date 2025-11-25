@@ -20,10 +20,10 @@ export const Route = createFileRoute('/_app/schemas/$schemaId')({
         });
         return queryClient.ensureQueryData(schemaQueryOptions);
     },
-    component: SchemaComponent,
+    component: SchemaLayout,
 });
 
-function SchemaComponent() {
+function SchemaLayout() {
     const {schemaId} = Route.useParams();
     const {error, isLoading, data} = api.useSuspenseQuery("get", "/api/v1/schema/{schema_id}", {
         params: {

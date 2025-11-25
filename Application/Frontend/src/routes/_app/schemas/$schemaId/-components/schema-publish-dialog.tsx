@@ -21,28 +21,31 @@ type SchemaPublishDialogProps = {
 }
 export const SchemaPublishDialog = ({name, onSubmit}: SchemaPublishDialogProps) => {
     const [loading, setLoading] = useState<boolean>(false);
+    const [open, setOpen] = useState<boolean>(false);
     const onPublish = async () => {
         setLoading(true);
         try {
             await onSubmit();
-        } catch (error) {
+        } finally {
             setLoading(false);
+            setOpen(false);
         }
     };
-    return <Dialog>
+
+    return <Dialog open={open}>
         <DialogTrigger asChild>
-            <Button variant="default">
+            <Button variant="default" onClick={() => setOpen(true)}>
                 <Upload/>
                 Publish
             </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent>
             <DialogHeader>
                 <div className="flex items-center gap-3 mb-2">
-                    <div className="p-2 bg-destructive/10 rounded-full">
-                        <AlertTriangle className="h-6 w-6 text-destructive"/>
+                    <div className="p-2 bg-primary/10 rounded-full">
+                        <AlertTriangle className="h-6 w-6"/>
                     </div>
-                    <DialogTitle className="text-xl">Publish {name}</DialogTitle>
+                    <DialogTitle className="text-xl text-pretty truncate">Publish {name}</DialogTitle>
                 </div>
                 <DialogDescription className="text-base">
                     This will make the schema publicly available.
@@ -58,13 +61,13 @@ export const SchemaPublishDialog = ({name, onSubmit}: SchemaPublishDialogProps) 
 
             <DialogFooter className="gap-2 sm:gap-0 mt-6">
                 <DialogClose asChild className="mx-2">
-                    <Button variant="outline">
+                    <Button variant="outline" onClick={() => setOpen(false)} disabled={loading}>
                         Cancel
                     </Button>
                 </DialogClose>
                 <Button
                     className="mx-2"
-                    variant="destructive"
+                    variant="default"
                     onClick={onPublish}
                     disabled={loading}
                 >

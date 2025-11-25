@@ -6,9 +6,9 @@ export const Route = createFileRoute('/_app/websites/')({
             getTitle: () => 'Index',
         };
     },
-    component: RouteComponent,
+    component: WebsitesIndexComponent,
 });
 
-function RouteComponent() {
+function WebsitesIndexComponent() {
     return <div>Hello "/_app/websites/"!</div>;
 }
