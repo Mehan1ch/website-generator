@@ -1,4 +1,4 @@
-import {Node, useNode} from "@craftjs/core";
+import {Node, useEditor, useNode} from "@craftjs/core";
 import ContentEditable from "react-contenteditable";
 import {useEffect, useState} from "react";
 import {Form, FormControl, FormField, FormItem, FormLabel} from "@/components/ui/form.tsx";
@@ -27,6 +27,10 @@ export const EditorText = ({text, fontSize = 20, textAlign = "left"}: EditorText
     }));
 
     const [editable, setEditable] = useState(false);
+    const {enabled} = useEditor((state) => ({
+        enabled: state.options.enabled
+    }));
+
 
     useEffect(() => {
         if (!hasSelectedNode) {
@@ -39,7 +43,9 @@ export const EditorText = ({text, fontSize = 20, textAlign = "left"}: EditorText
             ref={ref => {
                 connect(drag(ref!));
             }}
-            onClick={() => setEditable(true)}
+            onClick={() => {
+                if (enabled) setEditable(true);
+            }}
         >
             <ContentEditable
                 disabled={!editable}
