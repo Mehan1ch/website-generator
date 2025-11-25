@@ -1,52 +1,53 @@
 import {Field, FieldError, FieldGroup, FieldLabel} from "@/components/ui/field.tsx";
 import {Card, CardContent, CardFooter} from "@/components/ui/card.tsx";
-import {LayoutTemplateIcon, Save} from "lucide-react";
+import {Globe, Save} from "lucide-react";
 import {Controller, useForm} from "react-hook-form";
 import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {Spinner} from "@/components/ui/spinner.tsx";
 import {useState} from "react";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {CreateSchemaBody, createSchemaForm} from "@/types/schema.ts";
 import {useRouter} from "@tanstack/react-router";
 import {toast} from "sonner";
 import {api, APIError} from "@/lib/api/api-client.ts";
 import {Textarea} from "@/components/ui/textarea.tsx";
+import {CreateSiteBody, createSiteForm} from "@/types/site.ts";
 
-export const SchemaCreateForm = () => {
+export const SiteCreateForm = () => {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
-    const createSchemaMutation = api.useMutation("post", "/api/v1/schema");
+    const createSiteMutation = api.useMutation("post", "/api/v1/site");
 
 
-    const form = useForm<CreateSchemaBody>({
-        resolver: zodResolver(createSchemaForm),
+    const form = useForm<CreateSiteBody>({
+        resolver: zodResolver(createSiteForm),
         defaultValues: {
             name: "",
+            subdomain: "",
             description: "",
         },
         mode: "onSubmit",
         reValidateMode: "onSubmit",
     });
 
-    const handleSubmit = (data: CreateSchemaBody) => {
+    const handleSubmit = (data: CreateSiteBody) => {
         setLoading(true);
-        const loadingToast = toast.loading("Creating schema...");
-        createSchemaMutation.mutate({body: data}, {
+        const loadingToast = toast.loading("Creating site...");
+        createSiteMutation.mutate({body: data}, {
             onSuccess: (data) => {
                 toast.dismiss(loadingToast);
-                toast.success("Schema created successfully.");
+                toast.success("Site created successfully.");
                 router.navigate({
-                    to: "/schemas/$schemaId",
+                    to: "/sites/$siteId",
                     params: {
-                        schemaId: data?.data?.id || "",
+                        siteId: data?.data?.id || "",
                     }
                 });
             },
             onError: (err: APIError) => {
                 setLoading(false);
                 toast.dismiss(loadingToast);
-                toast.error("Failed to create schema: ", {
+                toast.error("Failed to create site: ", {
                     description: err.message,
                 });
             }
@@ -55,7 +56,7 @@ export const SchemaCreateForm = () => {
 
     return <div className="max-w-5xl p-6">
         <form className={"flex flex-col gap-6"}
-              onSubmit={form.handleSubmit((data: CreateSchemaBody) => {
+              onSubmit={form.handleSubmit((data: CreateSiteBody) => {
                   handleSubmit(data);
               })}
         >
@@ -63,8 +64,8 @@ export const SchemaCreateForm = () => {
                 <Card className="bg-card border p-8">
                     <div className="border-b pb-6">
                         <h2 className="text-2xl font-semibold tracking-tight flex items-center gap-2">
-                            <LayoutTemplateIcon/>
-                            Create Schema
+                            <Globe/>
+                            Create Site
                         </h2>
                         <p className="text-muted-foreground mt-2 text-sm">
                             Enter the details of your new schema
@@ -82,6 +83,26 @@ export const SchemaCreateForm = () => {
                                                id="name"
                                                type="text"
                                                placeholder="My personal homepage"
+                                               aria-invalid={fieldState.invalid}
+                                               required/>
+                                        {fieldState.invalid && (
+                                            <FieldError errors={[fieldState.error]}/>
+                                        )}
+                                    </Field>
+                                )}
+                            />
+                        </div>
+                        <div className="grid gap-3">
+                            <Controller
+                                name="subdomain"
+                                control={form.control}
+                                render={({field, fieldState}) => (
+                                    <Field data-invalid={fieldState.invalid}>
+                                        <FieldLabel htmlFor="subdomain">Subdomain</FieldLabel>
+                                        <Input {...field}
+                                               id="subdomain"
+                                               type="text"
+                                               placeholder="johndoe"
                                                aria-invalid={fieldState.invalid}
                                                required/>
                                         {fieldState.invalid && (
@@ -118,8 +139,7 @@ export const SchemaCreateForm = () => {
                             Discard changes
                         </Button>
                         <Button type="submit" disabled={loading}>
-                            {loading && <Spinner/>}
-                            <Save/>
+                            {loading ? <Spinner/> : <Save/>}
                             Save changes
                         </Button>
                     </CardFooter>
