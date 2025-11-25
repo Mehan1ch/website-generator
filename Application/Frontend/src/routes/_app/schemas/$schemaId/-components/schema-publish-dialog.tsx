@@ -1,3 +1,4 @@
+import {useState} from "react";
 import {
     Dialog,
     DialogClose,
@@ -9,26 +10,18 @@ import {
     DialogTrigger
 } from "@/components/ui/dialog.tsx";
 import {Button} from "@/components/ui/button.tsx";
-import {AlertTriangle, Trash2} from "lucide-react";
+import {AlertTriangle, Upload} from "lucide-react";
 import {Alert, AlertDescription} from "@/components/ui/alert.tsx";
 import {Spinner} from "@/components/ui/spinner.tsx";
-import {useState} from "react";
 
-type DeleteDialogProps = {
+
+type SchemaPublishDialogProps = {
     name: string;
-    description: string;
-    alertDescription?: string;
-    alertDescriptionItems?: string[];
     onSubmit: () => Promise<void>;
 }
-export const DeleteDialog = ({
-                                 name,
-                                 description,
-                                 alertDescription,
-                                 alertDescriptionItems,
-                                 onSubmit
-                             }: DeleteDialogProps) => {
-    const onDelete = async () => {
+export const SchemaPublishDialog = ({name, onSubmit}: SchemaPublishDialogProps) => {
+    const [loading, setLoading] = useState<boolean>(false);
+    const onPublish = async () => {
         setLoading(true);
         try {
             await onSubmit();
@@ -36,12 +29,11 @@ export const DeleteDialog = ({
             setLoading(false);
         }
     };
-    const [loading, setLoading] = useState<boolean>(false);
     return <Dialog>
         <DialogTrigger asChild>
-            <Button variant="destructive">
-                <Trash2/>
-                Delete
+            <Button variant="default">
+                <Upload/>
+                Publish
             </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-md">
@@ -50,24 +42,17 @@ export const DeleteDialog = ({
                     <div className="p-2 bg-destructive/10 rounded-full">
                         <AlertTriangle className="h-6 w-6 text-destructive"/>
                     </div>
-                    <DialogTitle className="text-xl">Delete {name}</DialogTitle>
+                    <DialogTitle className="text-xl">Publish {name}</DialogTitle>
                 </div>
                 <DialogDescription className="text-base">
-                    {description}
+                    This will make the schema publicly available.
                 </DialogDescription>
             </DialogHeader>
 
-            <Alert variant="destructive" className="mt-4">
+            <Alert variant="default" className="mt-4">
                 <AlertTriangle className="h-4 w-4"/>
                 <AlertDescription className="text-sm">
-                    {alertDescription}
-                    {alertDescriptionItems &&
-                        <ul className="list-disc list-inside mt-2 space-y-1">
-                            {alertDescriptionItems.map((item, index) => (
-                                <li key={index}>{item}</li>
-                            ))}
-                        </ul>
-                    }
+                    After publishing, users will be able to access the schema.
                 </AlertDescription>
             </Alert>
 
@@ -80,12 +65,11 @@ export const DeleteDialog = ({
                 <Button
                     className="mx-2"
                     variant="destructive"
-                    onClick={onDelete}
+                    onClick={onPublish}
                     disabled={loading}
                 >
-                    {loading && <Spinner/>}
-                    <Trash2/>
-                    {loading ? "Deleting..." : `Delete ${name}`}
+                    {loading ? <Spinner/> : <Upload/>}
+                    {loading ? "Publishing..." : "Publish schema"}
                 </Button>
             </DialogFooter>
         </DialogContent>

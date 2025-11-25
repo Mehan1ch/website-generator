@@ -20,9 +20,9 @@ import { Route as AppWebsitesRouteRouteImport } from './routes/_app/websites/rou
 import { Route as AppSchemasRouteRouteImport } from './routes/_app/schemas/route'
 import { Route as AppWebsitesIndexRouteImport } from './routes/_app/websites/index'
 import { Route as AppSchemasIndexRouteImport } from './routes/_app/schemas/index'
-import { Route as AppEditorIndexRouteImport } from './routes/_app/editor/index'
 import { Route as AppAccountIndexRouteImport } from './routes/_app/account/index'
 import { Route as AppSchemasCreateRouteImport } from './routes/_app/schemas/create'
+import { Route as AppSchemasSchemaIdRouteRouteImport } from './routes/_app/schemas/$schemaId/route'
 import { Route as AppSchemasSchemaIdIndexRouteImport } from './routes/_app/schemas/$schemaId/index'
 import { Route as AppSchemasSchemaIdEditRouteImport } from './routes/_app/schemas/$schemaId/edit'
 import { Route as AppSchemasSchemaIdDesignRouteImport } from './routes/_app/schemas/$schemaId/design'
@@ -82,11 +82,6 @@ const AppSchemasIndexRoute = AppSchemasIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppSchemasRouteRoute,
 } as any)
-const AppEditorIndexRoute = AppEditorIndexRouteImport.update({
-  id: '/editor/',
-  path: '/editor/',
-  getParentRoute: () => AppRouteRoute,
-} as any)
 const AppAccountIndexRoute = AppAccountIndexRouteImport.update({
   id: '/account/',
   path: '/account/',
@@ -97,21 +92,26 @@ const AppSchemasCreateRoute = AppSchemasCreateRouteImport.update({
   path: '/create',
   getParentRoute: () => AppSchemasRouteRoute,
 } as any)
-const AppSchemasSchemaIdIndexRoute = AppSchemasSchemaIdIndexRouteImport.update({
-  id: '/$schemaId/',
-  path: '/$schemaId/',
+const AppSchemasSchemaIdRouteRoute = AppSchemasSchemaIdRouteRouteImport.update({
+  id: '/$schemaId',
+  path: '/$schemaId',
   getParentRoute: () => AppSchemasRouteRoute,
 } as any)
+const AppSchemasSchemaIdIndexRoute = AppSchemasSchemaIdIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppSchemasSchemaIdRouteRoute,
+} as any)
 const AppSchemasSchemaIdEditRoute = AppSchemasSchemaIdEditRouteImport.update({
-  id: '/$schemaId/edit',
-  path: '/$schemaId/edit',
-  getParentRoute: () => AppSchemasRouteRoute,
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => AppSchemasSchemaIdRouteRoute,
 } as any)
 const AppSchemasSchemaIdDesignRoute =
   AppSchemasSchemaIdDesignRouteImport.update({
-    id: '/$schemaId/design',
-    path: '/$schemaId/design',
-    getParentRoute: () => AppSchemasRouteRoute,
+    id: '/design',
+    path: '/design',
+    getParentRoute: () => AppSchemasSchemaIdRouteRoute,
   } as any)
 const authEmailVerifyIdHashRoute = authEmailVerifyIdHashRouteImport.update({
   id: '/(auth)/email/verify/$id/$hash',
@@ -128,14 +128,14 @@ export interface FileRoutesByFullPath {
   '/register': typeof authRegisterRoute
   '/reset-password': typeof authResetPasswordRoute
   '/dashboard': typeof AppDashboardRoute
+  '/schemas/$schemaId': typeof AppSchemasSchemaIdRouteRouteWithChildren
   '/schemas/create': typeof AppSchemasCreateRoute
   '/account': typeof AppAccountIndexRoute
-  '/editor': typeof AppEditorIndexRoute
   '/schemas/': typeof AppSchemasIndexRoute
   '/websites/': typeof AppWebsitesIndexRoute
   '/schemas/$schemaId/design': typeof AppSchemasSchemaIdDesignRoute
   '/schemas/$schemaId/edit': typeof AppSchemasSchemaIdEditRoute
-  '/schemas/$schemaId': typeof AppSchemasSchemaIdIndexRoute
+  '/schemas/$schemaId/': typeof AppSchemasSchemaIdIndexRoute
   '/email/verify/$id/$hash': typeof authEmailVerifyIdHashRoute
 }
 export interface FileRoutesByTo {
@@ -147,7 +147,6 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AppDashboardRoute
   '/schemas/create': typeof AppSchemasCreateRoute
   '/account': typeof AppAccountIndexRoute
-  '/editor': typeof AppEditorIndexRoute
   '/schemas': typeof AppSchemasIndexRoute
   '/websites': typeof AppWebsitesIndexRoute
   '/schemas/$schemaId/design': typeof AppSchemasSchemaIdDesignRoute
@@ -166,9 +165,9 @@ export interface FileRoutesById {
   '/(auth)/register': typeof authRegisterRoute
   '/(auth)/reset-password': typeof authResetPasswordRoute
   '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/schemas/$schemaId': typeof AppSchemasSchemaIdRouteRouteWithChildren
   '/_app/schemas/create': typeof AppSchemasCreateRoute
   '/_app/account/': typeof AppAccountIndexRoute
-  '/_app/editor/': typeof AppEditorIndexRoute
   '/_app/schemas/': typeof AppSchemasIndexRoute
   '/_app/websites/': typeof AppWebsitesIndexRoute
   '/_app/schemas/$schemaId/design': typeof AppSchemasSchemaIdDesignRoute
@@ -187,14 +186,14 @@ export interface FileRouteTypes {
     | '/register'
     | '/reset-password'
     | '/dashboard'
+    | '/schemas/$schemaId'
     | '/schemas/create'
     | '/account'
-    | '/editor'
     | '/schemas/'
     | '/websites/'
     | '/schemas/$schemaId/design'
     | '/schemas/$schemaId/edit'
-    | '/schemas/$schemaId'
+    | '/schemas/$schemaId/'
     | '/email/verify/$id/$hash'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -206,7 +205,6 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/schemas/create'
     | '/account'
-    | '/editor'
     | '/schemas'
     | '/websites'
     | '/schemas/$schemaId/design'
@@ -224,9 +222,9 @@ export interface FileRouteTypes {
     | '/(auth)/register'
     | '/(auth)/reset-password'
     | '/_app/dashboard'
+    | '/_app/schemas/$schemaId'
     | '/_app/schemas/create'
     | '/_app/account/'
-    | '/_app/editor/'
     | '/_app/schemas/'
     | '/_app/websites/'
     | '/_app/schemas/$schemaId/design'
@@ -324,13 +322,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppSchemasIndexRouteImport
       parentRoute: typeof AppSchemasRouteRoute
     }
-    '/_app/editor/': {
-      id: '/_app/editor/'
-      path: '/editor'
-      fullPath: '/editor'
-      preLoaderRoute: typeof AppEditorIndexRouteImport
-      parentRoute: typeof AppRouteRoute
-    }
     '/_app/account/': {
       id: '/_app/account/'
       path: '/account'
@@ -345,26 +336,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppSchemasCreateRouteImport
       parentRoute: typeof AppSchemasRouteRoute
     }
-    '/_app/schemas/$schemaId/': {
-      id: '/_app/schemas/$schemaId/'
+    '/_app/schemas/$schemaId': {
+      id: '/_app/schemas/$schemaId'
       path: '/$schemaId'
       fullPath: '/schemas/$schemaId'
-      preLoaderRoute: typeof AppSchemasSchemaIdIndexRouteImport
+      preLoaderRoute: typeof AppSchemasSchemaIdRouteRouteImport
       parentRoute: typeof AppSchemasRouteRoute
+    }
+    '/_app/schemas/$schemaId/': {
+      id: '/_app/schemas/$schemaId/'
+      path: '/'
+      fullPath: '/schemas/$schemaId/'
+      preLoaderRoute: typeof AppSchemasSchemaIdIndexRouteImport
+      parentRoute: typeof AppSchemasSchemaIdRouteRoute
     }
     '/_app/schemas/$schemaId/edit': {
       id: '/_app/schemas/$schemaId/edit'
-      path: '/$schemaId/edit'
+      path: '/edit'
       fullPath: '/schemas/$schemaId/edit'
       preLoaderRoute: typeof AppSchemasSchemaIdEditRouteImport
-      parentRoute: typeof AppSchemasRouteRoute
+      parentRoute: typeof AppSchemasSchemaIdRouteRoute
     }
     '/_app/schemas/$schemaId/design': {
       id: '/_app/schemas/$schemaId/design'
-      path: '/$schemaId/design'
+      path: '/design'
       fullPath: '/schemas/$schemaId/design'
       preLoaderRoute: typeof AppSchemasSchemaIdDesignRouteImport
-      parentRoute: typeof AppSchemasRouteRoute
+      parentRoute: typeof AppSchemasSchemaIdRouteRoute
     }
     '/(auth)/email/verify/$id/$hash': {
       id: '/(auth)/email/verify/$id/$hash'
@@ -376,20 +374,34 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface AppSchemasRouteRouteChildren {
-  AppSchemasCreateRoute: typeof AppSchemasCreateRoute
-  AppSchemasIndexRoute: typeof AppSchemasIndexRoute
+interface AppSchemasSchemaIdRouteRouteChildren {
   AppSchemasSchemaIdDesignRoute: typeof AppSchemasSchemaIdDesignRoute
   AppSchemasSchemaIdEditRoute: typeof AppSchemasSchemaIdEditRoute
   AppSchemasSchemaIdIndexRoute: typeof AppSchemasSchemaIdIndexRoute
 }
 
+const AppSchemasSchemaIdRouteRouteChildren: AppSchemasSchemaIdRouteRouteChildren =
+  {
+    AppSchemasSchemaIdDesignRoute: AppSchemasSchemaIdDesignRoute,
+    AppSchemasSchemaIdEditRoute: AppSchemasSchemaIdEditRoute,
+    AppSchemasSchemaIdIndexRoute: AppSchemasSchemaIdIndexRoute,
+  }
+
+const AppSchemasSchemaIdRouteRouteWithChildren =
+  AppSchemasSchemaIdRouteRoute._addFileChildren(
+    AppSchemasSchemaIdRouteRouteChildren,
+  )
+
+interface AppSchemasRouteRouteChildren {
+  AppSchemasSchemaIdRouteRoute: typeof AppSchemasSchemaIdRouteRouteWithChildren
+  AppSchemasCreateRoute: typeof AppSchemasCreateRoute
+  AppSchemasIndexRoute: typeof AppSchemasIndexRoute
+}
+
 const AppSchemasRouteRouteChildren: AppSchemasRouteRouteChildren = {
+  AppSchemasSchemaIdRouteRoute: AppSchemasSchemaIdRouteRouteWithChildren,
   AppSchemasCreateRoute: AppSchemasCreateRoute,
   AppSchemasIndexRoute: AppSchemasIndexRoute,
-  AppSchemasSchemaIdDesignRoute: AppSchemasSchemaIdDesignRoute,
-  AppSchemasSchemaIdEditRoute: AppSchemasSchemaIdEditRoute,
-  AppSchemasSchemaIdIndexRoute: AppSchemasSchemaIdIndexRoute,
 }
 
 const AppSchemasRouteRouteWithChildren = AppSchemasRouteRoute._addFileChildren(
@@ -412,7 +424,6 @@ interface AppRouteRouteChildren {
   AppWebsitesRouteRoute: typeof AppWebsitesRouteRouteWithChildren
   AppDashboardRoute: typeof AppDashboardRoute
   AppAccountIndexRoute: typeof AppAccountIndexRoute
-  AppEditorIndexRoute: typeof AppEditorIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
@@ -420,7 +431,6 @@ const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppWebsitesRouteRoute: AppWebsitesRouteRouteWithChildren,
   AppDashboardRoute: AppDashboardRoute,
   AppAccountIndexRoute: AppAccountIndexRoute,
-  AppEditorIndexRoute: AppEditorIndexRoute,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(

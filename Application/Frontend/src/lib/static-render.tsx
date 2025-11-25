@@ -1,14 +1,14 @@
 import {createRoot} from "react-dom/client";
 import {flushSync} from "react-dom";
-import {EDITOR_RESOLVER} from "@/routes/_app/editor/-utils/resolver.ts";
 import {Editor, Frame} from "@craftjs/core";
+import {EDITOR_RESOLVER} from "@/lib/constants.ts";
 
 export function renderToStaticHTML(JSONStateString: string) {
     const div = document.createElement('div');
     const root = createRoot(div);
     flushSync(() => {
         root.render(<Editor enabled={false} resolver={EDITOR_RESOLVER}>
-            <Frame json={JSONStateString}/>
+            <Frame data={JSONStateString}/>
         </Editor>);
     });
     return `

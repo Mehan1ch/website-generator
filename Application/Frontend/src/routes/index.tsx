@@ -17,8 +17,12 @@ function Index() {
     return (
         <div className="min-h-screen flex flex-col">
             <Navbar isAuthenticated={isAuthenticated}/>
-            <Hero/>
-            <Footer/>
+            <div className="flex-1 overflow-auto">
+                <Hero/>
+            </div>
+            <div className="flex-shrink-0 max-h-24">
+                <Footer/>
+            </div>
         </div>
     );
 }

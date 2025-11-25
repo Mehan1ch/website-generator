@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use App\States\Draft;
+use App\States\Published;
 use App\States\PublishingState;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 use Spatie\ModelStates\HasStates;
 use Spatie\ModelStates\HasStatesContract;
 
@@ -52,10 +54,10 @@ class Schema extends Model implements HasStatesContract
     {
         parent::boot();
 
-        static::updating(function (Site $site) {
-            // Only transition to Draft state if certain attributes have changed, others are automatic
-            if ($site->isDirty(['name', 'content', 'description'])) {
-                $site->state->transitionTo(Draft::class);
+
+        static::updated(function (Schema $schema) {
+            if ($schema->isDirty(['name', 'content', 'description']) && $schema->state->equals(Published::class)) {
+                $schema->state->transitionTo(Draft::class);
             }
         });
     }

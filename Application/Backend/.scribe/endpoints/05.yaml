@@ -25,14 +25,14 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019ab311-9b23-7181-9f47-68579ef957c3
+        example: 019abc21-fb73-7214-ab65-63ce08280b49
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019ab311-9b23-7181-9f47-68579ef957c3
+      site_id: 019abc21-fb73-7214-ab65-63ce08280b49
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -81,14 +81,14 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019ab311-9b23-7181-9f47-68579ef957c3
+        example: 019abc21-fb73-7214-ab65-63ce08280b49
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019ab311-9b23-7181-9f47-68579ef957c3
+      site_id: 019abc21-fb73-7214-ab65-63ce08280b49
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -133,14 +133,14 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019ab311-9b23-7181-9f47-68579ef957c3
+        example: 019abc21-fb73-7214-ab65-63ce08280b49
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019ab311-9b23-7181-9f47-68579ef957c3
+      site_id: 019abc21-fb73-7214-ab65-63ce08280b49
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -185,14 +185,14 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019ab311-9b23-7181-9f47-68579ef957c3
+        example: 019abc21-fb73-7214-ab65-63ce08280b49
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019ab311-9b23-7181-9f47-68579ef957c3
+      site_id: 019abc21-fb73-7214-ab65-63ce08280b49
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -237,14 +237,14 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019ab311-9b23-7181-9f47-68579ef957c3
+        example: 019abc21-fb73-7214-ab65-63ce08280b49
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019ab311-9b23-7181-9f47-68579ef957c3
+      site_id: 019abc21-fb73-7214-ab65-63ce08280b49
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

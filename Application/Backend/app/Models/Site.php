@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\States\Draft;
+use App\States\Published;
 use App\States\PublishingState;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -76,9 +77,9 @@ class Site extends Model implements HasStatesContract
             ]);
         });
 
-        static::updating(function (Site $site) {
+        static::updated(function (Site $site) {
             // Only transition to Draft state if certain attributes have changed, others are automatic
-            if ($site->isDirty(['name', 'subdomain', 'description'])) {
+            if ($site->isDirty(['name', 'subdomain', 'description']) && $site->state->equals(Published::class)) {
                 $site->state->transitionTo(Draft::class);
             }
         });

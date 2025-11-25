@@ -1,6 +1,6 @@
 import {ContainerDefaultProps, ContainerSettings, EditorContainer} from "./editor-container.tsx";
 import {EditorText} from "./editor-text.tsx";
-import {EditorButton} from "@/routes/_app/editor/-components/editor-button.tsx";
+import {EditorButton} from "@/routes/_app/-components/editor/components/editor-button.tsx";
 import {Element, Node, useNode} from "@craftjs/core";
 import {ReactNode} from "react";
 

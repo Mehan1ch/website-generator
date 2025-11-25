@@ -1,0 +1,1 @@
+export type SiteState = 'draft' | 'published';

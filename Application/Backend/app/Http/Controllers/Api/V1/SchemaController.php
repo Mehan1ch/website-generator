@@ -8,7 +8,10 @@ use App\Http\Resources\Api\V1\Collections\SchemaCollection;
 use App\Http\Resources\Api\V1\SchemaResource;
 use App\Models\Schema;
 use App\States\Draft;
+use App\States\Published;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Spatie\ModelStates\Exceptions\CouldNotPerformTransition;
 
 /**
  * Schema Controller
@@ -70,6 +73,24 @@ class SchemaController extends Controller
         $schema->update($request->validated());
 
         return new SchemaResource($schema);
+    }
+
+    /**
+     * Publish Schema
+     *
+     * Publish the specified schema.
+     * @apiResource App\Http\Resources\Api\V1\SchemaResource
+     * @apiResourceModel App\Models\Schema
+     *
+     */
+    public function publish(Schema $schema)
+    {
+        try {
+            $schema->state->transitionTo(Published::class);
+            return new SchemaResource($schema);
+        } catch (CouldNotPerformTransition $e) {
+            return response()->json(['message' => 'Could not publish schema: ', 'error' => $e->getMessage()], 400);
+        }
     }
 
     /**

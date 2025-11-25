@@ -42,7 +42,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":[{"id":"019ab312-b42e-70fb-9887-1904194b3410","name":"O''Kon and Sons","subdomain":"dach","state":"draft"},{"id":"019ab312-b436-73a5-937b-33e388eba932","name":"Marquardt Inc","subdomain":"hirthe","state":"draft"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
+        content: '{"data":[{"id":"019abd0c-60f7-700f-901f-25e5947773be","name":"Gulgowski-O''Kon","subdomain":"ernser","state":"draft"},{"id":"019abd0c-60fd-7290-b3e9-a515c958ecf0","name":"Marquardt Inc","subdomain":"hirthe","state":"draft"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
         headers: []
         description: ''
     responseFields: []
@@ -74,14 +74,14 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019ab311-9b23-7181-9f47-68579ef957c3
+        example: 019abc21-fb73-7214-ab65-63ce08280b49
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019ab311-9b23-7181-9f47-68579ef957c3
+      site_id: 019abc21-fb73-7214-ab65-63ce08280b49
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -91,7 +91,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019ab312-b43f-7045-a754-511f93c82a92","name":"Fritsch-O''Keefe","subdomain":"predovic","description":"Consequatur aut dolores enim non facere tempora.","user_id":"019ab311-9ac3-7024-ac17-e29237dd2bfd","state":"draft","pages":{"data":[{"id":"019ab312-b440-73ad-aaf3-098f85f86e13","title":"Home","url":"\/"},{"id":"019ab312-b443-726a-a2bf-404b0d9f06b4","title":"Voluptatem laboriosam praesentium quis adipisci.","url":"\/deleniti-distinctio-eum-doloremque-id-aut"}]},"created_at":"2025-11-23T23:35:38.000000Z","updated_at":"2025-11-23T23:35:38.000000Z","published_at":"2025-05-31 09:10:14"}}'
+        content: '{"data":{"id":"019abd0c-6103-732f-b3dc-1126845c557e","name":"Fritsch-O''Keefe","subdomain":"predovic","description":"Consequatur aut dolores enim non facere tempora.","user_id":"019abc21-ff16-7048-93fc-c49217964492","state":"draft","pages":{"data":[{"id":"019abd0c-6103-732f-b3dc-112684bc9a2f","title":"Home","url":"\/"},{"id":"019abd0c-6106-73fa-9987-df8a5ea0dfa4","title":"Voluptatem laboriosam praesentium quis adipisci.","url":"\/deleniti-distinctio-eum-doloremque-id-aut"}]},"created_at":"2025-11-25T22:04:56.000000Z","updated_at":"2025-11-25T22:04:56.000000Z","published_at":"2025-06-02 07:39:32"}}'
         headers: []
         description: ''
     responseFields: []
@@ -164,7 +164,7 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"019ab312-b4e2-71c9-9bc0-8224dccd040e","name":"Bailey Ltd","subdomain":"okuneva","description":null,"user_id":"019ab311-a15c-73f4-8167-7113e5acb769","state":"draft","pages":{"data":[{"id":"019ab312-b4e3-7042-b342-ed522d4d96a8","title":"Home","url":"\/"}]},"created_at":"2025-11-23T23:35:38.000000Z","updated_at":"2025-11-23T23:35:38.000000Z","published_at":null}}'
+        content: '{"data":{"id":"019abd0c-6186-72d7-8a90-6dfe31d87c8d","name":"Bailey Ltd","subdomain":"okuneva","description":null,"user_id":"019abc21-fb2d-71cb-90ed-65d6207d759e","state":"draft","pages":{"data":[{"id":"019abd0c-6186-72d7-8a90-6dfe322a75ec","title":"Home","url":"\/"}]},"created_at":"2025-11-25T22:04:56.000000Z","updated_at":"2025-11-25T22:04:56.000000Z","published_at":"2024-12-26 09:40:45"}}'
         headers: []
         description: ''
     responseFields: []
@@ -196,14 +196,14 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019ab311-9b23-7181-9f47-68579ef957c3
+        example: 019abc21-fb73-7214-ab65-63ce08280b49
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019ab311-9b23-7181-9f47-68579ef957c3
+      site_id: 019abc21-fb73-7214-ab65-63ce08280b49
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -249,7 +249,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019ab312-b4ea-72b0-8d41-96b433386e33","name":"Bailey Ltd","subdomain":"rempel","description":"Sunt nihil accusantium harum mollitia.","user_id":"019ab311-a15c-73f4-8167-7113e5acb769","state":"draft","pages":{"data":[{"id":"019ab312-b4eb-73d4-a7f7-96862ed07317","title":"Home","url":"\/"}]},"created_at":"2025-11-23T23:35:38.000000Z","updated_at":"2025-11-23T23:35:38.000000Z","published_at":"2024-12-24 11:11:27"}}'
+        content: '{"data":{"id":"019abd0c-618c-7220-9a47-a4d8724239dd","name":"Bailey Ltd","subdomain":"rempel","description":"Sunt nihil accusantium harum mollitia.","user_id":"019abc21-ff16-7048-93fc-c49217964492","state":"draft","pages":{"data":[{"id":"019abd0c-618c-7220-9a47-a4d8728c3de4","title":"Home","url":"\/"}]},"created_at":"2025-11-25T22:04:56.000000Z","updated_at":"2025-11-25T22:04:56.000000Z","published_at":null}}'
         headers: []
         description: ''
     responseFields: []
@@ -281,14 +281,14 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019ab311-9b23-7181-9f47-68579ef957c3
+        example: 019abc21-fb73-7214-ab65-63ce08280b49
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019ab311-9b23-7181-9f47-68579ef957c3
+      site_id: 019abc21-fb73-7214-ab65-63ce08280b49
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

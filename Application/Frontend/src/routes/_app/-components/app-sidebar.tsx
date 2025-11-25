@@ -1,4 +1,4 @@
-import {Globe, LayoutDashboard, LayoutTemplateIcon, PencilIcon} from "lucide-react";
+import {Globe, LayoutDashboard, LayoutTemplateIcon} from "lucide-react";
 
 import {NavMain} from "@/components/sidebar/nav-main.tsx";
 import {NavUser} from "@/components/sidebar/nav-user.tsx";
@@ -32,11 +32,6 @@ const navMain: NavSection[] = [
         url: "/websites",
         icon: Globe,
     },
-    {
-        title: "Editor",
-        url: "/editor",
-        icon: PencilIcon,
-    }
 ];
 
 export function AppSidebar({...props}: ComponentProps<typeof Sidebar>) {

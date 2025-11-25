@@ -7,51 +7,62 @@ import {Button} from "@/components/ui/button.tsx";
 import {Spinner} from "@/components/ui/spinner.tsx";
 import {useState} from "react";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {CreateSchemaBody, updateSchemaForm} from "@/types/schema.ts";
+import {CreateSchemaBody, Schema, UpdateSchemaBody, updateSchemaForm} from "@/types/schema.ts";
 import {useRouter} from "@tanstack/react-router";
 import {toast} from "sonner";
 import {api, APIError} from "@/lib/api/api-client.ts";
-import {Textarea} from "@/components/ui/textarea.tsx";
 
-export const SchemaCreateForm = () => {
+type SchemaEditFormProps = {
+    schema: Schema
+}
+export const SchemaEditForm = ({schema}: SchemaEditFormProps) => {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
-    const createSchemaMutation = api.useMutation("post", "/api/v1/schema");
+    const editSchemaMutation = api.useMutation("put", "/api/v1/schema/{schema_id}");
 
 
-    const form = useForm<CreateSchemaBody>({
+    const form = useForm<UpdateSchemaBody>({
         resolver: zodResolver(updateSchemaForm),
         defaultValues: {
-            name: "",
-            description: "",
+            name: schema.name,
+            description: schema.description || "",
+            content: schema.content || "",
         },
         mode: "onSubmit",
         reValidateMode: "onSubmit",
     });
 
-    const handleSubmit = (data: CreateSchemaBody) => {
+    const handleSubmit = (data: UpdateSchemaBody) => {
         setLoading(true);
-        const loadingToast = toast.loading("Creating schema...");
-        createSchemaMutation.mutate({body: data}, {
-            onSuccess: (data) => {
+        const loadingToast = toast.loading("Updating schema...");
+        editSchemaMutation.mutate({
+            params: {
+                path: {
+                    schema_id: schema.id || "",
+                }
+            },
+            body: data
+        }, {
+            onSuccess: () => {
                 toast.dismiss(loadingToast);
-                toast.success("Schema created successfully.");
+                toast.success("Schema updated successfully.");
                 router.navigate({
                     to: "/schemas/$schemaId",
                     params: {
-                        schemaId: data?.data?.id || "",
+                        schemaId: schema.id || "",
                     }
                 });
             },
             onError: (err: APIError) => {
                 setLoading(false);
                 toast.dismiss(loadingToast);
-                toast.error("Failed to create schema: ", {
+                toast.error("Failed to update schema: ", {
                     description: err.message,
                 });
             }
         });
     };
+
 
     return <div className="max-w-5xl p-6">
         <form className={"flex flex-col gap-6"}
@@ -64,10 +75,10 @@ export const SchemaCreateForm = () => {
                     <div className="border-b pb-6">
                         <h2 className="text-2xl font-semibold tracking-tight flex items-center gap-2">
                             <LayoutTemplateIcon/>
-                            Create Schema
+                            Edit Schema
                         </h2>
                         <p className="text-muted-foreground mt-2 text-sm">
-                            Enter the details of your new schema
+                            Enter the new details for your schema below.
                         </p>
                     </div>
                     <CardContent className="grid gap-6">
@@ -98,10 +109,10 @@ export const SchemaCreateForm = () => {
                                 render={({field, fieldState}) => (
                                     <Field data-invalid={fieldState.invalid}>
                                         <FieldLabel htmlFor="description">Description</FieldLabel>
-                                        <Textarea
+                                        <Input
                                             {...field}
                                             id="description"
-                                            name="description"
+                                            type="text"
                                             placeholder="A brief description of my schema"
                                             aria-invalid={fieldState.invalid}
                                         />

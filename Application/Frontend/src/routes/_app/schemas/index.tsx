@@ -34,13 +34,13 @@ export const Route = createFileRoute('/_app/schemas/')({
         });
         return queryClient.ensureQueryData(schemaIndexQueryOptions);
     },
-    component: SchemaIndexRoute,
+    component: SchemasComponent,
 });
 
-function SchemaIndexRoute() {
+function SchemasComponent() {
     const {user} = useAuth();
     const {page} = Route.useSearch();
-    const {error, isLoading, data} = api.useQuery("get", "/api/v1/schema", {
+    const {error, isLoading, data} = api.useSuspenseQuery("get", "/api/v1/schema", {
         params: {
             query: {
                 page: page,

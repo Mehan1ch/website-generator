@@ -1,10 +1,10 @@
 import {Button} from "@/components/ui/button.tsx";
 import {Card, CardContent} from "@/components/ui/card.tsx";
 import {Element, useEditor} from "@craftjs/core";
-import {EditorButton} from "@/routes/_app/editor/-components/editor-button.tsx";
-import {EditorContainer} from "@/routes/_app/editor/-components/editor-container.tsx";
-import {EditorCard} from "@/routes/_app/editor/-components/editor-card.tsx";
-import {EditorText} from "@/routes/_app/editor/-components/editor-text.tsx";
+import {EditorButton} from "@/routes/_app/-components/editor/components/editor-button.tsx";
+import {EditorContainer} from "@/routes/_app/-components/editor/components/editor-container.tsx";
+import {EditorCard} from "@/routes/_app/-components/editor/components/editor-card.tsx";
+import {EditorText} from "@/routes/_app/-components/editor/components/editor-text.tsx";
 
 export const Toolbox = () => {
     const {connectors} = useEditor();

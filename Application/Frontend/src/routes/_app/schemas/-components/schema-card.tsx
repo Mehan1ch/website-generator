@@ -1,8 +1,7 @@
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
-import {SchemaCollectionItem} from "@/types/schema.ts";
+import {SchemaCollectionItem, SchemaState} from "@/types/schema.ts";
 import {useRouter} from "@tanstack/react-router";
 import {calculateCardDescription, getDateString} from "@/lib/utils.ts";
-import {SchemaState} from "@/types/state.ts";
 import {useAuth} from "@/hooks/use-auth.tsx";
 import {StateBadge} from "@/components/blocks/state-badge.tsx";
 
@@ -18,9 +17,9 @@ export const SchemaCard = ({schema}: SchemaCardProps) => {
     const onCardClick = () => {
         if (schema?.id == undefined) return;
         router.navigate({
-            to: "/schemas/$id",
+            to: "/schemas/$schemaId",
             params: {
-                id: schema?.id
+                schemaId: schema?.id
             }
         });
     };
@@ -29,15 +28,15 @@ export const SchemaCard = ({schema}: SchemaCardProps) => {
     return <Card
         className={"outline-1 hover:bg-secondary hover:shadow-lg hover:shadow-primary/50"}
         onClick={onCardClick}>
-        <CardHeader>
-            <CardTitle>
+        <CardHeader className={"flex justify-between"}>
+            <CardTitle className={"text-pretty truncate"}>
                 {schema?.name}
             </CardTitle>
             <CardDescription>
                 {user?.is_admin && <StateBadge state={schema?.state as SchemaState}/>}
             </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className={"h-full"}>
             {calculateCardDescription(schema?.description)}
         </CardContent>
         {user?.is_admin &&

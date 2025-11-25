@@ -24,6 +24,7 @@ Route::controller(SchemaController::class)->middleware(['auth:sanctum', 'verifie
     Route::get('/schema', 'index')->can('view-any', Schema::class);
     Route::get('/schema/{schema}', 'show')->can('view', 'schema');
     Route::post('/schema', 'store')->can('create', Schema::class);
+    Route::post('/schema/{schema}/publish', 'publish')->can('update', 'schema');
     Route::put('/schema/{schema}', 'update')->can('update', 'schema');
     Route::delete('/schema/{schema}', 'destroy')->can('delete', 'schema');
 });
@@ -48,5 +49,5 @@ Route::controller(DeploymentController::class)->middleware(['auth:sanctum', 'ver
     Route::post('/site/{site}/deployment', 'store')->can('update', 'site');
     Route::put('/site/{site}/deployment', 'update')->can('update', 'site');
     Route::delete('/site/{site}/deployment', 'destroy')->can('update', 'site');
-    Route::post('/site/{site}/deployment/restart', 'restart')->can('update', 'site');;
+    Route::post('/site/{site}/deployment/restart', 'restart')->can('update', 'site');
 });

@@ -7,12 +7,16 @@ import {ColorPicker} from "@/components/ui/color-picker.tsx";
 import {Slider} from "@/components/ui/slider.tsx";
 
 interface EditorContainerProps {
-    background: string;
+    background?: string;
     padding?: number;
     children: React.ReactNode;
 }
 
-export const EditorContainer = ({background, padding = 0, children}: EditorContainerProps) => {
+export const EditorContainer = ({
+                                    background = "bg-primary-foreground",
+                                    padding = 0,
+                                    children
+                                }: EditorContainerProps) => {
     const {connectors: {connect, drag}} = useNode();
     return (
         <Card
@@ -40,7 +44,7 @@ export const ContainerSettings = () => {
 
     return (
         <Form {...form}>
-            <form className="flex flex-col gap-4">
+            <form className="flex flex-col gap-4 h-full">
                 <FormField
                     control={form.control}
                     name="background"
@@ -49,7 +53,7 @@ export const ContainerSettings = () => {
                             <FormLabel>Background</FormLabel>
                             <FormControl>
                                 <ColorPicker
-                                    color={background || "#000"}
+                                    color={background}
                                     onChange={(color: string) => setProp((props: {
                                         background: string;
                                     }) => props.background = color)}
@@ -85,8 +89,8 @@ export const ContainerSettings = () => {
 
 // We export this because we'll be using this in the Card component as well
 export const ContainerDefaultProps = {
-    background: "#ffffff",
-    padding: 3
+    background: "bg-primary-foreground",
+    padding: 2
 };
 
 EditorContainer.craft = {

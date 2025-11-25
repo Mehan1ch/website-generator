@@ -1,5 +1,8 @@
 import {createFileRoute, redirect} from '@tanstack/react-router';
 import {toast} from "sonner";
+import {BackLink} from "@/components/blocks/back-link.tsx";
+import {SchemaCreateForm} from "@/routes/_app/schemas/-components/schema-create-form.tsx";
+import {RouteTitle} from "@/components/blocks/route-title.tsx";
 
 export const Route = createFileRoute('/_app/schemas/create')({
     beforeLoad: ({context: {auth}}) => {
@@ -10,12 +13,16 @@ export const Route = createFileRoute('/_app/schemas/create')({
             });
         }
         return {
-            getTitle: () => 'Create Schema',
+            getTitle: () => 'Create',
         };
     },
-    component: RouteComponent,
+    component: SchemaCreate,
 });
 
-function RouteComponent() {
-    return <div>Hello "/_app/schemas/create"!</div>;
+function SchemaCreate() {
+    return <div className="mb-8">
+        <BackLink text={"Back to Schemas"}/>
+        <RouteTitle title={"Create Schema"} description={"Enter the details of your new schema"}/>
+        <SchemaCreateForm/>
+    </div>;
 }

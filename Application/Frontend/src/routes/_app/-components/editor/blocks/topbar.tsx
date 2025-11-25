@@ -16,23 +16,30 @@ import {
 } from "@/components/ui/dialog.tsx";
 import {Label} from "@/components/ui/label.tsx";
 import {Input} from "@/components/ui/input.tsx";
-import {compressAndEncodeBase64, decodeBase64AndDecompress} from "@/routes/_app/editor/-utils/compress.ts";
+import {compressAndEncodeBase64, decodeBase64AndDecompress} from "@/lib/utils.ts";
+import {Spinner} from "@/components/ui/spinner.tsx";
+import {Save, Upload} from "lucide-react";
 
-export const Topbar = () => {
+type TopbarProps = {
+    onSave: (content: string) => void;
+}
+
+export const Topbar = ({onSave}: TopbarProps) => {
     const {actions, query, enabled} = useEditor((state) => ({
         enabled: state.options.enabled
     }));
 
     const [stateToLoad, setStateToLoad] = useState<string>();
-    //const [json, setJson] = useState<json>(null);
-    //TODO: do this from API backend call example is left here but it would be better to do this with a loader func
-    // Load save state from server on page load
-    //useEffect(() => {
-    //    const stateToLoad = await fetch("your api to get the compressed data");
-    //    const json = lz.decompress(lz.decodeBase64(stateToLoad));
-    //    setJson(json);
-    //}, []);
+    const [loading, setLoading] = useState(false);
 
+
+    const handleSave = () => {
+        setLoading(true);
+        const json = query.serialize();
+        const compressed = compressAndEncodeBase64(json);
+        onSave(compressed);
+        setLoading(false);
+    };
 
     return (
         <div className="outline bg-primary-foreground px-2 py-2 mt-3 mb-1 rounded">
@@ -46,11 +53,9 @@ export const Topbar = () => {
                 </Label>
                 <div className={"items-center px-2"}>
                     <Button
-                        onClick={async () => {
+                        onClick={() => {
                             const json = query.serialize();
-                            console.log(json);
-                            console.log(await compressAndEncodeBase64(json));
-                            copy(await compressAndEncodeBase64(json));
+                            copy(compressAndEncodeBase64(json));
                             toast.info("State copied to clipboard");
                         }}
                     >
@@ -58,7 +63,10 @@ export const Topbar = () => {
                     </Button>
                     <Dialog>
                         <DialogTrigger asChild>
-                            <Button>Load</Button>
+                            <Button>
+                                <Upload/>
+                                Load
+                            </Button>
                         </DialogTrigger>
                         <DialogContent className="sm:max-w-md">
                             <DialogHeader>
@@ -83,15 +91,21 @@ export const Topbar = () => {
                                     <Button variant="outline">Cancel</Button>
                                 </DialogClose>
                                 <Button
-                                    onClick={async () => {
-                                        const json = await decodeBase64AndDecompress(stateToLoad as string);
+                                    onClick={() => {
+                                        const json = decodeBase64AndDecompress(stateToLoad as string);
                                         actions.deserialize(json);
                                         toast.info("State loaded");
                                     }}
-                                >Load</Button>
+                                >
+                                    Load
+                                </Button>
                             </DialogFooter>
                         </DialogContent>
                     </Dialog>
+                    <Button onClick={handleSave} disabled={loading}>
+                        {loading ? <Spinner/> : <Save/>}
+                        Save
+                    </Button>
                 </div>
             </div>
         </div>
