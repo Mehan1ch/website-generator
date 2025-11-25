@@ -4,9 +4,9 @@ import {toast} from "sonner";
 import {Loading} from "@/components/blocks/loading.tsx";
 
 export const Route = createFileRoute('/_app/schemas/$schemaId')({
-    beforeLoad: ({params}) => {
+    beforeLoad: ({params: {schemaId}}) => {
         return {
-            getTitle: () => `${params.schemaId}`,
+            getTitle: () => schemaId,
         };
     },
     loader: async ({context: {queryClient}, params}) => {

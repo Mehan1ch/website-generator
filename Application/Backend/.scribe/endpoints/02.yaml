@@ -42,7 +42,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":[{"id":"019abd0c-60dc-7325-94e8-d5f373e77aeb","name":"architecto","description":null,"state":"draft","created_at":"2025-11-25T22:04:56.000000Z","updated_at":"2025-11-25T22:04:56.000000Z","published_at":null},{"id":"019abd0c-60df-707b-bff0-be82c25a4902","name":"quos","description":null,"state":"draft","created_at":"2025-11-25T22:04:56.000000Z","updated_at":"2025-11-25T22:04:56.000000Z","published_at":null}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
+        content: '{"data":[{"id":"019abd45-095b-7181-80fc-86b82d31567a","name":"architecto","description":null,"state":"draft","created_at":"2025-11-25T23:06:49.000000Z","updated_at":"2025-11-25T23:06:49.000000Z","published_at":null},{"id":"019abd45-095d-72aa-9b17-ce9381a87083","name":"quos","description":null,"state":"draft","created_at":"2025-11-25T23:06:49.000000Z","updated_at":"2025-11-25T23:06:49.000000Z","published_at":null}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
         headers: []
         description: ''
     responseFields: []
@@ -91,7 +91,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019abd0c-60e5-711a-8475-6f46b7a6bc98","name":"sunt","description":"Harum mollitia modi deserunt aut ab provident perspiciatis quo.","content":null,"state":"draft","created_at":"2025-11-25T22:04:56.000000Z","updated_at":"2025-11-25T22:04:56.000000Z","published_at":null}}'
+        content: '{"data":{"id":"019abd45-0962-7026-a406-d50868b5c8ca","name":"sunt","description":"Harum mollitia modi deserunt aut ab provident perspiciatis quo.","content":null,"state":"draft","created_at":"2025-11-25T23:06:49.000000Z","updated_at":"2025-11-25T23:06:49.000000Z","published_at":null}}'
         headers: []
         description: ''
     responseFields: []
@@ -164,7 +164,7 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"019abd0c-60e9-73ab-baa9-f9191869bfb3","name":"architecto","description":null,"content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","state":"published","created_at":"2025-11-25T22:04:56.000000Z","updated_at":"2025-11-25T22:04:56.000000Z","published_at":null}}'
+        content: '{"data":{"id":"019abd45-0966-7252-993c-3bbf132782f6","name":"architecto","description":null,"content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","state":"draft","created_at":"2025-11-25T23:06:49.000000Z","updated_at":"2025-11-25T23:06:49.000000Z","published_at":null}}'
         headers: []
         description: ''
     responseFields: []
@@ -213,7 +213,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019abd0c-60ec-70e2-a5c4-4bc6a3185533","name":"quos","description":null,"content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","state":"published","created_at":"2025-11-25T22:04:56.000000Z","updated_at":"2025-11-25T22:04:56.000000Z","published_at":null}}'
+        content: '{"data":{"id":"019abd45-0969-72d7-9bba-f73f8dacfe08","name":"quos","description":null,"content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","state":"published","created_at":"2025-11-25T23:06:49.000000Z","updated_at":"2025-11-25T23:06:49.000000Z","published_at":null}}'
         headers: []
         description: ''
     responseFields: []
@@ -298,7 +298,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019abd0c-60f0-72cc-bfbc-3709bbb417ff","name":"architecto","description":null,"content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","state":"published","created_at":"2025-11-25T22:04:56.000000Z","updated_at":"2025-11-25T22:04:56.000000Z","published_at":null}}'
+        content: '{"data":{"id":"019abd45-096d-701b-9a91-2973624a9412","name":"architecto","description":null,"content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","state":"published","created_at":"2025-11-25T23:06:49.000000Z","updated_at":"2025-11-25T23:06:49.000000Z","published_at":null}}'
         headers: []
         description: ''
     responseFields: []

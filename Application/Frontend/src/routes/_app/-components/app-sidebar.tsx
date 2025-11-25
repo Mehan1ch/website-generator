@@ -28,8 +28,8 @@ const navMain: NavSection[] = [
         icon: LayoutTemplateIcon,
     },
     {
-        title: "Websites",
-        url: "/websites",
+        title: "Sites",
+        url: "/sites",
         icon: Globe,
     },
 ];

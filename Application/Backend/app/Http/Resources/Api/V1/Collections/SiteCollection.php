@@ -20,7 +20,11 @@ class SiteCollection extends ResourceCollection
                     'id' => $site->id,
                     'name' => $site->name,
                     'subdomain' => $site->subdomain,
+                    'description' => $site->description,
                     'state' => $site->state,
+                    'created_at' => $site->created_at,
+                    'updated_at' => $site->updated_at,
+                    'published_at' => $site->published_at
                 ];
             })
         ];

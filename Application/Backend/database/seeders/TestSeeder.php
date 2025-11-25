@@ -18,13 +18,7 @@ class TestSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([
-            RolesPermissionsSeeder::class,
-            UserSeeder::class,
-            SchemaSeeder::class,
-            SiteSeeder::class,
-            PageSeeder::class,
-        ]);
+        $this->call(RolesPermissionsSeeder::class);
 
         // Create super admin user, change password after creation needed
         User::factory()->create([
@@ -32,5 +26,12 @@ class TestSeeder extends Seeder
             'email' => 'admin@example.com',
             'password' => bcrypt('password'),
         ])->assignRole(Roles::SUPER_ADMIN);
+
+        $this->call([
+            UserSeeder::class,
+            SchemaSeeder::class,
+            SiteSeeder::class,
+            PageSeeder::class,
+        ]);
     }
 }

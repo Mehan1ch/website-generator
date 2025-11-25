@@ -42,7 +42,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":[{"id":"019abd0c-60f7-700f-901f-25e5947773be","name":"Gulgowski-O''Kon","subdomain":"ernser","state":"draft"},{"id":"019abd0c-60fd-7290-b3e9-a515c958ecf0","name":"Marquardt Inc","subdomain":"hirthe","state":"draft"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
+        content: '{"data":[{"id":"019abd45-0974-737e-8c3d-ea25c87b6b62","name":"O''Kon and Sons","subdomain":"dach","description":"Mollitia modi deserunt aut ab provident perspiciatis quo.","state":"draft","created_at":"2025-11-25T23:06:49.000000Z","updated_at":"2025-11-25T23:06:49.000000Z","published_at":"2025-04-08 05:01:30"},{"id":"019abd45-097a-7285-917e-a43dfbab8765","name":"Marquardt Inc","subdomain":"hirthe","description":"Commodi incidunt iure odit.","state":"draft","created_at":"2025-11-25T23:06:49.000000Z","updated_at":"2025-11-25T23:06:49.000000Z","published_at":null}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
         headers: []
         description: ''
     responseFields: []
@@ -91,7 +91,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019abd0c-6103-732f-b3dc-1126845c557e","name":"Fritsch-O''Keefe","subdomain":"predovic","description":"Consequatur aut dolores enim non facere tempora.","user_id":"019abc21-ff16-7048-93fc-c49217964492","state":"draft","pages":{"data":[{"id":"019abd0c-6103-732f-b3dc-112684bc9a2f","title":"Home","url":"\/"},{"id":"019abd0c-6106-73fa-9987-df8a5ea0dfa4","title":"Voluptatem laboriosam praesentium quis adipisci.","url":"\/deleniti-distinctio-eum-doloremque-id-aut"}]},"created_at":"2025-11-25T22:04:56.000000Z","updated_at":"2025-11-25T22:04:56.000000Z","published_at":"2025-06-02 07:39:32"}}'
+        content: '{"data":{"id":"019abd45-097f-73f0-a002-1535e72013c2","name":"Fritsch-O''Keefe","subdomain":"predovic","description":"Consequatur aut dolores enim non facere tempora.","user_id":"019abc21-fb35-73e2-ad1c-f0c30b5755b7","state":"draft","pages":{"data":[{"id":"019abd45-0980-7015-8a20-1dd2b5e2da25","title":"Home","url":"\/"},{"id":"019abd45-0983-71bf-b32c-6b1e024bd3a8","title":"Voluptatem laboriosam praesentium quis adipisci.","url":"\/deleniti-distinctio-eum-doloremque-id-aut"}]},"created_at":"2025-11-25T23:06:49.000000Z","updated_at":"2025-11-25T23:06:49.000000Z","published_at":"2025-06-02 08:41:25"}}'
         headers: []
         description: ''
     responseFields: []
@@ -164,7 +164,7 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"019abd0c-6186-72d7-8a90-6dfe31d87c8d","name":"Bailey Ltd","subdomain":"okuneva","description":null,"user_id":"019abc21-fb2d-71cb-90ed-65d6207d759e","state":"draft","pages":{"data":[{"id":"019abd0c-6186-72d7-8a90-6dfe322a75ec","title":"Home","url":"\/"}]},"created_at":"2025-11-25T22:04:56.000000Z","updated_at":"2025-11-25T22:04:56.000000Z","published_at":"2024-12-26 09:40:45"}}'
+        content: '{"data":{"id":"019abd45-0a0e-7126-8c58-8cb8571cf95e","name":"Bailey Ltd","subdomain":"okuneva","description":null,"user_id":"019abc21-fb24-7330-8960-7c14761a3a4a","state":"draft","pages":{"data":[{"id":"019abd45-0a0e-7126-8c58-8cb857a4d63a","title":"Home","url":"\/"}]},"created_at":"2025-11-25T23:06:49.000000Z","updated_at":"2025-11-25T23:06:49.000000Z","published_at":null}}'
         headers: []
         description: ''
     responseFields: []
@@ -249,7 +249,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019abd0c-618c-7220-9a47-a4d8724239dd","name":"Bailey Ltd","subdomain":"rempel","description":"Sunt nihil accusantium harum mollitia.","user_id":"019abc21-ff16-7048-93fc-c49217964492","state":"draft","pages":{"data":[{"id":"019abd0c-618c-7220-9a47-a4d8728c3de4","title":"Home","url":"\/"}]},"created_at":"2025-11-25T22:04:56.000000Z","updated_at":"2025-11-25T22:04:56.000000Z","published_at":null}}'
+        content: '{"data":{"id":"019abd45-0a13-73aa-965c-b4fba2d1fa90","name":"Bailey Ltd","subdomain":"rempel","description":"Sunt nihil accusantium harum mollitia.","user_id":"019abc21-fb37-732d-87a1-dcbda27227a7","state":"draft","pages":{"data":[{"id":"019abd45-0a14-71f6-adc1-8dfa595cc598","title":"Home","url":"\/"}]},"created_at":"2025-11-25T23:06:49.000000Z","updated_at":"2025-11-25T23:06:49.000000Z","published_at":null}}'
         headers: []
         description: ''
     responseFields: []
