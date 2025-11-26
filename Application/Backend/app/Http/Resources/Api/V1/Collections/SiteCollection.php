@@ -22,6 +22,7 @@ class SiteCollection extends ResourceCollection
                     'subdomain' => $site->subdomain,
                     'description' => $site->description,
                     'state' => $site->state,
+                    'number_of_pages' => $site->pages->count(),
                     'created_at' => $site->created_at,
                     'updated_at' => $site->updated_at,
                     'published_at' => $site->published_at

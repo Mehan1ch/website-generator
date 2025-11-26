@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\StorePageRequest;
 use App\Http\Requests\Api\V1\UpdatePageRequest;
+use App\Http\Resources\Api\V1\Collections\PageCollection;
 use App\Http\Resources\Api\V1\PageResource;
 use App\Models\Page;
 use App\Models\Site;
@@ -21,6 +22,20 @@ class PageController extends Controller
 {
     public function __construct(protected HTMLSanitizerService $htmlSanitizerService)
     {
+    }
+
+    /**
+     * Get Pages for a Site
+     *
+     * Display all Pages for the given Site.
+     * @queryParam page integer The page number. Example: 1
+     * @apiResourceCollection App\Http\Resources\Api\V1\Collections\PageCollection
+     * @apiResourceModel App\Models\Page paginate=15
+     */
+    public function index(Site $site)
+    {
+
+        return new Pagecollection(Page::query()->where('site_id', $site->id)->paginate());
     }
 
     /**

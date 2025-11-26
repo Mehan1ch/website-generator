@@ -38,6 +38,7 @@ Route::controller(SiteController::class)->middleware(['auth:sanctum', 'verified'
 });
 
 Route::controller(PageController::class)->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('site/{site}/page', 'index')->can('view-any', Page::class);
     Route::get('site/{site}/page/{page}', 'show')->can('view', 'page');
     Route::post('site/{site}/page', 'store')->can('create', Page::class);
     Route::put('site/{site}/page/{page}', 'update')->can('update', 'page');

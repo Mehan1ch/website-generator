@@ -1,16 +1,14 @@
-import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
+import {Card, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import {useRouter} from "@tanstack/react-router";
-import {calculateCardDescription, getDateString} from "@/lib/utils.ts";
-import {StateBadge} from "@/components/blocks/state-badge.tsx";
-import {SiteCollectionItem, SiteState} from "@/types/site.ts";
+import {getDateString} from "@/lib/utils.ts";
+import {PageCollectionItem} from "@/types/pages.ts";
 
 
-export type SiteCardProps = {
-    page: SiteCollectionItem
+export type PageCardProps = {
+    page: PageCollectionItem
 }
 
-
-export const SiteCard = ({page}: SiteCardProps) => {
+export const PageCard = ({page}: PageCardProps) => {
     const router = useRouter();
     const onCardClick = () => {
         if (page?.id == undefined) return;
@@ -28,25 +26,18 @@ export const SiteCard = ({page}: SiteCardProps) => {
         onClick={onCardClick}>
         <CardHeader>
             <CardTitle className={"flex justify-between"}>
-                {page?.name}
-                <StateBadge state={page?.state as SiteState}/>
+                {page?.title}
             </CardTitle>
             <CardDescription>
-                {page?.subdomain}
+                {page?.url}
             </CardDescription>
         </CardHeader>
-        <CardContent className={"h-full"}>
-            {calculateCardDescription(page?.description)}
-        </CardContent>
         <CardFooter className="flex justify-between">
             <p className="text-muted-foreground text-sm">
                 Created at: {getDateString(page?.created_at)}
             </p>
             <p className="text-muted-foreground text-sm">
                 Updated at: {getDateString(page?.updated_at)}
-            </p>
-            <p className="text-muted-foreground text-sm">
-                Published at: {getDateString(page?.published_at)}
             </p>
         </CardFooter>
     </Card>;

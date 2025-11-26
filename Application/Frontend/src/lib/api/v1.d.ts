@@ -115,7 +115,7 @@ export interface paths {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019abc21-fb73-7214-ab65-63ce08280b49
+                 * @example 019abd86-72ea-7227-8b92-c033c77c3f74
                  */
                 site_id: string;
             };
@@ -153,7 +153,7 @@ export interface paths {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019abc21-fb73-7214-ab65-63ce08280b49
+                 * @example 019abd86-72ea-7227-8b92-c033c77c3f74
                  */
                 site_id: string;
             };
@@ -223,6 +223,36 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/site/{site_id}/page": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019abd86-72ea-7227-8b92-c033c77c3f74
+                 */
+                site_id: string;
+            };
+            cookie?: never;
+        };
+        /**
+         * Get Pages for a Site
+         * @description Display all Pages for the given Site.
+         */
+        get: operations["getPagesForASite"];
+        put?: never;
+        /**
+         * Create Page for Site
+         * @description Store a newly created page for a specific site.
+         */
+        post: operations["createPageForSite"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/site/{site_id}/page/{page_id}": {
         parameters: {
             query?: never;
@@ -230,12 +260,12 @@ export interface paths {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019abc21-fb73-7214-ab65-63ce08280b49
+                 * @example 019abd86-72ea-7227-8b92-c033c77c3f74
                  */
                 site_id: string;
                 /**
                  * @description The ID of the page.
-                 * @example 019abc21-fb75-7152-8e7e-05d1ce9119a2
+                 * @example 019abd86-72ee-728c-a9c4-0c9bbeb2ac08
                  */
                 page_id: string;
             };
@@ -257,32 +287,6 @@ export interface paths {
          * @description Remove the specified page from a specific site.
          */
         delete: operations["deletePageForSite"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/site/{site_id}/page": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description The ID of the site.
-                 * @example 019abc21-fb73-7214-ab65-63ce08280b49
-                 */
-                site_id: string;
-            };
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Create Page for Site
-         * @description Store a newly created page for a specific site.
-         */
-        post: operations["createPageForSite"];
-        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -399,7 +403,7 @@ export interface paths {
             path: {
                 /**
                  * @description The ID of the schema.
-                 * @example 019abc21-fb45-7391-bf98-54dd88f7536b
+                 * @example 019abd86-7298-72c0-bf74-dea600aa9e99
                  */
                 schema_id: string;
             };
@@ -433,7 +437,7 @@ export interface paths {
             path: {
                 /**
                  * @description The ID of the schema.
-                 * @example 019abc21-fb45-7391-bf98-54dd88f7536b
+                 * @example 019abd86-7298-72c0-bf74-dea600aa9e99
                  */
                 schema_id: string;
             };
@@ -483,7 +487,7 @@ export interface paths {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019abc21-fb73-7214-ab65-63ce08280b49
+                 * @example 019abd86-72ea-7227-8b92-c033c77c3f74
                  */
                 site_id: string;
             };
@@ -831,7 +835,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019abc21-fb73-7214-ab65-63ce08280b49
+                 * @example 019abd86-72ea-7227-8b92-c033c77c3f74
                  */
                 site_id: string;
             };
@@ -856,7 +860,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019abc21-fb73-7214-ab65-63ce08280b49
+                 * @example 019abd86-72ea-7227-8b92-c033c77c3f74
                  */
                 site_id: string;
             };
@@ -881,7 +885,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019abc21-fb73-7214-ab65-63ce08280b49
+                 * @example 019abd86-72ea-7227-8b92-c033c77c3f74
                  */
                 site_id: string;
             };
@@ -906,7 +910,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019abc21-fb73-7214-ab65-63ce08280b49
+                 * @example 019abd86-72ea-7227-8b92-c033c77c3f74
                  */
                 site_id: string;
             };
@@ -931,7 +935,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019abc21-fb73-7214-ab65-63ce08280b49
+                 * @example 019abd86-72ea-7227-8b92-c033c77c3f74
                  */
                 site_id: string;
             };
@@ -1011,6 +1015,183 @@ export interface operations {
             };
         };
     };
+    getPagesForASite: {
+        parameters: {
+            query?: {
+                /**
+                 * @description The page number.
+                 * @example 1
+                 */
+                page?: number;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019abd86-72ea-7227-8b92-c033c77c3f74
+                 */
+                site_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @example [
+                         *       {
+                         *         "id": "019abda3-86fc-7258-ba15-844dec1372da",
+                         *         "title": "Deserunt aut ab provident perspiciatis quo omnis nostrum.",
+                         *         "url": "/quidem-nostrum-qui-commodi-incidunt-iure-odit",
+                         *         "created_at": "2025-11-26T00:50:02.000000Z",
+                         *         "updated_at": "2025-11-26T00:50:02.000000Z"
+                         *       },
+                         *       {
+                         *         "id": "019abda3-8710-7050-a18d-fbe5633d67ac",
+                         *         "title": "Voluptatem laboriosam praesentium quis adipisci.",
+                         *         "url": "/aliquam-veniam-corporis-dolorem-mollitia-deleniti-nemo",
+                         *         "created_at": "2025-11-26T00:50:02.000000Z",
+                         *         "updated_at": "2025-11-26T00:50:02.000000Z"
+                         *       }
+                         *     ]
+                         */
+                        data?: {
+                            /** @example 019abda3-86fc-7258-ba15-844dec1372da */
+                            id?: string;
+                            /** @example Deserunt aut ab provident perspiciatis quo omnis nostrum. */
+                            title?: string;
+                            /** @example /quidem-nostrum-qui-commodi-incidunt-iure-odit */
+                            url?: string;
+                            /** @example 2025-11-26T00:50:02.000000Z */
+                            created_at?: string;
+                            /** @example 2025-11-26T00:50:02.000000Z */
+                            updated_at?: string;
+                        }[];
+                        links?: {
+                            /** @example /?page=1 */
+                            first?: string;
+                            /** @example /?page=1 */
+                            last?: string;
+                            /** @example null */
+                            prev?: string;
+                            /** @example null */
+                            next?: string;
+                        };
+                        meta?: {
+                            /** @example 1 */
+                            current_page?: number;
+                            /** @example 1 */
+                            from?: number;
+                            /** @example 1 */
+                            last_page?: number;
+                            /**
+                             * @example [
+                             *       {
+                             *         "url": null,
+                             *         "label": "&laquo; Previous",
+                             *         "page": null,
+                             *         "active": false
+                             *       },
+                             *       {
+                             *         "url": "/?page=1",
+                             *         "label": "1",
+                             *         "page": 1,
+                             *         "active": true
+                             *       },
+                             *       {
+                             *         "url": null,
+                             *         "label": "Next &raquo;",
+                             *         "page": null,
+                             *         "active": false
+                             *       }
+                             *     ]
+                             */
+                            links?: {
+                                /** @example null */
+                                url?: string;
+                                /** @example &laquo; Previous */
+                                label?: string;
+                                /** @example null */
+                                page?: string;
+                                /** @example false */
+                                active?: boolean;
+                            }[];
+                            /** @example / */
+                            path?: string;
+                            /** @example 15 */
+                            per_page?: number;
+                            /** @example 2 */
+                            to?: number;
+                            /** @example 2 */
+                            total?: number;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    createPageForSite: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The ID of the site.
+                 * @example 019abd86-72ea-7227-8b92-c033c77c3f74
+                 */
+                site_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description The title of the page . . Must not be greater than 255 characters.
+                     * @example My personal homepage
+                     */
+                    title: string;
+                    /**
+                     * @description The URL slug for the post . . Must not be greater than 255 characters.
+                     * @example my - first - post
+                     */
+                    url: string;
+                };
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data?: {
+                            /** @example 019abda3-875d-73fd-b98f-d6b0168c3ded */
+                            id?: string;
+                            /** @example Eius et animi quos velit et. */
+                            title?: string;
+                            /** @example /accusantium-harum-mollitia-modi-deserunt-aut-ab */
+                            url?: string;
+                            /** @example hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n */
+                            content?: string;
+                            /** @example 019abd86-730d-73ee-8cd9-25b34556bce3 */
+                            site_id?: string;
+                            /** @example 2025-11-26T00:50:02.000000Z */
+                            created_at?: string;
+                            /** @example 2025-11-26T00:50:02.000000Z */
+                            updated_at?: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
     getPageForSite: {
         parameters: {
             query?: never;
@@ -1018,12 +1199,12 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019abc21-fb73-7214-ab65-63ce08280b49
+                 * @example 019abd86-72ea-7227-8b92-c033c77c3f74
                  */
                 site_id: string;
                 /**
                  * @description The ID of the page.
-                 * @example 019abc21-fb75-7152-8e7e-05d1ce9119a2
+                 * @example 019abd86-72ee-728c-a9c4-0c9bbeb2ac08
                  */
                 page_id: string;
             };
@@ -1038,19 +1219,19 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019abd45-0a1d-71a7-b2ff-9081f397fe7d */
+                            /** @example 019abda3-8722-7265-8232-2e8fc274c426 */
                             id?: string;
-                            /** @example Deserunt aut ab provident perspiciatis quo omnis nostrum. */
+                            /** @example Repellendus assumenda et tenetur ab reiciendis. */
                             title?: string;
-                            /** @example /quidem-nostrum-qui-commodi-incidunt-iure-odit */
+                            /** @example /deserunt-ducimus-corrupti-et-dolores-quia-maiores */
                             url?: string;
                             /** @example null */
                             content?: string;
-                            /** @example 019abc21-fbbe-715c-928d-0cc684f12b6a */
+                            /** @example 019abd86-731b-7185-a185-c6229fd8e443 */
                             site_id?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:02.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:02.000000Z */
                             updated_at?: string;
                         };
                     };
@@ -1076,12 +1257,12 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019abc21-fb73-7214-ab65-63ce08280b49
+                 * @example 019abd86-72ea-7227-8b92-c033c77c3f74
                  */
                 site_id: string;
                 /**
                  * @description The ID of the page.
-                 * @example 019abc21-fb75-7152-8e7e-05d1ce9119a2
+                 * @example 019abd86-72ee-728c-a9c4-0c9bbeb2ac08
                  */
                 page_id: string;
             };
@@ -1121,7 +1302,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019abd45-0a38-70db-a382-29f390247df7 */
+                            /** @example 019abda3-877b-7132-ba7f-5ac12318afa4 */
                             id?: string;
                             /** @example Eius et animi quos velit et. */
                             title?: string;
@@ -1129,11 +1310,11 @@ export interface operations {
                             url?: string;
                             /** @example hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n */
                             content?: string;
-                            /** @example 019abc21-fb73-7214-ab65-63ce08280b49 */
+                            /** @example 019abd86-7316-7255-8c01-53480a8c055c */
                             site_id?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:02.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:02.000000Z */
                             updated_at?: string;
                         };
                     };
@@ -1159,12 +1340,12 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019abc21-fb73-7214-ab65-63ce08280b49
+                 * @example 019abd86-72ea-7227-8b92-c033c77c3f74
                  */
                 site_id: string;
                 /**
                  * @description The ID of the page.
-                 * @example 019abc21-fb75-7152-8e7e-05d1ce9119a2
+                 * @example 019abd86-72ee-728c-a9c4-0c9bbeb2ac08
                  */
                 page_id: string;
             };
@@ -1178,63 +1359,6 @@ export interface operations {
                 };
                 content: {
                     "application/json": Record<string, never>;
-                };
-            };
-        };
-    };
-    createPageForSite: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /**
-                 * @description The ID of the site.
-                 * @example 019abc21-fb73-7214-ab65-63ce08280b49
-                 */
-                site_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    /**
-                     * @description The title of the page . . Must not be greater than 255 characters.
-                     * @example My personal homepage
-                     */
-                    title: string;
-                    /**
-                     * @description The URL slug for the post . . Must not be greater than 255 characters.
-                     * @example my - first - post
-                     */
-                    url: string;
-                };
-            };
-        };
-        responses: {
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data?: {
-                            /** @example 019abd45-0a2b-7002-b0a1-5d0125b3b30c */
-                            id?: string;
-                            /** @example Eius et animi quos velit et. */
-                            title?: string;
-                            /** @example /accusantium-harum-mollitia-modi-deserunt-aut-ab */
-                            url?: string;
-                            /** @example hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n */
-                            content?: string;
-                            /** @example 019abc21-fb81-7056-8c32-c58981deca19 */
-                            site_id?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
-                            created_at?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
-                            updated_at?: string;
-                        };
-                    };
                 };
             };
         };
@@ -1453,27 +1577,27 @@ export interface operations {
                         /**
                          * @example [
                          *       {
-                         *         "id": "019abd45-095b-7181-80fc-86b82d31567a",
+                         *         "id": "019abda3-853c-7304-b986-19e97e9c3173",
                          *         "name": "architecto",
                          *         "description": null,
                          *         "state": "draft",
-                         *         "created_at": "2025-11-25T23:06:49.000000Z",
-                         *         "updated_at": "2025-11-25T23:06:49.000000Z",
+                         *         "created_at": "2025-11-26T00:50:01.000000Z",
+                         *         "updated_at": "2025-11-26T00:50:01.000000Z",
                          *         "published_at": null
                          *       },
                          *       {
-                         *         "id": "019abd45-095d-72aa-9b17-ce9381a87083",
+                         *         "id": "019abda3-8546-7337-bd88-40d4795165fe",
                          *         "name": "quos",
                          *         "description": null,
-                         *         "state": "draft",
-                         *         "created_at": "2025-11-25T23:06:49.000000Z",
-                         *         "updated_at": "2025-11-25T23:06:49.000000Z",
+                         *         "state": "published",
+                         *         "created_at": "2025-11-26T00:50:01.000000Z",
+                         *         "updated_at": "2025-11-26T00:50:01.000000Z",
                          *         "published_at": null
                          *       }
                          *     ]
                          */
                         data?: {
-                            /** @example 019abd45-095b-7181-80fc-86b82d31567a */
+                            /** @example 019abda3-853c-7304-b986-19e97e9c3173 */
                             id?: string;
                             /** @example architecto */
                             name?: string;
@@ -1481,9 +1605,9 @@ export interface operations {
                             description?: string;
                             /** @example draft */
                             state?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:01.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:01.000000Z */
                             updated_at?: string;
                             /** @example null */
                             published_at?: string;
@@ -1587,7 +1711,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019abd45-0966-7252-993c-3bbf132782f6 */
+                            /** @example 019abda3-8562-7123-a734-49fed75c817d */
                             id?: string;
                             /** @example architecto */
                             name?: string;
@@ -1597,9 +1721,9 @@ export interface operations {
                             content?: string;
                             /** @example draft */
                             state?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:01.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:01.000000Z */
                             updated_at?: string;
                             /** @example null */
                             published_at?: string;
@@ -1616,7 +1740,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the schema.
-                 * @example 019abc21-fb45-7391-bf98-54dd88f7536b
+                 * @example 019abd86-7298-72c0-bf74-dea600aa9e99
                  */
                 schema_id: string;
             };
@@ -1631,7 +1755,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019abd45-0962-7026-a406-d50868b5c8ca */
+                            /** @example 019abda3-8556-71b3-b00b-8dc4c5b0cebc */
                             id?: string;
                             /** @example sunt */
                             name?: string;
@@ -1641,9 +1765,9 @@ export interface operations {
                             content?: string;
                             /** @example draft */
                             state?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:01.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:01.000000Z */
                             updated_at?: string;
                             /** @example null */
                             published_at?: string;
@@ -1660,7 +1784,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the schema.
-                 * @example 019abc21-fb45-7391-bf98-54dd88f7536b
+                 * @example 019abd86-7298-72c0-bf74-dea600aa9e99
                  */
                 schema_id: string;
             };
@@ -1695,7 +1819,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019abd45-096d-701b-9a91-2973624a9412 */
+                            /** @example 019abda3-8575-700a-b237-ba891a9ceaf4 */
                             id?: string;
                             /** @example architecto */
                             name?: string;
@@ -1705,9 +1829,9 @@ export interface operations {
                             content?: string;
                             /** @example published */
                             state?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:01.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:01.000000Z */
                             updated_at?: string;
                             /** @example null */
                             published_at?: string;
@@ -1724,7 +1848,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the schema.
-                 * @example 019abc21-fb45-7391-bf98-54dd88f7536b
+                 * @example 019abd86-7298-72c0-bf74-dea600aa9e99
                  */
                 schema_id: string;
             };
@@ -1749,7 +1873,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the schema.
-                 * @example 019abc21-fb45-7391-bf98-54dd88f7536b
+                 * @example 019abd86-7298-72c0-bf74-dea600aa9e99
                  */
                 schema_id: string;
             };
@@ -1764,7 +1888,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019abd45-0969-72d7-9bba-f73f8dacfe08 */
+                            /** @example 019abda3-856b-70b8-9a6b-3c038c874da0 */
                             id?: string;
                             /** @example quos */
                             name?: string;
@@ -1772,11 +1896,11 @@ export interface operations {
                             description?: string;
                             /** @example hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n */
                             content?: string;
-                            /** @example published */
+                            /** @example draft */
                             state?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:01.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:01.000000Z */
                             updated_at?: string;
                             /** @example null */
                             published_at?: string;
@@ -1810,29 +1934,31 @@ export interface operations {
                         /**
                          * @example [
                          *       {
-                         *         "id": "019abd45-0974-737e-8c3d-ea25c87b6b62",
+                         *         "id": "019abda3-8583-7248-816b-7d51cc769b00",
                          *         "name": "O'Kon and Sons",
                          *         "subdomain": "dach",
                          *         "description": "Mollitia modi deserunt aut ab provident perspiciatis quo.",
                          *         "state": "draft",
-                         *         "created_at": "2025-11-25T23:06:49.000000Z",
-                         *         "updated_at": "2025-11-25T23:06:49.000000Z",
-                         *         "published_at": "2025-04-08 05:01:30"
+                         *         "number_of_pages": 1,
+                         *         "created_at": "2025-11-26T00:50:01.000000Z",
+                         *         "updated_at": "2025-11-26T00:50:01.000000Z",
+                         *         "published_at": "2025-04-08 06:44:42"
                          *       },
                          *       {
-                         *         "id": "019abd45-097a-7285-917e-a43dfbab8765",
+                         *         "id": "019abda3-858f-719a-bb6c-dabb2ff9e250",
                          *         "name": "Marquardt Inc",
                          *         "subdomain": "hirthe",
                          *         "description": "Commodi incidunt iure odit.",
                          *         "state": "draft",
-                         *         "created_at": "2025-11-25T23:06:49.000000Z",
-                         *         "updated_at": "2025-11-25T23:06:49.000000Z",
-                         *         "published_at": null
+                         *         "number_of_pages": 1,
+                         *         "created_at": "2025-11-26T00:50:01.000000Z",
+                         *         "updated_at": "2025-11-26T00:50:01.000000Z",
+                         *         "published_at": "2025-08-20 05:27:31"
                          *       }
                          *     ]
                          */
                         data?: {
-                            /** @example 019abd45-0974-737e-8c3d-ea25c87b6b62 */
+                            /** @example 019abda3-8583-7248-816b-7d51cc769b00 */
                             id?: string;
                             /** @example O'Kon and Sons */
                             name?: string;
@@ -1842,11 +1968,13 @@ export interface operations {
                             description?: string;
                             /** @example draft */
                             state?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 1 */
+                            number_of_pages?: number;
+                            /** @example 2025-11-26T00:50:01.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:01.000000Z */
                             updated_at?: string;
-                            /** @example 2025-04-08 05:01:30 */
+                            /** @example 2025-04-08 06:44:42 */
                             published_at?: string;
                         }[];
                         links?: {
@@ -1948,7 +2076,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019abd45-0a0e-7126-8c58-8cb8571cf95e */
+                            /** @example 019abda3-86de-7370-896c-d7ab7ad6d72e */
                             id?: string;
                             /** @example Bailey Ltd */
                             name?: string;
@@ -1956,32 +2084,15 @@ export interface operations {
                             subdomain?: string;
                             /** @example null */
                             description?: string;
-                            /** @example 019abc21-fb24-7330-8960-7c14761a3a4a */
+                            /** @example 019abd86-728a-71b2-91df-e9bfaf81a5be */
                             user_id?: string;
                             /** @example draft */
                             state?: string;
-                            pages?: {
-                                /**
-                                 * @example [
-                                 *       {
-                                 *         "id": "019abd45-0a0e-7126-8c58-8cb857a4d63a",
-                                 *         "title": "Home",
-                                 *         "url": "/"
-                                 *       }
-                                 *     ]
-                                 */
-                                data?: {
-                                    /** @example 019abd45-0a0e-7126-8c58-8cb857a4d63a */
-                                    id?: string;
-                                    /** @example Home */
-                                    title?: string;
-                                    /** @example / */
-                                    url?: string;
-                                }[];
-                            };
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 1 */
+                            number_of_pages?: number;
+                            /** @example 2025-11-26T00:50:02.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:02.000000Z */
                             updated_at?: string;
                             /** @example null */
                             published_at?: string;
@@ -1998,7 +2109,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019abc21-fb73-7214-ab65-63ce08280b49
+                 * @example 019abd86-72ea-7227-8b92-c033c77c3f74
                  */
                 site_id: string;
             };
@@ -2013,47 +2124,25 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019abd45-097f-73f0-a002-1535e72013c2 */
+                            /** @example 019abda3-859e-7277-b577-a94f7e75b700 */
                             id?: string;
-                            /** @example Fritsch-O'Keefe */
+                            /** @example Bauch, Fritsch and O'Keefe */
                             name?: string;
                             /** @example predovic */
                             subdomain?: string;
                             /** @example Consequatur aut dolores enim non facere tempora. */
                             description?: string;
-                            /** @example 019abc21-fb35-73e2-ad1c-f0c30b5755b7 */
+                            /** @example 019abd86-7283-718a-9dec-7e43917e8109 */
                             user_id?: string;
                             /** @example draft */
                             state?: string;
-                            pages?: {
-                                /**
-                                 * @example [
-                                 *       {
-                                 *         "id": "019abd45-0980-7015-8a20-1dd2b5e2da25",
-                                 *         "title": "Home",
-                                 *         "url": "/"
-                                 *       },
-                                 *       {
-                                 *         "id": "019abd45-0983-71bf-b32c-6b1e024bd3a8",
-                                 *         "title": "Voluptatem laboriosam praesentium quis adipisci.",
-                                 *         "url": "/deleniti-distinctio-eum-doloremque-id-aut"
-                                 *       }
-                                 *     ]
-                                 */
-                                data?: {
-                                    /** @example 019abd45-0980-7015-8a20-1dd2b5e2da25 */
-                                    id?: string;
-                                    /** @example Home */
-                                    title?: string;
-                                    /** @example / */
-                                    url?: string;
-                                }[];
-                            };
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2 */
+                            number_of_pages?: number;
+                            /** @example 2025-11-26T00:50:01.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:01.000000Z */
                             updated_at?: string;
-                            /** @example 2025-06-02 08:41:25 */
+                            /** @example 2025-07-12 11:37:08 */
                             published_at?: string;
                         };
                     };
@@ -2068,7 +2157,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019abc21-fb73-7214-ab65-63ce08280b49
+                 * @example 019abd86-72ea-7227-8b92-c033c77c3f74
                  */
                 site_id: string;
             };
@@ -2103,7 +2192,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019abd45-0a13-73aa-965c-b4fba2d1fa90 */
+                            /** @example 019abda3-86e7-727a-a96e-3e26ef430059 */
                             id?: string;
                             /** @example Bailey Ltd */
                             name?: string;
@@ -2111,34 +2200,17 @@ export interface operations {
                             subdomain?: string;
                             /** @example Sunt nihil accusantium harum mollitia. */
                             description?: string;
-                            /** @example 019abc21-fb37-732d-87a1-dcbda27227a7 */
+                            /** @example 019abd86-7283-718a-9dec-7e43917e8109 */
                             user_id?: string;
                             /** @example draft */
                             state?: string;
-                            pages?: {
-                                /**
-                                 * @example [
-                                 *       {
-                                 *         "id": "019abd45-0a14-71f6-adc1-8dfa595cc598",
-                                 *         "title": "Home",
-                                 *         "url": "/"
-                                 *       }
-                                 *     ]
-                                 */
-                                data?: {
-                                    /** @example 019abd45-0a14-71f6-adc1-8dfa595cc598 */
-                                    id?: string;
-                                    /** @example Home */
-                                    title?: string;
-                                    /** @example / */
-                                    url?: string;
-                                }[];
-                            };
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 1 */
+                            number_of_pages?: number;
+                            /** @example 2025-11-26T00:50:02.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:02.000000Z */
                             updated_at?: string;
-                            /** @example null */
+                            /** @example 2024-12-26 12:25:51 */
                             published_at?: string;
                         };
                     };
@@ -2153,7 +2225,7 @@ export interface operations {
             path: {
                 /**
                  * @description The ID of the site.
-                 * @example 019abc21-fb73-7214-ab65-63ce08280b49
+                 * @example 019abd86-72ea-7227-8b92-c033c77c3f74
                  */
                 site_id: string;
             };
@@ -2314,21 +2386,21 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019abd45-0934-738d-a1ec-d3726ba41548 */
+                            /** @example 019abda3-84d2-7194-941d-df49dc39e59f */
                             id?: string;
-                            /** @example Zaria Braun */
+                            /** @example Kaleigh Fay */
                             name?: string;
-                            /** @example monahan.leda@example.org */
+                            /** @example sturner@example.com */
                             email?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:01.000000Z */
                             email_verified_at?: string;
                             /** @example null */
                             avatar?: string;
                             /** @example false */
                             is_admin?: boolean;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:01.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-25T23:06:49.000000Z */
+                            /** @example 2025-11-26T00:50:01.000000Z */
                             updated_at?: string;
                         };
                     };

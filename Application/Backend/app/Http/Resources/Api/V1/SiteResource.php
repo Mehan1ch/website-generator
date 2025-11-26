@@ -26,7 +26,7 @@ class SiteResource extends JsonResource
             'description' => $this->description,
             'user_id' => $this->user_id,
             'state' => $this->state,
-            'pages' => new PageCollection($this->pages),
+            'number_of_pages' => $this->pages->count(),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'published_at' => $this->published_at

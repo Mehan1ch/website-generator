@@ -1,8 +1,6 @@
 import {createFileRoute} from '@tanstack/react-router';
 
-export const Route = createFileRoute(
-    '/_app/sites/$siteId/pages/$pageId/create',
-)({
+export const Route = createFileRoute('/_app/sites/$siteId/pages/create')({
     beforeLoad: () => {
         return {
             getTitle: () => 'Create',
@@ -12,5 +10,5 @@ export const Route = createFileRoute(
 });
 
 function PageCreateComponent() {
-    return <div>Hello "/_app/websites/$siteId/pages/$pageId/create"!</div>;
+    return <div>Hello "/_app/sites/$siteId/pages/create"!</div>;
 }

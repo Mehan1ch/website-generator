@@ -73,7 +73,7 @@ function SitesIndexComponent() {
             </div>
             <div className={"grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3"}>
                 {sites.map(site => {
-                    return (<SiteCard key={site.id} site={site}/>);
+                    return (<SiteCard key={site.id} page={site}/>);
                 })}
             </div>
             <PaginationDynamic currentPage={siteCollectionResponse.meta?.current_page}

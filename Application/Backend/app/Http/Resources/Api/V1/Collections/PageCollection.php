@@ -20,6 +20,8 @@ class PageCollection extends ResourceCollection
                     'id' => $page->id,
                     'title' => $page->title,
                     'url' => $page->url,
+                    'created_at' => $page->created_at,
+                    'updated_at' => $page->updated_at,
                 ];
             })
         ];

@@ -5,6 +5,67 @@ endpoints:
     custom: []
     httpMethods:
       - GET
+    uri: 'api/v1/site/{site_id}/page'
+    metadata:
+      custom: []
+      groupName: Pages
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Pages for a Site'
+      description: 'Display all Pages for the given Site.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      site_id:
+        custom: []
+        name: site_id
+        description: 'The ID of the site.'
+        required: true
+        example: 019abd86-72ea-7227-8b92-c033c77c3f74
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      site_id: 019abd86-72ea-7227-8b92-c033c77c3f74
+    queryParameters:
+      page:
+        custom: []
+        name: page
+        description: 'The page number.'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      page: 1
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":"019abda3-86fc-7258-ba15-844dec1372da","title":"Deserunt aut ab provident perspiciatis quo omnis nostrum.","url":"\/quidem-nostrum-qui-commodi-incidunt-iure-odit","created_at":"2025-11-26T00:50:02.000000Z","updated_at":"2025-11-26T00:50:02.000000Z"},{"id":"019abda3-8710-7050-a18d-fbe5633d67ac","title":"Voluptatem laboriosam praesentium quis adipisci.","url":"\/aliquam-veniam-corporis-dolorem-mollitia-deleniti-nemo","created_at":"2025-11-26T00:50:02.000000Z","updated_at":"2025-11-26T00:50:02.000000Z"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
     uri: 'api/v1/site/{site_id}/page/{page_id}'
     metadata:
       custom: []
@@ -25,7 +86,7 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019abc21-fb73-7214-ab65-63ce08280b49
+        example: 019abd86-72ea-7227-8b92-c033c77c3f74
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -36,15 +97,15 @@ endpoints:
         name: page_id
         description: 'The ID of the page.'
         required: true
-        example: 019abc21-fb75-7152-8e7e-05d1ce9119a2
+        example: 019abd86-72ee-728c-a9c4-0c9bbeb2ac08
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019abc21-fb73-7214-ab65-63ce08280b49
-      page_id: 019abc21-fb75-7152-8e7e-05d1ce9119a2
+      site_id: 019abd86-72ea-7227-8b92-c033c77c3f74
+      page_id: 019abd86-72ee-728c-a9c4-0c9bbeb2ac08
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -54,7 +115,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019abd45-0a1d-71a7-b2ff-9081f397fe7d","title":"Deserunt aut ab provident perspiciatis quo omnis nostrum.","url":"\/quidem-nostrum-qui-commodi-incidunt-iure-odit","content":null,"site_id":"019abc21-fbbe-715c-928d-0cc684f12b6a","created_at":"2025-11-25T23:06:49.000000Z","updated_at":"2025-11-25T23:06:49.000000Z"}}'
+        content: '{"data":{"id":"019abda3-8722-7265-8232-2e8fc274c426","title":"Repellendus assumenda et tenetur ab reiciendis.","url":"\/deserunt-ducimus-corrupti-et-dolores-quia-maiores","content":null,"site_id":"019abd86-731b-7185-a185-c6229fd8e443","created_at":"2025-11-26T00:50:02.000000Z","updated_at":"2025-11-26T00:50:02.000000Z"}}'
         headers: []
         description: ''
       -
@@ -95,14 +156,14 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019abc21-fb73-7214-ab65-63ce08280b49
+        example: 019abd86-72ea-7227-8b92-c033c77c3f74
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019abc21-fb73-7214-ab65-63ce08280b49
+      site_id: 019abd86-72ea-7227-8b92-c033c77c3f74
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -136,7 +197,7 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"019abd45-0a2b-7002-b0a1-5d0125b3b30c","title":"Eius et animi quos velit et.","url":"\/accusantium-harum-mollitia-modi-deserunt-aut-ab","content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","site_id":"019abc21-fb81-7056-8c32-c58981deca19","created_at":"2025-11-25T23:06:49.000000Z","updated_at":"2025-11-25T23:06:49.000000Z"}}'
+        content: '{"data":{"id":"019abda3-875d-73fd-b98f-d6b0168c3ded","title":"Eius et animi quos velit et.","url":"\/accusantium-harum-mollitia-modi-deserunt-aut-ab","content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","site_id":"019abd86-730d-73ee-8cd9-25b34556bce3","created_at":"2025-11-26T00:50:02.000000Z","updated_at":"2025-11-26T00:50:02.000000Z"}}'
         headers: []
         description: ''
     responseFields: []
@@ -168,7 +229,7 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019abc21-fb73-7214-ab65-63ce08280b49
+        example: 019abd86-72ea-7227-8b92-c033c77c3f74
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -179,15 +240,15 @@ endpoints:
         name: page_id
         description: 'The ID of the page.'
         required: true
-        example: 019abc21-fb75-7152-8e7e-05d1ce9119a2
+        example: 019abd86-72ee-728c-a9c4-0c9bbeb2ac08
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019abc21-fb73-7214-ab65-63ce08280b49
-      page_id: 019abc21-fb75-7152-8e7e-05d1ce9119a2
+      site_id: 019abd86-72ea-7227-8b92-c033c77c3f74
+      page_id: 019abd86-72ee-728c-a9c4-0c9bbeb2ac08
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -245,7 +306,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019abd45-0a38-70db-a382-29f390247df7","title":"Eius et animi quos velit et.","url":"\/perspiciatis-quo-omnis-nostrum-aut-adipisci-quidem-nostrum-qui","content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","site_id":"019abc21-fb73-7214-ab65-63ce08280b49","created_at":"2025-11-25T23:06:49.000000Z","updated_at":"2025-11-25T23:06:49.000000Z"}}'
+        content: '{"data":{"id":"019abda3-877b-7132-ba7f-5ac12318afa4","title":"Eius et animi quos velit et.","url":"\/perspiciatis-quo-omnis-nostrum-aut-adipisci-quidem-nostrum-qui","content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","site_id":"019abd86-7316-7255-8c01-53480a8c055c","created_at":"2025-11-26T00:50:02.000000Z","updated_at":"2025-11-26T00:50:02.000000Z"}}'
         headers: []
         description: ''
       -
@@ -286,7 +347,7 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019abc21-fb73-7214-ab65-63ce08280b49
+        example: 019abd86-72ea-7227-8b92-c033c77c3f74
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -297,15 +358,15 @@ endpoints:
         name: page_id
         description: 'The ID of the page.'
         required: true
-        example: 019abc21-fb75-7152-8e7e-05d1ce9119a2
+        example: 019abd86-72ee-728c-a9c4-0c9bbeb2ac08
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019abc21-fb73-7214-ab65-63ce08280b49
-      page_id: 019abc21-fb75-7152-8e7e-05d1ce9119a2
+      site_id: 019abd86-72ea-7227-8b92-c033c77c3f74
+      page_id: 019abd86-72ee-728c-a9c4-0c9bbeb2ac08
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
