@@ -2,6 +2,7 @@ import {capitalize, cn, getStateBadgeVariant} from "@/lib/utils.ts";
 import {SiteState} from "@/types/site.ts";
 import {Badge} from "@/components/ui/badge.tsx";
 import {SchemaState} from "@/types/schema.ts";
+import {getStateBadgeIcon} from "@/lib/element-utils.tsx";
 
 type StateBadgeProps = {
     className?: string;
@@ -13,5 +14,5 @@ export const StateBadge = ({className, state}: StateBadgeProps) => {
         return null;
     }
     return <Badge className={cn(className)}
-                  variant={getStateBadgeVariant(state)}>{capitalize(state || "")}</Badge>;
+                  variant={getStateBadgeVariant(state)}>{getStateBadgeIcon(state)}{capitalize(state)}</Badge>;
 };

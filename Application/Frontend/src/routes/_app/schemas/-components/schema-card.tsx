@@ -42,13 +42,13 @@ export const SchemaCard = ({schema}: SchemaCardProps) => {
         {user?.is_admin &&
             <CardFooter className="flex justify-between">
                 <p className="text-muted-foreground text-sm">
-                    Created at: {getDateString(schema?.created_at)}
+                    Created at: <br/> {getDateString(schema?.created_at)}
                 </p>
                 <p className="text-muted-foreground text-sm">
-                    Updated at: {getDateString(schema?.updated_at)}
+                    Updated at: <br/> {getDateString(schema?.updated_at)}
                 </p>
                 <p className="text-muted-foreground text-sm">
-                    Published at: {getDateString(schema?.published_at)}
+                    Published at: <br/> {getDateString(schema?.published_at)}
                 </p>
             </CardFooter>
         }

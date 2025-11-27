@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\SiteRequest;
+use App\Http\Requests\Api\V1\StoreSiteRequest;
+use App\Http\Requests\Api\V1\UpdateSiteRequest;
 use App\Http\Resources\Api\V1\Collections\SiteCollection;
 use App\Http\Resources\Api\V1\SiteResource;
 use App\Models\Site;
@@ -38,7 +39,7 @@ class SiteController extends Controller
      * @apiResource App\Http\Resources\Api\V1\SiteResource status=201
      * @apiResourceModel App\Models\Site
      */
-    public function store(SiteRequest $request)
+    public function store(StoreSiteRequest $request)
     {
         $site = auth()->user()->sites()->create($request->validated());
         return response()->json(new SiteResource($site), 201);
@@ -63,7 +64,7 @@ class SiteController extends Controller
      * @apiResource App\Http\Resources\Api\V1\SiteResource
      * @apiResourceModel App\Models\Site
      */
-    public function update(SiteRequest $request, Site $site)
+    public function update(UpdateSiteRequest $request, Site $site)
     {
         $site->update($request->validated());
         return new SiteResource($site);

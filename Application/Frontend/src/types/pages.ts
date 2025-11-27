@@ -11,4 +11,4 @@ type PageData = paths["/api/v1/site/{site_id}/page/{page_id}"]["get"]["responses
 
 export type PageDataResponse = paths["/api/v1/site/{site_id}/page/{page_id}"]["get"]["responses"]["200"]["content"]["application/json"];
 
-export type Site = NonNullable<PageData>;
+export type Page = NonNullable<PageData>;

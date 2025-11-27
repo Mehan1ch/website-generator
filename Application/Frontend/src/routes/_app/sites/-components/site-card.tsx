@@ -40,13 +40,13 @@ export const SiteCard = ({page}: SiteCardProps) => {
         </CardContent>
         <CardFooter className="flex justify-between">
             <p className="text-muted-foreground text-sm">
-                Created at: {getDateString(page?.created_at)}
+                Created at: <br/> {getDateString(page?.created_at)}
             </p>
             <p className="text-muted-foreground text-sm">
-                Updated at: {getDateString(page?.updated_at)}
+                Updated at: <br/> {getDateString(page?.updated_at)}
             </p>
             <p className="text-muted-foreground text-sm">
-                Published at: {getDateString(page?.published_at)}
+                Published at: <br/> {getDateString(page?.published_at)}
             </p>
         </CardFooter>
     </Card>;

@@ -5,7 +5,6 @@ import {useForm} from "react-hook-form";
 import {Form, FormControl, FormField, FormItem, FormLabel} from "@/components/ui/form.tsx";
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group.tsx";
 
-// https://tanstack.com/router/latest/docs/framework/react/routing/routing-concepts#excluding-files-and-folders-from-routes
 type EditorButtonProps = {
     size: "sm" | "lg" | "default" | "icon" | null | undefined;
     variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";

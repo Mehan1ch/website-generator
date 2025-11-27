@@ -1,43 +1,52 @@
-import {Field, FieldError, FieldGroup, FieldLabel} from "@/components/ui/field.tsx";
-import {Card, CardContent, CardFooter} from "@/components/ui/card.tsx";
-import {Globe, Save, TriangleAlert} from "lucide-react";
-import {Controller, useForm} from "react-hook-form";
-import {Input} from "@/components/ui/input.tsx";
-import {Button} from "@/components/ui/button.tsx";
-import {Spinner} from "@/components/ui/spinner.tsx";
-import {useState} from "react";
-import {zodResolver} from "@hookform/resolvers/zod";
+import {CreateSiteBody, Site, UpdateSiteBody, updateSiteForm} from "@/types/site.ts";
 import {useRouter} from "@tanstack/react-router";
+import {zodResolver} from "@hookform/resolvers/zod";
 import {toast} from "sonner";
 import {api, APIError} from "@/lib/api/api-client.ts";
+import {Controller, useForm} from "react-hook-form";
+import {useState} from "react";
+import {Field, FieldError, FieldGroup, FieldLabel} from "@/components/ui/field.tsx";
+import {Card, CardContent, CardFooter} from "@/components/ui/card.tsx";
+import {Globe, Save} from "lucide-react";
+import {Input} from "@/components/ui/input.tsx";
 import {Textarea} from "@/components/ui/textarea.tsx";
-import {CreateSiteBody, createSiteForm} from "@/types/site.ts";
-import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert.tsx";
+import {Button} from "@/components/ui/button.tsx";
+import {Spinner} from "@/components/ui/spinner.tsx";
 
-export const SiteCreateForm = () => {
+type SiteEditFormProps = {
+    site: Site
+}
+export const SiteEditForm = ({site}: SiteEditFormProps) => {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
-    const createSiteMutation = api.useMutation("post", "/api/v1/site");
+    const editSiteMutation = api.useMutation("put", "/api/v1/site/{site_id}");
 
 
-    const form = useForm<CreateSiteBody>({
-        resolver: zodResolver(createSiteForm),
+    const form = useForm<UpdateSiteBody>({
+        resolver: zodResolver(updateSiteForm),
         defaultValues: {
-            name: "",
-            subdomain: "",
-            description: "",
+            name: site.name,
+            subdomain: site.subdomain,
+            description: site.description,
         },
         mode: "onSubmit",
         reValidateMode: "onSubmit",
     });
 
-    const handleSubmit = (data: CreateSiteBody) => {
+    const handleSubmit = (data: UpdateSiteBody) => {
         setLoading(true);
-        const loadingToast = toast.loading("Creating site...");
-        createSiteMutation.mutate({body: data}, {
+        const loadingToast = toast.loading("Updating site...");
+        editSiteMutation.mutate({
+            params: {
+                path: {
+                    site_id: site.id || "",
+                }
+            },
+            body: data
+        }, {
             onSuccess: (data) => {
                 toast.dismiss(loadingToast);
-                toast.success("Site created successfully.");
+                toast.success("Site updated successfully.");
                 router.navigate({
                     to: "/sites/$siteId",
                     params: {
@@ -48,7 +57,7 @@ export const SiteCreateForm = () => {
             onError: (err: APIError) => {
                 setLoading(false);
                 toast.dismiss(loadingToast);
-                toast.error("Failed to create site: ", {
+                toast.error("Failed to update site: ", {
                     description: err.message,
                 });
             }
@@ -66,10 +75,10 @@ export const SiteCreateForm = () => {
                     <div className="border-b pb-6">
                         <h2 className="text-2xl font-semibold tracking-tight flex items-center gap-2">
                             <Globe/>
-                            Create Site
+                            Update Site
                         </h2>
                         <p className="text-muted-foreground mt-2 text-sm">
-                            Enter the details of your new site
+                            Update the details of your site
                         </p>
                     </div>
                     <CardContent className="grid gap-6">
@@ -92,33 +101,6 @@ export const SiteCreateForm = () => {
                                     </Field>
                                 )}
                             />
-                        </div>
-                        <div className="grid gap-3">
-                            <Controller
-                                name="subdomain"
-                                control={form.control}
-                                render={({field, fieldState}) => (
-                                    <Field data-invalid={fieldState.invalid}>
-                                        <FieldLabel htmlFor="subdomain">Subdomain</FieldLabel>
-                                        <Input {...field}
-                                               id="subdomain"
-                                               type="text"
-                                               placeholder="johndoe"
-                                               aria-invalid={fieldState.invalid}
-                                               required/>
-                                        {fieldState.invalid && (
-                                            <FieldError errors={[fieldState.error]}/>
-                                        )}
-                                    </Field>
-                                )}
-                            />
-                            <Alert variant="destructive" className="w-fit">
-                                <TriangleAlert/>
-                                <AlertTitle>Warning!</AlertTitle>
-                                <AlertDescription>
-                                    After creating the site, changing the subdomain is not allowed!
-                                </AlertDescription>
-                            </Alert>
                         </div>
                         <div className="grid gap-3">
                             <Controller

@@ -6,7 +6,7 @@ use App\Models\Site;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SiteRequest extends FormRequest
+class StoreSiteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

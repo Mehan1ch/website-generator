@@ -42,7 +42,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":[{"id":"019abda3-8583-7248-816b-7d51cc769b00","name":"O''Kon and Sons","subdomain":"dach","description":"Mollitia modi deserunt aut ab provident perspiciatis quo.","state":"draft","number_of_pages":1,"created_at":"2025-11-26T00:50:01.000000Z","updated_at":"2025-11-26T00:50:01.000000Z","published_at":"2025-04-08 06:44:42"},{"id":"019abda3-858f-719a-bb6c-dabb2ff9e250","name":"Marquardt Inc","subdomain":"hirthe","description":"Commodi incidunt iure odit.","state":"draft","number_of_pages":1,"created_at":"2025-11-26T00:50:01.000000Z","updated_at":"2025-11-26T00:50:01.000000Z","published_at":"2025-08-20 05:27:31"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
+        content: '{"data":[{"id":"019ac789-18bc-7259-bdb0-425cfc9358ad","name":"O''Kon and Sons","subdomain":"dach","description":"Mollitia modi deserunt aut ab provident perspiciatis quo.","state":"draft","number_of_pages":1,"created_at":"2025-11-27T22:57:22.000000Z","updated_at":"2025-11-27T22:57:22.000000Z","published_at":"2025-04-10 04:52:03"},{"id":"019ac789-18d5-72e6-a247-e3b7fdac5b6a","name":"Marquardt Inc","subdomain":"hirthe","description":"Commodi incidunt iure odit.","state":"draft","number_of_pages":1,"created_at":"2025-11-27T22:57:22.000000Z","updated_at":"2025-11-27T22:57:22.000000Z","published_at":null}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
         headers: []
         description: ''
     responseFields: []
@@ -91,7 +91,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019abda3-859e-7277-b577-a94f7e75b700","name":"Bauch, Fritsch and O''Keefe","subdomain":"predovic","description":"Consequatur aut dolores enim non facere tempora.","user_id":"019abd86-7283-718a-9dec-7e43917e8109","state":"draft","number_of_pages":2,"created_at":"2025-11-26T00:50:01.000000Z","updated_at":"2025-11-26T00:50:01.000000Z","published_at":"2025-07-12 11:37:08"}}'
+        content: '{"data":{"id":"019ac789-18e8-7340-abb3-8541ff50ba3c","name":"Fritsch-O''Keefe","subdomain":"predovic","description":"Consequatur aut dolores enim non facere tempora.","user_id":"019abd86-7285-7344-943f-fc8016f4d184","state":"draft","number_of_pages":2,"created_at":"2025-11-27T22:57:22.000000Z","updated_at":"2025-11-27T22:57:22.000000Z","published_at":"2025-06-04 08:31:58"}}'
         headers: []
         description: ''
     responseFields: []
@@ -164,7 +164,7 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"019abda3-86de-7370-896c-d7ab7ad6d72e","name":"Bailey Ltd","subdomain":"okuneva","description":null,"user_id":"019abd86-728a-71b2-91df-e9bfaf81a5be","state":"draft","number_of_pages":1,"created_at":"2025-11-26T00:50:02.000000Z","updated_at":"2025-11-26T00:50:02.000000Z","published_at":null}}'
+        content: '{"data":{"id":"019ac789-1b37-71c4-883c-25ed809186ab","name":"Bailey Ltd","subdomain":"okuneva","description":null,"user_id":"019abd86-7287-7379-b3d3-a1f662fdd314","state":"draft","number_of_pages":1,"created_at":"2025-11-27T22:57:22.000000Z","updated_at":"2025-11-27T22:57:22.000000Z","published_at":null}}'
         headers: []
         description: ''
     responseFields: []
@@ -218,17 +218,6 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      subdomain:
-        custom: []
-        name: subdomain
-        description: 'The subdomain for the site. Must not be greater than 255 characters.'
-        required: true
-        example: mypersonalsite
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
       description:
         custom: []
         name: description
@@ -242,14 +231,13 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       name: 'My Personal Site'
-      subdomain: mypersonalsite
       description: 'This is my personal website where I share my projects and blog posts.'
     fileParameters: []
     responses:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019abda3-86e7-727a-a96e-3e26ef430059","name":"Bailey Ltd","subdomain":"rempel","description":"Sunt nihil accusantium harum mollitia.","user_id":"019abd86-7283-718a-9dec-7e43917e8109","state":"draft","number_of_pages":1,"created_at":"2025-11-26T00:50:02.000000Z","updated_at":"2025-11-26T00:50:02.000000Z","published_at":"2024-12-26 12:25:51"}}'
+        content: '{"data":{"id":"019ac789-1b81-732c-8c50-eeb4f5fca336","name":"Bailey Ltd","subdomain":"rempel","description":"Sunt nihil accusantium harum mollitia.","user_id":"019abd86-7270-7172-89eb-55a2394e6a7c","state":"draft","number_of_pages":1,"created_at":"2025-11-27T22:57:22.000000Z","updated_at":"2025-11-27T22:57:22.000000Z","published_at":null}}'
         headers: []
         description: ''
     responseFields: []
