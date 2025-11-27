@@ -47,7 +47,7 @@ export function DeleteAccountForm() {
                 </CardContent>
                 <CardFooter>
                     <DeleteDialog name={"account"}
-                                  description={`This will permanently delete <strong>your user</strong> and all associated data.`}
+                                  description={"This will permanently delete your user and all associated data."}
                                   alertDescription={"This action is irreversible. The following will be deleted:"}
                                   alertDescriptionItems={["All of your websites", "All of your pages", "All of their deployments"]}
                                   onSubmit={onSubmit}/>
