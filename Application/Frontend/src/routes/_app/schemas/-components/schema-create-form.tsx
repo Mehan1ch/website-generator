@@ -8,7 +8,7 @@ import {Spinner} from "@/components/ui/spinner.tsx";
 import {useState} from "react";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {CreateSchemaBody, createSchemaForm} from "@/types/schema.ts";
-import {useRouter} from "@tanstack/react-router";
+import {Link, useRouter} from "@tanstack/react-router";
 import {toast} from "sonner";
 import {api, APIError} from "@/lib/api/api-client.ts";
 import {Textarea} from "@/components/ui/textarea.tsx";
@@ -114,9 +114,11 @@ export const SchemaCreateForm = () => {
                         </div>
                     </CardContent>
                     <CardFooter className={"flex justify-end gap-2"}>
-                        <Button variant={"outline"} onClick={() => router.history.back()}>
-                            Discard changes
-                        </Button>
+                        <Link to={".."}>
+                            <Button variant={"outline"}>
+                                Discard changes
+                            </Button>
+                        </Link>
                         <Button type="submit" disabled={loading}>
                             {loading && <Spinner/>}
                             <Save/>

@@ -8,7 +8,7 @@ import {Spinner} from "@/components/ui/spinner.tsx";
 import {useState} from "react";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {CreateSchemaBody, Schema, UpdateSchemaBody, updateSchemaForm} from "@/types/schema.ts";
-import {useRouter} from "@tanstack/react-router";
+import {Link, useNavigate} from "@tanstack/react-router";
 import {toast} from "sonner";
 import {api, APIError} from "@/lib/api/api-client.ts";
 
@@ -17,7 +17,7 @@ type SchemaEditFormProps = {
 }
 export const SchemaEditForm = ({schema}: SchemaEditFormProps) => {
     const [loading, setLoading] = useState(false);
-    const router = useRouter();
+    const navigate = useNavigate({from: "/schemas/$schemaId/edit"});
     const editSchemaMutation = api.useMutation("put", "/api/v1/schema/{schema_id}");
 
 
@@ -43,10 +43,10 @@ export const SchemaEditForm = ({schema}: SchemaEditFormProps) => {
             },
             body: data
         }, {
-            onSuccess: () => {
+            onSuccess: async () => {
                 toast.dismiss(loadingToast);
                 toast.success("Schema updated successfully.");
-                router.navigate({
+                await navigate({
                     to: "/schemas/$schemaId",
                     params: {
                         schemaId: schema.id || "",
@@ -125,9 +125,11 @@ export const SchemaEditForm = ({schema}: SchemaEditFormProps) => {
                         </div>
                     </CardContent>
                     <CardFooter className={"flex justify-end gap-2"}>
-                        <Button variant={"outline"} onClick={() => router.history.back()}>
-                            Discard changes
-                        </Button>
+                        <Link to={".."}>
+                            <Button variant={"outline"}>
+                                Discard changes
+                            </Button>
+                        </Link>
                         <Button type="submit" disabled={loading}>
                             {loading && <Spinner/>}
                             <Save/>

@@ -1,5 +1,5 @@
 import {CreateSiteBody, Site, UpdateSiteBody, updateSiteForm} from "@/types/site.ts";
-import {useRouter} from "@tanstack/react-router";
+import {Link, useRouter} from "@tanstack/react-router";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {toast} from "sonner";
 import {api, APIError} from "@/lib/api/api-client.ts";
@@ -125,9 +125,11 @@ export const SiteEditForm = ({site}: SiteEditFormProps) => {
                         </div>
                     </CardContent>
                     <CardFooter className={"flex justify-end gap-2"}>
-                        <Button variant={"outline"} onClick={() => router.history.back()}>
-                            Discard changes
-                        </Button>
+                        <Link to={".."}>
+                            <Button variant={"outline"}>
+                                Discard changes
+                            </Button>
+                        </Link>
                         <Button type="submit" disabled={loading}>
                             {loading ? <Spinner/> : <Save/>}
                             Save changes
