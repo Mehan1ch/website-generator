@@ -1,4 +1,4 @@
-import {createFileRoute, Link, useNavigate, useRouter} from '@tanstack/react-router';
+import {createFileRoute, Link, useRouter} from '@tanstack/react-router';
 import {api, APIError} from "@/lib/api/api-client.ts";
 import {toast} from "sonner";
 import {SiteNotFound} from "./-components/site-not-found";
@@ -16,10 +16,7 @@ import {SitePages} from "@/routes/_app/sites/$siteId/-components/site-pages.tsx"
 
 const sitePagesSearchSchema = z.object({
     page: z.number().min(1).default(1),
-    tab: z.literal(["overview", "pages"]).default("overview"),
 });
-
-type SitePagesTab = "overview" | "pages";
 
 export const Route = createFileRoute('/_app/sites/$siteId/')({
     validateSearch: sitePagesSearchSchema,
@@ -57,8 +54,7 @@ export const Route = createFileRoute('/_app/sites/$siteId/')({
 
 function WebsiteIndexComponent() {
     const {siteId} = Route.useParams();
-    const {page, tab} = Route.useSearch();
-    const navigate = useNavigate({from: Route.fullPath});
+    const {page} = Route.useSearch();
     const siteData = api.useSuspenseQuery("get", "/api/v1/site/{site_id}", {
         params: {
             path: {
@@ -85,14 +81,6 @@ function WebsiteIndexComponent() {
     const router = useRouter();
     const deleteSiteMutation = api.useMutation("delete", "/api/v1/site/{site_id}");
 
-    const handleTabChange = async (newTab: SitePagesTab) => {
-        await navigate({
-            search: (old) => ({
-                ...old,
-                tab: newTab,
-            })
-        });
-    };
 
     const onDelete = async () => {
         toast.promise(deleteSiteMutation.mutateAsync({
@@ -139,7 +127,7 @@ function WebsiteIndexComponent() {
                 </div>
             </div>
         </div>
-        <Tabs value={tab} onValueChange={handleTabChange}>
+        <Tabs>
             <TabsList>
                 <TabsTrigger value="overview">Overview</TabsTrigger>
                 <TabsTrigger value="pages">Pages</TabsTrigger>

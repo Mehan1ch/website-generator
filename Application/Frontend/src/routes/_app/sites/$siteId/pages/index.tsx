@@ -7,9 +7,6 @@ export const Route = createFileRoute('/_app/sites/$siteId/pages/')({
             params: {
                 siteId: siteId,
             },
-            search: {
-                tab: "pages",
-            }
         });
     },
 });
