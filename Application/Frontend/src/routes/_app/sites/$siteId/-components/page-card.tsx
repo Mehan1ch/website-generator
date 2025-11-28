@@ -5,17 +5,19 @@ import {PageCollectionItem} from "@/types/pages.ts";
 
 
 export type PageCardProps = {
+    siteId: string;
     page: PageCollectionItem
 }
 
-export const PageCard = ({page}: PageCardProps) => {
+export const PageCard = ({siteId, page}: PageCardProps) => {
     const router = useRouter();
     const onCardClick = () => {
         if (page?.id == undefined) return;
         router.navigate({
-            to: "/sites/$siteId",
+            to: "/sites/$siteId/pages/$pageId",
             params: {
-                siteId: page?.id
+                siteId: siteId,
+                pageId: page.id,
             }
         });
     };
@@ -26,18 +28,18 @@ export const PageCard = ({page}: PageCardProps) => {
         onClick={onCardClick}>
         <CardHeader>
             <CardTitle className={"flex justify-between"}>
-                {page?.title}
+                {page.title}
             </CardTitle>
             <CardDescription>
-                {page?.url}
+                {page.url}
             </CardDescription>
         </CardHeader>
         <CardFooter className="flex justify-between">
             <p className="text-muted-foreground text-sm">
-                Created at: <br/> {getDateString(page?.created_at)}
+                Created at: <br/> {getDateString(page.created_at)}
             </p>
             <p className="text-muted-foreground text-sm">
-                Updated at: <br/> {getDateString(page?.updated_at)}
+                Updated at: <br/> {getDateString(page.updated_at)}
             </p>
         </CardFooter>
     </Card>;

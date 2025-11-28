@@ -28,7 +28,7 @@ export const SitePages = ({pageCollectionResponse, siteId}: SitePagesProps) => {
             </div>
             <div className={"grid grid-cols-1 gap-2 lg:grid-cols-2 xl:grid-cols-3"}>
                 {pages.map(page => {
-                    return (<PageCard key={page.id} page={page}/>);
+                    return (<PageCard key={page.id} page={page} siteId={siteId}/>);
                 })}
             </div>
             <PaginationDynamic currentPage={pageCollectionResponse.meta?.current_page}
@@ -36,7 +36,7 @@ export const SitePages = ({pageCollectionResponse, siteId}: SitePagesProps) => {
         </>;
     } else {
         return <div className={"flex w-full min-h-screen items-center justify-center"}>
-            <SitePagesEmpty/>
+            <SitePagesEmpty siteId={siteId}/>
         </div>;
     }
 };

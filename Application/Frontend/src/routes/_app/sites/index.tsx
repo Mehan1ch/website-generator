@@ -48,7 +48,7 @@ function SitesIndexComponent() {
 
 
     if (error) {
-        toast.error("Failed to load schemas.", {
+        toast.error("Failed to load sites.", {
             description: (error as APIError).message,
         });
         throw error;

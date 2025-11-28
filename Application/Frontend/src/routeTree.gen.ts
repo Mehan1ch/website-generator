@@ -31,6 +31,7 @@ import { Route as AppSitesSiteIdEditRouteImport } from './routes/_app/sites/$sit
 import { Route as AppSchemasSchemaIdEditRouteImport } from './routes/_app/schemas/$schemaId/edit'
 import { Route as AppSchemasSchemaIdDesignRouteImport } from './routes/_app/schemas/$schemaId/design'
 import { Route as AppSitesSiteIdPagesRouteRouteImport } from './routes/_app/sites/$siteId/pages/route'
+import { Route as AppSitesSiteIdPagesIndexRouteImport } from './routes/_app/sites/$siteId/pages/index'
 import { Route as AppSitesSiteIdPagesCreateRouteImport } from './routes/_app/sites/$siteId/pages/create'
 import { Route as authEmailVerifyIdHashRouteImport } from './routes/(auth)/email.verify.$id.$hash'
 import { Route as AppSitesSiteIdPagesPageIdRouteRouteImport } from './routes/_app/sites/$siteId/pages/$pageId/route'
@@ -149,6 +150,12 @@ const AppSitesSiteIdPagesRouteRoute =
     path: '/pages',
     getParentRoute: () => AppSitesSiteIdRouteRoute,
   } as any)
+const AppSitesSiteIdPagesIndexRoute =
+  AppSitesSiteIdPagesIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AppSitesSiteIdPagesRouteRoute,
+  } as any)
 const AppSitesSiteIdPagesCreateRoute =
   AppSitesSiteIdPagesCreateRouteImport.update({
     id: '/create',
@@ -210,6 +217,7 @@ export interface FileRoutesByFullPath {
   '/sites/$siteId/pages/$pageId': typeof AppSitesSiteIdPagesPageIdRouteRouteWithChildren
   '/email/verify/$id/$hash': typeof authEmailVerifyIdHashRoute
   '/sites/$siteId/pages/create': typeof AppSitesSiteIdPagesCreateRoute
+  '/sites/$siteId/pages/': typeof AppSitesSiteIdPagesIndexRoute
   '/sites/$siteId/pages/$pageId/design': typeof AppSitesSiteIdPagesPageIdDesignRoute
   '/sites/$siteId/pages/$pageId/edit': typeof AppSitesSiteIdPagesPageIdEditRoute
   '/sites/$siteId/pages/$pageId/': typeof AppSitesSiteIdPagesPageIdIndexRoute
@@ -226,7 +234,6 @@ export interface FileRoutesByTo {
   '/account': typeof AppAccountIndexRoute
   '/schemas': typeof AppSchemasIndexRoute
   '/sites': typeof AppSitesIndexRoute
-  '/sites/$siteId/pages': typeof AppSitesSiteIdPagesRouteRouteWithChildren
   '/schemas/$schemaId/design': typeof AppSchemasSchemaIdDesignRoute
   '/schemas/$schemaId/edit': typeof AppSchemasSchemaIdEditRoute
   '/sites/$siteId/edit': typeof AppSitesSiteIdEditRoute
@@ -234,6 +241,7 @@ export interface FileRoutesByTo {
   '/sites/$siteId': typeof AppSitesSiteIdIndexRoute
   '/email/verify/$id/$hash': typeof authEmailVerifyIdHashRoute
   '/sites/$siteId/pages/create': typeof AppSitesSiteIdPagesCreateRoute
+  '/sites/$siteId/pages': typeof AppSitesSiteIdPagesIndexRoute
   '/sites/$siteId/pages/$pageId/design': typeof AppSitesSiteIdPagesPageIdDesignRoute
   '/sites/$siteId/pages/$pageId/edit': typeof AppSitesSiteIdPagesPageIdEditRoute
   '/sites/$siteId/pages/$pageId': typeof AppSitesSiteIdPagesPageIdIndexRoute
@@ -265,6 +273,7 @@ export interface FileRoutesById {
   '/_app/sites/$siteId/pages/$pageId': typeof AppSitesSiteIdPagesPageIdRouteRouteWithChildren
   '/(auth)/email/verify/$id/$hash': typeof authEmailVerifyIdHashRoute
   '/_app/sites/$siteId/pages/create': typeof AppSitesSiteIdPagesCreateRoute
+  '/_app/sites/$siteId/pages/': typeof AppSitesSiteIdPagesIndexRoute
   '/_app/sites/$siteId/pages/$pageId/design': typeof AppSitesSiteIdPagesPageIdDesignRoute
   '/_app/sites/$siteId/pages/$pageId/edit': typeof AppSitesSiteIdPagesPageIdEditRoute
   '/_app/sites/$siteId/pages/$pageId/': typeof AppSitesSiteIdPagesPageIdIndexRoute
@@ -296,6 +305,7 @@ export interface FileRouteTypes {
     | '/sites/$siteId/pages/$pageId'
     | '/email/verify/$id/$hash'
     | '/sites/$siteId/pages/create'
+    | '/sites/$siteId/pages/'
     | '/sites/$siteId/pages/$pageId/design'
     | '/sites/$siteId/pages/$pageId/edit'
     | '/sites/$siteId/pages/$pageId/'
@@ -312,7 +322,6 @@ export interface FileRouteTypes {
     | '/account'
     | '/schemas'
     | '/sites'
-    | '/sites/$siteId/pages'
     | '/schemas/$schemaId/design'
     | '/schemas/$schemaId/edit'
     | '/sites/$siteId/edit'
@@ -320,6 +329,7 @@ export interface FileRouteTypes {
     | '/sites/$siteId'
     | '/email/verify/$id/$hash'
     | '/sites/$siteId/pages/create'
+    | '/sites/$siteId/pages'
     | '/sites/$siteId/pages/$pageId/design'
     | '/sites/$siteId/pages/$pageId/edit'
     | '/sites/$siteId/pages/$pageId'
@@ -350,6 +360,7 @@ export interface FileRouteTypes {
     | '/_app/sites/$siteId/pages/$pageId'
     | '/(auth)/email/verify/$id/$hash'
     | '/_app/sites/$siteId/pages/create'
+    | '/_app/sites/$siteId/pages/'
     | '/_app/sites/$siteId/pages/$pageId/design'
     | '/_app/sites/$siteId/pages/$pageId/edit'
     | '/_app/sites/$siteId/pages/$pageId/'
@@ -521,6 +532,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppSitesSiteIdPagesRouteRouteImport
       parentRoute: typeof AppSitesSiteIdRouteRoute
     }
+    '/_app/sites/$siteId/pages/': {
+      id: '/_app/sites/$siteId/pages/'
+      path: '/'
+      fullPath: '/sites/$siteId/pages/'
+      preLoaderRoute: typeof AppSitesSiteIdPagesIndexRouteImport
+      parentRoute: typeof AppSitesSiteIdPagesRouteRoute
+    }
     '/_app/sites/$siteId/pages/create': {
       id: '/_app/sites/$siteId/pages/create'
       path: '/create'
@@ -621,6 +639,7 @@ const AppSitesSiteIdPagesPageIdRouteRouteWithChildren =
 interface AppSitesSiteIdPagesRouteRouteChildren {
   AppSitesSiteIdPagesPageIdRouteRoute: typeof AppSitesSiteIdPagesPageIdRouteRouteWithChildren
   AppSitesSiteIdPagesCreateRoute: typeof AppSitesSiteIdPagesCreateRoute
+  AppSitesSiteIdPagesIndexRoute: typeof AppSitesSiteIdPagesIndexRoute
 }
 
 const AppSitesSiteIdPagesRouteRouteChildren: AppSitesSiteIdPagesRouteRouteChildren =
@@ -628,6 +647,7 @@ const AppSitesSiteIdPagesRouteRouteChildren: AppSitesSiteIdPagesRouteRouteChildr
     AppSitesSiteIdPagesPageIdRouteRoute:
       AppSitesSiteIdPagesPageIdRouteRouteWithChildren,
     AppSitesSiteIdPagesCreateRoute: AppSitesSiteIdPagesCreateRoute,
+    AppSitesSiteIdPagesIndexRoute: AppSitesSiteIdPagesIndexRoute,
   }
 
 const AppSitesSiteIdPagesRouteRouteWithChildren =
