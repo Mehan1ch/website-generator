@@ -1,8 +1,6 @@
 import {createFileRoute, Link} from '@tanstack/react-router';
-import {api, APIError} from "@/lib/api/api-client.ts";
+import {api} from "@/lib/api/api-client.ts";
 import {z} from "zod";
-import {toast} from "sonner";
-import {Loading} from "@/components/blocks/loading.tsx";
 import {RouteTitle} from "@/components/blocks/route-title.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {Plus} from "lucide-react";
@@ -38,25 +36,13 @@ export const Route = createFileRoute('/_app/sites/')({
 
 function SitesIndexComponent() {
     const {page} = Route.useSearch();
-    const {error, isLoading, data} = api.useSuspenseQuery("get", "/api/v1/site", {
+    const {data} = api.useSuspenseQuery("get", "/api/v1/site", {
         params: {
             query: {
                 page: page,
             }
         }
     });
-
-
-    if (error) {
-        toast.error("Failed to load sites.", {
-            description: (error as APIError).message,
-        });
-        throw error;
-    }
-
-    if (!data || isLoading) {
-        return <Loading/>;
-    }
 
     const siteCollectionResponse: SiteCollectionResponse = data;
     const sites: SiteCollectionItem[] = siteCollectionResponse?.data || [];

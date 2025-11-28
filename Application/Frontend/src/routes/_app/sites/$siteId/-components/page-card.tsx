@@ -24,7 +24,7 @@ export const PageCard = ({siteId, page}: PageCardProps) => {
 
 
     return <Card
-        className={"outline-1 m-2 hover:bg-secondary hover:shadow-lg hover:shadow-primary/50"}
+        className={"outline-1 m-2 hover:bg-secondary hover:shadow-lg hover:shadow-primary/25"}
         onClick={onCardClick}>
         <CardHeader>
             <CardTitle className={"flex justify-between"}>

@@ -26,7 +26,7 @@ export const SchemaCard = ({schema}: SchemaCardProps) => {
 
 
     return <Card
-        className={"outline-1 hover:bg-secondary hover:shadow-lg hover:shadow-primary/50"}
+        className={"outline-1 hover:bg-secondary hover:shadow-lg hover:shadow-primary/25"}
         onClick={onCardClick}>
         <CardHeader className={"flex justify-between"}>
             <CardTitle className={"text-pretty truncate"}>
