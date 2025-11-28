@@ -26,17 +26,18 @@ class UpdatePageRequest extends FormRequest
     public function rules(Site $site, ?Page $page): array
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
+            'title' => ['nullable', 'string', 'max:255'],
             'url' => [
-                'required',
+                'nullable',
                 'string',
                 'max:255',
+                'starts_with:/',
                 Rule::unique('pages', 'url')
                     ->where('site_id', $site->id)
                     ->ignore($page), // For updates
             ],
-            'content' => ['required', 'string'],
-            'html' => ['required', 'string'],
+            'content' => ['nullable', 'string'],
+            'html' => ['nullable', 'string'],
         ];
     }
 

@@ -31,6 +31,7 @@ class StorePageRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
+                'starts_with:/',
                 Rule::unique('pages', 'url')
                     ->where('site_id', $site->id)
                     ->ignore($page), // For updates

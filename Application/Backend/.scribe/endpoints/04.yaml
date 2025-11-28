@@ -54,7 +54,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":[{"id":"019ac789-1bdc-73b0-a6d9-e9d78d9f9187","title":"Deserunt aut ab provident perspiciatis quo omnis nostrum.","url":"\/quidem-nostrum-qui-commodi-incidunt-iure-odit","created_at":"2025-11-27T22:57:22.000000Z","updated_at":"2025-11-27T22:57:22.000000Z"},{"id":"019ac789-1c7f-72b0-845d-77d0a50532b1","title":"Voluptatem laboriosam praesentium quis adipisci.","url":"\/aliquam-veniam-corporis-dolorem-mollitia-deleniti-nemo","created_at":"2025-11-27T22:57:23.000000Z","updated_at":"2025-11-27T22:57:23.000000Z"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
+        content: '{"data":[{"id":"019accc3-b4f3-72b4-9a77-c7e9e8c5033f","title":"Deserunt aut ab provident perspiciatis quo omnis nostrum.","url":"\/quidem-nostrum-qui-commodi-incidunt-iure-odit","created_at":"2025-11-28T23:19:29.000000Z","updated_at":"2025-11-28T23:19:29.000000Z"},{"id":"019accc3-b501-7120-90a8-93774856534b","title":"Voluptatem laboriosam praesentium quis adipisci.","url":"\/aliquam-veniam-corporis-dolorem-mollitia-deleniti-nemo","created_at":"2025-11-28T23:19:29.000000Z","updated_at":"2025-11-28T23:19:29.000000Z"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
         headers: []
         description: ''
     responseFields: []
@@ -115,7 +115,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019ac789-1d0d-701e-87d0-2d5f0ce09856","title":"Repellendus assumenda et tenetur ab reiciendis.","url":"\/deserunt-ducimus-corrupti-et-dolores-quia-maiores","content":null,"site_id":"019abd86-7311-70be-b479-c5c98b42caab","created_at":"2025-11-27T22:57:23.000000Z","updated_at":"2025-11-27T22:57:23.000000Z"}}'
+        content: '{"data":{"id":"019accc3-b511-7207-839f-843238223a32","title":"Repellendus assumenda et tenetur ab reiciendis.","url":"\/deserunt-ducimus-corrupti-et-dolores-quia-maiores","content":null,"site_id":"019abd86-7316-7255-8c01-53480a8c055c","created_at":"2025-11-28T23:19:29.000000Z","updated_at":"2025-11-28T23:19:29.000000Z"}}'
         headers: []
         description: ''
       -
@@ -181,7 +181,7 @@ endpoints:
       url:
         custom: []
         name: url
-        description: 'The URL slug for the post . . Must not be greater than 255 characters.'
+        description: 'The URL slug for the post . . Must start with one of <code>/</code> Must not be greater than 255 characters.'
         required: true
         example: 'my - first - post'
         type: string
@@ -197,7 +197,7 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"019ac789-1d90-728f-b7d6-e46d389f2071","title":"Eius et animi quos velit et.","url":"\/accusantium-harum-mollitia-modi-deserunt-aut-ab","content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","site_id":"019abd86-733b-712c-9acc-ff7f32f9eceb","created_at":"2025-11-27T22:57:23.000000Z","updated_at":"2025-11-27T22:57:23.000000Z"}}'
+        content: '{"data":{"id":"019accc3-b52c-7126-b0ca-7e4c1e9f6269","title":"Eius et animi quos velit et.","url":"\/accusantium-harum-mollitia-modi-deserunt-aut-ab","content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","site_id":"019abd86-734c-7260-8481-e69f330a86f9","created_at":"2025-11-28T23:19:29.000000Z","updated_at":"2025-11-28T23:19:29.000000Z"}}'
         headers: []
         description: ''
     responseFields: []
@@ -256,45 +256,45 @@ endpoints:
         custom: []
         name: title
         description: 'The title of the page . . Must not be greater than 255 characters.'
-        required: true
+        required: false
         example: 'My personal homepage'
         type: string
         enumValues: []
         exampleWasSpecified: false
-        nullable: false
+        nullable: true
         deprecated: false
       url:
         custom: []
         name: url
-        description: 'The URL slug for the post . . Must not be greater than 255 characters.'
-        required: true
+        description: 'The URL slug for the post . . Must start with one of <code>/</code> Must not be greater than 255 characters.'
+        required: false
         example: 'my - first - post'
         type: string
         enumValues: []
         exampleWasSpecified: false
-        nullable: false
+        nullable: true
         deprecated: false
       content:
         custom: []
         name: content
         description: 'The content of the schema, base64 encoded and zlib compressed JSON.'
-        required: true
+        required: false
         example: 'eJzT0yMAAGTvBe8 = '
         type: string
         enumValues: []
         exampleWasSpecified: false
-        nullable: false
+        nullable: true
         deprecated: false
       html:
         custom: []
         name: html
         description: 'The HTML content of the page base64 encoded and zlib compressed.'
-        required: true
+        required: false
         example: 'eJzT0yMAAGTvBe8 = '
         type: string
         enumValues: []
         exampleWasSpecified: false
-        nullable: false
+        nullable: true
         deprecated: false
     cleanBodyParameters:
       title: 'My personal homepage'
@@ -306,7 +306,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019ac789-1e48-7141-98ee-922debf8a2f0","title":"Eius et animi quos velit et.","url":"\/perspiciatis-quo-omnis-nostrum-aut-adipisci-quidem-nostrum-qui","content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","site_id":"019abd86-7324-721e-b2f3-1289e24328b2","created_at":"2025-11-27T22:57:23.000000Z","updated_at":"2025-11-27T22:57:23.000000Z"}}'
+        content: '{"data":{"id":"019accc3-b544-704e-bb10-913fec634aaf","title":"Eius et animi quos velit et.","url":"\/perspiciatis-quo-omnis-nostrum-aut-adipisci-quidem-nostrum-qui","content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","site_id":"019abd86-7318-7045-a317-c8c488d6365f","created_at":"2025-11-28T23:19:29.000000Z","updated_at":"2025-11-28T23:19:29.000000Z"}}'
         headers: []
         description: ''
       -
