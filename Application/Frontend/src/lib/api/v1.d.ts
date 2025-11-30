@@ -1023,6 +1023,11 @@ export interface operations {
                  * @example 1
                  */
                 page?: number;
+                /**
+                 * @description Number of items per page. Defaults to 15.
+                 * @example 16
+                 */
+                per_page?: number;
             };
             header?: never;
             path: {
@@ -1045,31 +1050,31 @@ export interface operations {
                         /**
                          * @example [
                          *       {
-                         *         "id": "019accc3-b4f3-72b4-9a77-c7e9e8c5033f",
-                         *         "title": "Deserunt aut ab provident perspiciatis quo omnis nostrum.",
-                         *         "url": "/quidem-nostrum-qui-commodi-incidunt-iure-odit",
-                         *         "created_at": "2025-11-28T23:19:29.000000Z",
-                         *         "updated_at": "2025-11-28T23:19:29.000000Z"
+                         *         "id": "019ad225-ad27-71e4-b091-995c2a46733a",
+                         *         "title": "Et animi quos velit et fugiat.",
+                         *         "url": "/accusantium-harum-mollitia-modi-deserunt-aut-ab",
+                         *         "created_at": "2025-11-30T00:24:35.000000Z",
+                         *         "updated_at": "2025-11-30T00:24:35.000000Z"
                          *       },
                          *       {
-                         *         "id": "019accc3-b501-7120-90a8-93774856534b",
-                         *         "title": "Voluptatem laboriosam praesentium quis adipisci.",
-                         *         "url": "/aliquam-veniam-corporis-dolorem-mollitia-deleniti-nemo",
-                         *         "created_at": "2025-11-28T23:19:29.000000Z",
-                         *         "updated_at": "2025-11-28T23:19:29.000000Z"
+                         *         "id": "019ad225-ad31-719f-8c48-06438018ec12",
+                         *         "title": "Assumenda consequatur ut et sunt quisquam.",
+                         *         "url": "/ut-eaque-alias-ratione-dolores-sed-rem-ea-ut",
+                         *         "created_at": "2025-11-30T00:24:35.000000Z",
+                         *         "updated_at": "2025-11-30T00:24:35.000000Z"
                          *       }
                          *     ]
                          */
                         data?: {
-                            /** @example 019accc3-b4f3-72b4-9a77-c7e9e8c5033f */
+                            /** @example 019ad225-ad27-71e4-b091-995c2a46733a */
                             id?: string;
-                            /** @example Deserunt aut ab provident perspiciatis quo omnis nostrum. */
+                            /** @example Et animi quos velit et fugiat. */
                             title?: string;
-                            /** @example /quidem-nostrum-qui-commodi-incidunt-iure-odit */
+                            /** @example /accusantium-harum-mollitia-modi-deserunt-aut-ab */
                             url?: string;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             updated_at?: string;
                         }[];
                         links?: {
@@ -1161,6 +1166,16 @@ export interface operations {
                      * @example my - first - post
                      */
                     url: string;
+                    /**
+                     * @description The HTML content of the page base64 encoded and zlib compressed.
+                     * @example eJzT0yMAAGTvBe8 =
+                     */
+                    html?: string | null;
+                    /**
+                     * @description The content of the schema, base64 encoded and zlib compressed JSON.
+                     * @example eJzT0yMAAGTvBe8 =
+                     */
+                    content?: string | null;
                 };
             };
         };
@@ -1172,19 +1187,19 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019accc3-b52c-7126-b0ca-7e4c1e9f6269 */
+                            /** @example 019ad225-ad4d-7241-be64-3550afb5f2e7 */
                             id?: string;
                             /** @example Eius et animi quos velit et. */
                             title?: string;
-                            /** @example /accusantium-harum-mollitia-modi-deserunt-aut-ab */
+                            /** @example /perspiciatis-quo-omnis-nostrum-aut-adipisci-quidem-nostrum-qui */
                             url?: string;
                             /** @example hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n */
                             content?: string;
-                            /** @example 019abd86-734c-7260-8481-e69f330a86f9 */
+                            /** @example 019abd86-72fe-7241-b6e7-36fb25bbb6af */
                             site_id?: string;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             updated_at?: string;
                         };
                     };
@@ -1219,19 +1234,19 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019accc3-b511-7207-839f-843238223a32 */
+                            /** @example 019ad225-ad3e-738f-94f2-08b67c43a8ee */
                             id?: string;
-                            /** @example Repellendus assumenda et tenetur ab reiciendis. */
+                            /** @example Quo culpa laudantium accusamus temporibus. */
                             title?: string;
-                            /** @example /deserunt-ducimus-corrupti-et-dolores-quia-maiores */
+                            /** @example /modi-reiciendis-nisi-qui-expedita-atque-modi-ipsam-qui */
                             url?: string;
-                            /** @example null */
+                            /** @example hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n */
                             content?: string;
-                            /** @example 019abd86-7316-7255-8c01-53480a8c055c */
+                            /** @example 019abd86-7307-7368-a6ab-133ffdf4fe4d */
                             site_id?: string;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             updated_at?: string;
                         };
                     };
@@ -1302,19 +1317,19 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019accc3-b544-704e-bb10-913fec634aaf */
+                            /** @example 019ad225-ad5d-7135-838a-b9a9ba4034b5 */
                             id?: string;
                             /** @example Eius et animi quos velit et. */
                             title?: string;
-                            /** @example /perspiciatis-quo-omnis-nostrum-aut-adipisci-quidem-nostrum-qui */
+                            /** @example /incidunt-iure-odit-et-et-modi-ipsum */
                             url?: string;
                             /** @example hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n */
                             content?: string;
-                            /** @example 019abd86-7318-7045-a317-c8c488d6365f */
+                            /** @example 019abd86-7327-706c-9ba7-8bfb9b393136 */
                             site_id?: string;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             updated_at?: string;
                         };
                     };
@@ -1561,6 +1576,11 @@ export interface operations {
                  * @example 1
                  */
                 page?: number;
+                /**
+                 * @description Number of items per page. Defaults to 15. Max 100.
+                 * @example 16
+                 */
+                per_page?: number;
             };
             header?: never;
             path?: never;
@@ -1577,37 +1597,41 @@ export interface operations {
                         /**
                          * @example [
                          *       {
-                         *         "id": "019accc3-b3da-7012-a9db-19708385329f",
-                         *         "name": "architecto",
-                         *         "description": null,
+                         *         "id": "019ad225-ac67-70b2-805b-423a1a7e5c01",
+                         *         "name": "eius",
+                         *         "description": "Quos velit et fugiat sunt nihil accusantium harum.",
                          *         "state": "draft",
-                         *         "created_at": "2025-11-28T23:19:28.000000Z",
-                         *         "updated_at": "2025-11-28T23:19:28.000000Z",
+                         *         "content": null,
+                         *         "created_at": "2025-11-30T00:24:35.000000Z",
+                         *         "updated_at": "2025-11-30T00:24:35.000000Z",
                          *         "published_at": null
                          *       },
                          *       {
-                         *         "id": "019accc3-b3de-72ac-9c59-cd321534efd7",
-                         *         "name": "quos",
+                         *         "id": "019ad225-ac69-73bb-adc8-3e72baabeeb8",
+                         *         "name": "modi",
                          *         "description": null,
-                         *         "state": "draft",
-                         *         "created_at": "2025-11-28T23:19:28.000000Z",
-                         *         "updated_at": "2025-11-28T23:19:28.000000Z",
+                         *         "state": "published",
+                         *         "content": "hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n",
+                         *         "created_at": "2025-11-30T00:24:35.000000Z",
+                         *         "updated_at": "2025-11-30T00:24:35.000000Z",
                          *         "published_at": null
                          *       }
                          *     ]
                          */
                         data?: {
-                            /** @example 019accc3-b3da-7012-a9db-19708385329f */
+                            /** @example 019ad225-ac67-70b2-805b-423a1a7e5c01 */
                             id?: string;
-                            /** @example architecto */
+                            /** @example eius */
                             name?: string;
-                            /** @example null */
+                            /** @example Quos velit et fugiat sunt nihil accusantium harum. */
                             description?: string;
                             /** @example draft */
                             state?: string;
-                            /** @example 2025-11-28T23:19:28.000000Z */
+                            /** @example null */
+                            content?: string;
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-28T23:19:28.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             updated_at?: string;
                             /** @example null */
                             published_at?: string;
@@ -1711,7 +1735,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019accc3-b3ed-705d-8207-97fa9d66abb2 */
+                            /** @example 019ad225-ac74-71db-8279-4e676a877bc8 */
                             id?: string;
                             /** @example architecto */
                             name?: string;
@@ -1721,9 +1745,9 @@ export interface operations {
                             content?: string;
                             /** @example draft */
                             state?: string;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             updated_at?: string;
                             /** @example null */
                             published_at?: string;
@@ -1755,19 +1779,19 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019accc3-b3e7-739f-a9bc-9a82ca94ba9f */
+                            /** @example 019ad225-ac70-71f8-9495-e6298ec25b52 */
                             id?: string;
-                            /** @example sunt */
+                            /** @example provident */
                             name?: string;
-                            /** @example Harum mollitia modi deserunt aut ab provident perspiciatis quo. */
+                            /** @example Omnis nostrum aut adipisci quidem nostrum qui commodi. */
                             description?: string;
-                            /** @example null */
+                            /** @example hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n */
                             content?: string;
                             /** @example published */
                             state?: string;
-                            /** @example 2025-11-28T23:19:28.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-28T23:19:28.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             updated_at?: string;
                             /** @example null */
                             published_at?: string;
@@ -1819,7 +1843,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019accc3-b3f6-70ee-a534-9bf4726f7025 */
+                            /** @example 019ad225-ac7b-72f6-af74-620babc35ff8 */
                             id?: string;
                             /** @example architecto */
                             name?: string;
@@ -1829,9 +1853,9 @@ export interface operations {
                             content?: string;
                             /** @example published */
                             state?: string;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             updated_at?: string;
                             /** @example null */
                             published_at?: string;
@@ -1888,7 +1912,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019accc3-b3f1-706d-a12f-428c9f9c2a9b */
+                            /** @example 019ad225-ac78-7103-bfe4-c2c6d31f040a */
                             id?: string;
                             /** @example quos */
                             name?: string;
@@ -1896,11 +1920,11 @@ export interface operations {
                             description?: string;
                             /** @example hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n */
                             content?: string;
-                            /** @example published */
+                            /** @example draft */
                             state?: string;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             updated_at?: string;
                             /** @example null */
                             published_at?: string;
@@ -1918,6 +1942,11 @@ export interface operations {
                  * @example 1
                  */
                 page?: number;
+                /**
+                 * @description Number of items per page. Defaults to 15.
+                 * @example 16
+                 */
+                per_page?: number;
             };
             header?: never;
             path?: never;
@@ -1934,47 +1963,47 @@ export interface operations {
                         /**
                          * @example [
                          *       {
-                         *         "id": "019accc3-b400-724d-948d-af5f3ffb5c12",
-                         *         "name": "Gulgowski-O'Kon",
-                         *         "subdomain": "ernser",
-                         *         "description": "Harum mollitia modi deserunt aut ab provident perspiciatis quo.",
+                         *         "id": "019ad225-ac82-707d-9e46-d9304ebed0d8",
+                         *         "name": "Crooks LLC",
+                         *         "subdomain": "rempel",
+                         *         "description": "Sunt nihil accusantium harum mollitia.",
                          *         "state": "draft",
                          *         "number_of_pages": 1,
-                         *         "created_at": "2025-11-28T23:19:29.000000Z",
-                         *         "updated_at": "2025-11-28T23:19:29.000000Z",
-                         *         "published_at": "2025-07-11 12:50:26"
+                         *         "created_at": "2025-11-30T00:24:35.000000Z",
+                         *         "updated_at": "2025-11-30T00:24:35.000000Z",
+                         *         "published_at": null
                          *       },
                          *       {
-                         *         "id": "019accc3-b40a-715b-aa59-a533a6b11622",
-                         *         "name": "Marquardt Inc",
-                         *         "subdomain": "hirthe",
-                         *         "description": "Commodi incidunt iure odit.",
+                         *         "id": "019ad225-ac88-7019-a55f-967ebe8fbcbe",
+                         *         "name": "Schuster Inc",
+                         *         "subdomain": "cormier",
+                         *         "description": "Omnis nostrum aut adipisci quidem nostrum qui commodi.",
                          *         "state": "draft",
                          *         "number_of_pages": 1,
-                         *         "created_at": "2025-11-28T23:19:29.000000Z",
-                         *         "updated_at": "2025-11-28T23:19:29.000000Z",
-                         *         "published_at": "2025-08-23 03:56:59"
+                         *         "created_at": "2025-11-30T00:24:35.000000Z",
+                         *         "updated_at": "2025-11-30T00:24:35.000000Z",
+                         *         "published_at": "2024-12-13 10:30:30"
                          *       }
                          *     ]
                          */
                         data?: {
-                            /** @example 019accc3-b400-724d-948d-af5f3ffb5c12 */
+                            /** @example 019ad225-ac82-707d-9e46-d9304ebed0d8 */
                             id?: string;
-                            /** @example Gulgowski-O'Kon */
+                            /** @example Crooks LLC */
                             name?: string;
-                            /** @example ernser */
+                            /** @example rempel */
                             subdomain?: string;
-                            /** @example Harum mollitia modi deserunt aut ab provident perspiciatis quo. */
+                            /** @example Sunt nihil accusantium harum mollitia. */
                             description?: string;
                             /** @example draft */
                             state?: string;
                             /** @example 1 */
                             number_of_pages?: number;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             updated_at?: string;
-                            /** @example 2025-07-11 12:50:26 */
+                            /** @example null */
                             published_at?: string;
                         }[];
                         links?: {
@@ -2076,7 +2105,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019accc3-b4da-7168-a00b-44f920cab85b */
+                            /** @example 019ad225-ad17-71cf-be71-8d196459b631 */
                             id?: string;
                             /** @example Bailey Ltd */
                             name?: string;
@@ -2084,17 +2113,17 @@ export interface operations {
                             subdomain?: string;
                             /** @example null */
                             description?: string;
-                            /** @example 019abd86-728a-71b2-91df-e9bfaf81a5be */
+                            /** @example 019abd86-7270-7172-89eb-55a2394e6a7c */
                             user_id?: string;
                             /** @example draft */
                             state?: string;
                             /** @example 1 */
                             number_of_pages?: number;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             updated_at?: string;
-                            /** @example 2024-12-29 10:55:18 */
+                            /** @example 2024-12-30 12:00:24 */
                             published_at?: string;
                         };
                     };
@@ -2124,25 +2153,25 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019accc3-b413-7315-9a6b-ea83bb85bd63 */
+                            /** @example 019ad225-ac8e-7258-8614-5a0920da75c3 */
                             id?: string;
-                            /** @example Fritsch-O'Keefe */
+                            /** @example McLaughlin, Leuschke and Bauch */
                             name?: string;
-                            /** @example predovic */
+                            /** @example fritsch */
                             subdomain?: string;
-                            /** @example Consequatur aut dolores enim non facere tempora. */
+                            /** @example null */
                             description?: string;
-                            /** @example 019abd86-7281-7363-b667-7058d4fe904a */
+                            /** @example 019abd86-7285-7344-943f-fc8016f4d184 */
                             user_id?: string;
                             /** @example draft */
                             state?: string;
                             /** @example 2 */
                             number_of_pages?: number;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             updated_at?: string;
-                            /** @example 2025-06-05 08:54:05 */
+                            /** @example 2025-04-18 03:32:04 */
                             published_at?: string;
                         };
                     };
@@ -2187,25 +2216,25 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019accc3-b4e4-718d-9a9e-957a70b76420 */
+                            /** @example 019ad225-ad1e-7192-be03-84f203a278d8 */
                             id?: string;
                             /** @example Bailey Ltd */
                             name?: string;
-                            /** @example rempel */
+                            /** @example gulgowski */
                             subdomain?: string;
-                            /** @example Sunt nihil accusantium harum mollitia. */
+                            /** @example Nihil accusantium harum mollitia modi deserunt. */
                             description?: string;
-                            /** @example 019abd86-7281-7363-b667-7058d4fe904a */
+                            /** @example 019abd86-7285-7344-943f-fc8016f4d184 */
                             user_id?: string;
                             /** @example draft */
                             state?: string;
                             /** @example 1 */
                             number_of_pages?: number;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-28T23:19:29.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             updated_at?: string;
-                            /** @example 2024-12-29 10:55:18 */
+                            /** @example null */
                             published_at?: string;
                         };
                     };
@@ -2381,21 +2410,21 @@ export interface operations {
                 content: {
                     "application/json": {
                         data?: {
-                            /** @example 019accc3-b382-72bf-a939-2fe77357db46 */
+                            /** @example 019ad225-ac2c-718a-a5e6-4e224466a49c */
                             id?: string;
-                            /** @example Taurean Breitenberg */
+                            /** @example Twila Gibson */
                             name?: string;
-                            /** @example trudie35@example.net */
+                            /** @example lemke.bryon@example.net */
                             email?: string;
-                            /** @example 2025-11-28T23:19:28.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             email_verified_at?: string;
                             /** @example null */
                             avatar?: string;
                             /** @example false */
                             is_admin?: boolean;
-                            /** @example 2025-11-28T23:19:28.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             created_at?: string;
-                            /** @example 2025-11-28T23:19:28.000000Z */
+                            /** @example 2025-11-30T00:24:35.000000Z */
                             updated_at?: string;
                         };
                     };

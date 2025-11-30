@@ -33,8 +33,20 @@ endpoints:
         exampleWasSpecified: true
         nullable: false
         deprecated: false
+      per_page:
+        custom: []
+        name: per_page
+        description: 'Number of items per page. Defaults to 15.'
+        required: false
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
     cleanQueryParameters:
       page: 1
+      per_page: 16
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -42,7 +54,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":[{"id":"019accc3-b400-724d-948d-af5f3ffb5c12","name":"Gulgowski-O''Kon","subdomain":"ernser","description":"Harum mollitia modi deserunt aut ab provident perspiciatis quo.","state":"draft","number_of_pages":1,"created_at":"2025-11-28T23:19:29.000000Z","updated_at":"2025-11-28T23:19:29.000000Z","published_at":"2025-07-11 12:50:26"},{"id":"019accc3-b40a-715b-aa59-a533a6b11622","name":"Marquardt Inc","subdomain":"hirthe","description":"Commodi incidunt iure odit.","state":"draft","number_of_pages":1,"created_at":"2025-11-28T23:19:29.000000Z","updated_at":"2025-11-28T23:19:29.000000Z","published_at":"2025-08-23 03:56:59"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
+        content: '{"data":[{"id":"019ad225-ac82-707d-9e46-d9304ebed0d8","name":"Crooks LLC","subdomain":"rempel","description":"Sunt nihil accusantium harum mollitia.","state":"draft","number_of_pages":1,"created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":null},{"id":"019ad225-ac88-7019-a55f-967ebe8fbcbe","name":"Schuster Inc","subdomain":"cormier","description":"Omnis nostrum aut adipisci quidem nostrum qui commodi.","state":"draft","number_of_pages":1,"created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":"2024-12-13 10:30:30"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
         headers: []
         description: ''
     responseFields: []
@@ -91,7 +103,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019accc3-b413-7315-9a6b-ea83bb85bd63","name":"Fritsch-O''Keefe","subdomain":"predovic","description":"Consequatur aut dolores enim non facere tempora.","user_id":"019abd86-7281-7363-b667-7058d4fe904a","state":"draft","number_of_pages":2,"created_at":"2025-11-28T23:19:29.000000Z","updated_at":"2025-11-28T23:19:29.000000Z","published_at":"2025-06-05 08:54:05"}}'
+        content: '{"data":{"id":"019ad225-ac8e-7258-8614-5a0920da75c3","name":"McLaughlin, Leuschke and Bauch","subdomain":"fritsch","description":null,"user_id":"019abd86-7285-7344-943f-fc8016f4d184","state":"draft","number_of_pages":2,"created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":"2025-04-18 03:32:04"}}'
         headers: []
         description: ''
     responseFields: []
@@ -164,7 +176,7 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"019accc3-b4da-7168-a00b-44f920cab85b","name":"Bailey Ltd","subdomain":"okuneva","description":null,"user_id":"019abd86-728a-71b2-91df-e9bfaf81a5be","state":"draft","number_of_pages":1,"created_at":"2025-11-28T23:19:29.000000Z","updated_at":"2025-11-28T23:19:29.000000Z","published_at":"2024-12-29 10:55:18"}}'
+        content: '{"data":{"id":"019ad225-ad17-71cf-be71-8d196459b631","name":"Bailey Ltd","subdomain":"okuneva","description":null,"user_id":"019abd86-7270-7172-89eb-55a2394e6a7c","state":"draft","number_of_pages":1,"created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":"2024-12-30 12:00:24"}}'
         headers: []
         description: ''
     responseFields: []
@@ -237,7 +249,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019accc3-b4e4-718d-9a9e-957a70b76420","name":"Bailey Ltd","subdomain":"rempel","description":"Sunt nihil accusantium harum mollitia.","user_id":"019abd86-7281-7363-b667-7058d4fe904a","state":"draft","number_of_pages":1,"created_at":"2025-11-28T23:19:29.000000Z","updated_at":"2025-11-28T23:19:29.000000Z","published_at":"2024-12-29 10:55:18"}}'
+        content: '{"data":{"id":"019ad225-ad1e-7192-be03-84f203a278d8","name":"Bailey Ltd","subdomain":"gulgowski","description":"Nihil accusantium harum mollitia modi deserunt.","user_id":"019abd86-7285-7344-943f-fc8016f4d184","state":"draft","number_of_pages":1,"created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":null}}'
         headers: []
         description: ''
     responseFields: []

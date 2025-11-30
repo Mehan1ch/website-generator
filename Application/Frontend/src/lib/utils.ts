@@ -39,11 +39,22 @@ export const calculateCardDescription = (description: string | null | undefined)
 export const getStateBadgeVariant = (state?: SchemaState | SiteState): "default" | "secondary" | "destructive" | "outline" => {
     switch (state) {
         case "published":
-            return "default";
+            return "secondary";
         case "draft":
             return "secondary";
         default:
             return "outline";
+    }
+};
+
+export const getStateBadgeColor = (state?: SchemaState | SiteState): string => {
+    switch (state) {
+        case "published":
+            return "border-green-200 text-green-700";
+        case "draft":
+            return "border-orange-200 text-yellow-700";
+        default:
+            return "";
     }
 };
 

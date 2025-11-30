@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Enums\Roles;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\SchemaRequest;
 use App\Http\Resources\Api\V1\Collections\SchemaCollection;
@@ -29,10 +30,17 @@ class SchemaController extends Controller
      * @apiResourceCollection App\Http\Resources\Api\V1\Collections\SchemaCollection
      * @apiResourceModel App\Models\Schema paginate=15
      * @queryParam page integer The page number. Example: 1
+     * @queryParam per_page integer Number of items per page. Defaults to 15. Max 100.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new SchemaCollection(Schema::query()->where("schemas.state", "!=", Draft::class)->paginate());
+        $perPage = (int)$request->query('per_page', 15);
+        $perPage = max(1, min($perPage, 100));
+        $user = $request->user();
+        if ($user->hasAnyRole(Roles::ADMIN, Roles::SUPER_ADMIN)) {
+            return new SchemaCollection(Schema::query()->paginate($perPage));
+        }
+        return new SchemaCollection(Schema::query()->where("state", "!=", Draft::$name)->paginate($perPage));
     }
 
     /**

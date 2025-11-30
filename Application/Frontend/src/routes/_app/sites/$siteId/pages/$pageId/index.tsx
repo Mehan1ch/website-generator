@@ -100,8 +100,8 @@ function PageIndexComponent() {
                         </Button>
                     </Link>
                     {page.url !== "/" &&
-                        <DeleteDialog name={"schema"} description={"Delete your page schema"}
-                                      alertDescription={"Warning this will delete all resources associated with this schema!"}
+                        <DeleteDialog name={"page"} description={"Delete your page"}
+                                      alertDescription={"Warning this will delete all resources associated with this page!"}
                                       onSubmit={onDelete}/>}
                 </div>
             </div>

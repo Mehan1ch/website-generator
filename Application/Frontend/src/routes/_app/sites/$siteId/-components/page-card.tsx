@@ -1,4 +1,4 @@
-import {Card, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import {useRouter} from "@tanstack/react-router";
 import {getDateString} from "@/lib/utils.ts";
 import {PageCollectionItem} from "@/types/pages.ts";
@@ -34,6 +34,7 @@ export const PageCard = ({siteId, page}: PageCardProps) => {
                 {page.url}
             </CardDescription>
         </CardHeader>
+        <CardContent className={"h-full"}/>
         <CardFooter className="flex justify-between">
             <p className="text-muted-foreground text-sm">
                 Created at: <br/> {getDateString(page.created_at)}

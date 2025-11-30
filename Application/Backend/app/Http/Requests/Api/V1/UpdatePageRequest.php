@@ -23,8 +23,9 @@ class UpdatePageRequest extends FormRequest
      *
      * @return array<string, ValidationRule|array|string>
      */
-    public function rules(Site $site, ?Page $page): array
+    public function rules(): array
     {
+        $site_id = $this->route()->parameter("site")?->id;
         return [
             'title' => ['nullable', 'string', 'max:255'],
             'url' => [
@@ -33,11 +34,11 @@ class UpdatePageRequest extends FormRequest
                 'max:255',
                 'starts_with:/',
                 Rule::unique('pages', 'url')
-                    ->where('site_id', $site->id)
-                    ->ignore($page), // For updates
+                    ->where('site_id', $site_id)
+                    ->ignore($this->route()->parameter("page")), // Ignore the current page ID
             ],
-            'content' => ['nullable', 'string'],
-            'html' => ['nullable', 'string'],
+            'content' => ['sometimes', 'nullable', 'string'],
+            'html' => ['sometimes', 'nullable', 'string'],
         ];
     }
 

@@ -10,7 +10,6 @@ type ErrorBoundaryProps = {
 }
 
 export const ErrorBoundary = ({error}: ErrorBoundaryProps) => {
-    console.log(error);
     const errors = (error as APIError)?.errors as Array<string>;
     const message = (error as APIError)?.message;
     return <div className="flex w-full min-h-screen items-center justify-center">

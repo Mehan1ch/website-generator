@@ -6,6 +6,7 @@ use App\Models\Page;
 use App\Models\Site;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 
 class StorePageRequest extends FormRequest
@@ -23,8 +24,9 @@ class StorePageRequest extends FormRequest
      *
      * @return array<string, ValidationRule|array|string>
      */
-    public function rules(Site $site, ?Page $page): array
+    public function rules(): array
     {
+        $site_id = $this->route()->parameter("site")?->id;
         return [
             'title' => ['required', 'string', 'max:255'],
             'url' => [
@@ -33,9 +35,10 @@ class StorePageRequest extends FormRequest
                 'max:255',
                 'starts_with:/',
                 Rule::unique('pages', 'url')
-                    ->where('site_id', $site->id)
-                    ->ignore($page), // For updates
+                    ->where('site_id', $site_id)
             ],
+            'html' => ['sometimes', 'nullable', 'string'],
+            'content' => ['sometimes', 'nullable', 'string'],
         ];
     }
 
@@ -55,6 +58,14 @@ class StorePageRequest extends FormRequest
                 'description' => 'The URL slug for the post . ',
                 'example' => 'my - first - post',
             ],
+            'content' => [
+                'description' => 'The content of the schema, base64 encoded and zlib compressed JSON',
+                'example' => 'eJzT0yMAAGTvBe8 = ',
+            ],
+            'html' => [
+                'description' => 'The HTML content of the page base64 encoded and zlib compressed',
+                'example' => 'eJzT0yMAAGTvBe8 = ',
+            ]
         ];
     }
 }

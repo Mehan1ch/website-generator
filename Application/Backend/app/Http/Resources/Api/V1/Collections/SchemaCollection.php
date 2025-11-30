@@ -21,6 +21,7 @@ class SchemaCollection extends ResourceCollection
                     'name' => $schema->name,
                     "description" => $schema->description,
                     "state" => $schema->state,
+                    'content' => $schema->content,
                     "created_at" => $schema->created_at,
                     "updated_at" => $schema->updated_at,
                     "published_at" => $schema->published_at,

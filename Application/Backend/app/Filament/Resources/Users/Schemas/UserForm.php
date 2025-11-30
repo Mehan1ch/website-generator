@@ -9,7 +9,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
 
-//TODO: avatar upload sometimes runs into cors issue
 class UserForm
 {
     public static function configure(Schema $schema): Schema

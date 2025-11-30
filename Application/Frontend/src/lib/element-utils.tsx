@@ -15,18 +15,7 @@ export function renderToStaticHTML(JSONStateString: string) {
             <Frame data={JSONStateString}/>
         </Editor>);
     });
-    return `
-      <!DOCTYPE html>
-      <html lang="en">
-        <head>
-          <meta charSet="UTF-8" />
-          <link rel="stylesheet" href="/index.css">
-        </head>
-        <body>
-          ${div.innerHTML}
-        </body>
-      </html>
-    `;
+    return div.innerHTML;
 }
 
 export function useForwardedRef<T>(ref: ForwardedRef<T>) {

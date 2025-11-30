@@ -10,6 +10,9 @@ use App\Http\Resources\Api\V1\PageResource;
 use App\Models\Page;
 use App\Models\Site;
 use App\Services\HTMLSanitizerService;
+use Illuminate\Http\Request;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 /**
  * Page Controller
@@ -31,11 +34,14 @@ class PageController extends Controller
      * @queryParam page integer The page number. Example: 1
      * @apiResourceCollection App\Http\Resources\Api\V1\Collections\PageCollection
      * @apiResourceModel App\Models\Page paginate=15
+     * @queryParam page integer The page number. Example: 1
+     * @queryParam per_page integer Number of items per page. Defaults to 15.
      */
-    public function index(Site $site)
+    public function index(Request $request, Site $site)
     {
-
-        return new Pagecollection(Page::query()->where('site_id', $site->id)->paginate());
+        $perPage = (int)$request->query('per_page', 15);
+        $perPage = max(1, min($perPage, 100));
+        return new Pagecollection(Page::query()->where('site_id', $site->id)->paginate($perPage));
     }
 
     /**
@@ -47,8 +53,24 @@ class PageController extends Controller
      */
     public function store(StorePageRequest $request, Site $site)
     {
-        $site->pages()->create($request->validated());
-        return response()->json(new PageResource($site), 201);
+        $validated = $request->validated();
+        /** @var Page $page */
+        $page = $site->pages()->make($validated);
+
+        if ($validated["html"] !== null) {
+            $uncompressed = gzinflate(base64_decode($validated["html"]));
+            $sanitized = $this->htmlSanitizerService->sanitize($uncompressed, $validated["title"]);
+            try {
+                $page->addMediaFromString($sanitized)
+                    ->setFileName($page->url . '.html')
+                    ->toMediaCollection('static_html');
+            } catch (FileDoesNotExist|FileIsTooBig $e) {
+                return response()->json(['message' => 'Failed to save static HTML content.'], 500);
+            }
+        }
+        $page->save();
+
+        return response()->json(new PageResource($page), 201);
     }
 
     /**
@@ -89,13 +111,24 @@ class PageController extends Controller
             ], 404);
         }
 
-        $htmlCompressed = array_first($request->safe()->only(['html']));
-        $htmlUnCompressed = gzdeflate(base64_decode($htmlCompressed));
-        $sanitized = $this->htmlSanitizerService->sanitize($htmlUnCompressed);
-        $page->staticHTML = $sanitized;
+        $validated = $request->validated();
+        /** @var Page $page */
+        $page = $site->pages()->update($validated);
 
-        $validated = $request->safe()->except(['html']);
-        $page->update($validated);
+        if ($validated["html"] !== null) {
+            $uncompressed = gzinflate(base64_decode($validated["html"]));
+            $sanitized = $this->htmlSanitizerService->sanitize($uncompressed, $validated["title"]);
+            try {
+                $page->addMediaFromString($sanitized)
+                    ->setFileName($page->url . '.html')
+                    ->toMediaCollection('static_html');
+            } catch (FileDoesNotExist|FileIsTooBig $e) {
+                return response()->json(['message' => 'Failed to save static HTML content.'], 500);
+            }
+        }
+        $page->save();
+
+
         return new PageResource($page);
     }
 

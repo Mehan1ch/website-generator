@@ -17,6 +17,8 @@ export type Page = NonNullable<PageData>;
 export const createPageForm = z.object({
     title: z.string().min(1, "Title is required"),
     url: z.string().startsWith("/").min(1, "Url is required"),
+    content: z.string().optional(),
+    html: z.string().optional(),
 });
 
 export type CreatePageBody = z.infer<typeof createPageForm>;

@@ -8,6 +8,7 @@ use App\Http\Requests\Api\V1\UpdateSiteRequest;
 use App\Http\Resources\Api\V1\Collections\SiteCollection;
 use App\Http\Resources\Api\V1\SiteResource;
 use App\Models\Site;
+use Illuminate\Http\Request;
 
 /**
  * Site Controller
@@ -25,11 +26,14 @@ class SiteController extends Controller
      * @queryParam page integer The page number. Example: 1
      * @apiResourceCollection App\Http\Resources\Api\V1\Collections\SiteCollection
      * @apiResourceModel App\Models\Site paginate=15
+     * @queryParam page integer The page number. Example: 1
+     * @queryParam per_page integer Number of items per page. Defaults to 15.
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        return new SiteCollection(Site::query()->where('user_id', auth()->id())->paginate());
+        $perPage = (int)$request->query('per_page', 15);
+        $perPage = max(1, min($perPage, 100));
+        return new SiteCollection(Site::query()->where('user_id', auth()->id())->paginate($perPage));
     }
 
     /**
