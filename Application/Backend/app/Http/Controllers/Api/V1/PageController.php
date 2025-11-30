@@ -57,7 +57,7 @@ class PageController extends Controller
         /** @var Page $page */
         $page = $site->pages()->make($validated);
 
-        if ($validated["html"] !== null) {
+        if ($request->has("html") && $validated["html"] !== null) {
             $uncompressed = gzinflate(base64_decode($validated["html"]));
             $sanitized = $this->htmlSanitizerService->sanitize($uncompressed, $validated["title"]);
             try {
@@ -112,10 +112,10 @@ class PageController extends Controller
         }
 
         $validated = $request->validated();
-        /** @var Page $page */
-        $page = $site->pages()->update($validated);
 
-        if ($validated["html"] !== null) {
+        $page->update($validated);
+
+        if ($request->has("html") && $validated["html"] !== null) {
             $uncompressed = gzinflate(base64_decode($validated["html"]));
             $sanitized = $this->htmlSanitizerService->sanitize($uncompressed, $validated["title"]);
             try {

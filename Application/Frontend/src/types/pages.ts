@@ -31,4 +31,4 @@ export const updatePageForm = z.object({
 });
 
 
-export type UpdateSiteBody = z.infer<typeof updatePageForm>;
+export type UpdatePageBody = z.infer<typeof updatePageForm>;
