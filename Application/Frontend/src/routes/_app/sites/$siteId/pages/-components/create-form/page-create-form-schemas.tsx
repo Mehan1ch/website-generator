@@ -16,6 +16,7 @@ import {Button} from "@/components/ui/button.tsx";
 import {Dialog, DialogClose, DialogContent, DialogFooter, DialogTrigger} from "@/components/ui/dialog";
 import {Eye} from "lucide-react";
 import {Preview} from "@/routes/_app/-components/editor/blocks/preview.tsx";
+import {ScrollArea} from "@/components/ui/scroll-area.tsx";
 
 type PageCreateFormSchemasProps = {
     page: number
@@ -53,7 +54,7 @@ export const PageCreateFormSchemas = ({page, selectedSchema, setSelectedSchema}:
         params: {
             query: {
                 page: page,
-                per_page: 5,
+                per_page: 10,
             }
         }
     });
@@ -71,24 +72,26 @@ export const PageCreateFormSchemas = ({page, selectedSchema, setSelectedSchema}:
     const schemaCollectionResponse: SchemaCollectionResponse = data;
     const schemas: SchemaCollectionItem[] = schemaCollectionResponse?.data || [];
     return <div className={"space-y-4"}>
-        <Choicebox defaultValue={selectedSchema}>
-            {schemas.map((schema: SchemaCollectionItem) => (
-                <ChoiceboxItem onClick={() => setSelectedSchema(schema)} key={schema.id}
-                               value={schema?.id || ""} className="col-span-1">
-                    <ChoiceboxItemHeader>
-                        <ChoiceboxItemTitle>
-                            {schema.name}
-                        </ChoiceboxItemTitle>
-                        <ChoiceboxItemDescription>
-                            <SchemaDialogPreview content={schema.content || ""}/>
-                        </ChoiceboxItemDescription>
-                    </ChoiceboxItemHeader>
-                    <ChoiceboxItemContent>
-                        <ChoiceboxItemIndicator/>
-                    </ChoiceboxItemContent>
-                </ChoiceboxItem>
-            ))}
-        </Choicebox>
+        <ScrollArea className={"h-100 rounded-md border"}>
+            <Choicebox defaultValue={selectedSchema}>
+                {schemas.map((schema: SchemaCollectionItem) => (
+                    <ChoiceboxItem onClick={() => setSelectedSchema(schema)} key={schema.id}
+                                   value={schema?.id || ""} className="col-span-1">
+                        <ChoiceboxItemHeader>
+                            <ChoiceboxItemTitle>
+                                {schema.name}
+                            </ChoiceboxItemTitle>
+                            <ChoiceboxItemDescription>
+                                <SchemaDialogPreview content={schema.content || ""}/>
+                            </ChoiceboxItemDescription>
+                        </ChoiceboxItemHeader>
+                        <ChoiceboxItemContent>
+                            <ChoiceboxItemIndicator/>
+                        </ChoiceboxItemContent>
+                    </ChoiceboxItem>
+                ))}
+            </Choicebox>
+        </ScrollArea>
         <PaginationDynamic currentPage={schemaCollectionResponse.meta?.current_page}
                            lastPage={schemaCollectionResponse.meta?.last_page}/>
     </div>;
