@@ -117,7 +117,7 @@ class PageController extends Controller
 
         if ($request->has("html") && $validated["html"] !== null) {
             $uncompressed = gzinflate(base64_decode($validated["html"]));
-            $sanitized = $this->htmlSanitizerService->sanitize($uncompressed, $validated["title"]);
+            $sanitized = $this->htmlSanitizerService->sanitize($uncompressed, $page->title);
             try {
                 $page->addMediaFromString($sanitized)
                     ->setFileName($page->url . '.html')
