@@ -60,9 +60,13 @@ class DeploymentRequest {
                             volumes: [
                                 {name: "site-data", emptyDir: {}},
                                 {
-                                    name: "site-assets", configMap: {
+                                    name: "site-assets",
+                                    configMap: {
                                         name: process.env.CSS_CONFIGMAP_NAME || "css-configmap"
-                                    }
+                                    },
+                                    items: [
+                                        {key: "index.css", path: "index.css"}
+                                    ]
                                 }
                             ],
                             initContainers: [
@@ -94,7 +98,12 @@ class DeploymentRequest {
                                     image: "nginx:alpine",
                                     ports: [{containerPort: 80}],
                                     volumeMounts: [
-                                        {name: "site-data", mountPath: "/usr/share/nginx/html"}
+                                        {name: "site-data", mountPath: "/usr/share/nginx/html"},
+                                        {
+                                            name: "site-assets",
+                                            mountPath: "/usr/share/nginx/html/assets/index.css",
+                                            subPath: "index.css"
+                                        }
                                     ],
                                     resources: {
                                         requests: {cpu: "100m", memory: "200Mi"},

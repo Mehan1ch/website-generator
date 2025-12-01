@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>{{ $title }}</title>
-    <style rel="stylesheet" href="/index.css"></style>
+    <link rel="stylesheet" href="/assets/index.css">
 </head>
 <body>
 {!! $body !!}
