@@ -12,6 +12,7 @@ import {Tabs, TabsContent, TabsContents, TabsList, TabsTrigger} from "@/componen
 import {SiteOverview} from "@/routes/_app/sites/$siteId/-components/site-overview.tsx";
 import {z} from "zod";
 import {SitePages} from "@/routes/_app/sites/$siteId/-components/site-pages.tsx";
+import {SiteDeployDropdown} from "@/routes/_app/sites/$siteId/-components/site-deploy-dropdown.tsx";
 
 
 const sitePagesSearchSchema = z.object({
@@ -81,7 +82,6 @@ function WebsiteIndexComponent() {
     const router = useRouter();
     const deleteSiteMutation = api.useMutation("delete", "/api/v1/site/{site_id}");
 
-
     const onDelete = async () => {
         toast.promise(deleteSiteMutation.mutateAsync({
                 params: {
@@ -114,6 +114,7 @@ function WebsiteIndexComponent() {
                     </div>
                 </div>
                 <div className="flex gap-2">
+                    <SiteDeployDropdown site={site}/>
                     <Link to={"/sites/$siteId/edit"} params={{siteId: site.id || ""}}>
                         <Button>
                             <Edit className="mr-2 h-4 w-4"/>

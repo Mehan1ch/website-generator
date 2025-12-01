@@ -83,8 +83,7 @@ export const DeleteDialog = ({
                     onClick={onDelete}
                     disabled={loading}
                 >
-                    {loading && <Spinner/>}
-                    <Trash2/>
+                    {loading ? <Spinner/> : <Trash2/>}
                     {loading ? "Deleting..." : `Delete ${name}`}
                 </Button>
             </DialogFooter>

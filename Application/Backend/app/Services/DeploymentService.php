@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Http\Resources\Api\V1\SiteDeploymentError;
 use App\Http\Resources\Api\V1\SiteDeploymentResource;
 use App\Http\Resources\Api\V1\SiteDeploymentResponse;
+use App\Models\Page;
 use App\Models\Site;
 use App\States\Draft;
 use App\States\Published;
@@ -44,12 +45,6 @@ class DeploymentService
     {
         $path = DeploymentService::buildPath("/deployment");
         $siteResource = new SiteDeploymentResource($site);
-        if ($siteResource->pages->isEmpty()) {
-            return new SiteDeploymentError((object)[
-                'message' => 'Site has no pages to deploy.',
-                'error' => ['No pages found for deployment.'],
-            ]);
-        }
         return DeploymentService::deployWithStateTransition($site, fn() => Http::post($path, $siteResource), Published::class);
     }
 
@@ -63,12 +58,6 @@ class DeploymentService
     {
         $path = DeploymentService::buildPath("/deployment");
         $siteResource = new SiteDeploymentResource($site);
-        if ($siteResource->pages->isEmpty()) {
-            return new SiteDeploymentError((object)[
-                'message' => 'Site has no pages to deploy.',
-                'error' => ['No pages found for deployment.'],
-            ]);
-        }
         return DeploymentService::deployWithStateTransition($site, fn() => Http::put($path, $siteResource), Published::class);
     }
 
@@ -148,6 +137,22 @@ class DeploymentService
             return new SiteDeploymentError((object)[
                 'message' => 'Site is not in a state that allows deployment.',
                 'error' => ["Cannot transition from {$site->state} to $state."],
+            ]);
+        }
+
+        if (!$site->pages || $site->pages->isEmpty()) {
+            return new SiteDeploymentError((object)[
+                'message' => 'Site has no pages to deploy.',
+                'error' => ['No pages found for deployment.'],
+            ]);
+        }
+
+        if (!$site->pages->every(function (Page $page) {
+            return !empty($page->staticHTML) || !empty($page->content);
+        })) {
+            return new SiteDeploymentError((object)[
+                'message' => 'One or more pages are empty.',
+                'error' => ['All pages must have content or static HTML for deployment.'],
             ]);
         }
 
