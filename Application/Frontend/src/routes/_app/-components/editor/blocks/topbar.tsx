@@ -1,8 +1,6 @@
 import {Button} from "@/components/ui/button.tsx";
-import {Switch} from "@/components/ui/switch.tsx";
 import {useEditor} from "@craftjs/core";
 import {toast} from "sonner";
-import copy from "copy-to-clipboard";
 import {useState} from "react";
 import {
     Dialog,
@@ -16,15 +14,32 @@ import {
 } from "@/components/ui/dialog.tsx";
 import {Label} from "@/components/ui/label.tsx";
 import {Input} from "@/components/ui/input.tsx";
-import {compressAndEncodeBase64, decodeBase64AndDecompress} from "@/lib/utils.ts";
+import {cn, compressAndEncodeBase64, decodeBase64AndDecompress} from "@/lib/utils.ts";
 import {Spinner} from "@/components/ui/spinner.tsx";
-import {Save, Upload} from "lucide-react";
+import {AlertTriangle, Pencil, PencilOff, Save, Upload} from "lucide-react";
+import {CopyButton} from "@/components/ui/copy-button.tsx";
+import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert.tsx";
+import {Toggle} from "@/components/ui/toggle";
+import {SidebarTrigger} from "@/components/ui/sidebar.tsx";
+import {ViewportControls, type ViewportSize} from "@/routes/_app/-components/editor/blocks/viewport-controls.tsx";
 
 type TopbarProps = {
     onSave: (content: string) => void;
+    viewportSize: ViewportSize;
+    setViewportSize: (size: ViewportSize) => void;
+    isFullscreen: boolean;
+    setIsFullscreen: (value: boolean) => void;
+    onReset: () => void;
 }
 
-export const Topbar = ({onSave}: TopbarProps) => {
+export const Topbar = ({
+                           onSave,
+                           viewportSize,
+                           setViewportSize,
+                           isFullscreen,
+                           setIsFullscreen,
+                           onReset
+                       }: TopbarProps) => {
     const {actions, query, enabled} = useEditor((state) => ({
         enabled: state.options.enabled
     }));
@@ -42,29 +57,37 @@ export const Topbar = ({onSave}: TopbarProps) => {
     };
 
     return (
-        <div className="outline bg-primary-foreground px-2 py-2 mt-3 mb-1 rounded">
-            <div className="flex justify-between px-2">
-                <Label className="flex items-center space-x-2">
-                    <Switch
-                        checked={enabled}
-                        onCheckedChange={value => actions.setOptions(options => options.enabled = value)}
-                    />
-                    <span className="text-sm font-medium">Enable</span>
-                </Label>
-                <div className={"items-center px-2"}>
-                    <Button
-                        onClick={() => {
-                            const json = query.serialize();
-                            copy(compressAndEncodeBase64(json));
-                            toast.info("State copied to clipboard");
-                        }}
+        <div className={cn("bg-sidebar border-b", !isFullscreen && " mb-4 rounded-xl")}>
+            <div className="flex items-center justify-between gap-4 px-4 py-2">
+                <div className="flex items-center gap-2">
+                    <Toggle
+                        aria-label="Toggle editing mode"
+                        size="sm"
+                        variant="outline"
+                        pressed={enabled}
+                        onClick={() => actions.setOptions(options => options.enabled = !enabled)}
                     >
-                        Serialize JSON to clipboard
-                    </Button>
+                        {enabled ? <Pencil className="h-4 w-4"/> : <PencilOff className="h-4 w-4"/>}
+                        <span className="ml-2">{enabled ? "Editing" : "Preview"}</span>
+                    </Toggle>
+                </div>
+                <ViewportControls
+                    currentSize={viewportSize}
+                    isFullscreen={isFullscreen}
+                    onSizeChange={setViewportSize}
+                    onFullscreenToggle={() => setIsFullscreen(!isFullscreen)}
+                    onReset={onReset}
+                />
+                <div className="flex items-center gap-2">
+                    <CopyButton
+                        onCopy={() => {
+                            toast.info("Content copied to clipboard");
+                        }}
+                        content={compressAndEncodeBase64(query.serialize())}/>
                     <Dialog>
                         <DialogTrigger asChild>
-                            <Button>
-                                <Upload/>
+                            <Button variant="outline" size="sm">
+                                <Upload className="h-4 w-4"/>
                                 Load
                             </Button>
                         </DialogTrigger>
@@ -75,6 +98,11 @@ export const Topbar = ({onSave}: TopbarProps) => {
                                     Paste editor state to load it.
                                 </DialogDescription>
                             </DialogHeader>
+                            <Alert>
+                                <AlertTriangle className="h-4 w-4"/>
+                                <AlertTitle>Warning</AlertTitle>
+                                <AlertDescription>This will override your entire page content!</AlertDescription>
+                            </Alert>
                             <div className="flex items-center gap-2">
                                 <div className="grid flex-1 gap-2">
                                     <Label htmlFor="link" className="sr-only">
@@ -82,8 +110,7 @@ export const Topbar = ({onSave}: TopbarProps) => {
                                     </Label>
                                     <Input
                                         value={stateToLoad}
-                                        onChange={(e) => setStateToLoad(e.target.value)}
-                                    />
+                                        onChange={(e) => setStateToLoad(e.target.value)}/>
                                 </div>
                             </div>
                             <DialogFooter>
@@ -102,10 +129,16 @@ export const Topbar = ({onSave}: TopbarProps) => {
                             </DialogFooter>
                         </DialogContent>
                     </Dialog>
-                    <Button onClick={handleSave} disabled={loading}>
-                        {loading ? <Spinner/> : <Save/>}
+                    <Button onClick={handleSave} disabled={loading} size="sm">
+                        {loading ? <Spinner className="h-4 w-4"/> : <Save className="h-4 w-4"/>}
                         Save
                     </Button>
+                    {!isFullscreen && (
+                        <>
+                            <div className="h-6 w-px bg-border mx-1"/>
+                            <SidebarTrigger className="rotate-180"/>
+                        </>
+                    )}
                 </div>
             </div>
         </div>

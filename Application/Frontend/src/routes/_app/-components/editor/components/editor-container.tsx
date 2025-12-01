@@ -1,96 +1,61 @@
 import * as React from "react";
-import {Card} from "@/components/ui/card.tsx";
 import {useNode} from "@craftjs/core";
-import {useForm} from "react-hook-form";
-import {Form, FormControl, FormField, FormItem, FormLabel} from "@/components/ui/form.tsx";
-import {ColorPicker} from "@/components/ui/color-picker.tsx";
-import {Slider} from "@/components/ui/slider.tsx";
+import {Controller, useForm} from "react-hook-form";
+import {Field, FieldLabel} from "@/components/ui/field.tsx";
+import {BackgroundEditorSettingsType} from "@/types/editor-settings.tsx";
+import {ColorPickerBlock} from "@/components/blocks/color-picker-block.tsx";
 
-interface EditorContainerProps {
-    background?: string;
-    padding?: number;
-    children: React.ReactNode;
+type EditorContainerProps = BackgroundEditorSettingsType & {
+    children?: React.ReactNode;
 }
 
-export const EditorContainer = ({
-                                    background = "bg-primary-foreground",
-                                    padding = 0,
-                                    children
-                                }: EditorContainerProps) => {
+export const EditorContainer = (props: EditorContainerProps) => {
     const {connectors: {connect, drag}} = useNode();
     return (
-        <Card
-            ref={ref => {
-                connect(drag(ref!));
-            }}
-            style={{margin: "5px 0", background, padding: `${padding}px`}}>
-            {children}
-        </Card>
+        <div className={"w-full h-full"}
+             ref={ref => {
+                 connect(drag(ref!));
+             }}>
+            {props?.children}
+        </div>
     );
 };
 
 export const ContainerSettings = () => {
-    const {background, padding, actions: {setProp}} = useNode(node => ({
-        background: node.data.props.background,
-        padding: node.data.props.padding
+    const {props, actions: {setProp}} = useNode(node => ({
+        props: node.data.props as EditorContainerProps,
     }));
 
     const form = useForm({
         defaultValues: {
-            background,
-            padding,
+            props,
         }
     });
 
     return (
-        <Form {...form}>
-            <form className="flex flex-col gap-4 h-full">
-                <FormField
-                    control={form.control}
-                    name="background"
-                    render={() => (
-                        <FormItem>
-                            <FormLabel>Background</FormLabel>
-                            <FormControl>
-                                <ColorPicker
-                                    color={background}
-                                    onChange={(color: string) => setProp((props: {
-                                        background: string;
-                                    }) => props.background = color)}
-                                    value={""}/>
-                            </FormControl>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="padding"
-                    render={() => (
-                        <FormItem>
-                            <FormLabel>Padding</FormLabel>
-                            <FormControl>
-                                <Slider
-                                    value={[padding]}
-                                    min={0}
-                                    max={100}
-                                    step={1}
-                                    onValueChange={([value]) => setProp((props: {
-                                        padding: number;
-                                    }) => props.padding = value)}
-                                />
-                            </FormControl>
-                        </FormItem>
-                    )}
-                />
-            </form>
-        </Form>
+        <form className="flex flex-col gap-4 h-full">
+            <Controller
+                control={form.control}
+                name="props.background"
+                render={({fieldState}) => (
+                    <Field data-invalid={fieldState.invalid}>
+                        <FieldLabel htmlFor="props.background">Background</FieldLabel>
+                        <ColorPickerBlock
+                            color={props.background || ""}
+                            onChange={(color) => setProp((props: {
+                                background: string;
+                            }) => props.background = color.toString())}
+                        />
+                    </Field>
+                )}
+            />
+        </form>
     );
 };
 
 // We export this because we'll be using this in the Card component as well
 export const ContainerDefaultProps = {
-    background: "bg-primary-foreground",
-    padding: 2
+    background: "",
 };
 
 EditorContainer.craft = {

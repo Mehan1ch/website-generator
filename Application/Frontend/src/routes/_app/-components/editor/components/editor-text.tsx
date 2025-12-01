@@ -46,6 +46,7 @@ export const EditorText = ({text, fontSize = 20, textAlign = "left"}: EditorText
             onClick={() => {
                 if (enabled) setEditable(true);
             }}
+            className="w-full max-w-full"
         >
             <ContentEditable
                 disabled={!editable}
@@ -57,6 +58,7 @@ export const EditorText = ({text, fontSize = 20, textAlign = "left"}: EditorText
                 }
                 tagName="p"
                 style={{fontSize: `${fontSize}px`, textAlign}}
+                className="break-words overflow-wrap-anywhere max-w-full"
             />
         </div>
     );

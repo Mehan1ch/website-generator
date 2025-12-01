@@ -2,9 +2,11 @@ import {Card, CardContent} from "@/components/ui/card.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {useEditor} from "@craftjs/core";
 import {createElement} from "react";
+import {EditorDisabledEmpty} from "@/routes/_app/-components/editor/blocks/editor-disabled-empty.tsx";
+import {EditorSelectedEmpty} from "@/routes/_app/-components/editor/blocks/editor-selected-empty.tsx";
 
 export const SettingsPanel = () => {
-    const {actions, selected} = useEditor((state, query) => {
+    const {actions, selected, enabled} = useEditor((state, query) => {
         const [currentNodeId] = state.events.selected;
         let selected;
 
@@ -18,9 +20,12 @@ export const SettingsPanel = () => {
         }
 
         return {
-            selected
+            selected,
+            enabled: state.options.enabled
         };
     });
+
+    if (!enabled) return <EditorDisabledEmpty/>;
 
     return selected ? (
         <Card className="bg-muted mt-2 px-4 py-4">
@@ -48,5 +53,5 @@ export const SettingsPanel = () => {
                 }
             </CardContent>
         </Card>
-    ) : null;
+    ) : <EditorSelectedEmpty/>;
 };

@@ -65,3 +65,12 @@ export const getDateString = (dateString: string | undefined | null) => {
     const date = new Date(dateString);
     return date.toLocaleDateString();
 };
+
+export const getBackgroundColorClass = (bgClass: string) => {
+    const styles = getComputedStyle(document.documentElement);
+    const value = styles.getPropertyValue(bgClass);
+    if (value === "") {
+        return bgClass;
+    }
+    return value;
+};

@@ -1,8 +1,7 @@
 import {Button} from "@/components/ui/button.tsx";
 import {Card, CardContent} from "@/components/ui/card.tsx";
-import {Element, useEditor} from "@craftjs/core";
+import {useEditor} from "@craftjs/core";
 import {EditorButton} from "@/routes/_app/-components/editor/components/editor-button.tsx";
-import {EditorContainer} from "@/routes/_app/-components/editor/components/editor-container.tsx";
 import {EditorCard} from "@/routes/_app/-components/editor/components/editor-card.tsx";
 import {EditorText} from "@/routes/_app/-components/editor/components/editor-text.tsx";
 
@@ -24,12 +23,6 @@ export const Toolbox = () => {
                         connectors.create(ref!, <EditorText text="Hi world"/>);
                     }}
                     variant="default" className="w-full">Text</Button>
-                <Button
-                    ref={ref => {
-                        connectors.create(ref!, <Element is={EditorContainer} padding={20} canvas
-                                                         children={undefined} background={""}/>);
-                    }}
-                    variant="default" className="w-full">Container</Button>
                 <Button
                     ref={ref => {
                         connectors.create(ref!, <EditorCard background={""}/>);
