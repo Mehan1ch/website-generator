@@ -53,8 +53,6 @@ export const PageDesigner = ({content, onSave}: PageDesignerProps) => {
 
     useEventListener("keydown", handleKeyDown);
 
-    //TODO: better card content
-    //TODO: icon tooltipped components
 
     return (
         <div className={cn(!isFullscreen && "-m-4")}>

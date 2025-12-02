@@ -23,6 +23,7 @@ import {Toggle} from "@/components/ui/toggle";
 import {SidebarTrigger} from "@/components/ui/sidebar.tsx";
 import {ViewportControls, type ViewportSize} from "@/routes/_app/-components/editor/blocks/viewport-controls.tsx";
 import {ButtonGroup} from "@/components/ui/button-group.tsx";
+import {useEventListener} from "@/hooks/use-event-listener.ts";
 
 type TopbarProps = {
     onSave: (content: string) => void;
@@ -47,6 +48,7 @@ export const Topbar = ({
         canRedo: query.history.canRedo()
     }));
 
+    const [lastKeyPressed, setLastKeyPressed] = useState<string>("");
     const [stateToLoad, setStateToLoad] = useState<string>();
     const [loading, setLoading] = useState(false);
 
@@ -58,6 +60,18 @@ export const Topbar = ({
         onSave(compressed);
         setLoading(false);
     };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key == "z" && (lastKeyPressed == "Control" || lastKeyPressed == "Meta") && canUndo) {
+            actions.history.undo();
+        }
+        if (event.key == "y" && (lastKeyPressed == "Control" || lastKeyPressed == "Meta") && canRedo) {
+            actions.history.redo();
+        }
+        setLastKeyPressed(event.key);
+    };
+
+    useEventListener("keydown", handleKeyDown);
 
     return (
         <div className={cn("bg-sidebar border-b", !isFullscreen && " mb-4 rounded-xl")}>
