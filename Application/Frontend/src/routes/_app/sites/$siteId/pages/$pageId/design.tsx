@@ -1,4 +1,4 @@
-import {createFileRoute} from '@tanstack/react-router';
+import {createFileRoute, useBlocker} from '@tanstack/react-router';
 import {api, APIError} from "@/lib/api/api-client.ts";
 import {PageNotFound} from "@/routes/_app/sites/$siteId/pages/-components/page-not-found.tsx";
 import {compressAndEncodeBase64, decodeBase64AndDecompress} from "@/lib/utils.ts";
@@ -46,6 +46,13 @@ function PageDesignComponent() {
 
     const updatePageMutation = api.useMutation("put", "/api/v1/site/{site_id}/page/{page_id}");
     const decoded = decodeBase64AndDecompress(page?.content || "");
+
+    useBlocker({
+        shouldBlockFn: () => {
+            const shouldLeave = confirm('Are you sure you want to leave? Unsaved changes will be lost.');
+            return !shouldLeave;
+        },
+    });
 
     const onSave = (content: string) => {
         const decodedContent = decodeBase64AndDecompress(content);

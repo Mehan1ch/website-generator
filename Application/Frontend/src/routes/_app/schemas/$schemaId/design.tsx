@@ -1,4 +1,4 @@
-import {createFileRoute, redirect} from '@tanstack/react-router';
+import {createFileRoute, redirect, useBlocker} from '@tanstack/react-router';
 import {PageDesigner} from "@/routes/_app/-components/editor/page-designer.tsx";
 import {toast} from "sonner";
 import {decodeBase64AndDecompress} from "@/lib/utils.ts";
@@ -47,6 +47,13 @@ function SchemaDesignComponent() {
 
     const updateSchemaMutation = api.useMutation("put", "/api/v1/schema/{schema_id}");
     const decoded = decodeBase64AndDecompress(schema?.content || "");
+
+    useBlocker({
+        shouldBlockFn: () => {
+            const shouldLeave = confirm('Are you sure you want to leave? Unsaved changes will be lost.');
+            return !shouldLeave;
+        },
+    });
 
     const onSave = (content: string) => {
         toast.promise(updateSchemaMutation.mutateAsync({
