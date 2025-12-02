@@ -74,3 +74,7 @@ export const getBackgroundColorClass = (bgClass: string) => {
     }
     return value;
 };
+
+export const getEditorDisplayName = (name: string) => {
+    return name.startsWith('Editor') ? name.slice(6) : name;
+};

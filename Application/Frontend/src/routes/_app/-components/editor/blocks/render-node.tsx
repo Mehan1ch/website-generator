@@ -4,7 +4,7 @@ import {createPortal} from 'react-dom';
 import {GripVertical, Trash2} from "lucide-react";
 import React, {FC, ReactNode, useCallback, useEffect, useRef, useState} from "react";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip.tsx";
-import {cn} from "@/lib/utils.ts";
+import {cn, getEditorDisplayName} from "@/lib/utils.ts";
 
 type RenderNodeProps = {
     render: ReactNode;
@@ -132,7 +132,7 @@ export const RenderNode: FC<RenderNodeProps> = ({render}) => {
                             style={{
                                 top: 0,
                                 left: 0,
-                                zIndex: 9998,
+                                zIndex: 10,
                             }}
                         />
 
@@ -146,7 +146,7 @@ export const RenderNode: FC<RenderNodeProps> = ({render}) => {
                                 zIndex: 9999,
                             }}
                         >
-                            <span className="mr-1">{name}</span>
+                            <span className="mr-1">{getEditorDisplayName(name)}</span>
 
                             {moveable && (
                                 <Tooltip>
