@@ -1,9 +1,9 @@
 import {Node, useEditor, useNode} from "@craftjs/core";
 import ContentEditable from "react-contenteditable";
 import {useEffect, useState} from "react";
-import {Form, FormControl, FormField, FormItem, FormLabel} from "@/components/ui/form.tsx";
-import {useForm} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
 import {Slider} from "@/components/ui/slider.tsx";
+import {Field, FieldLabel} from "@/components/ui/field.tsx";
 
 interface EditorTextProps {
     text: string;
@@ -65,53 +65,48 @@ export const EditorText = ({text, fontSize = 20, textAlign = "left"}: EditorText
 };
 
 const TextSettings = () => {
-    const {actions: {setProp}, fontSize} = useNode((node) => ({
-        fontSize: node.data.props.fontSize
+    const {actions: {setProp}, props} = useNode((node) => ({
+        props: node.data.props as EditorTextProps
     }));
     const form = useForm({
         defaultValues: {
-            fontSize: fontSize
+            props: props
         }
     });
 
     return (
-        <>
-            <Form {...form} >
-                <form className="flex flex-col gap-4">
-                    <FormField
-                        control={form.control}
-                        name="fontSize"
-                        render={() => (
-                            <FormItem>
-                                <FormLabel>Font size</FormLabel>
-                                <FormControl>
-                                    <Slider
-                                        value={[fontSize]}
-                                        min={7}
-                                        max={50}
-                                        step={1}
-                                        onValueChange={([value]) => setProp((props: {
-                                            fontSize: number;
-                                        }) => props.fontSize = value)}
-                                    />
-                                </FormControl>
-                            </FormItem>
-                        )}
-                    />
-                </form>
-            </Form>
-        </>
+        <form className="flex flex-col gap-4 h-full">
+            <Controller
+                control={form.control}
+                name="props.fontSize"
+                render={({field, fieldState}) => (
+                    <Field data-invalid={fieldState.invalid}>
+                        <FieldLabel htmlFor="props.fontSize">Font Size</FieldLabel>
+                        <Slider
+                            value={[field.value || 12]}
+                            min={7}
+                            max={50}
+                            step={1}
+                            onValueChange={([value]) => {
+                                field.onChange(value);
+                                setProp((props: EditorTextProps) => {
+                                    props.fontSize = value;
+                                });
+                            }}
+                        />
+                    </Field>
+                )}
+            />
+        </form>
     );
 };
 
 EditorText.craft = {
     props: {
-        text: "Hi",
-        fontSize: 20
+        text: "Text",
+        fontSize: 12
     },
-    rules: {
-        canDrag: (node: Node) => node.data.props.text !== "Drag"
-    },
+    rules: {},
     related: {
         settings: TextSettings
     }
