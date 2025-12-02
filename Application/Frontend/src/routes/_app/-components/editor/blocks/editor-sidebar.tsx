@@ -16,7 +16,7 @@ export function EditorSidebar({...props}: ComponentProps<typeof Sidebar>) {
                     <TabsList className={"w-full"}>
                         <TabsTrigger value="customize">
                             <Tooltip>
-                                <TooltipTrigger>
+                                <TooltipTrigger asChild>
                                     <Brush className="h-4 w-4"/>
                                 </TooltipTrigger>
                                 <TooltipContent>
@@ -26,7 +26,7 @@ export function EditorSidebar({...props}: ComponentProps<typeof Sidebar>) {
                         </TabsTrigger>
                         <TabsTrigger value={"layers"}>
                             <Tooltip>
-                                <TooltipTrigger>
+                                <TooltipTrigger asChild>
                                     <Layers className="h-4 w-4"/>
                                 </TooltipTrigger>
                                 <TooltipContent>

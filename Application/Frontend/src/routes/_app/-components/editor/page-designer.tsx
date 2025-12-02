@@ -10,6 +10,7 @@ import {cn} from "@/lib/utils.ts";
 import type {ViewportSize} from "@/routes/_app/-components/editor/blocks/viewport-controls.tsx";
 import {useEventListener} from "@/hooks/use-event-listener.ts";
 import {Card, CardContent} from "@/components/ui/card.tsx";
+import {RenderNode} from "@/routes/_app/-components/editor/blocks/render-node.tsx";
 
 type PageDesignerProps = {
     content?: string;
@@ -56,7 +57,7 @@ export const PageDesigner = ({content, onSave}: PageDesignerProps) => {
 
     return (
         <div className={cn(!isFullscreen && "-m-4")}>
-            <Editor resolver={EDITOR_RESOLVER}>
+            <Editor resolver={EDITOR_RESOLVER} onRender={RenderNode}>
                 <SidebarProvider name={"Editor"}>
 
                     <SidebarInset>
