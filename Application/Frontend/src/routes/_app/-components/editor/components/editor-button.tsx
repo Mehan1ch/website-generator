@@ -120,7 +120,7 @@ export const ButtonSettings = () => {
                                                     });
                                                 }}>
                                                 <SelectTrigger>
-                                                    {capitalize(props.variant) || "Default"}
+                                                    {capitalize(props.variant || "default")}
                                                 </SelectTrigger>
                                                 <SelectContent>
                                                     <SelectItem value="default"
