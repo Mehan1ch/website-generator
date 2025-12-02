@@ -1,8 +1,9 @@
-import {ContainerDefaultProps, ContainerSettings, EditorContainer} from "./editor-container.tsx";
+import {ContainerSettings, EditorContainer} from "./editor-container.tsx";
 import {EditorText} from "./editor-text.tsx";
 import {EditorButton} from "@/routes/_app/-components/editor/components/editor-button.tsx";
 import {Element, Node, useNode} from "@craftjs/core";
 import {ReactNode} from "react";
+import {CommonDefaults} from "@/types/editor-settings.ts";
 
 
 interface EditorCardProps {
@@ -68,7 +69,7 @@ export const EditorCard = ({background, padding = 20}: EditorCardProps) => {
 };
 
 EditorCard.craft = {
-    props: ContainerDefaultProps,
+    props: CommonDefaults,
     related: {
         // Since Card has the same settings as Container, we'll just reuse ContainerSettings
         settings: ContainerSettings

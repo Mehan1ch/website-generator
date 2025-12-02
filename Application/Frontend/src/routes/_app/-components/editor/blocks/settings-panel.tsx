@@ -28,12 +28,12 @@ export const SettingsPanel = () => {
     if (!enabled) return <EditorDisabledEmpty/>;
 
     return selected ? (
-        <div className="flex flex-col space-y-4 p-4">
+        <>
             <div className="flex items-center justify-between pb-2">
                 <span className="text-sm font-medium">Selected</span>
                 <Badge variant="default">{getEditorDisplayName(selected.name)}</Badge>
             </div>
             {selected.settings && createElement(selected.settings)}
-        </div>
+        </>
     ) : <EditorSelectedEmpty/>;
 };

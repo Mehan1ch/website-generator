@@ -12,7 +12,7 @@ export function EditorSidebar({...props}: ComponentProps<typeof Sidebar>) {
     return (
         <Sidebar variant={"sidebar"} collapsible={"offcanvas"} {...props}>
             <SidebarContent>
-                <Tabs defaultValue={"customize"} className={"h-full flex flex-col m-2"}>
+                <Tabs defaultValue={"customize"} className={"m-2"}>
                     <TabsList className={"w-full"}>
                         <TabsTrigger value="customize">
                             <Tooltip>

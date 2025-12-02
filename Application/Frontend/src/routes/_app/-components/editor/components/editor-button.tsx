@@ -1,133 +1,160 @@
 import {Button} from "@/components/ui/button.tsx";
 import * as React from "react";
 import {useNode} from "@craftjs/core";
-import {useForm} from "react-hook-form";
-import {Form, FormControl, FormField, FormItem, FormLabel} from "@/components/ui/form.tsx";
-import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group.tsx";
+import {Controller, useForm} from "react-hook-form";
+import {Field, FieldLabel} from "@/components/ui/field.tsx";
+import {CommonDefaults, CommonEditorSettingsType} from "@/types/editor-settings.ts";
+import {CommonSettings} from "@/routes/_app/-components/editor/blocks/common-settings.tsx";
+import {capitalize, cn} from "@/lib/utils.ts";
+import {AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion.tsx";
+import {ToggleGroup, ToggleGroupItem} from "@/components/ui/toggle-group.tsx";
+import {Select, SelectContent, SelectItem, SelectTrigger} from "@/components/ui/select.tsx";
 
-type EditorButtonProps = {
+type EditorButtonProps = CommonEditorSettingsType & {
     size: "sm" | "lg" | "default" | "icon" | null | undefined;
     variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
     color?: string;
     children: React.ReactNode;
 }
 
-
-export const EditorButton = ({size, variant = "default", color, children}: EditorButtonProps) => {
+export const EditorButton = ({
+                                 size,
+                                 variant = "default",
+                                 color,
+                                 children,
+                                 margin_top = 0,
+                                 margin_bottom = 0,
+                                 margin_left = 0,
+                                 margin_right = 0,
+                                 padding_top = 0,
+                                 padding_bottom = 0,
+                                 padding_left = 0,
+                                 padding_right = 0,
+                                 background = "",
+                             }: EditorButtonProps) => {
     const {connectors: {connect, drag}} = useNode();
     return (
-        <Button
+        <div
             ref={ref => {
                 connect(drag(ref!));
             }}
-            size={size} variant={variant} color={color}>
-            {children}
-        </Button>
+            className={cn("inline-block")}
+            style={{
+                marginTop: margin_top ? `${margin_top}px` : undefined,
+                marginBottom: margin_bottom ? `${margin_bottom}px` : undefined,
+                marginLeft: margin_left ? `${margin_left}px` : undefined,
+                marginRight: margin_right ? `${margin_right}px` : undefined,
+                paddingTop: padding_top ? `${padding_top}px` : undefined,
+                paddingBottom: padding_bottom ? `${padding_bottom}px` : undefined,
+                paddingLeft: padding_left ? `${padding_left}px` : undefined,
+                paddingRight: padding_right ? `${padding_right}px` : undefined,
+                backgroundColor: background || undefined,
+            }}
+        >
+            <Button size={size} variant={variant} color={color}>
+                {children}
+            </Button>
+        </div>
     );
 };
 
 export const ButtonSettings = () => {
     const {actions: {setProp}, props} = useNode((node) => ({
-        props: node.data.props
+        props: node.data.props as EditorButtonProps
     }));
 
     const form = useForm({
         defaultValues: {
-            size: props.size,
-            variant: props.variant,
-            color: props.color,
+            props: props
         }
     });
 
     return (
-        <Form {...form}>
-            <form className="flex flex-col gap-4">
-                <FormField
-                    control={form.control}
-                    name="size"
-                    render={() => (
-                        <FormItem>
-                            <FormLabel>Size</FormLabel>
-                            <FormControl>
-                                <RadioGroup
-                                    value={props.size}
-                                    onValueChange={value => setProp((props: { size: string; }) => props.size = value)}
-                                    className="flex flex-col gap-1"
-                                >
-                                    <FormLabel htmlFor="size-sm">Small</FormLabel>
-                                    <RadioGroupItem value="sm" id="size-sm"/>
-                                    <FormLabel htmlFor="size-default">Medium</FormLabel>
-                                    <RadioGroupItem value="default" id="size-default"/>
-                                    <FormLabel htmlFor="size-lg">Large</FormLabel>
-                                    <RadioGroupItem value="lg" id="size-lg"/>
-                                </RadioGroup>
-                            </FormControl>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="variant"
-                    render={() => (
-                        <FormItem>
-                            <FormLabel>Variant</FormLabel>
-                            <FormControl>
-                                <RadioGroup
-                                    value={props.variant}
-                                    onValueChange={value => setProp((props: {
-                                        variant: string;
-                                    }) => props.variant = value)}
-                                    className="flex flex-col gap-1"
-                                >
-                                    <FormLabel htmlFor="variant-default">Default</FormLabel>
-                                    <RadioGroupItem value="default" id="variant-default"/>
-                                    <FormLabel htmlFor="variant-outline">Outline</FormLabel>
-                                    <RadioGroupItem value="outline" id="variant-outline"/>
-                                    <FormLabel htmlFor="variant-ghost">Ghost</FormLabel>
-                                    <RadioGroupItem value="ghost" id="variant-ghost"/>
-                                    <FormLabel htmlFor="variant-link">Link</FormLabel>
-                                    <RadioGroupItem value="link" id="variant-link"/>
-                                </RadioGroup>
-                            </FormControl>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="color"
-                    render={() => (
-                        <FormItem>
-                            <FormLabel>Color</FormLabel>
-                            <FormControl>
-                                <RadioGroup
-                                    value={props.color}
-                                    onValueChange={value => setProp((props: { color: string; }) => props.color = value)}
-                                    className="flex flex-col gap-1"
-                                >
-                                    <FormLabel htmlFor="color-default">Default</FormLabel>
-                                    <RadioGroupItem value="default" id="color-default"/>
-                                    <FormLabel htmlFor="color-primary">Primary</FormLabel>
-                                    <RadioGroupItem value="primary" id="color-primary"/>
-                                    <FormLabel htmlFor="color-secondary">Secondary</FormLabel>
-                                    <RadioGroupItem value="secondary" id="color-secondary"/>
-                                </RadioGroup>
-                            </FormControl>
-                        </FormItem>
-                    )}
-                />
-            </form>
-        </Form>
+        <form className="flex flex-col gap-4">
+            <CommonSettings
+                control={form.control}
+                setProp={setProp}
+                currentProps={props}
+                customSettings={
+                    <AccordionItem value={"button"}>
+                        <AccordionTrigger>Button</AccordionTrigger>
+                        <AccordionContent>
+                            <div className="flex flex-col gap-4">
+                                <Controller
+                                    control={form.control}
+                                    name="props.size"
+                                    render={({field, fieldState}) => (
+                                        <Field data-invalid={fieldState.invalid}>
+                                            <FieldLabel>Size</FieldLabel>
+                                            <ToggleGroup
+                                                type={"single"}
+                                                variant={"outline"}
+                                                orientation={"horizontal"}
+                                                value={props.size || "default"}
+                                                onValueChange={value => {
+                                                    field.onChange(value);
+                                                    setProp((props: EditorButtonProps) => {
+                                                        props.size = value as any;
+                                                    });
+                                                }}>
+                                                <ToggleGroupItem value="sm" id="size-sm">Small</ToggleGroupItem>
+                                                <ToggleGroupItem value="default"
+                                                                 id="size-default">Default</ToggleGroupItem>
+                                                <ToggleGroupItem value="lg" id="size-lg">Large</ToggleGroupItem>
+                                            </ToggleGroup>
+                                        </Field>
+                                    )}
+                                />
+                                <Controller
+                                    control={form.control}
+                                    name="props.variant"
+                                    render={({field, fieldState}) => (
+                                        <Field data-invalid={fieldState.invalid}>
+                                            <FieldLabel>Variant</FieldLabel>
+                                            <Select
+                                                value={props.variant || "default"}
+                                                onValueChange={value => {
+                                                    field.onChange(value);
+                                                    setProp((props: EditorButtonProps) => {
+                                                        props.variant = value as any;
+                                                    });
+                                                }}>
+                                                <SelectTrigger>
+                                                    {capitalize(props.variant) || "Default"}
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectItem value="default"
+                                                    >Default</SelectItem>
+                                                    <SelectItem value="outline"
+                                                    >Outline</SelectItem>
+                                                    <SelectItem value="ghost"
+                                                    >Ghost</SelectItem>
+                                                    <SelectItem value="link"
+                                                    >Link</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                        </Field>
+                                    )}
+                                />
+                            </div>
+                        </AccordionContent>
+                    </AccordionItem>
+                }
+            />
+        </form>
     );
 };
 
 EditorButton.craft = {
     props: {
-        size: "small",
-        variant: "contained",
+        size: "default",
+        variant: "default",
         color: "primary",
-        text: "Click me"
+        children: "Click me",
+        ...CommonDefaults,
     },
     related: {
         settings: ButtonSettings
     }
 };
+

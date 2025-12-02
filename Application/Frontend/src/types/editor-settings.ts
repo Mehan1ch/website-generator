@@ -40,6 +40,7 @@ export const BackgroundDefaults = {
 } as const;
 
 export type BackgroundEditorSettingsType = z.infer<typeof BackgroundEditorSettings>;
+
 export const CommonEditorSettings = z.object({
     ...MarginEditorSettings.shape,
     ...PaddingEditorSettings.shape,

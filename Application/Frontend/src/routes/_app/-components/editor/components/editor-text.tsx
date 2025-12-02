@@ -2,10 +2,13 @@ import {Node, useEditor, useNode} from "@craftjs/core";
 import ContentEditable from "react-contenteditable";
 import {useEffect, useState} from "react";
 import {Controller, useForm} from "react-hook-form";
-import {Slider} from "@/components/ui/slider.tsx";
 import {Field, FieldLabel} from "@/components/ui/field.tsx";
+import {CommonDefaults, CommonEditorSettingsType} from "@/types/editor-settings.ts";
+import {CommonSettings} from "@/routes/_app/-components/editor/blocks/common-settings.tsx";
+import {Input} from "@/components/ui/input.tsx";
+import {AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion.tsx";
 
-interface EditorTextProps {
+interface EditorTextProps extends CommonEditorSettingsType {
     text: string;
     fontSize?: number;
     textAlign?: "left" | "center" | "right";
@@ -16,7 +19,20 @@ interface EditorTextState {
     hasDraggedNode: boolean;
 }
 
-export const EditorText = ({text, fontSize = 20, textAlign = "left"}: EditorTextProps) => {
+export const EditorText = ({
+                               text,
+                               fontSize = 20,
+                               textAlign = "left",
+                               margin_top = 0,
+                               margin_bottom = 0,
+                               margin_left = 0,
+                               margin_right = 0,
+                               padding_top = 0,
+                               padding_bottom = 0,
+                               padding_left = 0,
+                               padding_right = 0,
+                               background = "",
+                           }: EditorTextProps) => {
     const {
         connectors: {connect, drag},
         hasSelectedNode,
@@ -47,6 +63,17 @@ export const EditorText = ({text, fontSize = 20, textAlign = "left"}: EditorText
                 if (enabled) setEditable(true);
             }}
             className="w-full max-w-full"
+            style={{
+                marginTop: `${margin_top}px`,
+                marginBottom: `${margin_bottom}px`,
+                marginLeft: `${margin_left}px`,
+                marginRight: `${margin_right}px`,
+                paddingTop: `${padding_top}px`,
+                paddingBottom: `${padding_bottom}px`,
+                paddingLeft: `${padding_left}px`,
+                paddingRight: `${padding_right}px`,
+                background: background || undefined,
+            }}
         >
             <ContentEditable
                 disabled={!editable}
@@ -76,26 +103,42 @@ const TextSettings = () => {
 
     return (
         <form className="flex flex-col gap-4 h-full">
-            <Controller
+            <CommonSettings
                 control={form.control}
-                name="props.fontSize"
-                render={({field, fieldState}) => (
-                    <Field data-invalid={fieldState.invalid}>
-                        <FieldLabel htmlFor="props.fontSize">Font Size</FieldLabel>
-                        <Slider
-                            value={[field.value || 12]}
-                            min={7}
-                            max={50}
-                            step={1}
-                            onValueChange={([value]) => {
-                                field.onChange(value);
-                                setProp((props: EditorTextProps) => {
-                                    props.fontSize = value;
-                                });
-                            }}
-                        />
-                    </Field>
-                )}
+                setProp={setProp}
+                currentProps={props}
+                customSettings={
+                    <AccordionItem value={"typography"}>
+                        <AccordionTrigger>Typography</AccordionTrigger>
+                        <AccordionContent>
+
+                            <div className="flex flex-col gap-4">
+                                <Controller
+                                    control={form.control}
+                                    name="props.fontSize"
+                                    render={({field, fieldState}) => (
+                                        <Field data-invalid={fieldState.invalid}>
+                                            <FieldLabel htmlFor="props.fontSize">Font Size (px)</FieldLabel>
+                                            <Input
+                                                type="number"
+                                                min={7}
+                                                max={100}
+                                                value={field.value || 12}
+                                                onChange={(e) => {
+                                                    const value = parseInt(e.target.value) || 12;
+                                                    field.onChange(value);
+                                                    setProp((props: EditorTextProps) => {
+                                                        props.fontSize = value;
+                                                    });
+                                                }}
+                                            />
+                                        </Field>
+                                    )}
+                                />
+                            </div>
+                        </AccordionContent>
+                    </AccordionItem>
+                }
             />
         </form>
     );
@@ -104,7 +147,8 @@ const TextSettings = () => {
 EditorText.craft = {
     props: {
         text: "Text",
-        fontSize: 12
+        fontSize: 12,
+        ...CommonDefaults,
     },
     rules: {},
     related: {
