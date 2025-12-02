@@ -8,6 +8,7 @@ import {ResizableHandle, ResizablePanel, ResizablePanelGroup} from "@/components
 import {useEffect, useRef, useState} from "react";
 import {cn} from "@/lib/utils.ts";
 import type {ViewportSize} from "@/routes/_app/-components/editor/blocks/viewport-controls.tsx";
+import {useEventListener} from "@/hooks/use-event-listener.ts";
 
 type PageDesignerProps = {
     content?: string;
@@ -42,15 +43,25 @@ export const PageDesigner = ({content, onSave}: PageDesignerProps) => {
         setViewportSize('desktop');
         setIsFullscreen(false);
     };
-    //TODO: block navigate away, unsaved changes warning
-    //TODO: changing viewport sizte thrashes the content
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key == "Escape" && isFullscreen) {
+            setIsFullscreen(false);
+        }
+    };
+
+    useEventListener("keydown", handleKeyDown);
+
+    //TODO: better card content
+    //TODO: icon tooltipped components
 
     return (
         <div className={cn(!isFullscreen && "-m-4")}>
             <Editor resolver={EDITOR_RESOLVER}>
                 <SidebarProvider name={"Editor"}>
-                    {isFullscreen ? (
-                        <div className="fixed inset-0 z-50 bg-background flex flex-col">
+
+                    <SidebarInset>
+                        <div className={cn(isFullscreen && "fixed inset-0 z-50 bg-background flex flex-col")}>
                             <Topbar
                                 onSave={onSave}
                                 viewportSize={viewportSize}
@@ -92,51 +103,8 @@ export const PageDesigner = ({content, onSave}: PageDesignerProps) => {
                                 </ResizablePanelGroup>
                             </div>
                         </div>
-                    ) : (
-                        <SidebarInset>
-                            <Topbar
-                                onSave={onSave}
-                                viewportSize={viewportSize}
-                                setViewportSize={setViewportSize}
-                                isFullscreen={isFullscreen}
-                                setIsFullscreen={setIsFullscreen}
-                                onReset={handleReset}
-                            />
-                            <div className="p-2">
-                                <ResizablePanelGroup
-                                    direction="horizontal"
-                                    className="w-full min-h-[calc(100vh-8rem)]"
-                                >
-                                    <ResizablePanel
-                                        ref={leftPanelRef}
-                                        defaultSize={(100 - VIEWPORT_SIZES[viewportSize]) / 2}
-                                        minSize={0}
-                                    />
-                                    <ResizableHandle className="w-px bg-border"/>
-                                    <ResizablePanel
-                                        ref={centerPanelRef}
-                                        defaultSize={VIEWPORT_SIZES[viewportSize]}
-                                        minSize={20}
-                                        maxSize={100}
-                                        className="transition-all duration-300"
-                                    >
-                                        <div className="h-full border rounded-lg shadow-sm bg-background overflow-auto">
-                                            <Frame data={content}>
-                                                <Element is={EditorContainer} canvas/>
-                                            </Frame>
-                                        </div>
-                                    </ResizablePanel>
-                                    <ResizableHandle className="w-px bg-border"/>
-                                    <ResizablePanel
-                                        ref={rightPanelRef}
-                                        defaultSize={(100 - VIEWPORT_SIZES[viewportSize]) / 2}
-                                        minSize={0}
-                                    />
-                                </ResizablePanelGroup>
-                            </div>
-                        </SidebarInset>
-                    )}
-                    {!isFullscreen && <EditorSidebar side={"right"}/>}
+                    </SidebarInset>
+                    <EditorSidebar className={cn(isFullscreen && "hidden")} side={"right"}/>
                 </SidebarProvider>
             </Editor>
         </div>
