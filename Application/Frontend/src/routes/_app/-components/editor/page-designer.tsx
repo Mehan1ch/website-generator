@@ -9,6 +9,7 @@ import {useEffect, useRef, useState} from "react";
 import {cn} from "@/lib/utils.ts";
 import type {ViewportSize} from "@/routes/_app/-components/editor/blocks/viewport-controls.tsx";
 import {useEventListener} from "@/hooks/use-event-listener.ts";
+import {Card, CardContent} from "@/components/ui/card.tsx";
 
 type PageDesignerProps = {
     content?: string;
@@ -80,7 +81,7 @@ export const PageDesigner = ({content, onSave}: PageDesignerProps) => {
                                         defaultSize={(100 - VIEWPORT_SIZES[viewportSize]) / 2}
                                         minSize={0}
                                     />
-                                    <ResizableHandle className="w-px bg-border"/>
+                                    <ResizableHandle withHandle className="w-px bg-transparent"/>
                                     <ResizablePanel
                                         ref={centerPanelRef}
                                         defaultSize={VIEWPORT_SIZES[viewportSize]}
@@ -88,13 +89,16 @@ export const PageDesigner = ({content, onSave}: PageDesignerProps) => {
                                         maxSize={100}
                                         className="transition-all duration-300"
                                     >
-                                        <div className="h-full border rounded-lg shadow-sm bg-background overflow-auto">
-                                            <Frame data={content}>
-                                                <Element is={EditorContainer} canvas/>
-                                            </Frame>
-                                        </div>
+                                        <Card
+                                            className="h-full -p-0 -m-0">
+                                            <CardContent className={"-p-0 -m-0"}>
+                                                <Frame data={content}>
+                                                    <Element is={EditorContainer} canvas/>
+                                                </Frame>
+                                            </CardContent>
+                                        </Card>
                                     </ResizablePanel>
-                                    <ResizableHandle className="w-px bg-border"/>
+                                    <ResizableHandle withHandle className="w-px bg-transparent"/>
                                     <ResizablePanel
                                         ref={rightPanelRef}
                                         defaultSize={(100 - VIEWPORT_SIZES[viewportSize]) / 2}
