@@ -4,11 +4,12 @@ import {EditorButton} from "@/routes/_app/-components/editor/components/editor-b
 import {EditorCard} from "@/routes/_app/-components/editor/components/editor-card.tsx";
 import {EditorText} from "@/routes/_app/-components/editor/components/editor-text.tsx";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip.tsx";
-import {CreditCard, Image, LayoutGrid, Minus, RectangleHorizontal, Type, Video} from "lucide-react";
+import {CreditCard, Image, LayoutGrid, Minus, RectangleHorizontal, Tag, Type, Video} from "lucide-react";
 import {EditorGrid} from "@/routes/_app/-components/editor/components/editor-grid.tsx";
 import {EditorImage} from "@/routes/_app/-components/editor/components/editor-image.tsx";
 import {EditorVideo} from "@/routes/_app/-components/editor/components/editor-video.tsx";
 import {EditorSeparator} from "@/routes/_app/-components/editor/components/editor-separator.tsx";
+import {EditorBadge} from "@/routes/_app/-components/editor/components/editor-badge.tsx";
 
 const toolboxItems = [
     {
@@ -45,6 +46,11 @@ const toolboxItems = [
         name: "Separator",
         icon: Minus,
         component: <EditorSeparator orientation={"horizontal"}/>
+    },
+    {
+        name: "Badge",
+        icon: Tag,
+        component: <EditorBadge text={""} variant={"default"}/>
     },
 ];
 

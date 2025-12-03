@@ -58,7 +58,7 @@ export const EditorImage = ({
             <img
                 src={src}
                 alt={alt}
-                className="w-full h-auto rounded-md"
+                className="w-full h-auto rounded-md min-h-10"
                 style={{
                     width: width ? `${width}px` : undefined,
                     height: height ? `${height}px` : undefined,

@@ -11,6 +11,7 @@ import {EditorGrid, EditorGridCell} from "@/routes/_app/-components/editor/compo
 import {EditorVideo} from "@/routes/_app/-components/editor/components/editor-video.tsx";
 import {EditorImage} from "@/routes/_app/-components/editor/components/editor-image.tsx";
 import {EditorSeparator} from "@/routes/_app/-components/editor/components/editor-separator.tsx";
+import {EditorBadge} from "@/routes/_app/-components/editor/components/editor-badge.tsx";
 
 export const EDITOR_RESOLVER = {
     EditorCard,
@@ -25,4 +26,5 @@ export const EDITOR_RESOLVER = {
     EditorVideo,
     EditorImage,
     EditorSeparator,
+    EditorBadge,
 };
