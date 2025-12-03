@@ -13,7 +13,7 @@ export const EditorContainer = (props: EditorContainerProps) => {
     const {connectors: {connect, drag}} = useNode();
     return (
         <div
-            className={cn("w-full h-full")}
+            className={cn("w-full h-full min-h-full")}
             ref={ref => {
                 connect(drag(ref!));
             }}

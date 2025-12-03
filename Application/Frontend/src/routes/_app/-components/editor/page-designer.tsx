@@ -11,6 +11,7 @@ import type {ViewportSize} from "@/routes/_app/-components/editor/blocks/viewpor
 import {useEventListener} from "@/hooks/use-event-listener.ts";
 import {Card, CardContent} from "@/components/ui/card.tsx";
 import {RenderNode} from "@/routes/_app/-components/editor/blocks/render-node.tsx";
+import {EditorText} from "@/routes/_app/-components/editor/components/editor-text.tsx";
 
 type PageDesignerProps = {
     content?: string;
@@ -87,12 +88,15 @@ export const PageDesigner = ({content, onSave}: PageDesignerProps) => {
                                         maxSize={100}
                                         className="transition-all duration-300"
                                     >
-                                        <Card
-                                            className="h-full -p-0 -m-0">
-                                            <CardContent className={"-p-0 -m-0"}>
-                                                <Frame data={content}>
-                                                    <Element is={EditorContainer} canvas/>
-                                                </Frame>
+                                        <Card className="h-full p-0 m-0 flex flex-col">
+                                            <CardContent className="p-0 m-0 flex-1 flex flex-col">
+                                                <div className="w-full h-full flex-1">
+                                                    <Frame data={content}>
+                                                        <Element is={EditorContainer} canvas>
+                                                            <EditorText text={"Hello World!"}/>
+                                                        </Element>
+                                                    </Frame>
+                                                </div>
                                             </CardContent>
                                         </Card>
                                     </ResizablePanel>
