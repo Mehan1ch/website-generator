@@ -1,6 +1,6 @@
 import {Button} from "@/components/ui/button.tsx";
-import * as React from "react";
-import {useNode} from "@craftjs/core";
+import {useState} from "react";
+import {useEditor, useNode} from "@craftjs/core";
 import {Controller, useForm} from "react-hook-form";
 import {Field, FieldLabel} from "@/components/ui/field.tsx";
 import {CommonDefaults, CommonEditorSettingsType} from "@/types/editor-settings.ts";
@@ -9,17 +9,21 @@ import {capitalize} from "@/lib/utils.ts";
 import {AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion.tsx";
 import {ToggleGroup, ToggleGroupItem} from "@/components/ui/toggle-group.tsx";
 import {Select, SelectContent, SelectItem, SelectTrigger} from "@/components/ui/select.tsx";
+import {Input} from "@/components/ui/input.tsx";
+import ContentEditable from "react-contenteditable";
 
 type EditorButtonProps = CommonEditorSettingsType & {
     size: "sm" | "lg" | "default" | "icon" | null | undefined;
     variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
-    children: React.ReactNode;
+    href?: string;
+    text?: string;
 }
 
 export const EditorButton = ({
                                  size,
                                  variant = "default",
-                                 children,
+                                 href,
+                                 text = "Click me",
                                  margin_top = 0,
                                  margin_bottom = 0,
                                  margin_left = 0,
@@ -29,7 +33,11 @@ export const EditorButton = ({
                                  padding_left = 0,
                                  padding_right = 0,
                              }: EditorButtonProps) => {
-    const {connectors: {connect, drag}} = useNode();
+    const {connectors: {connect, drag}, actions: {setProp}} = useNode();
+    const [editable, setEditable] = useState(false);
+    const {enabled} = useEditor((state) => ({
+        enabled: state.options.enabled
+    }));
 
     return (
         <Button
@@ -49,7 +57,20 @@ export const EditorButton = ({
                 paddingRight: padding_right ? `${padding_right}px` : undefined,
             }}
         >
-            {children}
+            <a href={href}>
+                <ContentEditable
+                    onClick={() => {
+                        if (enabled) setEditable(true);
+                    }}
+                    disabled={!editable}
+                    html={text}
+                    onChange={e =>
+                        setProp((props: { text: string; }) =>
+                            props.text = e.target.value.replace(/<\/?[^>]+(>|$)/g, "")
+                        )
+                    }
+                    tagName="p"></ContentEditable>
+            </a>
         </Button>
     );
 };
@@ -76,6 +97,26 @@ export const ButtonSettings = () => {
                         <AccordionTrigger>Button</AccordionTrigger>
                         <AccordionContent>
                             <div className="flex flex-col gap-4">
+                                <Controller
+                                    control={form.control}
+                                    name={"props.href"}
+                                    render={({field, fieldState}) => (
+                                        <Field data-invalid={fieldState.invalid}>
+                                            <FieldLabel>Link to</FieldLabel>
+                                            <Input
+                                                type="text"
+                                                value={field.value || ""}
+                                                onChange={(e) => {
+                                                    const value = e.target.value;
+                                                    field.onChange(value);
+                                                    setProp((props: EditorButtonProps) => {
+                                                        props.href = value;
+                                                    });
+                                                }}
+                                            />
+                                        </Field>
+                                    )}
+                                />
                                 <Controller
                                     control={form.control}
                                     name="props.size"
