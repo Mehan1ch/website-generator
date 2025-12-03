@@ -4,10 +4,11 @@ import {EditorButton} from "@/routes/_app/-components/editor/components/editor-b
 import {EditorCard} from "@/routes/_app/-components/editor/components/editor-card.tsx";
 import {EditorText} from "@/routes/_app/-components/editor/components/editor-text.tsx";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip.tsx";
-import {CreditCard, Image, LayoutGrid, RectangleHorizontal, Type, Video} from "lucide-react";
+import {CreditCard, Image, LayoutGrid, Minus, RectangleHorizontal, Type, Video} from "lucide-react";
 import {EditorGrid} from "@/routes/_app/-components/editor/components/editor-grid.tsx";
 import {EditorImage} from "@/routes/_app/-components/editor/components/editor-image.tsx";
 import {EditorVideo} from "@/routes/_app/-components/editor/components/editor-video.tsx";
+import {EditorSeparator} from "@/routes/_app/-components/editor/components/editor-separator.tsx";
 
 const toolboxItems = [
     {
@@ -33,12 +34,17 @@ const toolboxItems = [
     {
         name: "Image",
         icon: Image,
-        component: <EditorImage/>
+        component: <EditorImage src={""} alt={""} objectFit={"fill"}/>
     },
     {
         name: "Video",
         icon: Video,
-        component: <EditorVideo/>
+        component: <EditorVideo src={""} type={"youtube"} autoplay={false} controls={false} loop={false} muted={false}/>
+    },
+    {
+        name: "Separator",
+        icon: Minus,
+        component: <EditorSeparator orientation={"horizontal"}/>
     },
 ];
 

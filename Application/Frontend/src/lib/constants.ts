@@ -10,6 +10,7 @@ import {EditorContainer} from "@/routes/_app/-components/editor/components/edito
 import {EditorGrid, EditorGridCell} from "@/routes/_app/-components/editor/components/editor-grid.tsx";
 import {EditorVideo} from "@/routes/_app/-components/editor/components/editor-video.tsx";
 import {EditorImage} from "@/routes/_app/-components/editor/components/editor-image.tsx";
+import {EditorSeparator} from "@/routes/_app/-components/editor/components/editor-separator.tsx";
 
 export const EDITOR_RESOLVER = {
     EditorCard,
@@ -23,4 +24,5 @@ export const EDITOR_RESOLVER = {
     EditorGridCell,
     EditorVideo,
     EditorImage,
+    EditorSeparator,
 };
