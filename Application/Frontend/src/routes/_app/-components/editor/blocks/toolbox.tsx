@@ -4,8 +4,10 @@ import {EditorButton} from "@/routes/_app/-components/editor/components/editor-b
 import {EditorCard} from "@/routes/_app/-components/editor/components/editor-card.tsx";
 import {EditorText} from "@/routes/_app/-components/editor/components/editor-text.tsx";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip.tsx";
-import {CreditCard, LayoutGrid, RectangleHorizontal, Type} from "lucide-react";
+import {CreditCard, Image, LayoutGrid, RectangleHorizontal, Type, Video} from "lucide-react";
 import {EditorGrid} from "@/routes/_app/-components/editor/components/editor-grid.tsx";
+import {EditorImage} from "@/routes/_app/-components/editor/components/editor-image.tsx";
+import {EditorVideo} from "@/routes/_app/-components/editor/components/editor-video.tsx";
 
 const toolboxItems = [
     {
@@ -27,6 +29,16 @@ const toolboxItems = [
         name: "Grid",
         icon: LayoutGrid,
         component: <EditorGrid direction="column" divisions={2} gap={16}/>
+    },
+    {
+        name: "Image",
+        icon: Image,
+        component: <EditorImage/>
+    },
+    {
+        name: "Video",
+        icon: Video,
+        component: <EditorVideo/>
     },
 ];
 

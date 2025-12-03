@@ -78,3 +78,18 @@ export const getBackgroundColorClass = (bgClass: string) => {
 export const getEditorDisplayName = (name: string) => {
     return name.startsWith('Editor') ? name.slice(6) : name;
 };
+
+export const getButtonSizeText = (size: "lg" | "sm" | "icon" | "default" | undefined) => {
+    switch (size) {
+        case "lg":
+            return "Large";
+        case "sm":
+            return "Small";
+        case "icon":
+            return "Icon";
+        case "default":
+            return "Default";
+        default:
+            return "Default";
+    }
+};

@@ -8,6 +8,8 @@ import {EditorButton} from "@/routes/_app/-components/editor/components/editor-b
 import {EditorText} from "@/routes/_app/-components/editor/components/editor-text.tsx";
 import {EditorContainer} from "@/routes/_app/-components/editor/components/editor-container.tsx";
 import {EditorGrid, EditorGridCell} from "@/routes/_app/-components/editor/components/editor-grid.tsx";
+import {EditorVideo} from "@/routes/_app/-components/editor/components/editor-video.tsx";
+import {EditorImage} from "@/routes/_app/-components/editor/components/editor-image.tsx";
 
 export const EDITOR_RESOLVER = {
     EditorCard,
@@ -19,4 +21,6 @@ export const EDITOR_RESOLVER = {
     EditorCardFooterSection,
     EditorGrid,
     EditorGridCell,
+    EditorVideo,
+    EditorImage,
 };
