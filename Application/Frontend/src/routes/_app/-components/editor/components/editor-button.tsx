@@ -5,9 +5,8 @@ import {Controller, useForm} from "react-hook-form";
 import {Field, FieldLabel} from "@/components/ui/field.tsx";
 import {CommonDefaults, CommonEditorSettingsType} from "@/types/editor-settings.ts";
 import {CommonSettings} from "@/routes/_app/-components/editor/blocks/common-settings.tsx";
-import {capitalize} from "@/lib/utils.ts";
+import {capitalize, getButtonSizeText} from "@/lib/utils.ts";
 import {AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion.tsx";
-import {ToggleGroup, ToggleGroupItem} from "@/components/ui/toggle-group.tsx";
 import {Select, SelectContent, SelectItem, SelectTrigger} from "@/components/ui/select.tsx";
 import {Input} from "@/components/ui/input.tsx";
 import ContentEditable from "react-contenteditable";
@@ -123,23 +122,28 @@ export const ButtonSettings = () => {
                                     render={({field, fieldState}) => (
                                         <Field data-invalid={fieldState.invalid}>
                                             <FieldLabel>Size</FieldLabel>
-                                            <ToggleGroup
-                                                type={"single"}
-                                                variant={"outline"}
-                                                orientation={"horizontal"}
+                                            <Select
                                                 value={props.size || "default"}
                                                 onValueChange={value => {
                                                     field.onChange(value);
                                                     setProp((props: EditorButtonProps) => {
-                                                        props.size = value as any;
+                                                        props.size = value as "sm" | "lg" | "default" | "icon";
                                                     });
                                                 }}>
-                                                //TODO: icon size
-                                                <ToggleGroupItem value="sm" id="size-sm">Small</ToggleGroupItem>
-                                                <ToggleGroupItem value="default"
-                                                                 id="size-default">Default</ToggleGroupItem>
-                                                <ToggleGroupItem value="lg" id="size-lg">Large</ToggleGroupItem>
-                                            </ToggleGroup>
+                                                <SelectTrigger>
+                                                    {getButtonSizeText(props.size || "default")}
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectItem value="icon"
+                                                    >Icon</SelectItem>
+                                                    <SelectItem value="sm"
+                                                    >Small</SelectItem>
+                                                    <SelectItem value="default"
+                                                    >Default</SelectItem>
+                                                    <SelectItem value="lg"
+                                                    >Large</SelectItem>
+                                                </SelectContent>
+                                            </Select>
                                         </Field>
                                     )}
                                 />
@@ -154,7 +158,7 @@ export const ButtonSettings = () => {
                                                 onValueChange={value => {
                                                     field.onChange(value);
                                                     setProp((props: EditorButtonProps) => {
-                                                        props.variant = value as any;
+                                                        props.variant = value as "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
                                                     });
                                                 }}>
                                                 <SelectTrigger>
@@ -163,6 +167,10 @@ export const ButtonSettings = () => {
                                                 <SelectContent>
                                                     <SelectItem value="default"
                                                     >Default</SelectItem>
+                                                    <SelectItem value="destructive"
+                                                    >Destructive</SelectItem>
+                                                    <SelectItem value="secondary"
+                                                    >Secondary</SelectItem>
                                                     <SelectItem value="outline"
                                                     >Outline</SelectItem>
                                                     <SelectItem value="ghost"

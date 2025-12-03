@@ -104,13 +104,22 @@ export const EditorVideo = ({
                 );
             }
 
-            const params = new URLSearchParams({
-                ...(autoplay && {autoplay: "1"}),
-                ...(controls && {controls: "1"}),
-                ...(loop && {loop: "1"}),
-                ...(muted && {mute: "1"}),
-            });
-            const fullUrl = `${embedUrl}?${params.toString()}`;
+            const params = new URLSearchParams();
+            if (autoplay) {
+                params.append("autoplay", "1");
+                params.append("mute", "1");
+            }
+            if (!controls) {
+                params.append("controls", "0");
+            }
+            if (loop) {
+                params.append("loop", "1");
+            }
+            if (muted && !autoplay) {
+                params.append("mute", "1");
+            }
+
+            const fullUrl = params.toString() ? `${embedUrl}?${params.toString()}` : embedUrl;
 
             return (
                 <iframe
