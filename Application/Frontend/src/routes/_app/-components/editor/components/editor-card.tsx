@@ -1,77 +1,159 @@
-import {ContainerSettings, EditorContainer} from "./editor-container.tsx";
 import {EditorText} from "./editor-text.tsx";
 import {EditorButton} from "@/routes/_app/-components/editor/components/editor-button.tsx";
 import {Element, Node, useNode} from "@craftjs/core";
 import {ReactNode} from "react";
-import {CommonDefaults} from "@/types/editor-settings.ts";
+import {CommonDefaults, CommonEditorSettingsType} from "@/types/editor-settings.ts";
+import {Card, CardContent, CardFooter, CardHeader} from "@/components/ui/card.tsx";
+import {CommonSettings} from "@/routes/_app/-components/editor/blocks/common-settings.tsx";
+import {useForm} from "react-hook-form";
 
 
-interface EditorCardProps {
-    background: string;
-    padding?: number;
+type EditorCardProps = CommonEditorSettingsType & {
+    className?: string;
 }
 
 interface EditorCardSectionProps {
     children: ReactNode;
 }
 
-export const EditorCardTop = ({children}: EditorCardSectionProps) => {
+// Editable Card Header Section
+export const EditorCardHeaderSection = ({children}: EditorCardSectionProps) => {
     const {connectors: {connect}} = useNode();
     return (
-        <div ref={ref => {
+        <CardHeader ref={ref => {
             connect(ref!);
-        }} className="text-only">
+        }}>
             {children}
-        </div>
+        </CardHeader>
     );
 };
 
-EditorCardTop.craft = {
+EditorCardHeaderSection.craft = {
     rules: {
-        // Only accept Text
+        // Only accept Text components in header
         canMoveIn: (incomingNodes: [Node]) => incomingNodes.every(incomingNode => incomingNode.data.type === EditorText)
     }
 };
 
-export const EditorCardBottom = ({children}: EditorCardSectionProps) => {
+// Editable Card Content Section
+export const EditorCardContentSection = ({children}: EditorCardSectionProps) => {
     const {connectors: {connect}} = useNode();
     return (
-        <div ref={ref => {
+        <CardContent ref={ref => {
             connect(ref!);
         }}>
             {children}
-        </div>
+        </CardContent>
     );
 };
 
-EditorCardBottom.craft = {
+EditorCardContentSection.craft = {
     rules: {
-        // Only accept Buttons
-        canMoveIn: (incomingNodes: [Node]) => incomingNodes.every(incomingNode => incomingNode.data.type === EditorButton)
+        // Accept both Text and Buttons in content
+        canMoveIn: (incomingNodes: [Node]) => incomingNodes.every(incomingNode =>
+            incomingNode.data.type === EditorText || incomingNode.data.type === EditorButton
+        )
+    }
+};
+
+// Editable Card Footer Section
+export const EditorCardFooterSection = ({children}: EditorCardSectionProps) => {
+    const {connectors: {connect}} = useNode();
+    return (
+        <CardFooter ref={ref => {
+            connect(ref!);
+        }}>
+            {children}
+        </CardFooter>
+    );
+};
+
+EditorCardFooterSection.craft = {
+    rules: {
+        // Accept both Text and Buttons in footer
+        canMoveIn: (incomingNodes: [Node]) => incomingNodes.every(incomingNode =>
+            incomingNode.data.type === EditorText || incomingNode.data.type === EditorButton
+        )
     }
 };
 
 
-export const EditorCard = ({background, padding = 20}: EditorCardProps) => {
+export const EditorCard = ({
+                               className,
+                               margin_top = 0,
+                               margin_bottom = 0,
+                               margin_left = 0,
+                               margin_right = 0,
+                               padding_top = 0,
+                               padding_bottom = 0,
+                               padding_left = 0,
+                               padding_right = 0,
+                           }: EditorCardProps) => {
+    const {connectors: {connect, drag}} = useNode();
+
     return (
-        <EditorContainer background={background} padding={padding}>
-            <Element id="text" is={EditorCardTop} canvas> // Canvas Node of type div
-                <EditorText text="Title" fontSize={20}/>
-                <EditorText text="Subtitle" fontSize={15}/>
+        <Card
+            ref={ref => {
+                connect(drag(ref!));
+            }}
+            className={className}
+            style={{
+                marginTop: margin_top ? `${margin_top}px` : undefined,
+                marginBottom: margin_bottom ? `${margin_bottom}px` : undefined,
+                marginLeft: margin_left ? `${margin_left}px` : undefined,
+                marginRight: margin_right ? `${margin_right}px` : undefined,
+                paddingTop: padding_top ? `${padding_top}px` : undefined,
+                paddingBottom: padding_bottom ? `${padding_bottom}px` : undefined,
+                paddingLeft: padding_left ? `${padding_left}px` : undefined,
+                paddingRight: padding_right ? `${padding_right}px` : undefined,
+            }}
+        >
+            <Element id="header" is={EditorCardHeaderSection} canvas>
+                <EditorText text="Card Title" fontSize={20}/>
+                <EditorText text="Card description goes here" fontSize={14}/>
             </Element>
-            <Element id="buttons" is={EditorCardBottom} canvas> // Canvas Node of type div
-                <EditorButton size="sm" variant="default" color="primary">
-                    Learn more
-                </EditorButton>
+            <Element id="content" is={EditorCardContentSection} canvas>
+                <EditorText text="This is the card content area. You can add text and other elements here."
+                            fontSize={14}/>
             </Element>
-        </EditorContainer>
+            <Element id="footer" is={EditorCardFooterSection} canvas>
+                <EditorButton size="sm" variant="default" text="Learn more"/>
+            </Element>
+        </Card>
+    );
+};
+
+const CardSettings = () => {
+    const {
+        actions: {setProp},
+        props
+    } = useNode((node) => ({
+        props: node.data.props as EditorCardProps,
+    }));
+
+    const form = useForm<{ props: EditorCardProps }>({
+        defaultValues: {
+            props,
+        },
+    });
+
+    return (
+        <form>
+            <CommonSettings
+                control={form.control}
+                setProp={setProp}
+                currentProps={props}
+            />
+        </form>
     );
 };
 
 EditorCard.craft = {
-    props: CommonDefaults,
+    props: {
+        className: "",
+        ...CommonDefaults,
+    },
     related: {
-        // Since Card has the same settings as Container, we'll just reuse ContainerSettings
-        settings: ContainerSettings
+        settings: CardSettings
     }
 };
