@@ -12,6 +12,7 @@ import {EditorVideo} from "@/routes/_app/-components/editor/components/editor-vi
 import {EditorImage} from "@/routes/_app/-components/editor/components/editor-image.tsx";
 import {EditorSeparator} from "@/routes/_app/-components/editor/components/editor-separator.tsx";
 import {EditorBadge} from "@/routes/_app/-components/editor/components/editor-badge.tsx";
+import {EditorCalendar} from "@/routes/_app/-components/editor/components/editor-calendar.tsx";
 
 export const EDITOR_RESOLVER = {
     EditorCard,
@@ -27,4 +28,5 @@ export const EDITOR_RESOLVER = {
     EditorImage,
     EditorSeparator,
     EditorBadge,
+    EditorCalendar,
 };

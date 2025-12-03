@@ -4,12 +4,13 @@ import {EditorButton} from "@/routes/_app/-components/editor/components/editor-b
 import {EditorCard} from "@/routes/_app/-components/editor/components/editor-card.tsx";
 import {EditorText} from "@/routes/_app/-components/editor/components/editor-text.tsx";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip.tsx";
-import {CreditCard, Image, LayoutGrid, Minus, RectangleHorizontal, Tag, Type, Video} from "lucide-react";
+import {Calendar, CreditCard, Image, LayoutGrid, Minus, RectangleHorizontal, Tag, Type, Video} from "lucide-react";
 import {EditorGrid} from "@/routes/_app/-components/editor/components/editor-grid.tsx";
 import {EditorImage} from "@/routes/_app/-components/editor/components/editor-image.tsx";
 import {EditorVideo} from "@/routes/_app/-components/editor/components/editor-video.tsx";
 import {EditorSeparator} from "@/routes/_app/-components/editor/components/editor-separator.tsx";
 import {EditorBadge} from "@/routes/_app/-components/editor/components/editor-badge.tsx";
+import {EditorCalendar} from "@/routes/_app/-components/editor/components/editor-calendar.tsx";
 
 const toolboxItems = [
     {
@@ -35,22 +36,27 @@ const toolboxItems = [
     {
         name: "Image",
         icon: Image,
-        component: <EditorImage src={""} alt={""} objectFit={"fill"}/>
+        component: <EditorImage/>
     },
     {
         name: "Video",
         icon: Video,
-        component: <EditorVideo src={""} type={"youtube"} autoplay={false} controls={false} loop={false} muted={false}/>
+        component: <EditorVideo/>
     },
     {
         name: "Separator",
         icon: Minus,
-        component: <EditorSeparator orientation={"horizontal"}/>
+        component: <EditorSeparator/>
     },
     {
         name: "Badge",
         icon: Tag,
-        component: <EditorBadge text={""} variant={"default"}/>
+        component: <EditorBadge/>
+    },
+    {
+        name: "Calendar",
+        icon: Calendar,
+        component: <EditorCalendar/>
     },
 ];
 
