@@ -7,6 +7,7 @@ import {
 import {EditorButton} from "@/routes/_app/-components/editor/components/editor-button.tsx";
 import {EditorText} from "@/routes/_app/-components/editor/components/editor-text.tsx";
 import {EditorContainer} from "@/routes/_app/-components/editor/components/editor-container.tsx";
+import {EditorGrid, EditorGridCell} from "@/routes/_app/-components/editor/components/editor-grid.tsx";
 
 export const EDITOR_RESOLVER = {
     EditorCard,
@@ -15,5 +16,7 @@ export const EDITOR_RESOLVER = {
     EditorContainer,
     EditorCardHeaderSection,
     EditorCardContentSection,
-    EditorCardFooterSection
+    EditorCardFooterSection,
+    EditorGrid,
+    EditorGridCell,
 };

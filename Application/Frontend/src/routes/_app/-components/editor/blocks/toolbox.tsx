@@ -4,13 +4,14 @@ import {EditorButton} from "@/routes/_app/-components/editor/components/editor-b
 import {EditorCard} from "@/routes/_app/-components/editor/components/editor-card.tsx";
 import {EditorText} from "@/routes/_app/-components/editor/components/editor-text.tsx";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip.tsx";
-import {CreditCard, RectangleHorizontal, Type} from "lucide-react";
+import {CreditCard, LayoutGrid, RectangleHorizontal, Type} from "lucide-react";
+import {EditorGrid} from "@/routes/_app/-components/editor/components/editor-grid.tsx";
 
 const toolboxItems = [
     {
         name: "Button",
         icon: RectangleHorizontal,
-        component: <EditorButton size="sm">Click me!</EditorButton>
+        component: <EditorButton size="sm" text="Click me!"/>
     },
     {
         name: "Text",
@@ -20,7 +21,12 @@ const toolboxItems = [
     {
         name: "Card",
         icon: CreditCard,
-        component: <EditorCard background={""}/>
+        component: <EditorCard/>
+    },
+    {
+        name: "Grid",
+        icon: LayoutGrid,
+        component: <EditorGrid direction="column" divisions={2} gap={16}/>
     },
 ];
 

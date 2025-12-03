@@ -134,6 +134,7 @@ export const ButtonSettings = () => {
                                                         props.size = value as any;
                                                     });
                                                 }}>
+                                                //TODO: icon size
                                                 <ToggleGroupItem value="sm" id="size-sm">Small</ToggleGroupItem>
                                                 <ToggleGroupItem value="default"
                                                                  id="size-default">Default</ToggleGroupItem>
