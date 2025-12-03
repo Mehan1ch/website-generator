@@ -1,316 +1,60 @@
-name: Schemas
+name: Avatars
 description: ''
 endpoints:
   -
     custom: []
     httpMethods:
-      - GET
-    uri: api/v1/schema
-    metadata:
-      custom: []
-      groupName: Schemas
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Get Schemas'
-      description: 'Display all schemas with pagination.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters:
-      page:
-        custom: []
-        name: page
-        description: 'The page number.'
-        required: false
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      per_page:
-        custom: []
-        name: per_page
-        description: 'Number of items per page. Defaults to 15. Max 100.'
-        required: false
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanQueryParameters:
-      page: 1
-      per_page: 16
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data":[{"id":"019ad225-ac67-70b2-805b-423a1a7e5c01","name":"eius","description":"Quos velit et fugiat sunt nihil accusantium harum.","state":"draft","content":null,"created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":null},{"id":"019ad225-ac69-73bb-adc8-3e72baabeeb8","name":"modi","description":null,"state":"published","content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":null}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/v1/schema/{schema_id}'
-    metadata:
-      custom: []
-      groupName: Schemas
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Get Schema'
-      description: 'Display the specified schema.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      schema_id:
-        custom: []
-        name: schema_id
-        description: 'The ID of the schema.'
-        required: true
-        example: 019abd86-729a-722e-bbd4-e2a34c4fb0b9
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      schema_id: 019abd86-729a-722e-bbd4-e2a34c4fb0b9
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data":{"id":"019ad225-ac70-71f8-9495-e6298ec25b52","name":"provident","description":"Omnis nostrum aut adipisci quidem nostrum qui commodi.","content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","state":"published","created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":null}}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
       - POST
-    uri: api/v1/schema
+    uri: api/v1/avatar
     metadata:
       custom: []
-      groupName: Schemas
+      groupName: Avatars
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Create Schema'
-      description: 'Store a newly created schema.'
+      title: 'Post avatar'
+      description: "Upload and set the authenticated user's avatar image."
       authenticated: true
       deprecated: false
     headers:
-      Content-Type: application/json
+      Content-Type: multipart/form-data
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      name:
+      avatar:
         custom: []
-        name: name
-        description: 'The name of the schema. Must not be greater than 20 characters.'
+        name: avatar
+        description: 'The avatar image file to upload. Accepted formats are jpeg, jpg, png, gif, and webp. Maximum file size is 2MB. Must be a file. Must be an image. Must not be greater than 2048 kilobytes.'
         required: true
-        example: 'Portfolio Schema'
-        type: string
+        example: null
+        type: file
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      description:
-        custom: []
-        name: description
-        description: 'A brief description of the schema.'
-        required: false
-        example: 'A webpage schema for a personal portfolio site.'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      content:
-        custom: []
-        name: content
-        description: 'The content of the schema, base64 encoded and lz compressed JSON.'
-        required: false
-        example: eJzT0yMAAGTvBe8=
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-    cleanBodyParameters:
-      name: 'Portfolio Schema'
-      description: 'A webpage schema for a personal portfolio site.'
-      content: eJzT0yMAAGTvBe8=
-    fileParameters: []
+    cleanBodyParameters: []
+    fileParameters:
+      avatar: null
     responses:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"019ad225-ac74-71db-8279-4e676a877bc8","name":"architecto","description":null,"content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","state":"draft","created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":null}}'
+        content: '{"message": "Avatar uploaded successfully."}'
         headers: []
         description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: 'api/v1/schema/{schema_id}/publish'
-    metadata:
-      custom: []
-      groupName: Schemas
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Publish Schema'
-      description: 'Publish the specified schema.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      schema_id:
-        custom: []
-        name: schema_id
-        description: 'The ID of the schema.'
-        required: true
-        example: 019abd86-729a-722e-bbd4-e2a34c4fb0b9
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      schema_id: 019abd86-729a-722e-bbd4-e2a34c4fb0b9
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
       -
         custom: []
-        status: 200
-        content: '{"data":{"id":"019ad225-ac78-7103-bfe4-c2c6d31f040a","name":"quos","description":null,"content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","state":"draft","created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":null}}'
+        status: 400
+        content: '{"message": "File does not exist.", "error": "..."}'
         headers: []
         description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - PUT
-    uri: 'api/v1/schema/{schema_id}'
-    metadata:
-      custom: []
-      groupName: Schemas
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Update Schema'
-      description: 'Update the specified schema.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      schema_id:
-        custom: []
-        name: schema_id
-        description: 'The ID of the schema.'
-        required: true
-        example: 019abd86-729a-722e-bbd4-e2a34c4fb0b9
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      schema_id: 019abd86-729a-722e-bbd4-e2a34c4fb0b9
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        custom: []
-        name: name
-        description: 'The name of the schema. Must not be greater than 20 characters.'
-        required: true
-        example: 'Portfolio Schema'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      description:
-        custom: []
-        name: description
-        description: 'A brief description of the schema.'
-        required: false
-        example: 'A webpage schema for a personal portfolio site.'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      content:
-        custom: []
-        name: content
-        description: 'The content of the schema, base64 encoded and lz compressed JSON.'
-        required: false
-        example: eJzT0yMAAGTvBe8=
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-    cleanBodyParameters:
-      name: 'Portfolio Schema'
-      description: 'A webpage schema for a personal portfolio site.'
-      content: eJzT0yMAAGTvBe8=
-    fileParameters: []
-    responses:
       -
         custom: []
-        status: 200
-        content: '{"data":{"id":"019ad225-ac7b-72f6-af74-620babc35ff8","name":"architecto","description":null,"content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","state":"published","created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":null}}'
+        status: 400
+        content: '{"message": "File is too big.", "error": "..."}'
         headers: []
         description: ''
     responseFields: []
@@ -322,34 +66,22 @@ endpoints:
     custom: []
     httpMethods:
       - DELETE
-    uri: 'api/v1/schema/{schema_id}'
+    uri: api/v1/avatar
     metadata:
       custom: []
-      groupName: Schemas
+      groupName: Avatars
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Delete Schema'
-      description: 'Remove the specified schema.'
+      title: 'Delete avatar'
+      description: "Remove the authenticated user's avatar image."
       authenticated: true
       deprecated: false
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters:
-      schema_id:
-        custom: []
-        name: schema_id
-        description: 'The ID of the schema.'
-        required: true
-        example: 019abd86-729a-722e-bbd4-e2a34c4fb0b9
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      schema_id: 019abd86-729a-722e-bbd4-e2a34c4fb0b9
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

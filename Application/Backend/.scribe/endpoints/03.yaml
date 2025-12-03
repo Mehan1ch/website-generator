@@ -1,19 +1,19 @@
-name: Sites
+name: Schemas
 description: ''
 endpoints:
   -
     custom: []
     httpMethods:
       - GET
-    uri: api/v1/site
+    uri: api/v1/schema
     metadata:
       custom: []
-      groupName: Sites
+      groupName: Schemas
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Get Sites'
-      description: 'Display all sites for the authenticated user.'
+      title: 'Get Schemas'
+      description: 'Display all schemas with pagination.'
       authenticated: true
       deprecated: false
     headers:
@@ -36,7 +36,7 @@ endpoints:
       per_page:
         custom: []
         name: per_page
-        description: 'Number of items per page. Defaults to 15.'
+        description: 'Number of items per page. Defaults to 15. Max 100.'
         required: false
         example: 16
         type: integer
@@ -54,7 +54,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":[{"id":"019ad225-ac82-707d-9e46-d9304ebed0d8","name":"Crooks LLC","subdomain":"rempel","description":"Sunt nihil accusantium harum mollitia.","state":"draft","number_of_pages":1,"created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":null},{"id":"019ad225-ac88-7019-a55f-967ebe8fbcbe","name":"Schuster Inc","subdomain":"cormier","description":"Omnis nostrum aut adipisci quidem nostrum qui commodi.","state":"draft","number_of_pages":1,"created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":"2024-12-13 10:30:30"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
+        content: '{"data":[{"id":"019ad225-ac67-70b2-805b-423a1a7e5c01","name":"eius","description":"Quos velit et fugiat sunt nihil accusantium harum.","state":"draft","content":null,"created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":null},{"id":"019ad225-ac69-73bb-adc8-3e72baabeeb8","name":"modi","description":null,"state":"published","content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":null}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
         headers: []
         description: ''
     responseFields: []
@@ -66,34 +66,34 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: 'api/v1/site/{site_id}'
+    uri: 'api/v1/schema/{schema_id}'
     metadata:
       custom: []
-      groupName: Sites
+      groupName: Schemas
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Get Site'
-      description: 'Display the specified site.'
+      title: 'Get Schema'
+      description: 'Display the specified schema.'
       authenticated: true
       deprecated: false
     headers:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      site_id:
+      schema_id:
         custom: []
-        name: site_id
-        description: 'The ID of the site.'
+        name: schema_id
+        description: 'The ID of the schema.'
         required: true
-        example: 019abd86-72ea-7227-8b92-c033c77c3f74
+        example: 019abd86-729a-722e-bbd4-e2a34c4fb0b9
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019abd86-72ea-7227-8b92-c033c77c3f74
+      schema_id: 019abd86-729a-722e-bbd4-e2a34c4fb0b9
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -103,7 +103,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019ad225-ac8e-7258-8614-5a0920da75c3","name":"McLaughlin, Leuschke and Bauch","subdomain":"fritsch","description":null,"user_id":"019abd86-7285-7344-943f-fc8016f4d184","state":"draft","number_of_pages":2,"created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":"2025-04-18 03:32:04"}}'
+        content: '{"data":{"id":"019ad225-ac70-71f8-9495-e6298ec25b52","name":"provident","description":"Omnis nostrum aut adipisci quidem nostrum qui commodi.","content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","state":"published","created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":null}}'
         headers: []
         description: ''
     responseFields: []
@@ -115,15 +115,15 @@ endpoints:
     custom: []
     httpMethods:
       - POST
-    uri: api/v1/site
+    uri: api/v1/schema
     metadata:
       custom: []
-      groupName: Sites
+      groupName: Schemas
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Create Site'
-      description: 'Store a newly created site for the authenticated user.'
+      title: 'Create Schema'
+      description: 'Store a newly created schema.'
       authenticated: true
       deprecated: false
     headers:
@@ -137,20 +137,9 @@ endpoints:
       name:
         custom: []
         name: name
-        description: 'The name of the site. Must not be greater than 255 characters.'
+        description: 'The name of the schema. Must not be greater than 20 characters.'
         required: true
-        example: 'My Personal Site'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      subdomain:
-        custom: []
-        name: subdomain
-        description: 'The subdomain for the site. Must not be greater than 255 characters.'
-        required: true
-        example: mypersonalsite
+        example: 'Portfolio Schema'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -159,24 +148,84 @@ endpoints:
       description:
         custom: []
         name: description
-        description: 'A brief description of the site.'
+        description: 'A brief description of the schema.'
         required: false
-        example: 'This is my personal website where I share my projects and blog posts.'
+        example: 'A webpage schema for a personal portfolio site.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      content:
+        custom: []
+        name: content
+        description: 'The content of the schema, base64 encoded and lz compressed JSON.'
+        required: false
+        example: eJzT0yMAAGTvBe8=
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         deprecated: false
     cleanBodyParameters:
-      name: 'My Personal Site'
-      subdomain: mypersonalsite
-      description: 'This is my personal website where I share my projects and blog posts.'
+      name: 'Portfolio Schema'
+      description: 'A webpage schema for a personal portfolio site.'
+      content: eJzT0yMAAGTvBe8=
     fileParameters: []
     responses:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"019ad225-ad17-71cf-be71-8d196459b631","name":"Bailey Ltd","subdomain":"okuneva","description":null,"user_id":"019abd86-7270-7172-89eb-55a2394e6a7c","state":"draft","number_of_pages":1,"created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":"2024-12-30 12:00:24"}}'
+        content: '{"data":{"id":"019ad225-ac74-71db-8279-4e676a877bc8","name":"architecto","description":null,"content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","state":"draft","created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":null}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/v1/schema/{schema_id}/publish'
+    metadata:
+      custom: []
+      groupName: Schemas
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Publish Schema'
+      description: 'Publish the specified schema.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      schema_id:
+        custom: []
+        name: schema_id
+        description: 'The ID of the schema.'
+        required: true
+        example: 019abd86-729a-722e-bbd4-e2a34c4fb0b9
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      schema_id: 019abd86-729a-722e-bbd4-e2a34c4fb0b9
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":"019ad225-ac78-7103-bfe4-c2c6d31f040a","name":"quos","description":null,"content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","state":"draft","created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":null}}'
         headers: []
         description: ''
     responseFields: []
@@ -188,43 +237,43 @@ endpoints:
     custom: []
     httpMethods:
       - PUT
-    uri: 'api/v1/site/{site_id}'
+    uri: 'api/v1/schema/{schema_id}'
     metadata:
       custom: []
-      groupName: Sites
+      groupName: Schemas
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Update Site'
-      description: 'Update the specified site.'
+      title: 'Update Schema'
+      description: 'Update the specified schema.'
       authenticated: true
       deprecated: false
     headers:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      site_id:
+      schema_id:
         custom: []
-        name: site_id
-        description: 'The ID of the site.'
+        name: schema_id
+        description: 'The ID of the schema.'
         required: true
-        example: 019abd86-72ea-7227-8b92-c033c77c3f74
+        example: 019abd86-729a-722e-bbd4-e2a34c4fb0b9
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019abd86-72ea-7227-8b92-c033c77c3f74
+      schema_id: 019abd86-729a-722e-bbd4-e2a34c4fb0b9
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
       name:
         custom: []
         name: name
-        description: 'The name of the site. Must not be greater than 255 characters.'
+        description: 'The name of the schema. Must not be greater than 20 characters.'
         required: true
-        example: 'My Personal Site'
+        example: 'Portfolio Schema'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -233,23 +282,35 @@ endpoints:
       description:
         custom: []
         name: description
-        description: 'A brief description of the site.'
+        description: 'A brief description of the schema.'
         required: false
-        example: 'This is my personal website where I share my projects and blog posts.'
+        example: 'A webpage schema for a personal portfolio site.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      content:
+        custom: []
+        name: content
+        description: 'The content of the schema, base64 encoded and lz compressed JSON.'
+        required: false
+        example: eJzT0yMAAGTvBe8=
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         deprecated: false
     cleanBodyParameters:
-      name: 'My Personal Site'
-      description: 'This is my personal website where I share my projects and blog posts.'
+      name: 'Portfolio Schema'
+      description: 'A webpage schema for a personal portfolio site.'
+      content: eJzT0yMAAGTvBe8=
     fileParameters: []
     responses:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019ad225-ad1e-7192-be03-84f203a278d8","name":"Bailey Ltd","subdomain":"gulgowski","description":"Nihil accusantium harum mollitia modi deserunt.","user_id":"019abd86-7285-7344-943f-fc8016f4d184","state":"draft","number_of_pages":1,"created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":null}}'
+        content: '{"data":{"id":"019ad225-ac7b-72f6-af74-620babc35ff8","name":"architecto","description":null,"content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","state":"published","created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":null}}'
         headers: []
         description: ''
     responseFields: []
@@ -261,34 +322,34 @@ endpoints:
     custom: []
     httpMethods:
       - DELETE
-    uri: 'api/v1/site/{site_id}'
+    uri: 'api/v1/schema/{schema_id}'
     metadata:
       custom: []
-      groupName: Sites
+      groupName: Schemas
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Delete Site'
-      description: 'Remove the specified site.'
+      title: 'Delete Schema'
+      description: 'Remove the specified schema.'
       authenticated: true
       deprecated: false
     headers:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      site_id:
+      schema_id:
         custom: []
-        name: site_id
-        description: 'The ID of the site.'
+        name: schema_id
+        description: 'The ID of the schema.'
         required: true
-        example: 019abd86-72ea-7227-8b92-c033c77c3f74
+        example: 019abd86-729a-722e-bbd4-e2a34c4fb0b9
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019abd86-72ea-7227-8b92-c033c77c3f74
+      schema_id: 019abd86-729a-722e-bbd4-e2a34c4fb0b9
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\AvatarController;
+use App\Http\Controllers\Api\V1\DashboardController;
 use App\Http\Controllers\Api\V1\DeploymentController;
 use App\Http\Controllers\Api\V1\PageController;
 use App\Http\Controllers\Api\V1\SchemaController;
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 Route::controller(UserController::class)->middleware('auth:sanctum')->group(function () {
     Route::get('/user', 'show');
     Route::delete('/user', 'destroy');
+});
+
+Route::controller(DashboardController::class)->middleware('auth:sanctum')->group(function () {
+    Route::get('/dashboard', 'index');
 });
 
 Route::controller(AvatarController::class)->middleware(['auth:sanctum', 'verified'])->group(function () {

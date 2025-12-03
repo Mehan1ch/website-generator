@@ -1,80 +1,19 @@
-name: Avatars
+name: Dashboard
 description: ''
 endpoints:
   -
     custom: []
     httpMethods:
-      - POST
-    uri: api/v1/avatar
+      - GET
+    uri: api/v1/dashboard
     metadata:
       custom: []
-      groupName: Avatars
+      groupName: Dashboard
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Post avatar'
-      description: "Upload and set the authenticated user's avatar image."
-      authenticated: true
-      deprecated: false
-    headers:
-      Content-Type: multipart/form-data
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      avatar:
-        custom: []
-        name: avatar
-        description: 'The avatar image file to upload. Accepted formats are jpeg, jpg, png, gif, and webp. Maximum file size is 2MB. Must be a file. Must be an image. Must not be greater than 2048 kilobytes.'
-        required: true
-        example: null
-        type: file
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters: []
-    fileParameters:
-      avatar: null
-    responses:
-      -
-        custom: []
-        status: 201
-        content: '{"message": "Avatar uploaded successfully."}'
-        headers: []
-        description: ''
-      -
-        custom: []
-        status: 400
-        content: '{"message": "File does not exist.", "error": "..."}'
-        headers: []
-        description: ''
-      -
-        custom: []
-        status: 400
-        content: '{"message": "File is too big.", "error": "..."}'
-        headers: []
-        description: ''
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - DELETE
-    uri: api/v1/avatar
-    metadata:
-      custom: []
-      groupName: Avatars
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Delete avatar'
-      description: "Remove the authenticated user's avatar image."
+      title: 'Get Dashboard Info'
+      description: 'Display dashboard information including site counts, page counts, and recent activity.'
       authenticated: true
       deprecated: false
     headers:
@@ -90,8 +29,25 @@ endpoints:
     responses:
       -
         custom: []
-        status: 204
-        content: '{}'
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "data": {
+              "total_sites": 5,
+              "published_sites": 3,
+              "draft_sites": 2,
+              "total_pages": 12,
+              "recent_activity": {
+                "name": "My Blog",
+                "updated_at": "2 hours ago"
+              },
+              "latest_site": {
+                "name": "Portfolio",
+                "created_at": "1 day ago"
+              }
+            }
+          }
         headers: []
         description: ''
     responseFields: []

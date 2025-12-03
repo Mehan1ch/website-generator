@@ -1,38 +1,26 @@
-name: Pages
+name: Sites
 description: ''
 endpoints:
   -
     custom: []
     httpMethods:
       - GET
-    uri: 'api/v1/site/{site_id}/page'
+    uri: api/v1/site
     metadata:
       custom: []
-      groupName: Pages
+      groupName: Sites
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Get Pages for a Site'
-      description: 'Display all Pages for the given Site.'
+      title: 'Get Sites'
+      description: 'Display all sites for the authenticated user.'
       authenticated: true
       deprecated: false
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters:
-      site_id:
-        custom: []
-        name: site_id
-        description: 'The ID of the site.'
-        required: true
-        example: 019abd86-72ea-7227-8b92-c033c77c3f74
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      site_id: 019abd86-72ea-7227-8b92-c033c77c3f74
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters:
       page:
         custom: []
@@ -66,7 +54,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":[{"id":"019ad225-ad27-71e4-b091-995c2a46733a","title":"Et animi quos velit et fugiat.","url":"\/accusantium-harum-mollitia-modi-deserunt-aut-ab","created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z"},{"id":"019ad225-ad31-719f-8c48-06438018ec12","title":"Assumenda consequatur ut et sunt quisquam.","url":"\/ut-eaque-alias-ratione-dolores-sed-rem-ea-ut","created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
+        content: '{"data":[{"id":"019ad225-ac82-707d-9e46-d9304ebed0d8","name":"Crooks LLC","subdomain":"rempel","description":"Sunt nihil accusantium harum mollitia.","state":"draft","number_of_pages":1,"created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":null},{"id":"019ad225-ac88-7019-a55f-967ebe8fbcbe","name":"Schuster Inc","subdomain":"cormier","description":"Omnis nostrum aut adipisci quidem nostrum qui commodi.","state":"draft","number_of_pages":1,"created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":"2024-12-13 10:30:30"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
         headers: []
         description: ''
     responseFields: []
@@ -78,15 +66,15 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: 'api/v1/site/{site_id}/page/{page_id}'
+    uri: 'api/v1/site/{site_id}'
     metadata:
       custom: []
-      groupName: Pages
+      groupName: Sites
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Get Page for Site'
-      description: 'Display the specified page for a specific site.'
+      title: 'Get Site'
+      description: 'Display the specified site.'
       authenticated: true
       deprecated: false
     headers:
@@ -104,20 +92,8 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      page_id:
-        custom: []
-        name: page_id
-        description: 'The ID of the page.'
-        required: true
-        example: 019abd86-72ee-728c-a9c4-0c9bbeb2ac08
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
     cleanUrlParameters:
       site_id: 019abd86-72ea-7227-8b92-c033c77c3f74
-      page_id: 019abd86-72ee-728c-a9c4-0c9bbeb2ac08
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -127,16 +103,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019ad225-ad3e-738f-94f2-08b67c43a8ee","title":"Quo culpa laudantium accusamus temporibus.","url":"\/modi-reiciendis-nisi-qui-expedita-atque-modi-ipsam-qui","content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","site_id":"019abd86-7307-7368-a6ab-133ffdf4fe4d","created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z"}}'
-        headers: []
-        description: ''
-      -
-        custom: []
-        status: 404
-        content: |-
-          {
-            "message": "Page not found for the specified site."
-          }
+        content: '{"data":{"id":"019ad225-ac8e-7258-8614-5a0920da75c3","name":"McLaughlin, Leuschke and Bauch","subdomain":"fritsch","description":null,"user_id":"019abd86-7285-7344-943f-fc8016f4d184","state":"draft","number_of_pages":2,"created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":"2025-04-18 03:32:04"}}'
         headers: []
         description: ''
     responseFields: []
@@ -148,92 +115,68 @@ endpoints:
     custom: []
     httpMethods:
       - POST
-    uri: 'api/v1/site/{site_id}/page'
+    uri: api/v1/site
     metadata:
       custom: []
-      groupName: Pages
+      groupName: Sites
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Create Page for Site'
-      description: 'Store a newly created page for a specific site.'
+      title: 'Create Site'
+      description: 'Store a newly created site for the authenticated user.'
       authenticated: true
       deprecated: false
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters:
-      site_id:
-        custom: []
-        name: site_id
-        description: 'The ID of the site.'
-        required: true
-        example: 019abd86-72ea-7227-8b92-c033c77c3f74
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      site_id: 019abd86-72ea-7227-8b92-c033c77c3f74
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      title:
+      name:
         custom: []
-        name: title
-        description: 'The title of the page . . Must not be greater than 255 characters.'
+        name: name
+        description: 'The name of the site. Must not be greater than 255 characters.'
         required: true
-        example: 'My personal homepage'
+        example: 'My Personal Site'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      url:
+      subdomain:
         custom: []
-        name: url
-        description: 'The URL slug for the post . . Must start with one of <code>/</code> Must not be greater than 255 characters.'
+        name: subdomain
+        description: 'The subdomain for the site. Must not be greater than 255 characters.'
         required: true
-        example: 'my - first - post'
+        example: mypersonalsite
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      html:
+      description:
         custom: []
-        name: html
-        description: 'The HTML content of the page base64 encoded and zlib compressed.'
+        name: description
+        description: 'A brief description of the site.'
         required: false
-        example: 'eJzT0yMAAGTvBe8 = '
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      content:
-        custom: []
-        name: content
-        description: 'The content of the schema, base64 encoded and zlib compressed JSON.'
-        required: false
-        example: 'eJzT0yMAAGTvBe8 = '
+        example: 'This is my personal website where I share my projects and blog posts.'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         deprecated: false
     cleanBodyParameters:
-      title: 'My personal homepage'
-      url: 'my - first - post'
-      html: 'eJzT0yMAAGTvBe8 = '
-      content: 'eJzT0yMAAGTvBe8 = '
+      name: 'My Personal Site'
+      subdomain: mypersonalsite
+      description: 'This is my personal website where I share my projects and blog posts.'
     fileParameters: []
     responses:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"019ad225-ad4d-7241-be64-3550afb5f2e7","title":"Eius et animi quos velit et.","url":"\/perspiciatis-quo-omnis-nostrum-aut-adipisci-quidem-nostrum-qui","content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","site_id":"019abd86-72fe-7241-b6e7-36fb25bbb6af","created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z"}}'
+        content: '{"data":{"id":"019ad225-ad17-71cf-be71-8d196459b631","name":"Bailey Ltd","subdomain":"okuneva","description":null,"user_id":"019abd86-7270-7172-89eb-55a2394e6a7c","state":"draft","number_of_pages":1,"created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":"2024-12-30 12:00:24"}}'
         headers: []
         description: ''
     responseFields: []
@@ -245,15 +188,15 @@ endpoints:
     custom: []
     httpMethods:
       - PUT
-    uri: 'api/v1/site/{site_id}/page/{page_id}'
+    uri: 'api/v1/site/{site_id}'
     metadata:
       custom: []
-      groupName: Pages
+      groupName: Sites
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Update Page for Site'
-      description: 'Update the specified page for a specific site.'
+      title: 'Update Site'
+      description: 'Update the specified site.'
       authenticated: true
       deprecated: false
     headers:
@@ -271,87 +214,42 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      page_id:
+    cleanUrlParameters:
+      site_id: 019abd86-72ea-7227-8b92-c033c77c3f74
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
         custom: []
-        name: page_id
-        description: 'The ID of the page.'
+        name: name
+        description: 'The name of the site. Must not be greater than 255 characters.'
         required: true
-        example: 019abd86-72ee-728c-a9c4-0c9bbeb2ac08
+        example: 'My Personal Site'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-    cleanUrlParameters:
-      site_id: 019abd86-72ea-7227-8b92-c033c77c3f74
-      page_id: 019abd86-72ee-728c-a9c4-0c9bbeb2ac08
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      title:
+      description:
         custom: []
-        name: title
-        description: 'The title of the page . . Must not be greater than 255 characters.'
+        name: description
+        description: 'A brief description of the site.'
         required: false
-        example: 'My personal homepage'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      url:
-        custom: []
-        name: url
-        description: 'The URL slug for the post . . Must start with one of <code>/</code> Must not be greater than 255 characters.'
-        required: false
-        example: 'my - first - post'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      content:
-        custom: []
-        name: content
-        description: 'The content of the schema, base64 encoded and zlib compressed JSON.'
-        required: false
-        example: 'eJzT0yMAAGTvBe8 = '
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      html:
-        custom: []
-        name: html
-        description: 'The HTML content of the page base64 encoded and zlib compressed.'
-        required: false
-        example: 'eJzT0yMAAGTvBe8 = '
+        example: 'This is my personal website where I share my projects and blog posts.'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         deprecated: false
     cleanBodyParameters:
-      title: 'My personal homepage'
-      url: 'my - first - post'
-      content: 'eJzT0yMAAGTvBe8 = '
-      html: 'eJzT0yMAAGTvBe8 = '
+      name: 'My Personal Site'
+      description: 'This is my personal website where I share my projects and blog posts.'
     fileParameters: []
     responses:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"019ad225-ad5d-7135-838a-b9a9ba4034b5","title":"Eius et animi quos velit et.","url":"\/incidunt-iure-odit-et-et-modi-ipsum","content":"hZBNSwNBDIb\/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ\/J+POlguViswHVQ2sjDmzgHf2SaY21\/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr\/h\/Vik\/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n","site_id":"019abd86-7327-706c-9ba7-8bfb9b393136","created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z"}}'
-        headers: []
-        description: ''
-      -
-        custom: []
-        status: 404
-        content: |-
-          {
-           "message": "Page not found for the specified site."
-          }
+        content: '{"data":{"id":"019ad225-ad1e-7192-be03-84f203a278d8","name":"Bailey Ltd","subdomain":"gulgowski","description":"Nihil accusantium harum mollitia modi deserunt.","user_id":"019abd86-7285-7344-943f-fc8016f4d184","state":"draft","number_of_pages":1,"created_at":"2025-11-30T00:24:35.000000Z","updated_at":"2025-11-30T00:24:35.000000Z","published_at":null}}'
         headers: []
         description: ''
     responseFields: []
@@ -363,15 +261,15 @@ endpoints:
     custom: []
     httpMethods:
       - DELETE
-    uri: 'api/v1/site/{site_id}/page/{page_id}'
+    uri: 'api/v1/site/{site_id}'
     metadata:
       custom: []
-      groupName: Pages
+      groupName: Sites
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Delete Page for Site'
-      description: 'Remove the specified page from a specific site.'
+      title: 'Delete Site'
+      description: 'Remove the specified site.'
       authenticated: true
       deprecated: false
     headers:
@@ -389,20 +287,8 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      page_id:
-        custom: []
-        name: page_id
-        description: 'The ID of the page.'
-        required: true
-        example: 019abd86-72ee-728c-a9c4-0c9bbeb2ac08
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
     cleanUrlParameters:
       site_id: 019abd86-72ea-7227-8b92-c033c77c3f74
-      page_id: 019abd86-72ee-728c-a9c4-0c9bbeb2ac08
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
