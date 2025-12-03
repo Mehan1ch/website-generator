@@ -36,22 +36,22 @@ const toolboxItems = [
     {
         name: "Image",
         icon: Image,
-        component: <EditorImage/>
+        component: <EditorImage src={""} alt={""} objectFit={"fill"}/>
     },
     {
         name: "Video",
         icon: Video,
-        component: <EditorVideo/>
+        component: <EditorVideo src={""} type={"youtube"} autoplay={false} controls={false} loop={false} muted={false}/>
     },
     {
         name: "Separator",
         icon: Minus,
-        component: <EditorSeparator/>
+        component: <EditorSeparator orientation={"horizontal"}/>
     },
     {
         name: "Badge",
         icon: Tag,
-        component: <EditorBadge/>
+        component: <EditorBadge text={""} variant={"default"}/>
     },
     {
         name: "Calendar",
