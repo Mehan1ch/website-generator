@@ -117,7 +117,9 @@ export const ColorPicker = ({
             <div
                 className={cn('flex size-full flex-col gap-4', className)}
                 {...props}
-            />
+            >
+                {props.children}
+            </div>
         </ColorPickerContext.Provider>
     );
 };

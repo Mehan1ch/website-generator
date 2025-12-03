@@ -59,7 +59,6 @@ export const PageDesigner = ({content, onSave}: PageDesignerProps) => {
         <div className={cn(!isFullscreen && "-m-4")}>
             <Editor resolver={EDITOR_RESOLVER} onRender={RenderNode}>
                 <SidebarProvider name={"Editor"}>
-
                     <SidebarInset>
                         <div className={cn(isFullscreen && "fixed inset-0 z-50 bg-background flex flex-col")}>
                             <Topbar

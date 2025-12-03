@@ -231,16 +231,17 @@ export function CommonSettings<T extends FieldValues>({
                         <Controller
                             control={control}
                             name={"props.background" as Path<T>}
-                            render={({fieldState}) => (
+                            render={({field, fieldState}) => (
                                 <Field data-invalid={fieldState.invalid}>
                                     <FieldLabel htmlFor="props.background">Color</FieldLabel>
                                     <ColorPickerBlock
-                                        color={currentProps.background || ""}
-                                        onChange={(color) =>
+                                        color={currentProps.background || "#ffffff"}
+                                        onChange={(color) => {
+                                            field.onChange(color);
                                             setProp((props: any) => {
-                                                props.background = color.toString();
-                                            })
-                                        }
+                                                props.background = color;
+                                            });
+                                        }}
                                     />
                                 </Field>
                             )}

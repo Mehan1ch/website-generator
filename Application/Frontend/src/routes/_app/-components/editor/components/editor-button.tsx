@@ -5,7 +5,7 @@ import {Controller, useForm} from "react-hook-form";
 import {Field, FieldLabel} from "@/components/ui/field.tsx";
 import {CommonDefaults, CommonEditorSettingsType} from "@/types/editor-settings.ts";
 import {CommonSettings} from "@/routes/_app/-components/editor/blocks/common-settings.tsx";
-import {capitalize, cn} from "@/lib/utils.ts";
+import {capitalize} from "@/lib/utils.ts";
 import {AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion.tsx";
 import {ToggleGroup, ToggleGroupItem} from "@/components/ui/toggle-group.tsx";
 import {Select, SelectContent, SelectItem, SelectTrigger} from "@/components/ui/select.tsx";
@@ -33,12 +33,15 @@ export const EditorButton = ({
                                  background = "",
                              }: EditorButtonProps) => {
     const {connectors: {connect, drag}} = useNode();
+
     return (
-        <div
+        <Button
             ref={ref => {
                 connect(drag(ref!));
             }}
-            className={cn("inline-block")}
+            size={size}
+            variant={variant}
+            color={color}
             style={{
                 marginTop: margin_top ? `${margin_top}px` : undefined,
                 marginBottom: margin_bottom ? `${margin_bottom}px` : undefined,
@@ -48,13 +51,11 @@ export const EditorButton = ({
                 paddingBottom: padding_bottom ? `${padding_bottom}px` : undefined,
                 paddingLeft: padding_left ? `${padding_left}px` : undefined,
                 paddingRight: padding_right ? `${padding_right}px` : undefined,
-                backgroundColor: background || undefined,
+                backgroundColor: background && background !== "#ffffff" ? background : undefined,
             }}
         >
-            <Button size={size} variant={variant} color={color}>
-                {children}
-            </Button>
-        </div>
+            {children}
+        </Button>
     );
 };
 

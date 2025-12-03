@@ -75,27 +75,13 @@ export const EditorText = ({
     }, [hasSelectedNode]);
 
     return (
-        <div
-            ref={ref => {
-                connect(drag(ref!));
-            }}
-            onClick={() => {
-                if (enabled) setEditable(true);
-            }}
-            className="w-full max-w-full"
-            style={{
-                marginTop: `${margin_top}px`,
-                marginBottom: `${margin_bottom}px`,
-                marginLeft: `${margin_left}px`,
-                marginRight: `${margin_right}px`,
-                paddingTop: `${padding_top}px`,
-                paddingBottom: `${padding_bottom}px`,
-                paddingLeft: `${padding_left}px`,
-                paddingRight: `${padding_right}px`,
-                background: background || undefined,
-            }}
-        >
+        <div ref={ref => {
+            connect(drag(ref!));
+        }}>
             <ContentEditable
+                onClick={() => {
+                    if (enabled) setEditable(true);
+                }}
                 disabled={!editable}
                 html={text}
                 onChange={e =>
@@ -105,6 +91,15 @@ export const EditorText = ({
                 }
                 tagName="p"
                 style={{
+                    marginTop: margin_top ? `${margin_top}px` : undefined,
+                    marginBottom: margin_bottom ? `${margin_bottom}px` : undefined,
+                    marginLeft: margin_left ? `${margin_left}px` : undefined,
+                    marginRight: margin_right ? `${margin_right}px` : undefined,
+                    paddingTop: padding_top ? `${padding_top}px` : undefined,
+                    paddingBottom: padding_bottom ? `${padding_bottom}px` : undefined,
+                    paddingLeft: padding_left ? `${padding_left}px` : undefined,
+                    paddingRight: padding_right ? `${padding_right}px` : undefined,
+                    backgroundColor: background && background !== "#ffffff" ? background : undefined,
                     fontSize: `${fontSize}px`,
                     textAlign,
                     fontWeight,

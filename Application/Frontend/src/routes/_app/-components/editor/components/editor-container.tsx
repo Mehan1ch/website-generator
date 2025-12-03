@@ -26,7 +26,7 @@ export const EditorContainer = (props: EditorContainerProps) => {
                 paddingBottom: props.padding_bottom ? `${props.padding_bottom}px` : undefined,
                 paddingLeft: props.padding_left ? `${props.padding_left}px` : undefined,
                 paddingRight: props.padding_right ? `${props.padding_right}px` : undefined,
-                backgroundColor: props.background || undefined,
+                backgroundColor: props.background && props.background !== "#ffffff" ? props.background : undefined,
             }}
         >
             {props?.children}
@@ -46,7 +46,7 @@ export const ContainerSettings = () => {
     });
 
     return (
-        <form className="flex flex-col gap-4 h-full">
+        <form className="flex flex-col gap-4">
             <CommonSettings
                 control={form.control}
                 setProp={setProp}
