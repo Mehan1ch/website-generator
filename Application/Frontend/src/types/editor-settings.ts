@@ -50,7 +50,6 @@ export const CommonEditorSettings = z.object({
 export const CommonDefaults = {
     ...MarginDefaults,
     ...PaddingDefaults,
-    ...BackgroundDefaults,
 } as const;
 
 export type CommonEditorSettingsType = z.infer<typeof CommonEditorSettings>;

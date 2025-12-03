@@ -1,12 +1,12 @@
-import * as React from "react";
 import {useNode} from "@craftjs/core";
 import {useForm} from "react-hook-form";
 import {CommonDefaults, CommonEditorSettingsType} from "@/types/editor-settings.ts";
 import {CommonSettings} from "@/routes/_app/-components/editor/blocks/common-settings.tsx";
 import {cn} from "@/lib/utils.ts";
+import {ReactNode} from "react";
 
 type EditorContainerProps = CommonEditorSettingsType & {
-    children?: React.ReactNode;
+    children?: ReactNode;
 }
 
 export const EditorContainer = (props: EditorContainerProps) => {
@@ -26,7 +26,6 @@ export const EditorContainer = (props: EditorContainerProps) => {
                 paddingBottom: props.padding_bottom ? `${props.padding_bottom}px` : undefined,
                 paddingLeft: props.padding_left ? `${props.padding_left}px` : undefined,
                 paddingRight: props.padding_right ? `${props.padding_right}px` : undefined,
-                backgroundColor: props.background && props.background !== "#ffffff" ? props.background : undefined,
             }}
         >
             {props?.children}

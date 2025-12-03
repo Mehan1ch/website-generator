@@ -41,7 +41,6 @@ export const EditorText = ({
                                padding_bottom = 0,
                                padding_left = 0,
                                padding_right = 0,
-                               background = "",
                            }: EditorTextProps) => {
     const {
         connectors: {connect, drag},
@@ -99,7 +98,6 @@ export const EditorText = ({
                     paddingBottom: padding_bottom ? `${padding_bottom}px` : undefined,
                     paddingLeft: padding_left ? `${padding_left}px` : undefined,
                     paddingRight: padding_right ? `${padding_right}px` : undefined,
-                    backgroundColor: background && background !== "#ffffff" ? background : undefined,
                     fontSize: `${fontSize}px`,
                     textAlign,
                     fontWeight,

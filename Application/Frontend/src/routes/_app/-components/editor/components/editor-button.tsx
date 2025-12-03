@@ -13,14 +13,12 @@ import {Select, SelectContent, SelectItem, SelectTrigger} from "@/components/ui/
 type EditorButtonProps = CommonEditorSettingsType & {
     size: "sm" | "lg" | "default" | "icon" | null | undefined;
     variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
-    color?: string;
     children: React.ReactNode;
 }
 
 export const EditorButton = ({
                                  size,
                                  variant = "default",
-                                 color,
                                  children,
                                  margin_top = 0,
                                  margin_bottom = 0,
@@ -30,7 +28,6 @@ export const EditorButton = ({
                                  padding_bottom = 0,
                                  padding_left = 0,
                                  padding_right = 0,
-                                 background = "",
                              }: EditorButtonProps) => {
     const {connectors: {connect, drag}} = useNode();
 
@@ -41,7 +38,6 @@ export const EditorButton = ({
             }}
             size={size}
             variant={variant}
-            color={color}
             style={{
                 marginTop: margin_top ? `${margin_top}px` : undefined,
                 marginBottom: margin_bottom ? `${margin_bottom}px` : undefined,
@@ -51,7 +47,6 @@ export const EditorButton = ({
                 paddingBottom: padding_bottom ? `${padding_bottom}px` : undefined,
                 paddingLeft: padding_left ? `${padding_left}px` : undefined,
                 paddingRight: padding_right ? `${padding_right}px` : undefined,
-                backgroundColor: background && background !== "#ffffff" ? background : undefined,
             }}
         >
             {children}
@@ -150,7 +145,6 @@ EditorButton.craft = {
     props: {
         size: "default",
         variant: "default",
-        color: "primary",
         children: "Click me",
         ...CommonDefaults,
     },
