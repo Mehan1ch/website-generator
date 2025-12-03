@@ -108,6 +108,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/dashboard": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Dashboard Info
+         * @description Display dashboard information including site counts, page counts, and recent activity.
+         */
+        get: operations["getDashboardInfo"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/site/{site_id}/deployment": {
         parameters: {
             query?: never;
@@ -824,6 +844,50 @@ export interface operations {
                 };
                 content: {
                     "application/json": Record<string, never> | null;
+                };
+            };
+        };
+    };
+    getDashboardInfo: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @example success */
+                        status?: string;
+                        data?: {
+                            /** @example 5 */
+                            total_sites?: number;
+                            /** @example 3 */
+                            published_sites?: number;
+                            /** @example 2 */
+                            draft_sites?: number;
+                            /** @example 12 */
+                            total_pages?: number;
+                            recent_activity?: {
+                                /** @example My Blog */
+                                name?: string;
+                                /** @example 2 hours ago */
+                                updated_at?: string;
+                            };
+                            latest_site?: {
+                                /** @example Portfolio */
+                                name?: string;
+                                /** @example 1 day ago */
+                                created_at?: string;
+                            };
+                        };
+                    };
                 };
             };
         };
