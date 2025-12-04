@@ -84,7 +84,7 @@ class Site extends Model implements HasStatesContract
             }
         });
 
-        static::deleting(function ($site) {
+        static::deleting(function (Site $site) {
             $site->pages()->delete();
         });
     }

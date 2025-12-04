@@ -32,7 +32,6 @@ endpoints:
         status: 200
         content: |-
           {
-            "status": "success",
             "data": {
               "total_sites": 5,
               "published_sites": 3,

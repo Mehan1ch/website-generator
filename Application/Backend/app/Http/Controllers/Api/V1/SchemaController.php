@@ -36,11 +36,10 @@ class SchemaController extends Controller
     {
         $perPage = (int)$request->query('per_page', 15);
         $perPage = max(1, min($perPage, 100));
-        $user = $request->user();
-        if ($user->hasAnyRole(Roles::ADMIN, Roles::SUPER_ADMIN)) {
+        if (auth()->user()->hasAnyRole(Roles::ADMIN, Roles::SUPER_ADMIN)) {
             return new SchemaCollection(Schema::query()->paginate($perPage));
         }
-        return new SchemaCollection(Schema::query()->where("state", "!=", Draft::$name)->paginate($perPage));
+        return new SchemaCollection(Schema::whereNotState('state', Draft::class)->paginate($perPage));
     }
 
     /**

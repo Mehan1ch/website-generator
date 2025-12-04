@@ -22,8 +22,8 @@ class HTMLSanitizerService
                 ->allowSafeElements()
                 ->allowStaticElements()
                 ->allowRelativeLinks()
-                ->allowMediaSchemes(['https', 'http'])
-                ->allowRelativeMedias();
+                ->allowLinkSchemes(['//', 'http', 'https'])
+                ->allowElement('iframe', '*');
         }
         $this->sanitizer = new HtmlSanitizer($this->config);
 

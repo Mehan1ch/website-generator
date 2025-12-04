@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Feature\Controllers\Api\V1;
 
 use App\Models\Page;
 use App\Models\Site;
@@ -12,7 +12,9 @@ class DashboardTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp(): void
+    protected User $user;
+
+    protected function setUp(): void
     {
         parent::setUp();
         $this->user = User::factory()->has(
@@ -25,14 +27,14 @@ class DashboardTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function test_example(): void
+    public function test_user_can_get_dashboard_information(): void
     {
-        $response = $this->actingAs($this->user)->get("/api/v1/dashboard");
+        $response = $this->actingAs($this->user)->getJson('/api/v1/dashboard');
 
         $response->assertJson([
             'data' => [
                 'total_sites' => 5,
-                'total_pages' => 20, //3*5 + 1*5 (Home page for each site)
+                'total_pages' => 20, // 3*5 + 1*5 (Home page for each site)
             ],
         ]);
 

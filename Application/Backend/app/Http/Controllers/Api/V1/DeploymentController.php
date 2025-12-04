@@ -43,9 +43,9 @@ class DeploymentController extends Controller
     {
         $response = $this->deploymentService->store($site);
         if ($response instanceof SiteDeploymentError) {
-            return response($response, 400);
+            return response()->json($response, 400);
         }
-        return response($response, 201);
+        return response()->json($response, 201);
     }
 
 
@@ -54,11 +54,13 @@ class DeploymentController extends Controller
      *
      * Get the deployment status of the specified site.
      * @response 200 {
-     *     apiVersion: "1.0",
-     *     kind: "deployment",
-     *     metadata: {}
-     *     spec: {}
-     *     status: {}
+     *     "message": {
+     *          apiVersion: "1.0",
+     *          kind: "deployment",
+     *          metadata: {},
+     *          spec: {},
+     *          status: {},
+     *     }
      * }
      * @responsse 400 {
      *     "message": "Failed to fetch deployment.",
@@ -69,9 +71,9 @@ class DeploymentController extends Controller
     {
         $response = $this->deploymentService->show($site);
         if ($response instanceof SiteDeploymentError) {
-            return response($response, 400);
+            return response()->json($response, 400);
         }
-        return response($response, 200);
+        return response()->json($response);
     }
 
     /**
@@ -79,7 +81,7 @@ class DeploymentController extends Controller
      *
      * Update the deployment of the specified site.
      * @response 200 {
-     *     "message": "Deployment updated successfully.",
+     *     "message": "Deployment updated successfully."
      * }
      * @responsse 400 {
      *     "message": "Failed to update deployment.",
@@ -90,9 +92,9 @@ class DeploymentController extends Controller
     {
         $response = $this->deploymentService->update($site);
         if ($response instanceof SiteDeploymentError) {
-            return response($response, 400);
+            return response()->json($response, 400);
         }
-        return response($response, 200);
+        return response()->json($response);
     }
 
     /**
@@ -111,9 +113,9 @@ class DeploymentController extends Controller
     {
         $response = $this->deploymentService->destroy($site);
         if ($response instanceof SiteDeploymentError) {
-            return response($response, 400);
+            return response()->json($response, 400);
         }
-        return response($response, 204);
+        return response()->json($response, 204);
     }
 
     /**
@@ -132,8 +134,8 @@ class DeploymentController extends Controller
     {
         $response = $this->deploymentService->restart($site);
         if ($response instanceof SiteDeploymentError) {
-            return response($response, 400);
+            return response()->json($response, 400);
         }
-        return response($response, 200);
+        return response()->json($response);
     }
 }

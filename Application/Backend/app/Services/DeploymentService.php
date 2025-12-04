@@ -148,7 +148,7 @@ class DeploymentService
         }
 
         if (!$site->pages->every(function (Page $page) {
-            return !empty($page->staticHTML) || !empty($page->content);
+            return !empty($page->staticHTML) && !empty($page->content);
         })) {
             return new SiteDeploymentError((object)[
                 'message' => 'One or more pages are empty.',

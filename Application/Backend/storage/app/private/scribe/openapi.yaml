@@ -319,7 +319,6 @@ paths:
               schema:
                 type: object
                 example:
-                  status: success
                   data:
                     total_sites: 5
                     published_sites: 3
@@ -332,9 +331,6 @@ paths:
                       name: Portfolio
                       created_at: '1 day ago'
                 properties:
-                  status:
-                    type: string
-                    example: success
                   data:
                     type: object
                     properties:
@@ -383,7 +379,7 @@ paths:
             text/plain:
               schema:
                 type: string
-                example: "{\n    apiVersion: \"1.0\",\n    kind: \"deployment\",\n    metadata: {}\n    spec: {}\n    status: {}\n}"
+                example: "{\n    \"message\": {\n         apiVersion: \"1.0\",\n         kind: \"deployment\",\n         metadata: {},\n         spec: {},\n         status: {},\n    }\n}"
       tags:
         - Deployments
     post:
@@ -410,10 +406,15 @@ paths:
         200:
           description: ''
           content:
-            text/plain:
+            application/json:
               schema:
-                type: string
-                example: "{\n    \"message\": \"Deployment updated successfully.\",\n}"
+                type: object
+                example:
+                  message: 'Deployment updated successfully.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Deployment updated successfully.'
       tags:
         - Deployments
     delete:
@@ -436,7 +437,7 @@ paths:
         in: path
         name: site_id
         description: 'The ID of the site.'
-        example: 019abd86-72ea-7227-8b92-c033c77c3f74
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
         required: true
         schema:
           type: string
@@ -461,7 +462,7 @@ paths:
         in: path
         name: site_id
         description: 'The ID of the site.'
-        example: 019abd86-72ea-7227-8b92-c033c77c3f74
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
         required: true
         schema:
           type: string
@@ -570,17 +571,17 @@ paths:
                 example:
                   data:
                     -
-                      id: 019ad225-ad27-71e4-b091-995c2a46733a
+                      id: 019aeb4a-deb8-70b2-835b-0d0022d54256
                       title: 'Et animi quos velit et fugiat.'
                       url: /accusantium-harum-mollitia-modi-deserunt-aut-ab
-                      created_at: '2025-11-30T00:24:35.000000Z'
-                      updated_at: '2025-11-30T00:24:35.000000Z'
+                      created_at: '2025-12-04T21:35:43.000000Z'
+                      updated_at: '2025-12-04T21:35:43.000000Z'
                     -
-                      id: 019ad225-ad31-719f-8c48-06438018ec12
+                      id: 019aeb4a-dec6-71a7-8645-af80883effd3
                       title: 'Assumenda consequatur ut et sunt quisquam.'
                       url: /ut-eaque-alias-ratione-dolores-sed-rem-ea-ut
-                      created_at: '2025-11-30T00:24:35.000000Z'
-                      updated_at: '2025-11-30T00:24:35.000000Z'
+                      created_at: '2025-12-04T21:35:43.000000Z'
+                      updated_at: '2025-12-04T21:35:43.000000Z'
                   links:
                     first: '/?page=1'
                     last: '/?page=1'
@@ -615,23 +616,23 @@ paths:
                     type: array
                     example:
                       -
-                        id: 019ad225-ad27-71e4-b091-995c2a46733a
+                        id: 019aeb4a-deb8-70b2-835b-0d0022d54256
                         title: 'Et animi quos velit et fugiat.'
                         url: /accusantium-harum-mollitia-modi-deserunt-aut-ab
-                        created_at: '2025-11-30T00:24:35.000000Z'
-                        updated_at: '2025-11-30T00:24:35.000000Z'
+                        created_at: '2025-12-04T21:35:43.000000Z'
+                        updated_at: '2025-12-04T21:35:43.000000Z'
                       -
-                        id: 019ad225-ad31-719f-8c48-06438018ec12
+                        id: 019aeb4a-dec6-71a7-8645-af80883effd3
                         title: 'Assumenda consequatur ut et sunt quisquam.'
                         url: /ut-eaque-alias-ratione-dolores-sed-rem-ea-ut
-                        created_at: '2025-11-30T00:24:35.000000Z'
-                        updated_at: '2025-11-30T00:24:35.000000Z'
+                        created_at: '2025-12-04T21:35:43.000000Z'
+                        updated_at: '2025-12-04T21:35:43.000000Z'
                     items:
                       type: object
                       properties:
                         id:
                           type: string
-                          example: 019ad225-ad27-71e4-b091-995c2a46733a
+                          example: 019aeb4a-deb8-70b2-835b-0d0022d54256
                         title:
                           type: string
                           example: 'Et animi quos velit et fugiat.'
@@ -640,10 +641,10 @@ paths:
                           example: /accusantium-harum-mollitia-modi-deserunt-aut-ab
                         created_at:
                           type: string
-                          example: '2025-11-30T00:24:35.000000Z'
+                          example: '2025-12-04T21:35:43.000000Z'
                         updated_at:
                           type: string
-                          example: '2025-11-30T00:24:35.000000Z'
+                          example: '2025-12-04T21:35:43.000000Z'
                   links:
                     type: object
                     properties:
@@ -732,20 +733,20 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 019ad225-ad4d-7241-be64-3550afb5f2e7
+                    id: 019aeb4a-def5-7389-a587-ba952f79e8fb
                     title: 'Eius et animi quos velit et.'
                     url: /perspiciatis-quo-omnis-nostrum-aut-adipisci-quidem-nostrum-qui
                     content: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
-                    site_id: 019abd86-72fe-7241-b6e7-36fb25bbb6af
-                    created_at: '2025-11-30T00:24:35.000000Z'
-                    updated_at: '2025-11-30T00:24:35.000000Z'
+                    site_id: 019ae94a-1e83-723b-9bb1-0489961f8635
+                    created_at: '2025-12-04T21:35:43.000000Z'
+                    updated_at: '2025-12-04T21:35:43.000000Z'
                 properties:
                   data:
                     type: object
                     properties:
                       id:
                         type: string
-                        example: 019ad225-ad4d-7241-be64-3550afb5f2e7
+                        example: 019aeb4a-def5-7389-a587-ba952f79e8fb
                       title:
                         type: string
                         example: 'Eius et animi quos velit et.'
@@ -757,13 +758,13 @@ paths:
                         example: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
                       site_id:
                         type: string
-                        example: 019abd86-72fe-7241-b6e7-36fb25bbb6af
+                        example: 019ae94a-1e83-723b-9bb1-0489961f8635
                       created_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
                       updated_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
       tags:
         - Pages
       requestBody:
@@ -799,7 +800,7 @@ paths:
         in: path
         name: site_id
         description: 'The ID of the site.'
-        example: 019abd86-72ea-7227-8b92-c033c77c3f74
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
         required: true
         schema:
           type: string
@@ -818,20 +819,20 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 019ad225-ad3e-738f-94f2-08b67c43a8ee
+                    id: 019aeb4a-ded7-7213-b0ef-7bad2f8469e8
                     title: 'Quo culpa laudantium accusamus temporibus.'
                     url: /modi-reiciendis-nisi-qui-expedita-atque-modi-ipsam-qui
                     content: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
-                    site_id: 019abd86-7307-7368-a6ab-133ffdf4fe4d
-                    created_at: '2025-11-30T00:24:35.000000Z'
-                    updated_at: '2025-11-30T00:24:35.000000Z'
+                    site_id: 019ae94a-1e9b-7398-83d4-ca212b4ff643
+                    created_at: '2025-12-04T21:35:43.000000Z'
+                    updated_at: '2025-12-04T21:35:43.000000Z'
                 properties:
                   data:
                     type: object
                     properties:
                       id:
                         type: string
-                        example: 019ad225-ad3e-738f-94f2-08b67c43a8ee
+                        example: 019aeb4a-ded7-7213-b0ef-7bad2f8469e8
                       title:
                         type: string
                         example: 'Quo culpa laudantium accusamus temporibus.'
@@ -843,13 +844,13 @@ paths:
                         example: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
                       site_id:
                         type: string
-                        example: 019abd86-7307-7368-a6ab-133ffdf4fe4d
+                        example: 019ae94a-1e9b-7398-83d4-ca212b4ff643
                       created_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
                       updated_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
         404:
           description: ''
           content:
@@ -878,20 +879,20 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 019ad225-ad5d-7135-838a-b9a9ba4034b5
+                    id: 019aeb4a-df10-73c5-b9f6-24a0fb6ab6d4
                     title: 'Eius et animi quos velit et.'
                     url: /incidunt-iure-odit-et-et-modi-ipsum
                     content: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
-                    site_id: 019abd86-7327-706c-9ba7-8bfb9b393136
-                    created_at: '2025-11-30T00:24:35.000000Z'
-                    updated_at: '2025-11-30T00:24:35.000000Z'
+                    site_id: 019ae94a-1e91-7037-924d-41fd6044e06d
+                    created_at: '2025-12-04T21:35:43.000000Z'
+                    updated_at: '2025-12-04T21:35:43.000000Z'
                 properties:
                   data:
                     type: object
                     properties:
                       id:
                         type: string
-                        example: 019ad225-ad5d-7135-838a-b9a9ba4034b5
+                        example: 019aeb4a-df10-73c5-b9f6-24a0fb6ab6d4
                       title:
                         type: string
                         example: 'Eius et animi quos velit et.'
@@ -903,13 +904,13 @@ paths:
                         example: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
                       site_id:
                         type: string
-                        example: 019abd86-7327-706c-9ba7-8bfb9b393136
+                        example: 019ae94a-1e91-7037-924d-41fd6044e06d
                       created_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
                       updated_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
         404:
           description: ''
           content:
@@ -972,7 +973,7 @@ paths:
         in: path
         name: site_id
         description: 'The ID of the site.'
-        example: 019abd86-72ea-7227-8b92-c033c77c3f74
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
         required: true
         schema:
           type: string
@@ -980,7 +981,7 @@ paths:
         in: path
         name: page_id
         description: 'The ID of the page.'
-        example: 019abd86-72ee-728c-a9c4-0c9bbeb2ac08
+        example: 019ae94a-1e5c-70b1-8858-8ebb563ea071
         required: true
         schema:
           type: string
@@ -1221,22 +1222,22 @@ paths:
                 example:
                   data:
                     -
-                      id: 019ad225-ac67-70b2-805b-423a1a7e5c01
+                      id: 019aeb4a-dd4e-7096-8db8-3f621d03e0e8
                       name: eius
                       description: 'Quos velit et fugiat sunt nihil accusantium harum.'
                       state: draft
                       content: null
-                      created_at: '2025-11-30T00:24:35.000000Z'
-                      updated_at: '2025-11-30T00:24:35.000000Z'
+                      created_at: '2025-12-04T21:35:43.000000Z'
+                      updated_at: '2025-12-04T21:35:43.000000Z'
                       published_at: null
                     -
-                      id: 019ad225-ac69-73bb-adc8-3e72baabeeb8
+                      id: 019aeb4a-dd55-7088-b0ab-1543236eff64
                       name: modi
                       description: null
-                      state: published
+                      state: draft
                       content: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
-                      created_at: '2025-11-30T00:24:35.000000Z'
-                      updated_at: '2025-11-30T00:24:35.000000Z'
+                      created_at: '2025-12-04T21:35:43.000000Z'
+                      updated_at: '2025-12-04T21:35:43.000000Z'
                       published_at: null
                   links:
                     first: '/?page=1'
@@ -1272,29 +1273,29 @@ paths:
                     type: array
                     example:
                       -
-                        id: 019ad225-ac67-70b2-805b-423a1a7e5c01
+                        id: 019aeb4a-dd4e-7096-8db8-3f621d03e0e8
                         name: eius
                         description: 'Quos velit et fugiat sunt nihil accusantium harum.'
                         state: draft
                         content: null
-                        created_at: '2025-11-30T00:24:35.000000Z'
-                        updated_at: '2025-11-30T00:24:35.000000Z'
+                        created_at: '2025-12-04T21:35:43.000000Z'
+                        updated_at: '2025-12-04T21:35:43.000000Z'
                         published_at: null
                       -
-                        id: 019ad225-ac69-73bb-adc8-3e72baabeeb8
+                        id: 019aeb4a-dd55-7088-b0ab-1543236eff64
                         name: modi
                         description: null
-                        state: published
+                        state: draft
                         content: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
-                        created_at: '2025-11-30T00:24:35.000000Z'
-                        updated_at: '2025-11-30T00:24:35.000000Z'
+                        created_at: '2025-12-04T21:35:43.000000Z'
+                        updated_at: '2025-12-04T21:35:43.000000Z'
                         published_at: null
                     items:
                       type: object
                       properties:
                         id:
                           type: string
-                          example: 019ad225-ac67-70b2-805b-423a1a7e5c01
+                          example: 019aeb4a-dd4e-7096-8db8-3f621d03e0e8
                         name:
                           type: string
                           example: eius
@@ -1309,10 +1310,10 @@ paths:
                           example: null
                         created_at:
                           type: string
-                          example: '2025-11-30T00:24:35.000000Z'
+                          example: '2025-12-04T21:35:43.000000Z'
                         updated_at:
                           type: string
-                          example: '2025-11-30T00:24:35.000000Z'
+                          example: '2025-12-04T21:35:43.000000Z'
                         published_at:
                           type: string
                           example: null
@@ -1404,13 +1405,13 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 019ad225-ac74-71db-8279-4e676a877bc8
+                    id: 019aeb4a-dd6d-701f-b07a-615bc2e5ad6e
                     name: architecto
                     description: null
                     content: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
                     state: draft
-                    created_at: '2025-11-30T00:24:35.000000Z'
-                    updated_at: '2025-11-30T00:24:35.000000Z'
+                    created_at: '2025-12-04T21:35:43.000000Z'
+                    updated_at: '2025-12-04T21:35:43.000000Z'
                     published_at: null
                 properties:
                   data:
@@ -1418,7 +1419,7 @@ paths:
                     properties:
                       id:
                         type: string
-                        example: 019ad225-ac74-71db-8279-4e676a877bc8
+                        example: 019aeb4a-dd6d-701f-b07a-615bc2e5ad6e
                       name:
                         type: string
                         example: architecto
@@ -1433,10 +1434,10 @@ paths:
                         example: draft
                       created_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
                       updated_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
                       published_at:
                         type: string
                         example: null
@@ -1480,13 +1481,13 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 019ad225-ac70-71f8-9495-e6298ec25b52
+                    id: 019aeb4a-dd61-734b-842f-494742719d35
                     name: provident
                     description: 'Omnis nostrum aut adipisci quidem nostrum qui commodi.'
                     content: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
-                    state: published
-                    created_at: '2025-11-30T00:24:35.000000Z'
-                    updated_at: '2025-11-30T00:24:35.000000Z'
+                    state: draft
+                    created_at: '2025-12-04T21:35:43.000000Z'
+                    updated_at: '2025-12-04T21:35:43.000000Z'
                     published_at: null
                 properties:
                   data:
@@ -1494,7 +1495,7 @@ paths:
                     properties:
                       id:
                         type: string
-                        example: 019ad225-ac70-71f8-9495-e6298ec25b52
+                        example: 019aeb4a-dd61-734b-842f-494742719d35
                       name:
                         type: string
                         example: provident
@@ -1506,13 +1507,13 @@ paths:
                         example: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
                       state:
                         type: string
-                        example: published
+                        example: draft
                       created_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
                       updated_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
                       published_at:
                         type: string
                         example: null
@@ -1532,13 +1533,13 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 019ad225-ac7b-72f6-af74-620babc35ff8
+                    id: 019aeb4a-dd8e-71a1-9696-669f021e06d1
                     name: architecto
                     description: null
                     content: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
                     state: published
-                    created_at: '2025-11-30T00:24:35.000000Z'
-                    updated_at: '2025-11-30T00:24:35.000000Z'
+                    created_at: '2025-12-04T21:35:43.000000Z'
+                    updated_at: '2025-12-04T21:35:43.000000Z'
                     published_at: null
                 properties:
                   data:
@@ -1546,7 +1547,7 @@ paths:
                     properties:
                       id:
                         type: string
-                        example: 019ad225-ac7b-72f6-af74-620babc35ff8
+                        example: 019aeb4a-dd8e-71a1-9696-669f021e06d1
                       name:
                         type: string
                         example: architecto
@@ -1561,10 +1562,10 @@ paths:
                         example: published
                       created_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
                       updated_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
                       published_at:
                         type: string
                         example: null
@@ -1614,7 +1615,7 @@ paths:
         in: path
         name: schema_id
         description: 'The ID of the schema.'
-        example: 019abd86-729a-722e-bbd4-e2a34c4fb0b9
+        example: 019ae94a-1e0d-734a-baa0-40483b13c437
         required: true
         schema:
           type: string
@@ -1633,13 +1634,13 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 019ad225-ac78-7103-bfe4-c2c6d31f040a
+                    id: 019aeb4a-dd7b-7395-a689-e0926ce6b127
                     name: quos
                     description: null
                     content: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
-                    state: draft
-                    created_at: '2025-11-30T00:24:35.000000Z'
-                    updated_at: '2025-11-30T00:24:35.000000Z'
+                    state: published
+                    created_at: '2025-12-04T21:35:43.000000Z'
+                    updated_at: '2025-12-04T21:35:43.000000Z'
                     published_at: null
                 properties:
                   data:
@@ -1647,7 +1648,7 @@ paths:
                     properties:
                       id:
                         type: string
-                        example: 019ad225-ac78-7103-bfe4-c2c6d31f040a
+                        example: 019aeb4a-dd7b-7395-a689-e0926ce6b127
                       name:
                         type: string
                         example: quos
@@ -1659,13 +1660,13 @@ paths:
                         example: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
                       state:
                         type: string
-                        example: draft
+                        example: published
                       created_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
                       updated_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
                       published_at:
                         type: string
                         example: null
@@ -1676,7 +1677,7 @@ paths:
         in: path
         name: schema_id
         description: 'The ID of the schema.'
-        example: 019abd86-729a-722e-bbd4-e2a34c4fb0b9
+        example: 019ae94a-1e0d-734a-baa0-40483b13c437
         required: true
         schema:
           type: string
@@ -1716,25 +1717,25 @@ paths:
                 example:
                   data:
                     -
-                      id: 019ad225-ac82-707d-9e46-d9304ebed0d8
+                      id: 019aeb4a-dd9b-7257-b402-5469019ba9c0
                       name: 'Crooks LLC'
                       subdomain: rempel
                       description: 'Sunt nihil accusantium harum mollitia.'
                       state: draft
                       number_of_pages: 1
-                      created_at: '2025-11-30T00:24:35.000000Z'
-                      updated_at: '2025-11-30T00:24:35.000000Z'
-                      published_at: null
+                      created_at: '2025-12-04T21:35:43.000000Z'
+                      updated_at: '2025-12-04T21:35:43.000000Z'
+                      published_at: '2025-09-14 21:27:27'
                     -
-                      id: 019ad225-ac88-7019-a55f-967ebe8fbcbe
+                      id: 019aeb4a-dda7-719c-a5e4-4c45b0f5c9e2
                       name: 'Schuster Inc'
                       subdomain: cormier
                       description: 'Omnis nostrum aut adipisci quidem nostrum qui commodi.'
                       state: draft
                       number_of_pages: 1
-                      created_at: '2025-11-30T00:24:35.000000Z'
-                      updated_at: '2025-11-30T00:24:35.000000Z'
-                      published_at: '2024-12-13 10:30:30'
+                      created_at: '2025-12-04T21:35:43.000000Z'
+                      updated_at: '2025-12-04T21:35:43.000000Z'
+                      published_at: '2024-12-18 07:41:38'
                   links:
                     first: '/?page=1'
                     last: '/?page=1'
@@ -1769,31 +1770,31 @@ paths:
                     type: array
                     example:
                       -
-                        id: 019ad225-ac82-707d-9e46-d9304ebed0d8
+                        id: 019aeb4a-dd9b-7257-b402-5469019ba9c0
                         name: 'Crooks LLC'
                         subdomain: rempel
                         description: 'Sunt nihil accusantium harum mollitia.'
                         state: draft
                         number_of_pages: 1
-                        created_at: '2025-11-30T00:24:35.000000Z'
-                        updated_at: '2025-11-30T00:24:35.000000Z'
-                        published_at: null
+                        created_at: '2025-12-04T21:35:43.000000Z'
+                        updated_at: '2025-12-04T21:35:43.000000Z'
+                        published_at: '2025-09-14 21:27:27'
                       -
-                        id: 019ad225-ac88-7019-a55f-967ebe8fbcbe
+                        id: 019aeb4a-dda7-719c-a5e4-4c45b0f5c9e2
                         name: 'Schuster Inc'
                         subdomain: cormier
                         description: 'Omnis nostrum aut adipisci quidem nostrum qui commodi.'
                         state: draft
                         number_of_pages: 1
-                        created_at: '2025-11-30T00:24:35.000000Z'
-                        updated_at: '2025-11-30T00:24:35.000000Z'
-                        published_at: '2024-12-13 10:30:30'
+                        created_at: '2025-12-04T21:35:43.000000Z'
+                        updated_at: '2025-12-04T21:35:43.000000Z'
+                        published_at: '2024-12-18 07:41:38'
                     items:
                       type: object
                       properties:
                         id:
                           type: string
-                          example: 019ad225-ac82-707d-9e46-d9304ebed0d8
+                          example: 019aeb4a-dd9b-7257-b402-5469019ba9c0
                         name:
                           type: string
                           example: 'Crooks LLC'
@@ -1811,13 +1812,13 @@ paths:
                           example: 1
                         created_at:
                           type: string
-                          example: '2025-11-30T00:24:35.000000Z'
+                          example: '2025-12-04T21:35:43.000000Z'
                         updated_at:
                           type: string
-                          example: '2025-11-30T00:24:35.000000Z'
+                          example: '2025-12-04T21:35:43.000000Z'
                         published_at:
                           type: string
-                          example: null
+                          example: '2025-09-14 21:27:27'
                   links:
                     type: object
                     properties:
@@ -1906,23 +1907,23 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 019ad225-ad17-71cf-be71-8d196459b631
+                    id: 019aeb4a-de9c-7288-9c1b-d4bad76beb92
                     name: 'Bailey Ltd'
                     subdomain: okuneva
                     description: null
-                    user_id: 019abd86-7270-7172-89eb-55a2394e6a7c
+                    user_id: 019aeb1a-7f09-7005-bda9-6ae344ddf494
                     state: draft
                     number_of_pages: 1
-                    created_at: '2025-11-30T00:24:35.000000Z'
-                    updated_at: '2025-11-30T00:24:35.000000Z'
-                    published_at: '2024-12-30 12:00:24'
+                    created_at: '2025-12-04T21:35:43.000000Z'
+                    updated_at: '2025-12-04T21:35:43.000000Z'
+                    published_at: null
                 properties:
                   data:
                     type: object
                     properties:
                       id:
                         type: string
-                        example: 019ad225-ad17-71cf-be71-8d196459b631
+                        example: 019aeb4a-de9c-7288-9c1b-d4bad76beb92
                       name:
                         type: string
                         example: 'Bailey Ltd'
@@ -1934,7 +1935,7 @@ paths:
                         example: null
                       user_id:
                         type: string
-                        example: 019abd86-7270-7172-89eb-55a2394e6a7c
+                        example: 019aeb1a-7f09-7005-bda9-6ae344ddf494
                       state:
                         type: string
                         example: draft
@@ -1943,13 +1944,13 @@ paths:
                         example: 1
                       created_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
                       updated_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
                       published_at:
                         type: string
-                        example: '2024-12-30 12:00:24'
+                        example: null
       tags:
         - Sites
       requestBody:
@@ -1990,23 +1991,23 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 019ad225-ac8e-7258-8614-5a0920da75c3
+                    id: 019aeb4a-ddb3-711a-8a4e-f44b5e97ef41
                     name: 'McLaughlin, Leuschke and Bauch'
                     subdomain: fritsch
                     description: null
-                    user_id: 019abd86-7285-7344-943f-fc8016f4d184
+                    user_id: 019ae94a-1df8-7358-8da7-3c373e8ab5bd
                     state: draft
                     number_of_pages: 2
-                    created_at: '2025-11-30T00:24:35.000000Z'
-                    updated_at: '2025-11-30T00:24:35.000000Z'
-                    published_at: '2025-04-18 03:32:04'
+                    created_at: '2025-12-04T21:35:43.000000Z'
+                    updated_at: '2025-12-04T21:35:43.000000Z'
+                    published_at: '2025-04-23 00:43:12'
                 properties:
                   data:
                     type: object
                     properties:
                       id:
                         type: string
-                        example: 019ad225-ac8e-7258-8614-5a0920da75c3
+                        example: 019aeb4a-ddb3-711a-8a4e-f44b5e97ef41
                       name:
                         type: string
                         example: 'McLaughlin, Leuschke and Bauch'
@@ -2018,7 +2019,7 @@ paths:
                         example: null
                       user_id:
                         type: string
-                        example: 019abd86-7285-7344-943f-fc8016f4d184
+                        example: 019ae94a-1df8-7358-8da7-3c373e8ab5bd
                       state:
                         type: string
                         example: draft
@@ -2027,13 +2028,13 @@ paths:
                         example: 2
                       created_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
                       updated_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
                       published_at:
                         type: string
-                        example: '2025-04-18 03:32:04'
+                        example: '2025-04-23 00:43:12'
       tags:
         - Sites
     put:
@@ -2050,15 +2051,15 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 019ad225-ad1e-7192-be03-84f203a278d8
+                    id: 019aeb4a-dea5-7369-8e62-c14565c35ea2
                     name: 'Bailey Ltd'
                     subdomain: gulgowski
                     description: 'Nihil accusantium harum mollitia modi deserunt.'
-                    user_id: 019abd86-7285-7344-943f-fc8016f4d184
+                    user_id: 019ae94a-1dae-7350-ba10-fdbf5a6c4e1f
                     state: draft
                     number_of_pages: 1
-                    created_at: '2025-11-30T00:24:35.000000Z'
-                    updated_at: '2025-11-30T00:24:35.000000Z'
+                    created_at: '2025-12-04T21:35:43.000000Z'
+                    updated_at: '2025-12-04T21:35:43.000000Z'
                     published_at: null
                 properties:
                   data:
@@ -2066,7 +2067,7 @@ paths:
                     properties:
                       id:
                         type: string
-                        example: 019ad225-ad1e-7192-be03-84f203a278d8
+                        example: 019aeb4a-dea5-7369-8e62-c14565c35ea2
                       name:
                         type: string
                         example: 'Bailey Ltd'
@@ -2078,7 +2079,7 @@ paths:
                         example: 'Nihil accusantium harum mollitia modi deserunt.'
                       user_id:
                         type: string
-                        example: 019abd86-7285-7344-943f-fc8016f4d184
+                        example: 019ae94a-1dae-7350-ba10-fdbf5a6c4e1f
                       state:
                         type: string
                         example: draft
@@ -2087,10 +2088,10 @@ paths:
                         example: 1
                       created_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
                       updated_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
                       published_at:
                         type: string
                         example: null
@@ -2135,7 +2136,7 @@ paths:
         in: path
         name: site_id
         description: 'The ID of the site.'
-        example: 019abd86-72ea-7227-8b92-c033c77c3f74
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
         required: true
         schema:
           type: string
@@ -2291,30 +2292,30 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 019ad225-ac2c-718a-a5e6-4e224466a49c
-                    name: 'Twila Gibson'
-                    email: lemke.bryon@example.net
-                    email_verified_at: '2025-11-30T00:24:35.000000Z'
+                    id: 019aeb4a-dcb4-7349-8fa5-d001733b2513
+                    name: 'Prof. Kiley Altenwerth'
+                    email: urodriguez@example.net
+                    email_verified_at: '2025-12-04T21:35:42.000000Z'
                     avatar: null
                     is_admin: false
-                    created_at: '2025-11-30T00:24:35.000000Z'
-                    updated_at: '2025-11-30T00:24:35.000000Z'
+                    created_at: '2025-12-04T21:35:43.000000Z'
+                    updated_at: '2025-12-04T21:35:43.000000Z'
                 properties:
                   data:
                     type: object
                     properties:
                       id:
                         type: string
-                        example: 019ad225-ac2c-718a-a5e6-4e224466a49c
+                        example: 019aeb4a-dcb4-7349-8fa5-d001733b2513
                       name:
                         type: string
-                        example: 'Twila Gibson'
+                        example: 'Prof. Kiley Altenwerth'
                       email:
                         type: string
-                        example: lemke.bryon@example.net
+                        example: urodriguez@example.net
                       email_verified_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:42.000000Z'
                       avatar:
                         type: string
                         example: null
@@ -2323,10 +2324,10 @@ paths:
                         example: false
                       created_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
                       updated_at:
                         type: string
-                        example: '2025-11-30T00:24:35.000000Z'
+                        example: '2025-12-04T21:35:43.000000Z'
       tags:
         - Users
     delete:

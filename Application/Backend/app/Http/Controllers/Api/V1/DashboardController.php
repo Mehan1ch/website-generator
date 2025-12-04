@@ -23,7 +23,6 @@ class DashboardController extends Controller
      * Display dashboard information including site counts, page counts, and recent activity.
      *
      * @response 200 {
-     *   "status": "success",
      *   "data": {
      *     "total_sites": 5,
      *     "published_sites": 3,
@@ -55,7 +54,6 @@ class DashboardController extends Controller
         $latestSite = $user->sites()->latest()->first();
 
         return response()->json([
-            'status' => 'success',
             'data' => [
                 'total_sites' => $totalSites,
                 'published_sites' => $publishedSites,
@@ -70,6 +68,6 @@ class DashboardController extends Controller
                     'created_at' => $latestSite->created_at->diffForHumans(),
                 ] : null,
             ],
-        ]);
+        ], "200");
     }
 }

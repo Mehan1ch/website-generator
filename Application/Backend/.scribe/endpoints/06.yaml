@@ -25,14 +25,14 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019abd86-72ea-7227-8b92-c033c77c3f74
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019abd86-72ea-7227-8b92-c033c77c3f74
+      site_id: 019ae94a-1e56-71a6-96d6-abb850c76efb
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -44,11 +44,13 @@ endpoints:
         status: 200
         content: |-
           {
-              apiVersion: "1.0",
-              kind: "deployment",
-              metadata: {}
-              spec: {}
-              status: {}
+              "message": {
+                   apiVersion: "1.0",
+                   kind: "deployment",
+                   metadata: {},
+                   spec: {},
+                   status: {},
+              }
           }
         headers: []
         description: ''
@@ -81,14 +83,14 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019abd86-72ea-7227-8b92-c033c77c3f74
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019abd86-72ea-7227-8b92-c033c77c3f74
+      site_id: 019ae94a-1e56-71a6-96d6-abb850c76efb
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -133,14 +135,14 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019abd86-72ea-7227-8b92-c033c77c3f74
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019abd86-72ea-7227-8b92-c033c77c3f74
+      site_id: 019ae94a-1e56-71a6-96d6-abb850c76efb
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -152,7 +154,7 @@ endpoints:
         status: 200
         content: |-
           {
-              "message": "Deployment updated successfully.",
+              "message": "Deployment updated successfully."
           }
         headers: []
         description: ''
@@ -185,14 +187,14 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019abd86-72ea-7227-8b92-c033c77c3f74
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019abd86-72ea-7227-8b92-c033c77c3f74
+      site_id: 019ae94a-1e56-71a6-96d6-abb850c76efb
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -237,14 +239,14 @@ endpoints:
         name: site_id
         description: 'The ID of the site.'
         required: true
-        example: 019abd86-72ea-7227-8b92-c033c77c3f74
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      site_id: 019abd86-72ea-7227-8b92-c033c77c3f74
+      site_id: 019ae94a-1e56-71a6-96d6-abb850c76efb
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

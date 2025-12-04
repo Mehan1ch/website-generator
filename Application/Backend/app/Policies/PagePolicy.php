@@ -64,7 +64,7 @@ class PagePolicy
             return Response::deny("The homepage cannot be deleted.");
         }
         if ($user->can(Permissions::DELETE_PAGES)) {
-            $page->site->user_id === $user->id
+            return $page->site->user_id === $user->id
                 ? Response::allow()
                 : Response::deny("You do not own this page.");
         }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\SchemaController;
 use App\Http\Controllers\Api\V1\SiteController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Models\Page;
+use App\Models\Schema;
 use App\Models\Site;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +18,7 @@ Route::controller(UserController::class)->middleware('auth:sanctum')->group(func
 });
 
 Route::controller(DashboardController::class)->middleware('auth:sanctum')->group(function () {
-    Route::get('/dashboard', 'index');
+    Route::get('/dashboard', 'index')->can("view-any", Site::class);
 });
 
 Route::controller(AvatarController::class)->middleware(['auth:sanctum', 'verified'])->group(function () {

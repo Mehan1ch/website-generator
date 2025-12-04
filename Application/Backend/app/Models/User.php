@@ -78,7 +78,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia, Filamen
     {
         parent::boot();
 
-        static::creating(function ($user) {
+        static::created(function (User $user) {
             $user->assignRole(Roles::USER->value);
         });
 
