@@ -27,3 +27,4 @@ yarn-error.log
 /.scribe/intro.md
 /resources/views/scribe
 /public/vendor/scribe
+/coverage

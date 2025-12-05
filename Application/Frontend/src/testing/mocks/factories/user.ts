@@ -8,7 +8,7 @@ export const createUser = (overrides?: Partial<User>): User => ({
     email: faker.internet.email(),
     avatar: faker.image.avatar(),
     is_admin: faker.datatype.boolean(),
-    email_verified_at: faker.internet.email(),
+    email_verified_at: faker.date.past().toISOString(),
     created_at: faker.date.past().toISOString(),
     updated_at: faker.date.recent().toISOString(),
     ...overrides,

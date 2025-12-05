@@ -10,6 +10,7 @@ import {
 import Color from "color";
 import {useMemo} from "react";
 
+s;
 type ColorPickerBlockProps = {
     color: string;
     onChange: (color: string) => void;

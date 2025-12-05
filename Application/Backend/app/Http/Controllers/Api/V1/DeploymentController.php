@@ -30,10 +30,10 @@ class DeploymentController extends Controller
      * Store site deployment.
      *
      * Initiate a new deployment for the specified site.
-     * @response 200 {
-     *     "message": "Deployment created successfully.",
+     * @response 201 {
+     *     "message": "Deployment created successfully."
      * }
-     * @responsse 400 {
+     * @response 400 {
      *     "message": "Failed to create deployment.",
      *     "error": "Detailed error information."
      * }
@@ -53,16 +53,16 @@ class DeploymentController extends Controller
      * Get site deployment.
      *
      * Get the deployment status of the specified site.
-     * @response 200 {
-     *     "message": {
-     *          apiVersion: "1.0",
-     *          kind: "deployment",
-     *          metadata: {},
-     *          spec: {},
-     *          status: {},
-     *     }
+     * @response {
+     *  "message": {
+     *   "apiVersion": "1.0",
+     *   "kind": "deployment",
+     *   "metadata": {},
+     *   "spec": {},
+     *   "status": {}
+     *   }
      * }
-     * @responsse 400 {
+     * @response 400 {
      *     "message": "Failed to fetch deployment.",
      *     "error": "Detailed error information."
      * }
@@ -83,7 +83,7 @@ class DeploymentController extends Controller
      * @response 200 {
      *     "message": "Deployment updated successfully."
      * }
-     * @responsse 400 {
+     * @response 400 {
      *     "message": "Failed to update deployment.",
      *     "error": "Detailed error information."
      * }
@@ -102,9 +102,9 @@ class DeploymentController extends Controller
      *
      * Delete the deployment of the specified site.
      * @response 204 {
-     *     "message": "Deployment deleted successfully.",
+     *     "message": "Deployment deleted successfully."
      * }
-     * @responsse 400 {
+     * @response 400 {
      *     "message": "Failed to delete deployment.",
      *     "error": "Detailed error information."
      * }
@@ -123,9 +123,9 @@ class DeploymentController extends Controller
      *
      * Restart the deployment of the specified site.
      * @response 200 {
-     *     "message": "Deployment restarted successfully.",
+     *     "message": "Deployment restarted successfully."
      * }
-     * @responsse 400 {
+     * @response 400 {
      *     "message": "Failed to restart deployment.",
      *     "error": "Detailed error information."
      * }

@@ -1,4 +1,4 @@
-import {createMemoryHistory, createRouter, RouterProvider} from '@tanstack/react-router';
+import {createRouter, RouterProvider} from '@tanstack/react-router';
 import {routeTree} from '@/routeTree.gen.ts';
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {render} from "vitest-browser-react";
@@ -26,6 +26,18 @@ export const testQueryClient = new QueryClient({
         },
     },
 });
+export const testRouter = createRouter({
+    routeTree,
+    context: {
+        queryClient: testQueryClient,
+        auth: undefined!,
+        getTitle: () => "",
+    },
+    defaultViewTransition: true,
+    defaultPreload: 'intent',
+    defaultPreloadStaleTime: 0,
+    scrollRestoration: true,
+});
 
 export function renderWithFileRoutes(
     {
@@ -35,24 +47,14 @@ export function renderWithFileRoutes(
         storageKey = 'vite-ui-theme',
     }: RenderWithFileRoutesOptions = {},
 ) {
-    let routerInstance: ReturnType<typeof createRouter<typeof routeTree>>;
 
+    testRouter.history.replace(initialLocation);
     const InnerRouterProvider = () => {
         const auth = useMockAuth();
-
-        routerInstance = createRouter({
-            routeTree,
-            history: createMemoryHistory({
-                initialEntries: [initialLocation],
-            }),
-            context: {
-                queryClient: testQueryClient,
-                auth,
-                getTitle: () => "",
-            },
-        });
-
-        return <RouterProvider router={routerInstance}/>;
+        return <RouterProvider router={testRouter} context={{
+            queryClient: testQueryClient,
+            auth: {...auth, ...initialAuth},
+        }}/>;
     };
 
     const TestApp = () => {
@@ -73,7 +75,7 @@ export function renderWithFileRoutes(
     return {
         ...renderResult,
         get router() {
-            return routerInstance!;
+            return testRouter!;
         },
     };
 }

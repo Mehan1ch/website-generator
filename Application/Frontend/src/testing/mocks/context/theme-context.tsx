@@ -68,7 +68,7 @@ export const MockThemeProvider = ({
     );
 };
 
-export const useTheme = () => {
+export const useMockTheme = () => {
     const context = useContext(ThemeContext);
     if (!context) {
         throw new Error('useTheme must be used within MockThemeProvider');

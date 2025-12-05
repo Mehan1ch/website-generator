@@ -1,4 +1,4 @@
-import {ReactNode, useContext, useState} from 'react';
+import {ReactNode, useContext, useEffect, useState} from 'react';
 import {LoginBody, RegisterBody, User} from "@/types/auth.ts";
 import {createUser} from "@/testing/mocks/factories/user.ts";
 import {AuthContext} from "@/contexts/auth-context.ts";
@@ -13,27 +13,35 @@ const MockAuthProvider = ({
     const [user, setUser] = useState<User | null>(initialValue?.user || null);
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(initialValue?.isAuthenticated || false);
 
+    useEffect(() => {
+        if (initialValue?.user) {
+            setUser(initialValue.user);
+        } else {
+            setUser(null);
+        }
+
+        if (initialValue?.isAuthenticated) {
+            setIsAuthenticated(true);
+        } else {
+            setIsAuthenticated(false);
+        }
+    }, [initialValue]);
+
     const login = async (_credentials: LoginBody) => {
         const mockUser = createUser();
         setUser(mockUser);
         setIsAuthenticated(true);
-        localStorage.setItem('user', JSON.stringify(mockUser));
-        localStorage.setItem('isAuthenticated', 'true');
     };
 
     const logout = async () => {
         setUser(null);
         setIsAuthenticated(false);
-        localStorage.removeItem('user');
-        localStorage.removeItem('isAuthenticated');
     };
 
     const register = async (_credentials: RegisterBody) => {
         const mockUser = createUser();
         setUser(mockUser);
         setIsAuthenticated(true);
-        localStorage.setItem('user', JSON.stringify(mockUser));
-        localStorage.setItem('isAuthenticated', 'true');
     };
 
     const fetchUserContext = async () => {
@@ -41,16 +49,12 @@ const MockAuthProvider = ({
             const mockUser = createUser();
             setUser(mockUser);
             setIsAuthenticated(true);
-            localStorage.setItem('user', JSON.stringify(mockUser));
-            localStorage.setItem('isAuthenticated', 'true');
         }
     };
 
     const deleteUser = async () => {
         setUser(null);
         setIsAuthenticated(false);
-        localStorage.removeItem('user');
-        localStorage.removeItem('isAuthenticated');
     };
 
     return (

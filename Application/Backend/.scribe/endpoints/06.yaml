@@ -44,13 +44,23 @@ endpoints:
         status: 200
         content: |-
           {
-              "message": {
-                   apiVersion: "1.0",
-                   kind: "deployment",
-                   metadata: {},
-                   spec: {},
-                   status: {},
-              }
+           "message": {
+            "apiVersion": "1.0",
+            "kind": "deployment",
+            "metadata": {},
+            "spec": {},
+            "status": {}
+            }
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 400
+        content: |-
+          {
+              "message": "Failed to fetch deployment.",
+              "error": "Detailed error information."
           }
         headers: []
         description: ''
@@ -99,10 +109,20 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
+        status: 201
         content: |-
           {
-              "message": "Deployment created successfully.",
+              "message": "Deployment created successfully."
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 400
+        content: |-
+          {
+              "message": "Failed to create deployment.",
+              "error": "Detailed error information."
           }
         headers: []
         description: ''
@@ -158,6 +178,16 @@ endpoints:
           }
         headers: []
         description: ''
+      -
+        custom: []
+        status: 400
+        content: |-
+          {
+              "message": "Failed to update deployment.",
+              "error": "Detailed error information."
+          }
+        headers: []
+        description: ''
     responseFields: []
     auth: []
     controller: null
@@ -206,7 +236,17 @@ endpoints:
         status: 204
         content: |-
           {
-              "message": "Deployment deleted successfully.",
+              "message": "Deployment deleted successfully."
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 400
+        content: |-
+          {
+              "message": "Failed to delete deployment.",
+              "error": "Detailed error information."
           }
         headers: []
         description: ''
@@ -258,7 +298,17 @@ endpoints:
         status: 200
         content: |-
           {
-              "message": "Deployment restarted successfully.",
+              "message": "Deployment restarted successfully."
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 400
+        content: |-
+          {
+              "message": "Failed to restart deployment.",
+              "error": "Detailed error information."
           }
         headers: []
         description: ''

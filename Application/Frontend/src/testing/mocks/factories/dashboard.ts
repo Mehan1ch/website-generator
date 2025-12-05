@@ -2,7 +2,7 @@ import {DashboardDataResponse, DashboardResponse} from "@/types/dashboard.ts";
 import {faker} from "@faker-js/faker";
 
 
-export const createDashboardResponse = (overrides?: Partial<DashboardResponse>) => {
+export const createDashboardResponse = (overrides?: Partial<DashboardDataResponse>): DashboardResponse => {
     return {
         data: {
             total_sites: faker.number.int({min: 1, max: 1000}),
