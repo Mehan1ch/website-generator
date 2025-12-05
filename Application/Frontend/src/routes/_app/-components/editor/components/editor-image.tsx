@@ -110,7 +110,7 @@ const ImageSettings = () => {
                                                             (props.src = e.target.value)
                                                     );
                                                 }}
-                                                placeholder="https://example.com/image.jpg"
+                                                placeholder=""
                                                 rows={3}
                                             />
                                         )}

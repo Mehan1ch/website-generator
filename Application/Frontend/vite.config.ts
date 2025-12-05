@@ -4,6 +4,7 @@ import {defineConfig} from 'vite';
 import tanstackRouter from '@tanstack/router-plugin/vite';
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
+import {playwright} from "@vitest/browser-playwright";
 
 export default defineConfig({
     plugins: [
@@ -33,6 +34,21 @@ export default defineConfig({
         port: 5173,
     },
     test: {
-        // ...
+        globals: true,
+        browser: {
+            enabled: true,
+            provider: playwright(),
+            instances: [
+                {browser: 'chromium'},
+            ],
+        },
+        setupFiles: 'src/testing/vitest.setup.ts',
+        reporters: ['default'],
+        outputFile: 'report/vitest-report.html',
+        coverage: {
+            include: ['src/**'],
+            exclude: ['src/testing/**'],
+            reporter: ["html"]
+        },
     },
 });

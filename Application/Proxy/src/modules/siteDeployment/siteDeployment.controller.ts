@@ -12,7 +12,7 @@ class SiteDeploymentController {
         const params = request.params as DefaultResource;
         try {
             const deployment = await deploymentService.readDeployment(params);
-            reply.status(200).send(deployment);
+            reply.status(200).send({message: deployment});
         } catch (err: unknown) {
             console.error('Error during site deployment read:', err);
             reply.status(400).send({
