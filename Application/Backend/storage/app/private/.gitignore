@@ -1,0 +1,4 @@
+*
+!.gitignore
+!scribe/
+!scribe/openapi.yaml
