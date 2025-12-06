@@ -38,6 +38,7 @@ export default defineConfig({
         testTimeout: 10000,
         browser: {
             enabled: true,
+            viewport: {width: 1280, height: 720},
             provider: playwright(),
             instances: [
                 {browser: 'chromium'},

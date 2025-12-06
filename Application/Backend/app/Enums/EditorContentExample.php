@@ -4,6 +4,6 @@ namespace App\Enums;
 
 enum EditorContentExample: string
 {
-    case ENCODED = 'hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n';
-    case ORIGINAL = '{"ROOT":{"type":{"resolvedName":"EditorContainer"},"isCanvas":true,"props":{"background":"#eee","padding":5},"displayName":"EditorContainer","custom":{},"hidden":false,"nodes":["Im08yZIspb"],"linkedNodes":{}},"Im08yZIspb":{"type":{"resolvedName":"EditorText"},"isCanvas":false,"props":{"text":"Hi world!","fontSize":36},"displayName":"EditorText","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}}}';
+    case ENCODED = 'q64FAA==';
+    case ORIGINAL = '{"ROOT":{"type":{"resolvedName":"EditorContainer"},"isCanvas":true,"props":{"margin_top":0,"margin_bottom":0,"margin_left":0,"margin_right":0,"padding_top":0,"padding_bottom":0,"padding_left":0,"padding_right":0},"displayName":"EditorContainer","custom":{},"hidden":false,"nodes":["KMX35AIr26"],"linkedNodes":{}},"KMX35AIr26":{"type":{"resolvedName":"EditorText"},"isCanvas":false,"props":{"text":"Hello World!","fontSize":12,"margin_top":0,"margin_bottom":0,"margin_left":0,"margin_right":0,"padding_top":0,"padding_bottom":0,"padding_left":0,"padding_right":0},"displayName":"EditorText","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}}}';
 }

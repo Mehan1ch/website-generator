@@ -5,7 +5,7 @@ export const createSchema = (overrides?: Partial<Schema>): Schema => ({
     id: faker.string.uuid(),
     name: faker.word.noun(),
     description: faker.lorem.paragraph(),
-    content: faker.lorem.paragraph(),
+    content: 'q64FAA==',
     user_id: faker.string.uuid(),
     number_of_pages: faker.number.int({min: 0, max: 100}),
     state: faker.helpers.arrayElement(["draft", "published"]),

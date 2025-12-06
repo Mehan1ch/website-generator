@@ -53,7 +53,7 @@ export function renderWithFileRoutes(
         const auth = useMockAuth();
         return <RouterProvider router={testRouter} context={{
             queryClient: testQueryClient,
-            auth: {...auth, ...initialAuth},
+            auth: auth,
         }}/>;
     };
 

@@ -27,8 +27,10 @@ const MockAuthProvider = ({
         }
     }, [initialValue]);
 
-    const login = async (_credentials: LoginBody) => {
-        const mockUser = createUser();
+    const login = async (credentials: LoginBody) => {
+        const mockUser = createUser({
+            email: credentials.email,
+        });
         setUser(mockUser);
         setIsAuthenticated(true);
     };
@@ -38,8 +40,11 @@ const MockAuthProvider = ({
         setIsAuthenticated(false);
     };
 
-    const register = async (_credentials: RegisterBody) => {
-        const mockUser = createUser();
+    const register = async (credentials: RegisterBody) => {
+        const mockUser = createUser({
+            name: credentials.name,
+            email: credentials.email,
+        });
         setUser(mockUser);
         setIsAuthenticated(true);
     };

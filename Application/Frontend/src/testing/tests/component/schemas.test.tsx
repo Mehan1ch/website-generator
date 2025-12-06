@@ -18,13 +18,13 @@ describe('Schemas Index Page', () => {
     test('should display schema cards when schemas exist', async () => {
         const {router} = renderWithFileRoutes({
             initialLocation: '/schemas',
-            initialAuth: createMockAuthenticatedContext(),
+            initialAuth: createMockAuthenticatedContext({is_admin: true}),
         });
 
         await router.load();
 
         await expect.element(page.getByText('Schemas').first()).toBeVisible();
-        const draftOrPublished = page.getByText(/Draft|Published/).first();
+        const draftOrPublished = page.getByText(/Draft|Published/i).first();
         await expect.element(draftOrPublished).toBeVisible();
         await expect.element(page.getByText("Created").first()).toBeVisible();
         await expect.element(page.getByText("Updated").first()).toBeVisible();

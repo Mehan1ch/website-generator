@@ -5,7 +5,7 @@ export const createPage = (overrides?: Partial<Page>): Page => ({
     id: faker.string.uuid(),
     site_id: faker.string.uuid(),
     title: faker.word.words(2),
-    content: faker.lorem.paragraph(),
+    content: 'q64FAA==',
     created_at: faker.date.past().toISOString(),
     updated_at: faker.date.recent().toISOString(),
     ...overrides,

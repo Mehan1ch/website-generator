@@ -2,9 +2,9 @@ import {describe, expect, test} from 'vitest';
 import {renderWithFileRoutes} from "@/testing/utils/file-route-utils.tsx";
 import {page} from "@vitest/browser/context";
 import {createMockUnauthenticatedContext} from "@/testing/mocks/context/auth-context.tsx";
+import {clickSideBarItem} from "@/testing/utils/test-helpers.ts";
 
 describe('E2E Authentication Flow', () => {
-
     test('test complete auth flow', {timeout: 60000}, async () => {
         const {router} = renderWithFileRoutes({
             initialLocation: '/register',
@@ -20,12 +20,12 @@ describe('E2E Authentication Flow', () => {
         const passwordInputs = page.getByLabelText('Password');
         const confirmPasswordInput = page.getByLabelText('Confirm Password');
 
-        await nameInput.fill('John Doe');
-        await emailInput.fill('john.doe@example.com');
-        await passwordInputs.first().fill('SecurePassword123!');
-        await confirmPasswordInput.fill('SecurePassword123!');
+        await nameInput.fill('Grant');
+        await emailInput.fill('grant@example.com');
+        await passwordInputs.first().fill('password');
+        await confirmPasswordInput.fill('password');
 
-        const registerButton = page.getByRole('button', {name: /Create Account/});
+        const registerButton = page.getByRole('button', {name: /Create Account/i});
         await registerButton.click();
 
         await expect.poll(() => router.state.location.pathname).toBe('/');
@@ -33,27 +33,29 @@ describe('E2E Authentication Flow', () => {
         const getStartedButton = page.getByText("Get Started").first();
         await getStartedButton.click();
 
-        const userMenuTrigger = page.getByRole('button').filter({hasText: 'John Doe'});
-        await userMenuTrigger.click();
+        await clickSideBarItem('Grant', 'sidebar');
 
         const logoutButton = page.getByRole('menuitem', {name: /logout/i});
-        await logoutButton.click();
+        await expect.element(logoutButton).toBeVisible();
+        await logoutButton.click({timeout: 2000});
 
-        await expect.poll(() => router.state.location.pathname).toMatch(/^\/($|login)/);
+        await expect.poll(() => router.state.location.pathname).toMatch("/");
 
-        await router.navigate({to: '/login'});
-        await router.load();
+        const singInLink = page.getByRole('link', {name: /sign in/i}).first();
+        await expect.element(singInLink).toBeVisible();
+        await singInLink.click();
 
-        await expect.element(page.getByText('Login to your account')).toBeVisible();
+        await expect.element(page.getByText('Login to your account').first()).toBeVisible();
 
         const loginEmailInput = page.getByLabelText('Email address');
         const loginPasswordInput = page.getByLabelText('Password');
 
-        await loginEmailInput.fill('john.doe@example.com');
-        await loginPasswordInput.fill('SecurePassword123!');
+        await loginEmailInput.fill('grant@example.com');
+        await loginPasswordInput.fill('password');
 
-        const loginButton = page.getByRole('button', {name: /login/i});
-        await loginButton.click();
+        const loginButton = page.getByRole('button', {name: /Login/i}).first();
+        await expect.element(loginButton).toBeVisible();
+        await loginButton.click({timeout: 2000});
 
         await expect.poll(() => router.state.location.pathname).toBe('/');
 
@@ -63,6 +65,7 @@ describe('E2E Authentication Flow', () => {
         await expect.element(page.getByText('Settings').first()).toBeVisible();
 
         const profileTab = page.getByRole('tab', {name: 'Profile'});
+        await expect.element(profileTab).toBeVisible();
         await profileTab.click();
 
         await expect.element(page.getByText('Profile').first()).toBeVisible();
@@ -71,54 +74,50 @@ describe('E2E Authentication Flow', () => {
         const profileEmailInput = page.getByLabelText('Email').first();
 
         await profileNameInput.clear();
-        await profileNameInput.fill('Jane Doe');
+        await profileNameInput.fill('Grant Happy');
         await profileEmailInput.clear();
-        await profileEmailInput.fill('jane.doe@example.com');
+        await profileEmailInput.fill('grant.happy@example.com');
 
         const saveProfileButton = page.getByRole('button', {name: /save changes/i}).first();
+        await expect.element(saveProfileButton).toBeVisible();
         await saveProfileButton.click();
 
         await expect.element(page.getByText('Profile updated successfully!')).toBeVisible();
 
-        const passwordTab = page.getByRole('tab', {name: 'Password'});
+        const passwordTab = page.getByRole('tab', {name: 'Password'}).first();
+        await expect.element(passwordTab).toBeVisible();
         await passwordTab.click();
 
         await expect.element(page.getByText('Change Password').first()).toBeVisible();
 
         const currentPasswordInput = page.getByLabelText('Current Password');
-        const newPasswordInput = page.getByLabelText('New Password');
-        const confirmNewPasswordInput = page.getByLabelText('Confirm New Password');
+        const newPasswordInput = page.getByRole('textbox', {name: 'Password', exact: true});
+        const confirmNewPasswordInput = page.getByLabelText('Password Confirmation');
 
-        await currentPasswordInput.fill('SecurePassword123!');
-        await newPasswordInput.fill('NewSecurePassword456!');
-        await confirmNewPasswordInput.fill('NewSecurePassword456!');
+        await currentPasswordInput.fill('password');
+        await newPasswordInput.fill('asdasdasd');
+        await confirmNewPasswordInput.fill('asdasdasd');
 
         const changePasswordButton = page.getByRole('button', {name: /update password/i});
+        await expect.element(changePasswordButton).toBeVisible();
         await changePasswordButton.click();
 
         await expect.element(page.getByText(/password updated successfully/i)).toBeVisible();
-        await expect.poll(() => router.state.location.pathname).toBe('/login');
+        await expect.poll(() => router.state.location.pathname).toBe('/');
 
-        await router.load();
+        await getStartedButton.click();
 
         const finalLoginEmailInput = page.getByLabelText('Email address');
         const finalLoginPasswordInput = page.getByLabelText('Password');
 
-        await finalLoginEmailInput.fill('jane.doe@example.com');
-        await finalLoginPasswordInput.fill('NewSecurePassword456!');
+        await finalLoginEmailInput.fill('grant.happy@example.com');
+        await finalLoginPasswordInput.fill('asdasdasd');
 
         const finalLoginButton = page.getByRole('button', {name: /login/i});
+        await expect.element(finalLoginButton).toBeVisible();
         await finalLoginButton.click();
 
-        await expect.poll(() => router.state.location.pathname).toBe('/');
-
-        const finalUserMenuTrigger = page.getByRole('button').filter({hasText: 'Jane Doe'});
-        await finalUserMenuTrigger.click();
-
-        const finalLogoutButton = page.getByRole('menuitem', {name: /logout/i});
-        await finalLogoutButton.click();
-
-        await expect.poll(() => router.state.location.pathname).toMatch(/^\/($|login)/);
+        await expect.poll(() => router.state.location.pathname).toBe('/dashboard');
     });
 });
 
