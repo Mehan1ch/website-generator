@@ -1,15 +1,15 @@
 # Kubernetes Proxy
 
-A small proxy app to use the Kubernetes JS client library to expose Kubernetes API resources over HTTP to the backend.
+A small proxy app built using Fastify to use the Kubernetes JS client library to expose Kubernetes API resources over a REST API to the backend.
 
 ---
 
-## Running in development
+## Running the proxy in development
 
 - Prerequisites:
-    - Docker and Docker Compose installed
-    - A running Kubernetes cluster accessible from your machine, with a Traefik ingress controller set up
-    - Backend service running (see the backend README for instructions)
+  - Docker and Docker Compose installed
+  - A running Kubernetes cluster accessible from your machine, with a Traefik ingress controller set up
+  - Backend service running (see the backend README for instructions)
 
 - Steps:
     1. Setup your Kubernetes configuration at .kube/config or with other methods.
@@ -20,11 +20,15 @@ A small proxy app to use the Kubernetes JS client library to expose Kubernetes A
        ```bash
        docker-compose up -d
        ```
+
     4. If needed open the kubernetes cluster proxy, eg:
 
        ```bash
        kubectl proxy --address=0.0.0.0 --port=8080
        ```
 
-- Next Steps:
-    - Run the frontend service (see the frontend README for instructions).
+---
+
+## Next Steps
+
+- Refer to the README-s of the Backend and Proxy apps on how to run them.
