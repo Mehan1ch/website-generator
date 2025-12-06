@@ -1,0 +1,2467 @@
+openapi: 3.0.3
+info:
+  title: 'Website Generator API Documentation'
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost:8000'
+tags:
+  -
+    name: Authentication
+    description: 'Authentication endpoints provided by Laravel Fortify'
+  -
+    name: Avatars
+    description: ''
+  -
+    name: 'CSRF Protection'
+    description: 'CSRF token management for SPA authentication'
+  -
+    name: Dashboard
+    description: ''
+  -
+    name: Deployments
+    description: ''
+  -
+    name: 'Email Verification'
+    description: 'Email verification endpoints'
+  -
+    name: Pages
+    description: ''
+  -
+    name: 'Password Confirmation'
+    description: 'Password confirmation endpoints for sensitive operations'
+  -
+    name: 'Password Management'
+    description: 'Password reset and management endpoints'
+  -
+    name: Schemas
+    description: ''
+  -
+    name: Sites
+    description: ''
+  -
+    name: 'User Profile'
+    description: null
+  -
+    name: Users
+    description: ''
+paths:
+  /login:
+    post:
+      summary: Login
+      operationId: login
+      description: 'Authenticate a user and return a Sanctum token.'
+      parameters: []
+      responses:
+        200:
+          description: 'Login successful.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+        422:
+          description: 'Login failed - invalid credentials.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data is invalid.'
+                  errors:
+                    email:
+                      - 'These credentials do not match our records.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data is invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'These credentials do not match our records.'
+                        items:
+                          type: string
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: "The user's email address."
+                  example: user@example.com
+                password:
+                  type: string
+                  description: "The user's password."
+                  example: password123
+              required:
+                - email
+                - password
+      security: []
+  /logout:
+    post:
+      summary: Logout
+      operationId: logout
+      description: 'Log out the authenticated user and revoke their tokens.'
+      parameters: []
+      responses:
+        204:
+          description: 'Logout successful.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+      tags:
+        - Authentication
+  /register:
+    post:
+      summary: Register
+      operationId: register
+      description: 'Register a new user account.'
+      parameters: []
+      responses:
+        201:
+          description: 'Registration successful.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+        422:
+          description: 'Validation failed.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data is invalid.'
+                  errors:
+                    email:
+                      - 'The email has already been taken.'
+                    password:
+                      - 'The password must be at least 8 characters.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data is invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The email has already been taken.'
+                        items:
+                          type: string
+                      password:
+                        type: array
+                        example:
+                          - 'The password must be at least 8 characters.'
+                        items:
+                          type: string
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: "The user's full name."
+                  example: 'John Doe'
+                email:
+                  type: string
+                  description: "The user's email address."
+                  example: user@example.com
+                password:
+                  type: string
+                  description: "The user's password (minimum 8 characters)."
+                  example: password123
+                password_confirmation:
+                  type: string
+                  description: 'Password confirmation.'
+                  example: password123
+              required:
+                - name
+                - email
+                - password
+                - password_confirmation
+      security: []
+  /api/v1/avatar:
+    post:
+      summary: 'Post avatar'
+      operationId: postAvatar
+      description: "Upload and set the authenticated user's avatar image."
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Avatar uploaded successfully.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Avatar uploaded successfully.'
+        400:
+          description: ''
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  -
+                    description: ''
+                    type: object
+                    example:
+                      message: 'File does not exist.'
+                      error: ...
+                    properties:
+                      message:
+                        type: string
+                        example: 'File does not exist.'
+                      error:
+                        type: string
+                        example: ...
+                  -
+                    description: ''
+                    type: object
+                    example:
+                      message: 'File is too big.'
+                      error: ...
+                    properties:
+                      message:
+                        type: string
+                        example: 'File is too big.'
+                      error:
+                        type: string
+                        example: ...
+      tags:
+        - Avatars
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                avatar:
+                  type: string
+                  format: binary
+                  description: 'The avatar image file to upload. Accepted formats are jpeg, jpg, png, gif, and webp. Maximum file size is 2MB. Must be a file. Must be an image. Must not be greater than 2048 kilobytes.'
+              required:
+                - avatar
+    delete:
+      summary: 'Delete avatar'
+      operationId: deleteAvatar
+      description: "Remove the authenticated user's avatar image."
+      parameters: []
+      responses:
+        204:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {  }
+                properties: {  }
+      tags:
+        - Avatars
+  /sanctum/csrf-cookie:
+    get:
+      summary: 'Get CSRF Cookie'
+      operationId: getCSRFCookie
+      description: 'Initialize CSRF protection by setting the XSRF-TOKEN cookie for SPA authentication.'
+      parameters:
+        -
+          in: header
+          name: Referer
+          description: ''
+          example: 'https://yourapp.com'
+          schema:
+            type: string
+      responses:
+        204:
+          description: 'CSRF cookie set successfully.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+      tags:
+        - 'CSRF Protection'
+      security: []
+  /api/v1/dashboard:
+    get:
+      summary: 'Get Dashboard Info'
+      operationId: getDashboardInfo
+      description: 'Display dashboard information including site counts, page counts, and recent activity.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    total_sites: 5
+                    published_sites: 3
+                    draft_sites: 2
+                    total_pages: 12
+                    recent_activity:
+                      name: 'My Blog'
+                      updated_at: '2 hours ago'
+                    latest_site:
+                      name: Portfolio
+                      created_at: '1 day ago'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      total_sites:
+                        type: integer
+                        example: 5
+                      published_sites:
+                        type: integer
+                        example: 3
+                      draft_sites:
+                        type: integer
+                        example: 2
+                      total_pages:
+                        type: integer
+                        example: 12
+                      recent_activity:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: 'My Blog'
+                          updated_at:
+                            type: string
+                            example: '2 hours ago'
+                      latest_site:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: Portfolio
+                          created_at:
+                            type: string
+                            example: '1 day ago'
+      tags:
+        - Dashboard
+  '/api/v1/site/{site_id}/deployment':
+    get:
+      summary: 'Get site deployment.'
+      operationId: getSiteDeployment
+      description: 'Get the deployment status of the specified site.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message:
+                    apiVersion: '1.0'
+                    kind: deployment
+                    metadata: {  }
+                    spec: {  }
+                    status: {  }
+                properties:
+                  message:
+                    type: object
+                    properties:
+                      apiVersion:
+                        type: string
+                        example: '1.0'
+                      kind:
+                        type: string
+                        example: deployment
+                      metadata:
+                        type: object
+                        properties: {  }
+                      spec:
+                        type: object
+                        properties: {  }
+                      status:
+                        type: object
+                        properties: {  }
+        400:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Failed to fetch deployment.'
+                  error: 'Detailed error information.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Failed to fetch deployment.'
+                  error:
+                    type: string
+                    example: 'Detailed error information.'
+      tags:
+        - Deployments
+    post:
+      summary: 'Store site deployment.'
+      operationId: storeSiteDeployment
+      description: 'Initiate a new deployment for the specified site.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Deployment created successfully.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Deployment created successfully.'
+        400:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Failed to create deployment.'
+                  error: 'Detailed error information.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Failed to create deployment.'
+                  error:
+                    type: string
+                    example: 'Detailed error information.'
+      tags:
+        - Deployments
+    put:
+      summary: 'Update site deployment.'
+      operationId: updateSiteDeployment
+      description: 'Update the deployment of the specified site.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Deployment updated successfully.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Deployment updated successfully.'
+        400:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Failed to update deployment.'
+                  error: 'Detailed error information.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Failed to update deployment.'
+                  error:
+                    type: string
+                    example: 'Detailed error information.'
+      tags:
+        - Deployments
+    delete:
+      summary: 'Delete site deployment.'
+      operationId: deleteSiteDeployment
+      description: 'Delete the deployment of the specified site.'
+      parameters: []
+      responses:
+        204:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Deployment deleted successfully.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Deployment deleted successfully.'
+        400:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Failed to delete deployment.'
+                  error: 'Detailed error information.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Failed to delete deployment.'
+                  error:
+                    type: string
+                    example: 'Detailed error information.'
+      tags:
+        - Deployments
+    parameters:
+      -
+        in: path
+        name: site_id
+        description: 'The ID of the site.'
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
+        required: true
+        schema:
+          type: string
+  '/api/v1/site/{site_id}/deployment/restart':
+    post:
+      summary: 'Restart site deployment.'
+      operationId: restartSiteDeployment
+      description: 'Restart the deployment of the specified site.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Deployment restarted successfully.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Deployment restarted successfully.'
+        400:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Failed to restart deployment.'
+                  error: 'Detailed error information.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Failed to restart deployment.'
+                  error:
+                    type: string
+                    example: 'Detailed error information.'
+      tags:
+        - Deployments
+    parameters:
+      -
+        in: path
+        name: site_id
+        description: 'The ID of the site.'
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
+        required: true
+        schema:
+          type: string
+  /email/verification-notification:
+    post:
+      summary: 'Resend Verification Email'
+      operationId: resendVerificationEmail
+      description: 'Resend email verification notification.'
+      parameters: []
+      responses:
+        202:
+          description: 'Verification link sent.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+      tags:
+        - 'Email Verification'
+  '/email/verify/{id}/{hash}':
+    get:
+      summary: 'Verify Email'
+      operationId: verifyEmail
+      description: 'Verify user email address.'
+      parameters:
+        -
+          in: query
+          name: expires
+          description: 'The expiration timestamp of the verification link.'
+          example: 1712345678
+          required: true
+          schema:
+            type: integer
+            description: 'The expiration timestamp of the verification link.'
+            example: 1712345678
+        -
+          in: query
+          name: signature
+          description: 'The signature of the verification link.'
+          example: abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890
+          required: true
+          schema:
+            type: string
+            description: 'The signature of the verification link.'
+            example: abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890
+      responses:
+        204:
+          description: 'Email verified successfully.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+      tags:
+        - 'Email Verification'
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The user ID.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+      -
+        in: path
+        name: hash
+        description: 'The verification hash.'
+        example: abc123def456
+        required: true
+        schema:
+          type: string
+  '/api/v1/site/{site_id}/page':
+    get:
+      summary: 'Get Pages for a Site'
+      operationId: getPagesForASite
+      description: 'Display all Pages for the given Site.'
+      parameters:
+        -
+          in: query
+          name: page
+          description: 'The page number.'
+          example: 1
+          required: false
+          schema:
+            type: integer
+            description: 'The page number.'
+            example: 1
+        -
+          in: query
+          name: per_page
+          description: 'Number of items per page. Defaults to 15.'
+          example: 16
+          required: false
+          schema:
+            type: integer
+            description: 'Number of items per page. Defaults to 15.'
+            example: 16
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 019af032-3e39-70cf-b8e1-02d73bc49858
+                      title: 'Et animi quos velit et fugiat.'
+                      url: /accusantium-harum-mollitia-modi-deserunt-aut-ab
+                      created_at: '2025-12-05T20:26:55.000000Z'
+                      updated_at: '2025-12-05T20:26:55.000000Z'
+                    -
+                      id: 019af032-3e42-720d-84b8-48af8abd2146
+                      title: 'Assumenda consequatur ut et sunt quisquam.'
+                      url: /ut-eaque-alias-ratione-dolores-sed-rem-ea-ut
+                      created_at: '2025-12-05T20:26:55.000000Z'
+                      updated_at: '2025-12-05T20:26:55.000000Z'
+                  links:
+                    first: '/?page=1'
+                    last: '/?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        page: null
+                        active: false
+                      -
+                        url: '/?page=1'
+                        label: '1'
+                        page: 1
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        page: null
+                        active: false
+                    path: /
+                    per_page: 15
+                    to: 2
+                    total: 2
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 019af032-3e39-70cf-b8e1-02d73bc49858
+                        title: 'Et animi quos velit et fugiat.'
+                        url: /accusantium-harum-mollitia-modi-deserunt-aut-ab
+                        created_at: '2025-12-05T20:26:55.000000Z'
+                        updated_at: '2025-12-05T20:26:55.000000Z'
+                      -
+                        id: 019af032-3e42-720d-84b8-48af8abd2146
+                        title: 'Assumenda consequatur ut et sunt quisquam.'
+                        url: /ut-eaque-alias-ratione-dolores-sed-rem-ea-ut
+                        created_at: '2025-12-05T20:26:55.000000Z'
+                        updated_at: '2025-12-05T20:26:55.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: 019af032-3e39-70cf-b8e1-02d73bc49858
+                        title:
+                          type: string
+                          example: 'Et animi quos velit et fugiat.'
+                        url:
+                          type: string
+                          example: /accusantium-harum-mollitia-modi-deserunt-aut-ab
+                        created_at:
+                          type: string
+                          example: '2025-12-05T20:26:55.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2025-12-05T20:26:55.000000Z'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: '/?page=1'
+                      last:
+                        type: string
+                        example: '/?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            page: null
+                            active: false
+                          -
+                            url: '/?page=1'
+                            label: '1'
+                            page: 1
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            page: null
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            page:
+                              type: string
+                              example: null
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: /
+                      per_page:
+                        type: integer
+                        example: 15
+                      to:
+                        type: integer
+                        example: 2
+                      total:
+                        type: integer
+                        example: 2
+      tags:
+        - Pages
+    post:
+      summary: 'Create Page for Site'
+      operationId: createPageForSite
+      description: 'Store a newly created page for a specific site.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 019af032-3e67-7005-8039-438a4140b336
+                    title: 'Eius et animi quos velit et.'
+                    url: /perspiciatis-quo-omnis-nostrum-aut-adipisci-quidem-nostrum-qui
+                    content: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
+                    site_id: 019ae94a-1e6d-7379-9055-f165d14550a3
+                    created_at: '2025-12-05T20:26:55.000000Z'
+                    updated_at: '2025-12-05T20:26:55.000000Z'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 019af032-3e67-7005-8039-438a4140b336
+                      title:
+                        type: string
+                        example: 'Eius et animi quos velit et.'
+                      url:
+                        type: string
+                        example: /perspiciatis-quo-omnis-nostrum-aut-adipisci-quidem-nostrum-qui
+                      content:
+                        type: string
+                        example: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
+                      site_id:
+                        type: string
+                        example: 019ae94a-1e6d-7379-9055-f165d14550a3
+                      created_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+      tags:
+        - Pages
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'The title of the page . . Must not be greater than 255 characters.'
+                  example: 'My personal homepage'
+                url:
+                  type: string
+                  description: 'The URL slug for the post . . Must start with one of <code>/</code> Must not be greater than 255 characters.'
+                  example: 'my - first - post'
+                html:
+                  type: string
+                  description: 'The HTML content of the page base64 encoded and zlib compressed.'
+                  example: 'eJzT0yMAAGTvBe8 = '
+                  nullable: true
+                content:
+                  type: string
+                  description: 'The content of the schema, base64 encoded and zlib compressed JSON.'
+                  example: 'eJzT0yMAAGTvBe8 = '
+                  nullable: true
+              required:
+                - title
+                - url
+    parameters:
+      -
+        in: path
+        name: site_id
+        description: 'The ID of the site.'
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
+        required: true
+        schema:
+          type: string
+  '/api/v1/site/{site_id}/page/{page_id}':
+    get:
+      summary: 'Get Page for Site'
+      operationId: getPageForSite
+      description: 'Display the specified page for a specific site.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 019af032-3e4c-72de-b53f-ba746c338090
+                    title: 'Quo culpa laudantium accusamus temporibus.'
+                    url: /modi-reiciendis-nisi-qui-expedita-atque-modi-ipsam-qui
+                    content: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
+                    site_id: 019ae94a-1e91-7037-924d-41fd6044e06d
+                    created_at: '2025-12-05T20:26:55.000000Z'
+                    updated_at: '2025-12-05T20:26:55.000000Z'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 019af032-3e4c-72de-b53f-ba746c338090
+                      title:
+                        type: string
+                        example: 'Quo culpa laudantium accusamus temporibus.'
+                      url:
+                        type: string
+                        example: /modi-reiciendis-nisi-qui-expedita-atque-modi-ipsam-qui
+                      content:
+                        type: string
+                        example: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
+                      site_id:
+                        type: string
+                        example: 019ae94a-1e91-7037-924d-41fd6044e06d
+                      created_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Page not found for the specified site.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Page not found for the specified site.'
+      tags:
+        - Pages
+    put:
+      summary: 'Update Page for Site'
+      operationId: updatePageForSite
+      description: 'Update the specified page for a specific site.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 019af032-3e7a-709b-9d8f-700e893ed378
+                    title: 'Eius et animi quos velit et.'
+                    url: /incidunt-iure-odit-et-et-modi-ipsum
+                    content: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
+                    site_id: 019ae94a-1e67-70cb-9be6-95aae0f34c94
+                    created_at: '2025-12-05T20:26:55.000000Z'
+                    updated_at: '2025-12-05T20:26:55.000000Z'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 019af032-3e7a-709b-9d8f-700e893ed378
+                      title:
+                        type: string
+                        example: 'Eius et animi quos velit et.'
+                      url:
+                        type: string
+                        example: /incidunt-iure-odit-et-et-modi-ipsum
+                      content:
+                        type: string
+                        example: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
+                      site_id:
+                        type: string
+                        example: 019ae94a-1e67-70cb-9be6-95aae0f34c94
+                      created_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Page not found for the specified site.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Page not found for the specified site.'
+      tags:
+        - Pages
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'The title of the page . . Must not be greater than 255 characters.'
+                  example: 'My personal homepage'
+                  nullable: true
+                url:
+                  type: string
+                  description: 'The URL slug for the post . . Must start with one of <code>/</code> Must not be greater than 255 characters.'
+                  example: 'my - first - post'
+                  nullable: true
+                content:
+                  type: string
+                  description: 'The content of the schema, base64 encoded and zlib compressed JSON.'
+                  example: 'eJzT0yMAAGTvBe8 = '
+                  nullable: true
+                html:
+                  type: string
+                  description: 'The HTML content of the page base64 encoded and zlib compressed.'
+                  example: 'eJzT0yMAAGTvBe8 = '
+                  nullable: true
+    delete:
+      summary: 'Delete Page for Site'
+      operationId: deletePageForSite
+      description: 'Remove the specified page from a specific site.'
+      parameters: []
+      responses:
+        204:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {  }
+                properties: {  }
+      tags:
+        - Pages
+    parameters:
+      -
+        in: path
+        name: site_id
+        description: 'The ID of the site.'
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: page_id
+        description: 'The ID of the page.'
+        example: 019ae94a-1e5c-70b1-8858-8ebb563ea071
+        required: true
+        schema:
+          type: string
+  /user/confirm-password:
+    post:
+      summary: 'Confirm Password'
+      operationId: confirmPassword
+      description: "Confirm the user's password for sensitive operations."
+      parameters: []
+      responses:
+        201:
+          description: 'Password confirmed successfully.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+        422:
+          description: 'Password confirmation failed.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data is invalid.'
+                  errors:
+                    password:
+                      - 'The password is incorrect.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data is invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      password:
+                        type: array
+                        example:
+                          - 'The password is incorrect.'
+                        items:
+                          type: string
+      tags:
+        - 'Password Confirmation'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  description: "The user's current password."
+                  example: password123
+              required:
+                - password
+  /user/confirmed-password-status:
+    get:
+      summary: 'Get Password Confirmation Status'
+      operationId: getPasswordConfirmationStatus
+      description: "Check if the user's password has been recently confirmed."
+      parameters: []
+      responses:
+        200:
+          description: 'Password confirmation status retrieved.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  confirmed: true
+                  seconds_until_expiration: 10800
+                properties:
+                  confirmed:
+                    type: boolean
+                    example: true
+                  seconds_until_expiration:
+                    type: integer
+                    example: 10800
+      tags:
+        - 'Password Confirmation'
+  /forgot-password:
+    post:
+      summary: 'Forgot Password'
+      operationId: forgotPassword
+      description: "Send a password reset link to the user's email."
+      parameters: []
+      responses:
+        200:
+          description: 'Password reset link sent.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+        422:
+          description: 'Validation failed.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data is invalid.'
+                  errors:
+                    email:
+                      - 'The email is invalid.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data is invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The email is invalid.'
+                        items:
+                          type: string
+      tags:
+        - 'Password Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: "The user's email address."
+                  example: user@example.com
+              required:
+                - email
+      security: []
+  /reset-password:
+    post:
+      summary: 'Reset Password'
+      operationId: resetPassword
+      description: "Reset the user's password using a reset token."
+      parameters: []
+      responses:
+        200:
+          description: 'Password reset successful.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+        422:
+          description: 'Validation failed.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data is invalid.'
+                  errors:
+                    email:
+                      - 'The email is invalid.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data is invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The email is invalid.'
+                        items:
+                          type: string
+      tags:
+        - 'Password Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: "The user's email address."
+                  example: user@example.com
+                password:
+                  type: string
+                  description: 'The new password (minimum 8 characters).'
+                  example: newpassword123
+                password_confirmation:
+                  type: string
+                  description: 'Password confirmation.'
+                  example: newpassword123
+                token:
+                  type: string
+                  description: 'The password reset token.'
+                  example: reset_token_123
+              required:
+                - email
+                - password
+                - password_confirmation
+                - token
+      security: []
+  /api/v1/schema:
+    get:
+      summary: 'Get Schemas'
+      operationId: getSchemas
+      description: 'Display all schemas with pagination.'
+      parameters:
+        -
+          in: query
+          name: page
+          description: 'The page number.'
+          example: 1
+          required: false
+          schema:
+            type: integer
+            description: 'The page number.'
+            example: 1
+        -
+          in: query
+          name: per_page
+          description: 'Number of items per page. Defaults to 15. Max 100.'
+          example: 16
+          required: false
+          schema:
+            type: integer
+            description: 'Number of items per page. Defaults to 15. Max 100.'
+            example: 16
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 019af032-3d6d-721c-98d8-3b137d9c8ecc
+                      name: eius
+                      description: 'Quos velit et fugiat sunt nihil accusantium harum.'
+                      state: draft
+                      content: null
+                      created_at: '2025-12-05T20:26:55.000000Z'
+                      updated_at: '2025-12-05T20:26:55.000000Z'
+                      published_at: null
+                    -
+                      id: 019af032-3d6f-7260-a680-d9894fbfe29e
+                      name: modi
+                      description: null
+                      state: published
+                      content: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
+                      created_at: '2025-12-05T20:26:55.000000Z'
+                      updated_at: '2025-12-05T20:26:55.000000Z'
+                      published_at: null
+                  links:
+                    first: '/?page=1'
+                    last: '/?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        page: null
+                        active: false
+                      -
+                        url: '/?page=1'
+                        label: '1'
+                        page: 1
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        page: null
+                        active: false
+                    path: /
+                    per_page: 15
+                    to: 2
+                    total: 2
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 019af032-3d6d-721c-98d8-3b137d9c8ecc
+                        name: eius
+                        description: 'Quos velit et fugiat sunt nihil accusantium harum.'
+                        state: draft
+                        content: null
+                        created_at: '2025-12-05T20:26:55.000000Z'
+                        updated_at: '2025-12-05T20:26:55.000000Z'
+                        published_at: null
+                      -
+                        id: 019af032-3d6f-7260-a680-d9894fbfe29e
+                        name: modi
+                        description: null
+                        state: published
+                        content: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
+                        created_at: '2025-12-05T20:26:55.000000Z'
+                        updated_at: '2025-12-05T20:26:55.000000Z'
+                        published_at: null
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: 019af032-3d6d-721c-98d8-3b137d9c8ecc
+                        name:
+                          type: string
+                          example: eius
+                        description:
+                          type: string
+                          example: 'Quos velit et fugiat sunt nihil accusantium harum.'
+                        state:
+                          type: string
+                          example: draft
+                        content:
+                          type: string
+                          example: null
+                        created_at:
+                          type: string
+                          example: '2025-12-05T20:26:55.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2025-12-05T20:26:55.000000Z'
+                        published_at:
+                          type: string
+                          example: null
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: '/?page=1'
+                      last:
+                        type: string
+                        example: '/?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            page: null
+                            active: false
+                          -
+                            url: '/?page=1'
+                            label: '1'
+                            page: 1
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            page: null
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            page:
+                              type: string
+                              example: null
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: /
+                      per_page:
+                        type: integer
+                        example: 15
+                      to:
+                        type: integer
+                        example: 2
+                      total:
+                        type: integer
+                        example: 2
+      tags:
+        - Schemas
+    post:
+      summary: 'Create Schema'
+      operationId: createSchema
+      description: 'Store a newly created schema.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 019af032-3d7a-7122-b2af-6f7f7469edc8
+                    name: architecto
+                    description: null
+                    content: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
+                    state: published
+                    created_at: '2025-12-05T20:26:55.000000Z'
+                    updated_at: '2025-12-05T20:26:55.000000Z'
+                    published_at: null
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 019af032-3d7a-7122-b2af-6f7f7469edc8
+                      name:
+                        type: string
+                        example: architecto
+                      description:
+                        type: string
+                        example: null
+                      content:
+                        type: string
+                        example: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
+                      state:
+                        type: string
+                        example: published
+                      created_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+                      published_at:
+                        type: string
+                        example: null
+      tags:
+        - Schemas
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the schema. Must not be greater than 20 characters.'
+                  example: 'Portfolio Schema'
+                description:
+                  type: string
+                  description: 'A brief description of the schema.'
+                  example: 'A webpage schema for a personal portfolio site.'
+                  nullable: true
+                content:
+                  type: string
+                  description: 'The content of the schema, base64 encoded and lz compressed JSON.'
+                  example: eJzT0yMAAGTvBe8=
+                  nullable: true
+              required:
+                - name
+  '/api/v1/schema/{schema_id}':
+    get:
+      summary: 'Get Schema'
+      operationId: getSchema
+      description: 'Display the specified schema.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 019af032-3d75-7049-9616-381cc2d7c63a
+                    name: provident
+                    description: 'Omnis nostrum aut adipisci quidem nostrum qui commodi.'
+                    content: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
+                    state: draft
+                    created_at: '2025-12-05T20:26:55.000000Z'
+                    updated_at: '2025-12-05T20:26:55.000000Z'
+                    published_at: null
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 019af032-3d75-7049-9616-381cc2d7c63a
+                      name:
+                        type: string
+                        example: provident
+                      description:
+                        type: string
+                        example: 'Omnis nostrum aut adipisci quidem nostrum qui commodi.'
+                      content:
+                        type: string
+                        example: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
+                      state:
+                        type: string
+                        example: draft
+                      created_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+                      published_at:
+                        type: string
+                        example: null
+      tags:
+        - Schemas
+    put:
+      summary: 'Update Schema'
+      operationId: updateSchema
+      description: 'Update the specified schema.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 019af032-3d82-7225-bacd-43359cd11ad3
+                    name: architecto
+                    description: null
+                    content: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
+                    state: draft
+                    created_at: '2025-12-05T20:26:55.000000Z'
+                    updated_at: '2025-12-05T20:26:55.000000Z'
+                    published_at: null
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 019af032-3d82-7225-bacd-43359cd11ad3
+                      name:
+                        type: string
+                        example: architecto
+                      description:
+                        type: string
+                        example: null
+                      content:
+                        type: string
+                        example: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
+                      state:
+                        type: string
+                        example: draft
+                      created_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+                      published_at:
+                        type: string
+                        example: null
+      tags:
+        - Schemas
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the schema. Must not be greater than 20 characters.'
+                  example: 'Portfolio Schema'
+                description:
+                  type: string
+                  description: 'A brief description of the schema.'
+                  example: 'A webpage schema for a personal portfolio site.'
+                  nullable: true
+                content:
+                  type: string
+                  description: 'The content of the schema, base64 encoded and lz compressed JSON.'
+                  example: eJzT0yMAAGTvBe8=
+                  nullable: true
+              required:
+                - name
+    delete:
+      summary: 'Delete Schema'
+      operationId: deleteSchema
+      description: 'Remove the specified schema.'
+      parameters: []
+      responses:
+        204:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {  }
+                properties: {  }
+      tags:
+        - Schemas
+    parameters:
+      -
+        in: path
+        name: schema_id
+        description: 'The ID of the schema.'
+        example: 019ae94a-1e0d-734a-baa0-40483b13c437
+        required: true
+        schema:
+          type: string
+  '/api/v1/schema/{schema_id}/publish':
+    post:
+      summary: 'Publish Schema'
+      operationId: publishSchema
+      description: 'Publish the specified schema.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 019af032-3d7e-72ed-8e28-190da0c6130e
+                    name: quos
+                    description: null
+                    content: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
+                    state: published
+                    created_at: '2025-12-05T20:26:55.000000Z'
+                    updated_at: '2025-12-05T20:26:55.000000Z'
+                    published_at: null
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 019af032-3d7e-72ed-8e28-190da0c6130e
+                      name:
+                        type: string
+                        example: quos
+                      description:
+                        type: string
+                        example: null
+                      content:
+                        type: string
+                        example: hZBNSwNBDIb/isbrHgSpyFyLYC8t1J4sHtImraGzmWFmtnZd9r+brSIWXDwNQ/J+POlguViswHVQ2sjDmzgHf2SaY21/eCQpIU2DFhTlBH0FkqeoR8zgSmq4gphCzIN0g9vDPoVGyYQ3zAw2RCLRPbiJKUly9NiOWFewbXIJtVnZ7psQsYLboc8WooHYQtYwq28f2pdZjht4rcCLHqzr17DrTfdr/h/Vik/lEug77IeoDBsOnuTqPSRP19ZxZ32f5cNc7u5HkM6+lzQRE+tgdT73KN0fRP0n
+                      state:
+                        type: string
+                        example: published
+                      created_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+                      published_at:
+                        type: string
+                        example: null
+      tags:
+        - Schemas
+    parameters:
+      -
+        in: path
+        name: schema_id
+        description: 'The ID of the schema.'
+        example: 019ae94a-1e0d-734a-baa0-40483b13c437
+        required: true
+        schema:
+          type: string
+  /api/v1/site:
+    get:
+      summary: 'Get Sites'
+      operationId: getSites
+      description: 'Display all sites for the authenticated user.'
+      parameters:
+        -
+          in: query
+          name: page
+          description: 'The page number.'
+          example: 1
+          required: false
+          schema:
+            type: integer
+            description: 'The page number.'
+            example: 1
+        -
+          in: query
+          name: per_page
+          description: 'Number of items per page. Defaults to 15.'
+          example: 16
+          required: false
+          schema:
+            type: integer
+            description: 'Number of items per page. Defaults to 15.'
+            example: 16
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 019af032-3d89-73ad-b8d0-e3be62ea5778
+                      name: 'Crooks LLC'
+                      subdomain: rempel
+                      description: 'Sunt nihil accusantium harum mollitia.'
+                      state: draft
+                      number_of_pages: 1
+                      created_at: '2025-12-05T20:26:55.000000Z'
+                      updated_at: '2025-12-05T20:26:55.000000Z'
+                      published_at: null
+                    -
+                      id: 019af032-3d90-70ad-9f6d-969b1dbae453
+                      name: 'Schuster Inc'
+                      subdomain: cormier
+                      description: 'Omnis nostrum aut adipisci quidem nostrum qui commodi.'
+                      state: draft
+                      number_of_pages: 1
+                      created_at: '2025-12-05T20:26:55.000000Z'
+                      updated_at: '2025-12-05T20:26:55.000000Z'
+                      published_at: null
+                  links:
+                    first: '/?page=1'
+                    last: '/?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        page: null
+                        active: false
+                      -
+                        url: '/?page=1'
+                        label: '1'
+                        page: 1
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        page: null
+                        active: false
+                    path: /
+                    per_page: 15
+                    to: 2
+                    total: 2
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 019af032-3d89-73ad-b8d0-e3be62ea5778
+                        name: 'Crooks LLC'
+                        subdomain: rempel
+                        description: 'Sunt nihil accusantium harum mollitia.'
+                        state: draft
+                        number_of_pages: 1
+                        created_at: '2025-12-05T20:26:55.000000Z'
+                        updated_at: '2025-12-05T20:26:55.000000Z'
+                        published_at: null
+                      -
+                        id: 019af032-3d90-70ad-9f6d-969b1dbae453
+                        name: 'Schuster Inc'
+                        subdomain: cormier
+                        description: 'Omnis nostrum aut adipisci quidem nostrum qui commodi.'
+                        state: draft
+                        number_of_pages: 1
+                        created_at: '2025-12-05T20:26:55.000000Z'
+                        updated_at: '2025-12-05T20:26:55.000000Z'
+                        published_at: null
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: 019af032-3d89-73ad-b8d0-e3be62ea5778
+                        name:
+                          type: string
+                          example: 'Crooks LLC'
+                        subdomain:
+                          type: string
+                          example: rempel
+                        description:
+                          type: string
+                          example: 'Sunt nihil accusantium harum mollitia.'
+                        state:
+                          type: string
+                          example: draft
+                        number_of_pages:
+                          type: integer
+                          example: 1
+                        created_at:
+                          type: string
+                          example: '2025-12-05T20:26:55.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2025-12-05T20:26:55.000000Z'
+                        published_at:
+                          type: string
+                          example: null
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: '/?page=1'
+                      last:
+                        type: string
+                        example: '/?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            page: null
+                            active: false
+                          -
+                            url: '/?page=1'
+                            label: '1'
+                            page: 1
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            page: null
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            page:
+                              type: string
+                              example: null
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: /
+                      per_page:
+                        type: integer
+                        example: 15
+                      to:
+                        type: integer
+                        example: 2
+                      total:
+                        type: integer
+                        example: 2
+      tags:
+        - Sites
+    post:
+      summary: 'Create Site'
+      operationId: createSite
+      description: 'Store a newly created site for the authenticated user.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 019af032-3e25-71ac-8b68-a3e763ba7379
+                    name: 'Bailey Ltd'
+                    subdomain: okuneva
+                    description: null
+                    user_id: 019ae94a-1db3-713b-a57e-c32298fdeca0
+                    state: draft
+                    number_of_pages: 1
+                    created_at: '2025-12-05T20:26:55.000000Z'
+                    updated_at: '2025-12-05T20:26:55.000000Z'
+                    published_at: null
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 019af032-3e25-71ac-8b68-a3e763ba7379
+                      name:
+                        type: string
+                        example: 'Bailey Ltd'
+                      subdomain:
+                        type: string
+                        example: okuneva
+                      description:
+                        type: string
+                        example: null
+                      user_id:
+                        type: string
+                        example: 019ae94a-1db3-713b-a57e-c32298fdeca0
+                      state:
+                        type: string
+                        example: draft
+                      number_of_pages:
+                        type: integer
+                        example: 1
+                      created_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+                      published_at:
+                        type: string
+                        example: null
+      tags:
+        - Sites
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the site. Must not be greater than 255 characters.'
+                  example: 'My Personal Site'
+                subdomain:
+                  type: string
+                  description: 'The subdomain for the site. Must not be greater than 255 characters.'
+                  example: mypersonalsite
+                description:
+                  type: string
+                  description: 'A brief description of the site.'
+                  example: 'This is my personal website where I share my projects and blog posts.'
+                  nullable: true
+              required:
+                - name
+                - subdomain
+  '/api/v1/site/{site_id}':
+    get:
+      summary: 'Get Site'
+      operationId: getSite
+      description: 'Display the specified site.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 019af032-3d96-7100-861a-488b90c63f75
+                    name: 'McLaughlin, Leuschke and Bauch'
+                    subdomain: fritsch
+                    description: null
+                    user_id: 019ae94a-1df1-7023-b433-316d3016a245
+                    state: draft
+                    number_of_pages: 2
+                    created_at: '2025-12-05T20:26:55.000000Z'
+                    updated_at: '2025-12-05T20:26:55.000000Z'
+                    published_at: '2025-04-23 23:34:24'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 019af032-3d96-7100-861a-488b90c63f75
+                      name:
+                        type: string
+                        example: 'McLaughlin, Leuschke and Bauch'
+                      subdomain:
+                        type: string
+                        example: fritsch
+                      description:
+                        type: string
+                        example: null
+                      user_id:
+                        type: string
+                        example: 019ae94a-1df1-7023-b433-316d3016a245
+                      state:
+                        type: string
+                        example: draft
+                      number_of_pages:
+                        type: integer
+                        example: 2
+                      created_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+                      published_at:
+                        type: string
+                        example: '2025-04-23 23:34:24'
+      tags:
+        - Sites
+    put:
+      summary: 'Update Site'
+      operationId: updateSite
+      description: 'Update the specified site.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 019af032-3e2b-7079-8236-337043bf3bc4
+                    name: 'Bailey Ltd'
+                    subdomain: gulgowski
+                    description: 'Nihil accusantium harum mollitia modi deserunt.'
+                    user_id: 019ae94a-1dee-7294-a0b9-18ff5a86896f
+                    state: draft
+                    number_of_pages: 1
+                    created_at: '2025-12-05T20:26:55.000000Z'
+                    updated_at: '2025-12-05T20:26:55.000000Z'
+                    published_at: null
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 019af032-3e2b-7079-8236-337043bf3bc4
+                      name:
+                        type: string
+                        example: 'Bailey Ltd'
+                      subdomain:
+                        type: string
+                        example: gulgowski
+                      description:
+                        type: string
+                        example: 'Nihil accusantium harum mollitia modi deserunt.'
+                      user_id:
+                        type: string
+                        example: 019ae94a-1dee-7294-a0b9-18ff5a86896f
+                      state:
+                        type: string
+                        example: draft
+                      number_of_pages:
+                        type: integer
+                        example: 1
+                      created_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+                      published_at:
+                        type: string
+                        example: null
+      tags:
+        - Sites
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the site. Must not be greater than 255 characters.'
+                  example: 'My Personal Site'
+                description:
+                  type: string
+                  description: 'A brief description of the site.'
+                  example: 'This is my personal website where I share my projects and blog posts.'
+                  nullable: true
+              required:
+                - name
+    delete:
+      summary: 'Delete Site'
+      operationId: deleteSite
+      description: 'Remove the specified site.'
+      parameters: []
+      responses:
+        204:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {  }
+                properties: {  }
+      tags:
+        - Sites
+    parameters:
+      -
+        in: path
+        name: site_id
+        description: 'The ID of the site.'
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
+        required: true
+        schema:
+          type: string
+  /user/profile-information:
+    put:
+      summary: 'Update Profile'
+      operationId: updateProfile
+      description: "Update the authenticated user's profile information."
+      parameters: []
+      responses:
+        200:
+          description: 'Profile updated successfully.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+        422:
+          description: 'Profile update failed - validation error.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data is invalid.'
+                  errors:
+                    email:
+                      - 'The email has already been taken.'
+                    password:
+                      - 'The password must be at least 8 characters.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data is invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The email has already been taken.'
+                        items:
+                          type: string
+                      password:
+                        type: array
+                        example:
+                          - 'The password must be at least 8 characters.'
+                        items:
+                          type: string
+      tags:
+        - 'User Profile'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: "The user's full name."
+                  example: 'John Doe'
+                email:
+                  type: string
+                  description: "The user's email address."
+                  example: user@example.com
+              required:
+                - name
+                - email
+  /user/password:
+    put:
+      summary: 'Update Password'
+      operationId: updatePassword
+      description: "Update the authenticated user's password."
+      parameters: []
+      responses:
+        200:
+          description: 'Password updated successfully.'
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+        422:
+          description: 'Password update failed - validation error.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data is invalid.'
+                  errors:
+                    current_password:
+                      - 'The current password is incorrect.'
+                    password:
+                      - 'The password must be at least 8 characters.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data is invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      current_password:
+                        type: array
+                        example:
+                          - 'The current password is incorrect.'
+                        items:
+                          type: string
+                      password:
+                        type: array
+                        example:
+                          - 'The password must be at least 8 characters.'
+                        items:
+                          type: string
+      tags:
+        - 'User Profile'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                current_password:
+                  type: string
+                  description: "The user's current password."
+                  example: oldpassword123
+                password:
+                  type: string
+                  description: 'The new password (minimum 8 characters).'
+                  example: newpassword123
+                password_confirmation:
+                  type: string
+                  description: 'Password confirmation.'
+                  example: newpassword123
+              required:
+                - current_password
+                - password
+                - password_confirmation
+  /api/v1/user:
+    get:
+      summary: 'Get user'
+      operationId: getUser
+      description: "Return the authenticated user's information."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 019af032-3d26-702b-a56a-18b0ed1611e9
+                    name: 'Ara Wiegand'
+                    email: lhilpert@example.net
+                    email_verified_at: '2025-12-05T20:26:55.000000Z'
+                    avatar: null
+                    is_admin: false
+                    created_at: '2025-12-05T20:26:55.000000Z'
+                    updated_at: '2025-12-05T20:26:55.000000Z'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 019af032-3d26-702b-a56a-18b0ed1611e9
+                      name:
+                        type: string
+                        example: 'Ara Wiegand'
+                      email:
+                        type: string
+                        example: lhilpert@example.net
+                      email_verified_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+                      avatar:
+                        type: string
+                        example: null
+                      is_admin:
+                        type: boolean
+                        example: false
+                      created_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2025-12-05T20:26:55.000000Z'
+      tags:
+        - Users
+    delete:
+      summary: 'Delete user'
+      operationId: deleteUser
+      description: "Delete the authenticated user's account and all associated data."
+      parameters: []
+      responses:
+        204:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 'No Content'
+      tags:
+        - Users

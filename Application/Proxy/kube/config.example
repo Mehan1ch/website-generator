@@ -1,0 +1,19 @@
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data:
+    server: http://127.0.0.1:8080
+    proxy-url: http://host.docker.internal
+  name: docker-desktop
+contexts:
+- context:
+    cluster: docker-desktop
+    user: docker-desktop
+  name: docker-desktop
+current-context: docker-desktop
+kind: Config
+users:
+- name: docker-desktop
+  user:
+    client-certificate-data:
+    client-key-data:

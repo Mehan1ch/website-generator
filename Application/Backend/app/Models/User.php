@@ -1,0 +1,145 @@
+<?php
+
+namespace App\Models;
+
+use App\Enums\Permissions;
+use App\Enums\Roles;
+use Carbon\Carbon;
+use Database\Factories\UserFactory;
+use DateTime;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
+use Filament\Panel;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Permission\Traits\HasRoles;
+
+
+/**
+ * @property string $id
+ * @property string $name
+ * @property string $email
+ * @property string $password
+ * @property-read string|null $avatar
+ * @property string|null $remember_token
+ * @property-read Site $sites
+ * @property DateTime|null $email_verified_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ */
+class User extends Authenticatable implements MustVerifyEmail, HasMedia, FilamentUser, HasAvatar
+{
+    /** @use HasFactory<UserFactory> */
+    use HasFactory, Notifiable, HasApiTokens, InteractsWithMedia, HasUuids, HasRoles;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var list<string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::created(function (User $user) {
+            $user->assignRole(Roles::USER->value);
+        });
+
+        static::deleting(function (User $user) {
+            $user->sites()->delete();
+            $user->clearMediaCollection('avatar');
+        });
+    }
+
+    /**
+     * Get the user's avatar URL.
+     *
+     * @return Attribute<string|null>
+     */
+    public function avatar(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->getFirstMedia('avatar')?->getUrl()
+        );
+    }
+
+    /**
+     * Register the media collections for the user.
+     *
+     * @return void
+     */
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('avatar')
+            ->singleFile();
+    }
+
+    /**
+     * Determine if the user can access the Filament admin panel.
+     *
+     * @param Panel $panel
+     * @return bool
+     */
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->can(Permissions::ACCESS_ADMIN_PANEL->value);
+    }
+
+    /**
+     * Get the sites for the user.
+     *
+     * @return HasMany<Site>
+     */
+    public function sites(): HasMany
+    {
+        return $this->hasMany(Site::class);
+    }
+
+    /**
+     * Get the URL of the user's avatar for Filament.
+     *
+     * @return string|null
+     */
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar;
+    }
+}

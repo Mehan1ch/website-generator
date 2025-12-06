@@ -1,0 +1,319 @@
+name: Deployments
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/site/{site_id}/deployment'
+    metadata:
+      custom: []
+      groupName: Deployments
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get site deployment.'
+      description: 'Get the deployment status of the specified site.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      site_id:
+        custom: []
+        name: site_id
+        description: 'The ID of the site.'
+        required: true
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      site_id: 019ae94a-1e56-71a6-96d6-abb850c76efb
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+           "message": {
+            "apiVersion": "1.0",
+            "kind": "deployment",
+            "metadata": {},
+            "spec": {},
+            "status": {}
+            }
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 400
+        content: |-
+          {
+              "message": "Failed to fetch deployment.",
+              "error": "Detailed error information."
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/v1/site/{site_id}/deployment'
+    metadata:
+      custom: []
+      groupName: Deployments
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Store site deployment.'
+      description: 'Initiate a new deployment for the specified site.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      site_id:
+        custom: []
+        name: site_id
+        description: 'The ID of the site.'
+        required: true
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      site_id: 019ae94a-1e56-71a6-96d6-abb850c76efb
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: |-
+          {
+              "message": "Deployment created successfully."
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 400
+        content: |-
+          {
+              "message": "Failed to create deployment.",
+              "error": "Detailed error information."
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+    uri: 'api/v1/site/{site_id}/deployment'
+    metadata:
+      custom: []
+      groupName: Deployments
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update site deployment.'
+      description: 'Update the deployment of the specified site.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      site_id:
+        custom: []
+        name: site_id
+        description: 'The ID of the site.'
+        required: true
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      site_id: 019ae94a-1e56-71a6-96d6-abb850c76efb
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+              "message": "Deployment updated successfully."
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 400
+        content: |-
+          {
+              "message": "Failed to update deployment.",
+              "error": "Detailed error information."
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/site/{site_id}/deployment'
+    metadata:
+      custom: []
+      groupName: Deployments
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete site deployment.'
+      description: 'Delete the deployment of the specified site.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      site_id:
+        custom: []
+        name: site_id
+        description: 'The ID of the site.'
+        required: true
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      site_id: 019ae94a-1e56-71a6-96d6-abb850c76efb
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 204
+        content: |-
+          {
+              "message": "Deployment deleted successfully."
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 400
+        content: |-
+          {
+              "message": "Failed to delete deployment.",
+              "error": "Detailed error information."
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/v1/site/{site_id}/deployment/restart'
+    metadata:
+      custom: []
+      groupName: Deployments
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Restart site deployment.'
+      description: 'Restart the deployment of the specified site.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      site_id:
+        custom: []
+        name: site_id
+        description: 'The ID of the site.'
+        required: true
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      site_id: 019ae94a-1e56-71a6-96d6-abb850c76efb
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+              "message": "Deployment restarted successfully."
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 400
+        content: |-
+          {
+              "message": "Failed to restart deployment.",
+              "error": "Detailed error information."
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null

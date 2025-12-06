@@ -1,0 +1,56 @@
+name: Dashboard
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/dashboard
+    metadata:
+      custom: []
+      groupName: Dashboard
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Dashboard Info'
+      description: 'Display dashboard information including site counts, page counts, and recent activity.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "data": {
+              "total_sites": 5,
+              "published_sites": 3,
+              "draft_sites": 2,
+              "total_pages": 12,
+              "recent_activity": {
+                "name": "My Blog",
+                "updated_at": "2 hours ago"
+              },
+              "latest_site": {
+                "name": "Portfolio",
+                "created_at": "1 day ago"
+              }
+            }
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null

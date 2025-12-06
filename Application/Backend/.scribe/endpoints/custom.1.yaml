@@ -1,0 +1,452 @@
+# Laravel Fortify and Sanctum Authentication Endpoints
+
+# Authentication Group
+- httpMethods:
+    - POST
+  uri: /login
+  metadata:
+    groupName: Authentication
+    groupDescription: Authentication endpoints provided by Laravel Fortify
+    title: Login
+    description: Authenticate a user and return a Sanctum token.
+    authenticated: false
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  bodyParameters:
+    email:
+      name: email
+      description: The user's email address.
+      required: true
+      example: user@example.com
+      type: string
+      format: email
+    password:
+      name: password
+      description: The user's password.
+      required: true
+      example: password123
+      type: string
+      minLength: 8
+  responses:
+    - status: 200
+      description: Login successful.
+      content: null
+    - status: 422
+      description: Login failed - invalid credentials.
+      content:
+        {
+          message: "The given data is invalid.",
+          errors: {
+            email: [
+              "These credentials do not match our records."
+            ]
+          }
+        }
+
+- httpMethods:
+    - POST
+  uri: /logout
+  metadata:
+    groupName: Authentication
+    title: Logout
+    description: Log out the authenticated user and revoke their tokens.
+    authenticated: true
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+    Authorization: Bearer {token}
+  responses:
+    - status: 204
+      description: Logout successful.
+      content: null
+
+- httpMethods:
+    - POST
+  uri: /register
+  metadata:
+    groupName: Authentication
+    title: Register
+    description: Register a new user account.
+    authenticated: false
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  bodyParameters:
+    name:
+      name: name
+      description: The user's full name.
+      required: true
+      example: John Doe
+      type: string
+      maxLength: 255
+    email:
+      name: email
+      description: The user's email address.
+      required: true
+      example: user@example.com
+      type: string
+      format: email
+      maxLength: 255
+    password:
+      name: password
+      description: The user's password (minimum 8 characters).
+      required: true
+      example: password123
+      type: string
+      minLength: 8
+    password_confirmation:
+      name: password_confirmation
+      description: Password confirmation.
+      required: true
+      example: password123
+      type: string
+      minLength: 8
+      matches: password
+  responses:
+    - status: 201
+      description: Registration successful.
+      content: null
+    - status: 422
+      description: Validation failed.
+      content:
+        {
+          message: "The given data is invalid.",
+          errors: {
+            email: [
+              "The email has already been taken."
+            ],
+            password: [
+              "The password must be at least 8 characters."
+            ]
+          }
+        }
+
+# Password Management Group
+- httpMethods:
+    - POST
+  uri: /forgot-password
+  metadata:
+    groupName: Password Management
+    groupDescription: Password reset and management endpoints
+    title: Forgot Password
+    description: Send a password reset link to the user's email.
+    authenticated: false
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  bodyParameters:
+    email:
+      name: email
+      description: The user's email address.
+      required: true
+      example: user@example.com
+      type: string
+      format: email
+  responses:
+    - status: 200
+      description: Password reset link sent.
+      content: null
+    - status: 422
+      description: Validation failed.
+      content:
+        {
+          message: "The given data is invalid.",
+          errors: {
+            email: [
+              "The email is invalid."
+            ],
+          }
+        }
+
+- httpMethods:
+    - POST
+  uri: /reset-password
+  metadata:
+    groupName: Password Management
+    title: Reset Password
+    description: Reset the user's password using a reset token.
+    authenticated: false
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  bodyParameters:
+    email:
+      name: email
+      description: The user's email address.
+      required: true
+      example: user@example.com
+      type: string
+      format: email
+    password:
+      name: password
+      description: The new password (minimum 8 characters).
+      required: true
+      example: newpassword123
+      type: string
+      minLength: 8
+    password_confirmation:
+      name: password_confirmation
+      description: Password confirmation.
+      required: true
+      example: newpassword123
+      type: string
+      minLength: 8
+      matches: password
+    token:
+      name: token
+      description: The password reset token.
+      required: true
+      example: reset_token_123
+      type: string
+  responses:
+    - status: 200
+      description: Password reset successful.
+      content: null
+    - status: 422
+      description: Validation failed.
+      content:
+        {
+          message: "The given data is invalid.",
+          errors: {
+            email: [
+              "The email is invalid."
+            ],
+          }
+        }
+
+# Email Verification Group
+- httpMethods:
+    - POST
+  uri: /email/verification-notification
+  metadata:
+    groupName: Email Verification
+    groupDescription: Email verification endpoints
+    title: Resend Verification Email
+    description: Resend email verification notification.
+    authenticated: true
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+    Authorization: Bearer {token}
+  responses:
+    - status: 202
+      description: 'Verification link sent.'
+      content: null
+
+- httpMethods:
+    - GET
+  uri: /email/verify/{id}/{hash}
+  metadata:
+    groupName: Email Verification
+    title: Verify Email
+    description: Verify user email address.
+    authenticated: true
+  headers:
+    Accept: application/json
+    Authorization: Bearer {token}
+  queryParameters:
+    expires:
+      name: expires
+      description: The expiration timestamp of the verification link.
+      required: true
+      example: 1712345678
+      type: integer
+    signature:
+      name: signature
+      description: The signature of the verification link.
+      required: true
+      example: abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890
+      type: string
+  urlParameters:
+    id:
+      name: id
+      description: The user ID.
+      required: true
+      example: 1
+      type: integer
+    hash:
+      name: hash
+      description: The verification hash.
+      required: true
+      example: abc123def456
+      type: string
+  responses:
+    - status: 204
+      description: Email verified successfully.
+      content: null
+
+- httpMethods:
+    - PUT
+  uri: /user/profile-information
+  metadata:
+    groupName: User Profile
+    title: Update Profile
+    description: Update the authenticated user's profile information.
+    authenticated: true
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+    Authorization: Bearer {token}
+  bodyParameters:
+    name:
+      name: name
+      description: The user's full name.
+      required: true
+      example: John Doe
+      type: string
+    email:
+      name: email
+      description: The user's email address.
+      required: true
+      example: user@example.com
+      type: string
+      format: email
+  responses:
+    - status: 200
+      description: Profile updated successfully.
+      content: null
+    - status: 422
+      description: Profile update failed - validation error.
+      content:
+        {
+          message: "The given data is invalid.",
+          errors: {
+            email: [
+              "The email has already been taken."
+            ],
+            password: [
+              "The password must be at least 8 characters."
+            ]
+          }
+        }
+
+- httpMethods:
+    - PUT
+  uri: /user/password
+  metadata:
+    groupName: User Profile
+    title: Update Password
+    description: Update the authenticated user's password.
+    authenticated: true
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+    Authorization: Bearer {token}
+  bodyParameters:
+    current_password:
+      name: current_password
+      description: The user's current password.
+      required: true
+      example: oldpassword123
+      type: string
+      minLength: 8
+    password:
+      name: password
+      description: The new password (minimum 8 characters).
+      required: true
+      example: newpassword123
+      type: string
+      minLength: 8
+    password_confirmation:
+      name: password_confirmation
+      description: Password confirmation.
+      required: true
+      example: newpassword123
+      type: string
+      minLength: 8
+      matches: password
+  responses:
+    - status: 200
+      description: Password updated successfully.
+      content: null
+    - status: 422
+      description: Password update failed - validation error.
+      content:
+        {
+          message: "The given data is invalid.",
+          errors: {
+            current_password: [
+              "The current password is incorrect."
+            ],
+            password: [
+              "The password must be at least 8 characters."
+            ]
+          }
+        }
+
+# Password Confirmation Group
+- httpMethods:
+    - POST
+  uri: /user/confirm-password
+  metadata:
+    groupName: Password Confirmation
+    groupDescription: Password confirmation endpoints for sensitive operations
+    title: Confirm Password
+    description: Confirm the user's password for sensitive operations.
+    authenticated: true
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+    Authorization: Bearer {token}
+  bodyParameters:
+    password:
+      name: password
+      description: The user's current password.
+      required: true
+      example: password123
+      type: string
+      minLength: 8
+  responses:
+    - status: 201
+      description: Password confirmed successfully.
+      content: null
+    - status: 422
+      description: Password confirmation failed.
+      content:
+        {
+          message: "The given data is invalid.",
+          errors: {
+            password: [
+              "The password is incorrect."
+            ]
+          }
+        }
+
+- httpMethods:
+    - GET
+  uri: /user/confirmed-password-status
+  metadata:
+    groupName: Password Confirmation
+    title: Get Password Confirmation Status
+    description: Check if the user's password has been recently confirmed.
+    authenticated: true
+  headers:
+    Accept: application/json
+    Authorization: Bearer {token}
+  responses:
+    - status: 200
+      description: Password confirmation status retrieved.
+      content:
+        {
+          "confirmed": true,
+          "seconds_until_expiration": 10800
+        }
+
+# CSRF Protection Group
+- httpMethods:
+    - GET
+  uri: /sanctum/csrf-cookie
+  metadata:
+    groupName: CSRF Protection
+    groupDescription: CSRF token management for SPA authentication
+    title: Get CSRF Cookie
+    description: Initialize CSRF protection by setting the XSRF-TOKEN cookie for SPA authentication.
+    authenticated: false
+  headers:
+    Accept: application/json
+    Referer: 'https://yourapp.com'
+  responses:
+    - status: 204
+      description: CSRF cookie set successfully.
+      content: null

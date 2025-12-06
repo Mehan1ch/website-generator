@@ -1,0 +1,308 @@
+name: Sites
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/site
+    metadata:
+      custom: []
+      groupName: Sites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Sites'
+      description: 'Display all sites for the authenticated user.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      page:
+        custom: []
+        name: page
+        description: 'The page number.'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      per_page:
+        custom: []
+        name: per_page
+        description: 'Number of items per page. Defaults to 15.'
+        required: false
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      page: 1
+      per_page: 16
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":"019af032-3d89-73ad-b8d0-e3be62ea5778","name":"Crooks LLC","subdomain":"rempel","description":"Sunt nihil accusantium harum mollitia.","state":"draft","number_of_pages":1,"created_at":"2025-12-05T20:26:55.000000Z","updated_at":"2025-12-05T20:26:55.000000Z","published_at":null},{"id":"019af032-3d90-70ad-9f6d-969b1dbae453","name":"Schuster Inc","subdomain":"cormier","description":"Omnis nostrum aut adipisci quidem nostrum qui commodi.","state":"draft","number_of_pages":1,"created_at":"2025-12-05T20:26:55.000000Z","updated_at":"2025-12-05T20:26:55.000000Z","published_at":null}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"\/?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"\/","per_page":15,"to":2,"total":2}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/site/{site_id}'
+    metadata:
+      custom: []
+      groupName: Sites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Site'
+      description: 'Display the specified site.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      site_id:
+        custom: []
+        name: site_id
+        description: 'The ID of the site.'
+        required: true
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      site_id: 019ae94a-1e56-71a6-96d6-abb850c76efb
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":"019af032-3d96-7100-861a-488b90c63f75","name":"McLaughlin, Leuschke and Bauch","subdomain":"fritsch","description":null,"user_id":"019ae94a-1df1-7023-b433-316d3016a245","state":"draft","number_of_pages":2,"created_at":"2025-12-05T20:26:55.000000Z","updated_at":"2025-12-05T20:26:55.000000Z","published_at":"2025-04-23 23:34:24"}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/site
+    metadata:
+      custom: []
+      groupName: Sites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create Site'
+      description: 'Store a newly created site for the authenticated user.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: 'The name of the site. Must not be greater than 255 characters.'
+        required: true
+        example: 'My Personal Site'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      subdomain:
+        custom: []
+        name: subdomain
+        description: 'The subdomain for the site. Must not be greater than 255 characters.'
+        required: true
+        example: mypersonalsite
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      description:
+        custom: []
+        name: description
+        description: 'A brief description of the site.'
+        required: false
+        example: 'This is my personal website where I share my projects and blog posts.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      name: 'My Personal Site'
+      subdomain: mypersonalsite
+      description: 'This is my personal website where I share my projects and blog posts.'
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: '{"data":{"id":"019af032-3e25-71ac-8b68-a3e763ba7379","name":"Bailey Ltd","subdomain":"okuneva","description":null,"user_id":"019ae94a-1db3-713b-a57e-c32298fdeca0","state":"draft","number_of_pages":1,"created_at":"2025-12-05T20:26:55.000000Z","updated_at":"2025-12-05T20:26:55.000000Z","published_at":null}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+    uri: 'api/v1/site/{site_id}'
+    metadata:
+      custom: []
+      groupName: Sites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update Site'
+      description: 'Update the specified site.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      site_id:
+        custom: []
+        name: site_id
+        description: 'The ID of the site.'
+        required: true
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      site_id: 019ae94a-1e56-71a6-96d6-abb850c76efb
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: 'The name of the site. Must not be greater than 255 characters.'
+        required: true
+        example: 'My Personal Site'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      description:
+        custom: []
+        name: description
+        description: 'A brief description of the site.'
+        required: false
+        example: 'This is my personal website where I share my projects and blog posts.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      name: 'My Personal Site'
+      description: 'This is my personal website where I share my projects and blog posts.'
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":"019af032-3e2b-7079-8236-337043bf3bc4","name":"Bailey Ltd","subdomain":"gulgowski","description":"Nihil accusantium harum mollitia modi deserunt.","user_id":"019ae94a-1dee-7294-a0b9-18ff5a86896f","state":"draft","number_of_pages":1,"created_at":"2025-12-05T20:26:55.000000Z","updated_at":"2025-12-05T20:26:55.000000Z","published_at":null}}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/site/{site_id}'
+    metadata:
+      custom: []
+      groupName: Sites
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete Site'
+      description: 'Remove the specified site.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      site_id:
+        custom: []
+        name: site_id
+        description: 'The ID of the site.'
+        required: true
+        example: 019ae94a-1e56-71a6-96d6-abb850c76efb
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      site_id: 019ae94a-1e56-71a6-96d6-abb850c76efb
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 204
+        content: '{}'
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
