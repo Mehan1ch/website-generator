@@ -1,7 +1,7 @@
 % !TeX spellcheck = en_GB
 % !TeX encoding = UTF-8
 % !TeX program = xelatex
-% TODO Change language to en_GB (recommended) or en_US for English documents
+% Change language to en_GB (recommended) or en_US for English documents
 \documentclass[11pt,a4paper,oneside]{report}             % Single-side
 %\documentclass[11pt,a4paper,twoside,openright]{report}  % Duplex
 
@@ -31,7 +31,6 @@
 \newcommand{\szerzoMeta}{\vikszerzoVezeteknev{} \vikszerzoKeresztnev} % egy szerző esetén
 %\newcommand{\szerzoMeta}{\vikszerzoVezeteknev{} \vikszerzoKeresztnev, \tdkszerzoB} % két szerző esetén
 
-%TODO Language configuration -- choose one
 % Beállítások magyar nyelvű dolgozathoz
 %\input{include/thesis-hu}
 % Settings for English documents
@@ -54,47 +53,39 @@
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 \include{include/titlepage}
 
-
 % Table of Contents
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 \tableofcontents\vfill
-
 
 % Declaration and Abstract
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 \include{include/declaration}
 \include{content/abstract}
 
-
 % The main part of the thesis
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 \pagenumbering{arabic}
 
-%TODO import your own content
 \include{content/chapters/introduction/introduction}
-\include{content/chapters/planning/planning}
-\include{content/chapters/technologies/technologies}
+\include{content/chapters/literature-review/literature-review}
 \include{content/chapters/development/development}
 \include{content/chapters/testing/testing}
+\include{content/chapters/production/production}
 \include{content/chapters/summary/summary}
-
 
 % Acknowledgements
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 \include{content/acknowledgement}
-
 
 % List of Figures, Tables
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %\listoffigures\addcontentsline{toc}{chapter}{\listfigurename}
 %\listoftables\addcontentsline{toc}{chapter}{\listtablename}
 
-
 % Bibliography
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 \addcontentsline{toc}{chapter}{\bibname}
 \bibliography{bib/mybib}
-
 
 % Appendix
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
