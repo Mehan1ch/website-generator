@@ -1,0 +1,15 @@
+Otwell
+Symfony
+FrankenPHP
+Spatie
+FilamentPHP
+tsx
+TanStack
+useEffect
+Zustand
+GrapesJS
+CraftJS
+kubectl
+init
+Traefik
+Replicasets

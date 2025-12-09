@@ -3,7 +3,7 @@
 In order to develop a software as a service (SaaS) application suite we first have to explore what a SaaS entails.
 To do this an overview and understanding of cloud computing and its related terminologies is necessary.
 ISO defines cloud computing as a
-``paradigm for enabling network access to a scalable and elastic pool of shareable physical or virtual resources with self-service provisioning and administration on-demand. \cite{ISO/IEC22123-1}''
+``paradigm for enabling network access to a scalable and elastic pool of shareable physical or virtual resources with self-service provisioning and administration on-demand \cite{ISO/IEC22123-1}.''
 The NIST (National Institute of Standards and Technology) defines five essential characteristics, four deployment models and three service models for the cloud. \cite{mell2011nist}
 
 The essential characteristics are the following:
@@ -11,7 +11,7 @@ The essential characteristics are the following:
   \item On demand self-service: resources can be provisioned without additional human assistance.
   \item Broad network access: users can access capabilities through standardized methods over the network.
   \item Resource pooling: the provider manages their cloud resources in such a way that it can serve multiple customers flexibly.
-  \item Rapid elasticity: capabilities are scalable and reassignable on demand.
+  \item Rapid elasticity: capabilities are scalable and re-assignable on demand.
   \item Measured service: resource usage is monitored, controlled and automatically optimized.
 \end{itemize}
 
@@ -33,7 +33,7 @@ Most importantly for the topic the three service models:
     various client devices through either a thin client interface, such as a web browser (e.g.,
     web-based email), or a program interface. The consumer does not manage or control the
     underlying cloud infrastructure including network, servers, operating systems, storage, or
-    even individual application capabilities, with the possible exception of limited user-specific application configuration settings.'' \cite{mell2011nist}
+    even individual application capabilities, with the possible exception of limited user-specific application configuration settings \cite{mell2011nist}.''
 \end{itemize}
 
 There are many cloud providers available for use most notably Amazon Web Services (AWS), Microsoft's Azure and Google Cloud Platform (GCP), which boast numerous amount services belonging to the models described previously.
@@ -44,7 +44,7 @@ After establishing a definition of SaaS and its related terminologies, lets dive
 
 ``Software as a service (SaaS) is a software delivery model in which
 third-party providers provide software as a service rather than as a
-product over the Internet for multiple users.'' \cite{aleem2017architecture}
+product over the Internet for multiple users \cite{aleem2017architecture}.''
 SaaS applications hence are also web applications and built with web technologies and frameworks.
 However not all web applications are SaaS due to the aforementioned delivery model.
 In a way SaaS is a specific subset of web applications.
@@ -69,4 +69,8 @@ In a cloud environment a scale-out solution is relied on more by default due to 
 However, most complex production system usually combine the two forms in some form. Not only that SaaS platforms commonly employ either a two level or a generalized K-level scalability structure where each level is a separate dimension of the service capable of scaling independently. Scaling solutions are also made tenant aware so that each tenant gets scaled for their respective needs. \cite{scalable}
 
 Of course plenty more aspects could be reviewed and explored regarding SaaS applications, however the previously mentioned concerns and areas are sufficient to get a general understanding required for the topic.
-% TODO: some real life SaaS examples related to the topics application.
+
+Nowadays, many popular applications operate using a SaaS model such as Microsoft's Office suite, Slack or Notion.
+In regard to the thesis topic there are also many similar existing solutions such as Squarespace, Wix, GoDaddy or Shopify.
+However, they almost always require a subscription or one time payment upfront and or only offer a limited trial.
+They also frequently have a steep learning curve due to their complexity, and specialize in one given business area.
