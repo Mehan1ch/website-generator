@@ -1,23 +1,24 @@
 \section{React}
 
-This section provides a short overview of React and more importantly the packages I'm going to use throughout the implementation. React is JavaScript library for building user interfaces (UI) through reusable and composable components. It leverages a virtual DOM (Document Object Model) that decides whether the component has to be re-rendered or not based on the state and properties (props) of the component and their changes. \cite{javeed2019performance}
+This section provides a short overview of React and more importantly the packages I'm going to use throughout the implementation. React is JavaScript library for building user interfaces (UI) through reusable and composable components. It leverages a virtual DOM (Document Object Model) that decides whether the component has to be re-rendered or not based on the state and properties (props) of the component and their changes \cite{javeed2019performance}.
 
-React is commonly used to implement client-side rendered single page applications (SPA), where only one HTML file is sent from the server and the DOM is dynamically rebuilt by the bundled JavaScript code, without needing to make additional requests to the server. \cite{spa}
+React is commonly used to implement client-side rendered single page applications (SPA), where only one HTML file is sent from the server and the DOM is dynamically rebuilt by the bundled JavaScript code, without needing to make additional requests to the server \cite{spa}.
 
 \subsection{SPA routing: TanStack Router}
 
 Since SPA-s only serve one HTML file from the backend they need some way to know which component to render for which web route. For this routing libraries are used.
-In React the most popular routing library has been React Router for a long time. \cite{ganatra2018react}
-However, recently React Router became part of the Remix framework which was later rebranded as version 7 of React Router and introduced declarative, data and framework modes to the router. \cite{remix_react_router_v7}
+In React the most popular routing library has been React Router for a long time \cite{ganatra2018react}.
+However, recently React Router became part of the Remix framework which was later rebranded as version 7 of React Router and introduced declarative, data and framework modes to the router \cite{remix_react_router_v7}.
 Due to these changes and the fact that I planned to use TanStack Query (formerly known as React Query) I opted to use TanStack Router instead for easier use and better integration.
 
-TanStack Router provides many features out of the box including but not limited to file and code based routing, caching, prefetching and data loading, route contexts, search and URL parameter validation and native TypeScript support and type safe navigation. \cite{tanstack_router}
+TanStack Router provides many features out of the box including but not limited to file and code based routing, caching, prefetching and data loading, route contexts, search and URL parameter validation and native TypeScript support and type safe navigation \cite{tanstack_router}.
 
 The thesis project uses file-based routing, which we should take a closer look at.
 When we create our React application a router instance is created with the default context (e.g. auth, theming) and settings like error boundaries, cache stale time and view transitions.
 We also have to create a routes folder and a root route where we can configure application wide error, not found and loading components.
 From here on out all tsx files (except the ones with special naming) will be treated as routes and will be auto managed by the router.
-This means creating route stubs and auto updating them on changes. From the structure of the routes' folder a route tree file will also be generated which provides the type safe route checking features. However, files can use special naming conventions for given purposes. The ones relevant for this project is demonstrated in Table \ref{tab:tanstack_router}
+This means creating route stubs and auto updating them on changes. From the structure of the routes' folder a route tree file will also be generated which provides the type safe route checking features.
+However, files can use special naming conventions for given purposes. The ones relevant for this project is demonstrated in Table \ref{tab:tanstack_router}
 
 \begin{table}[H]
   \centering
@@ -36,8 +37,9 @@ This means creating route stubs and auto updating them on changes. From the stru
   \end{tabular}
 \end{table}
 
-Folders can also be used for nesting instead of the dot notation with the prefixes outlined above. The main difference is in folder based grouping the file serving exact path of the folder (e.g.g /posts) must be named \texttt{index.tsx} while layout routes should be named \texttt{route.tsx}.
-Folders can also be used for logical grouping without adding additional routes segments by putting the folder name in parentheses (e.g. (auth)). \cite{tanstack_router}
+Folders can also be used for nesting instead of the dot notation with the prefixes outlined above.
+The main difference is in folder based grouping the file serving exact path of the folder (e.g.g /posts) must be named \texttt{index.tsx} while layout routes should be named \texttt{route.tsx}.
+Folders can also be used for logical grouping without adding additional routes segments by putting the folder name in parentheses (e.g. (auth))  \cite{tanstack_router}.
 
 \subsection{TanStack Query}
 
@@ -45,17 +47,18 @@ Folders can also be used for logical grouping without adding additional routes s
 
 The library integrates seamlessly with TanStack Router and helps replace boilerplate API data fetching codes relying on fetch, useEffect and state management.
 Moreover, the package providers intelligent and automatic caching, background updates and request deduplication.
-TanStack Query has three fundamental concepts, queries which fetch data (GET), mutations that modify data (PUT, POST, DELETE) and the query client which is the coordinator of the other two. \cite{garg2025react}
+TanStack Query has three fundamental concepts, queries which fetch data (GET), mutations that modify data (PUT, POST, DELETE) and the query client which is the coordinator of the other two \cite{garg2025react}.
 
 Under the hood the library uses Stale-While-Revalidate (SWR) caching which was put forward by RFC 5861 \cite{rfc_5861}. SWR is a client side caching strategy that works the following way. The client caches all queries upon fetching.
 The next time the user would need the result of that query \textbf{stale} data is served immediately, \textbf{while} triggering a re-fetch in the background.
 Once the fresh data is returned by the server it is \textbf{revalidate}d and the UI is updated without blocking.
-The queries are identified by their query key which is most often the path of the query and all or any associated URL parameters. The cache can become stale after a set timeout, be manually invalidated, or on window or page switches and network reconnections \cite{micheal2025leveraging}
+The queries are identified by their query key which is most often the path of the query and all or any associated URL parameters.
+The cache can become stale after a set timeout, be manually invalidated, or on window or page switches and network reconnections \cite{micheal2025leveraging}.
 This can be seen illustrated on Figure \ref{fig:swr}.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.2]{./figures/swr.png}
+  \includegraphics[width=\linewidth]{./figures/swr.png}
   \caption{Stale-While-Revalidate caching}
   \label{fig:swr}
 \end{figure}
@@ -64,6 +67,8 @@ This can be seen illustrated on Figure \ref{fig:swr}.
 
 Due to JavaScript's and by extension Reacts rich package and library ecosystem there exist multiple options to choose from regarding all needs.
 For the basis of the editor functionality I investigated two libraries, namely GrapesJS and CraftJS.
-They both offer capabilities to build ones own editor with drag and droppable UI elements. \cite{bagwani2024implementing}
+They both offer capabilities to build ones own editor with drag and droppable UI elements \cite{bagwani2024implementing}.
 Ultimately I decided against GrapesJS as the CraftJS is built more around React, while the former relies more heavily on pure JavaScript elements.
-CraftJS modularizes the editor an allows one to fully customize it according to their own needs. \cite{craftjs}
+CraftJS modularizes the editor an allows one to fully customize it according to their own needs \cite{craftjs}.
+
+%TODO: extend with details

@@ -4,7 +4,7 @@ In order to develop a software as a service (SaaS) application suite we first ha
 To do this an overview and understanding of cloud computing and its related terminologies is necessary.
 ISO defines cloud computing as a
 ``paradigm for enabling network access to a scalable and elastic pool of shareable physical or virtual resources with self-service provisioning and administration on-demand \cite{ISO/IEC22123-1}.''
-The NIST (National Institute of Standards and Technology) defines five essential characteristics, four deployment models and three service models for the cloud. \cite{mell2011nist}
+The NIST (National Institute of Standards and Technology) defines five essential characteristics, four deployment models and three service models for the cloud \cite{mell2011nist}.
 
 The essential characteristics are the following:
 \begin{itemize}
@@ -49,24 +49,26 @@ SaaS applications hence are also web applications and built with web technologie
 However not all web applications are SaaS due to the aforementioned delivery model.
 In a way SaaS is a specific subset of web applications.
 
-There is not a fixed defined set of characteristics that a SaaS has to meet in order to be considered one, however there are some commonly recurring ones that most take into account, such as multi-tenancy, customization and scalability. \cite{espadas2008application}
+There is not a fixed defined set of characteristics that a SaaS has to meet in order to be considered one, however there are some commonly recurring ones that most take into account, such as multi-tenancy, customization and scalability \cite{espadas2008application}.
 
 Most SaaS applications support some form of multi tenancy.
 Multi tenancy is the ability to share the same (and single) hosted instance of the application between multiple tenants, instead of deploying the application separately for each tenant.
-A tenant is a user or group of users (e.g. an organization) with the same share of the service. \cite{krebs2012architectural}
+A tenant is a user or group of users (e.g. an organization) with the same share of the service \cite{krebs2012architectural}.
 Commonly people refer to multi-tenancy as the ability to have multiple organizations use the service with their own share and users, however as we can see this is not a strict requirement.
 There are many ways to achieve multi-tenancy with different amounts of complexity in concern areas like architecture, scaling, and security.
-The methods usually differ by how separated each tenants share is on a database, data model and infrastructure level. \cite{tsai_bai_huang_2014}
+The methods usually differ by how separated each tenants share is on a database, data model and infrastructure level \cite{tsai_bai_huang_2014}.
 
 This goes hand-in hand with the next common characteristic which is customization. SaaS applications must support a level of customization to meet all tenants needs. This allows tenants to adapt the service more seamlessly into their workflows, processes and requirements. The ability to change aspects also reduces repetitive tasks between users of the same tenants.
 Customization can range from interface level differences to full on tailoring of the tenants share of the application down to the platform or even infrastructure level.
-Each added aspect of personalization however increases complexity, due to which a balance must be struck between customization and standardization. \cite{aslam2023benefits}
+Each added aspect of personalization however increases complexity, due to which a balance must be struck between customization and standardization \cite{aslam2023benefits}.
 
 Scalability is the ability of the service to handle increasing workloads and usage needs.
 Generally there are two methods of scaling, vertical scaling (also known as scale-up) and horizontal scaling (also known as scale-out).
 Vertical scaling involves giving more resources to the machine running the service, while horizontal scaling means distributing the application on multiple machines.
 In a cloud environment a scale-out solution is relied on more by default due to the available amount of resources and also due to the fact that increasing a machines resources is only feasible up to a level.
-However, most complex production system usually combine the two forms in some form. Not only that SaaS platforms commonly employ either a two level or a generalized K-level scalability structure where each level is a separate dimension of the service capable of scaling independently. Scaling solutions are also made tenant aware so that each tenant gets scaled for their respective needs. \cite{scalable}
+However, most complex production system usually combine the two forms in some form.
+Not only that SaaS platforms commonly employ either a two level or a generalized K-level scalability structure where each level is a separate dimension of the service capable of scaling independently.
+Scaling solutions are also made tenant aware so that each tenant gets scaled for their respective needs \cite{scalable}.
 
 Of course plenty more aspects could be reviewed and explored regarding SaaS applications, however the previously mentioned concerns and areas are sufficient to get a general understanding required for the topic.
 
