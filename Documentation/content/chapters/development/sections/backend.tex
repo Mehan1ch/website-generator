@@ -1,1 +1,45 @@
 \section{Backend}
+\subsection{Setup}
+The backend is written primarily using the Laravel PHP web framework as stated beforehand.
+As the first step the application has to be installed and set up.
+This can be done with Laravel's own installer, where many application templates can be selected.
+A React template is available, however that uses Inertia.JS by default which is a package that enables the frontend to be server side routed a minimal API backend template.
+So Laravel will serve as an API backend and the view layer of the MVC architecture will be entirely handled by the frontend.
+
+After installation, I decided to install the Laravel Sail package which provides a preconfigured development Docker Compose setup, and also provides options to install additional components into our environment.
+The extra containers in our case will be the MySQL database, the Mailpit SMTP test server and the MinIO S3 compatible object storage.
+Sail is however published as a package which by default would need a local PHP and Composer (PHP's package manager) installation.
+This would kind of defeat its purpose.
+Luckily this can be avoided by using a temporary PHP container to quickly install initial dependencies and then use the Sail application for further required packages.
+
+Afterwards the provided \texttt{.env.example} file needs to be copied to \texttt{.env} and the appropriate environment variables need to be set, including the mail server, database and object storage connections.
+Finally, the application key must be initialized using the Artisan CLI and the default database migrations have to be run.
+
+\subsection{Data Layer}
+
+Let me start building up the backend's feature set from the bottom, starting with the parts of the Eloquent ORM.
+The database schema of the backend including the most important tables can be seen on Figure \ref{fig:database}.
+
+\textit{Note:} Laravel has some other default tables, related to built-in features such as jobs and caching that I omitted from the diagram for better clarity as they will be unused in the application.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/database.png}
+  \caption{Database schema}
+  \label{fig:database}
+\end{figure}
+
+The 'users' table is auto generated, the only change I made is regarding the ID (Identifier) field.
+In all tables and models I opted to switch from the default integer ID to UUIDv7 (Universally Unique Identifiers version 7) which are time-based sortable universally unique identifiers composed of 32 hexadecimal digits.
+
+The role related tables are added by the Spatie's Laravel Permission package, which I will talk about in more detail in the authorization Subsection \ref{subsection:authorization}.
+
+On the other hand the media table is added by
+
+\subsection{Authentication}
+\subsection{Authorization}
+\label{subsection:authorization}
+\subsection{Core CRUD}
+\subsection{Deployment Logic}
+%TODO: Sequence diagram for deployment logic?
+\subsection{Admin Panel}
