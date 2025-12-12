@@ -1,7 +1,7 @@
 \chapter{Architecture}
 
 The goal of the thesis is to develop a template-driven website generator SaaS platform that allows users to create, customize, and publish single-page websites.
-Special attention must be paid to scalability, security and user experience (UX).
+Special attention must be paid to scalability, security, and user experience (UX).
 A platform that can achieve this task from one end (the user) to the other (deployment) is inherently complex and requires the cooperation and integration of many technologies.
 
 To begin with, I will present the overarching high-level architecture of the complete system, introduce each component, then explain the ways they integrate and interact in detail. The architecture itself can be viewed on Figure \ref{fig:architecture}.
@@ -13,15 +13,15 @@ To begin with, I will present the overarching high-level architecture of the com
   \label{fig:architecture}
 \end{figure}
 
-The system is composed of two main components a Docker host and a Kubernetes cluster.
+The system I designed has two main components a Docker host and a Kubernetes cluster.
 The Docker host contains the three main applications of the SaaS, each running inside containers and having their own Docker Compose configuration.
 
-The frontend is built primarily using React with the Vite build and bundling tool. The frontend communicates with the backend through a REST API.
+I built the frontend primarily using React with the Vite build and bundling tool. It communicates with the backend through a REST API.
 
 The backend relies mainly on Laravel, but also uses MySQL for the database, Mailpit which is a mailing testing tool that acts as an SMTP server and MinIO, an S3 compatible object store.
-The admin panel is also served from the backend using FilamentPHP for the implementation, while Scribe is used to generate the backends API documentation using the Scalar API documentation platform. The backend communicates with both the frontend and the proxy application also through REST.
+The backend serves the admin panel using FilamentPHP for the implementation, while Scribe is used to generate the backends API documentation using the Scalar API documentation platform. The backend communicates with both the frontend and the proxy application also through REST.
 
-The proxy application is built using the Fastify NodeJS web framework and the Kubernetes JavaScript library to connect to the running cluster.
+The Fastify NodeJS web framework provides the basis for the proxy application and the Kubernetes JavaScript library to connect to the running cluster.
 It also serves its own OpenAPI specification using the native Fastify OpenAPI plugin.
 For the reason of this functionality having its own separate application refer to section \ref{sec:proxy}.
 
@@ -30,6 +30,6 @@ The websites are all deployed to a given namespace ('default' namespace if not c
 The Deployments have the common style CSS (Cascading Style Sheets) attached as a volume through a ConfigMap.
 Furthermore, each Deployment by default has a 10 revision limit, default resource limits set, and a one replica requirement.
 In production these values could obviously be reconfigured and scaled up.
-Finally, a Service is also created for each website as well as an HTTP Route to connect to the Traefik API Gateway of the cluster for routing.
+Finally, the application also creates a Service for each website as well as an HTTP Route to connect to the Traefik API Gateway of the cluster for routing.
 
-A user thus is able to create and design their website on the frontend which is then saved to the backend and through the proxy app deployed to the running Kubernetes cluster. The deployed website can then be visited by outside users through the Traefik API Gateway acting as a reverse proxy.
+A user thus is able to create and design their website on the frontend which is then saved to the backend and through the proxy app deployed to the running Kubernetes cluster. Outside users can then visit the deployed website through the Traefik API Gateway acting as a reverse proxy.

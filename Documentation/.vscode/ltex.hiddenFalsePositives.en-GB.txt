@@ -1,3 +1,12 @@
 {"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QModels represent logical entities or resources in the application and is provided by Laravels Eloquent ORM\\E$"}
 {"rule":"MONTH_OF_XXXX","sentence":"^\\QOriginally created by Google, in March of 2016 it was donated to the Cloud Native Computing Foundation (CNCF)\\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.”\\E$"}
 {"rule":"MONTH_OF_XXXX","sentence":"^\\QOriginally created by Google, in March of 2016 it was donated to the Cloud Native Computing Foundation (CNCF) \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.”\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QIn all tables and models I opted to switch from the default integer ID to UUIDv7 (Universally Unique Identifiers version 7) which are time-based sortable universally unique identifiers composed of 32 hexadecimal digits.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThe Sites table store the websites of the users.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QLast but not least the schemas table is a mix of the previous two, having both a content identical to that of the pages table and the same published and draft state as sites.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QThe goal of the thesis is to develop a template-driven website generator SaaS platform that allows users to create, customize, and publish single-page websites.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\Q“Kubernetes is an open source container orchestration system.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QTanStack Router provides many features out of the box including but not limited to file and code based routing, caching, prefetching and data loading, route contexts, search, and URL parameter validation and native TypeScript support and type safe navigation \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qapp.posts.tsx Route nesting: /app/posts $ posts/$postId.tsx Route parameter\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QTanStack Router naming convention examples Symbol Example Function root.tsx The root route (prefix) layout.tsx Layout route - (prefix) -button.tsx Excluded, used for colocation .\\E$"}
+{"rule":"DASH_RULE","sentence":"^\\QTanStack Router naming convention examples Symbol Example Function root.tsx The root route (prefix) layout.tsx Layout route - (prefix) -button.tsx Excluded, used for colocation .\\E$"}

@@ -1,21 +1,22 @@
 \section{Backend}
 \subsection{Setup}
-The backend is written primarily using the Laravel PHP web framework as stated beforehand.
+I implemented the backend primarily using the Laravel PHP web framework as stated beforehand.
 As the first step the application has to be installed and set up.
 This can be done with Laravel's own installer, where many application templates can be selected.
-A React template is available, however that uses Inertia.JS by default which is a package that enables the frontend to be server side routed a minimal API backend template.
+A React template is available, however that uses Inertia.JS by default which is a package that enables the frontend to be server side routed.
+I wished to opt out of this and develop a traditional API based SPA, so I decided to use the minimal setup.
 So Laravel will serve as an API backend and the view layer of the MVC architecture will be entirely handled by the frontend.
 
 After installation, I decided to install the Laravel Sail package which provides a preconfigured development Docker Compose setup, and also provides options to install additional components into our environment.
 The extra containers in our case will be the MySQL database, the Mailpit SMTP test server and the MinIO S3 compatible object storage.
-Sail is however published as a package which by default would need a local PHP and Composer (PHP's package manager) installation.
+However, the Laravel creators published Sail as a package which by default would need a local PHP and Composer (PHP's package manager) installation.
 This would kind of defeat its purpose.
 Luckily this can be avoided by using a temporary PHP container to quickly install initial dependencies and then use the Sail application for further required packages.
 
 Afterwards the provided \texttt{.env.example} file needs to be copied to \texttt{.env} and the appropriate environment variables need to be set, including the mail server, database and object storage connections.
 Finally, the application key must be initialized using the Artisan CLI and the default database migrations have to be run.
 
-\subsection{Data Layer}
+\subsection{Eloquent ORM}
 
 Let me start building up the backend's feature set from the bottom, starting with the parts of the Eloquent ORM.
 The database schema of the backend including the most important tables can be seen on Figure \ref{fig:database}.
@@ -29,12 +30,33 @@ The database schema of the backend including the most important tables can be se
   \label{fig:database}
 \end{figure}
 
-The 'users' table is auto generated, the only change I made is regarding the ID (Identifier) field.
+The users' table is auto generated, the only change I made is regarding the ID (Identifier) field.
 In all tables and models I opted to switch from the default integer ID to UUIDv7 (Universally Unique Identifiers version 7) which are time-based sortable universally unique identifiers composed of 32 hexadecimal digits.
+The application uses the simplest form of tenancy where each user is a tenant as that is sufficient for the current requirements.
 
-The role related tables are added by the Spatie's Laravel Permission package, which I will talk about in more detail in the authorization Subsection \ref{subsection:authorization}.
+The Spatie Laravel Permission package adds the role related tables, which I will talk about in more detail in the authorization Subsection \ref{subsection:authorization}.
 
-On the other hand the media table is added by
+On the other hand the Spatie Media Library provides the media table which will be used to store profile pictures and the HTML files of the static pages.
+The application uses the password reset tokens and sessions table for authentication related features.
+The Sites table store the websites of the users. Each site must have a unique subdomain that will be assigned to it upon creation and which cannot be changed later.
+
+Also, worth mentioning that each site also has a state that can be either draft or published, to track changes and whether they are visible to the end users.
+This is implemented using the Spatie Model States library which adds an easy to configure state machine pattern support with helper functions such as checking viable transitions.
+It uses an abstract state (PublishingState) class with actual states being the concrete implementations (Published, Draft).
+Allowed transitions and transition handlers are also easy to configure and customize.
+
+A site can also have pages which need a corresponding URL segment (e.g., \texttt{/about}) for routing.
+The database stores the pages content in a zlib compressed and base64 encoded format for better transfer and storage efficiency, but can be cast to the uncompressed version if needed.
+The structure of the content will be further specified in Section \ref{section:frontend}.
+Last but not least the schemas table is a mix of the previous two, having both a content identical to that of the pages table and the same published and draft state as sites.
+Schemas allow administrators to create and publish page schemas that users can base their own pages off of.
+
+The models paired with the tables contain most of the business logic that is independent of routes (heavy models).
+This includes defining all relationships and their inverses, like in the case of sites and pages a hasMany, and it's inverse belongsTo functions, defining fillable fields that can be assigned from requests, and any custom casts and attributes.
+The former include casting to the aforementioned state classes while the latter includes accessing the decompressed and decoded content.
+Models register media collections for storing files by setting its name, accepted MIME (Multipurpose Internet Mail Extensions) types and the amount of files they can hold.
+Finally, for most of the mentioned models I extended the special boot method with additional functionality. Inside this the CRUD functionality can be extended with additional logic.
+Examples include ensuring that sites transfer to the draft state when one of their pages gets updated, ensuring that a home page (\texttt{/}) exists for all sites, and relationship and media clean up logic upon model deletion.
 
 \subsection{Authentication}
 \subsection{Authorization}

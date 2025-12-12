@@ -12,13 +12,13 @@ The essential characteristics are the following:
   \item Broad network access: users can access capabilities through standardized methods over the network.
   \item Resource pooling: the provider manages their cloud resources in such a way that it can serve multiple customers flexibly.
   \item Rapid elasticity: capabilities are scalable and re-assignable on demand.
-  \item Measured service: resource usage is monitored, controlled and automatically optimized.
+  \item Measured service: the cloud monitors resource usage, and it is controlled and automatically optimized.
 \end{itemize}
 
 The aforementioned deployment models are:
 \begin{itemize}
-  \item Private cloud: the cloud is used by a single organizational entity
-  \item Community cloud: the infrastructure is used by a community composed of multiple organizations or
+  \item Private cloud: a single organizational entity uses the cloud.
+  \item Community cloud: a community composed of multiple organizations or users uses the infrastructure.
   \item Public cloud: the cloud is open for use to the public.
   \item Hybrid cloud: the cloud is some mix of the models mentioned before.
 \end{itemize}
@@ -27,7 +27,7 @@ All the above deployment models may be either on or off premise and additionally
 
 Most importantly for the topic the three service models:
 \begin{itemize}
-  \item Infrastructure as a Service (IaaS): the provided resources are fundamental to computing, such as network, storage or processing power.
+  \item Infrastructure as a Service (IaaS): the provided resources are fundamental to computing, such as network, storage, or processing power.
   \item Platform as a Service (PaaS): the provided resources allow the customer to deploy applications to the cloud providers platform without configuring the underlying computing infrastructure.
   \item Software as a Service (SaaS): ``The capability provided to the consumer is to use the provider's applications running on a cloud infrastructure. The applications are accessible from
     various client devices through either a thin client interface, such as a web browser (e.g.,
@@ -53,26 +53,26 @@ There is not a fixed defined set of characteristics that a SaaS has to meet in o
 
 Most SaaS applications support some form of multi tenancy.
 Multi tenancy is the ability to share the same (and single) hosted instance of the application between multiple tenants, instead of deploying the application separately for each tenant.
-A tenant is a user or group of users (e.g. an organization) with the same share of the service \cite{krebs2012architectural}.
+A tenant is a user or group of users (e.g., an organization) with the same share of the service \cite{krebs2012architectural}.
 Commonly people refer to multi-tenancy as the ability to have multiple organizations use the service with their own share and users, however as we can see this is not a strict requirement.
 There are many ways to achieve multi-tenancy with different amounts of complexity in concern areas like architecture, scaling, and security.
 The methods usually differ by how separated each tenants share is on a database, data model and infrastructure level \cite{tsai_bai_huang_2014}.
 
-This goes hand-in hand with the next common characteristic which is customization. SaaS applications must support a level of customization to meet all tenants needs. This allows tenants to adapt the service more seamlessly into their workflows, processes and requirements. The ability to change aspects also reduces repetitive tasks between users of the same tenants.
+This goes hand-in hand with the next common characteristic which is customization. SaaS applications must support a level of customization to meet all tenants needs. This allows tenants to adapt the service more seamlessly into their workflows, processes, and requirements. The ability to change aspects also reduces repetitive tasks between users of the same tenants.
 Customization can range from interface level differences to full on tailoring of the tenants share of the application down to the platform or even infrastructure level.
 Each added aspect of personalization however increases complexity, due to which a balance must be struck between customization and standardization \cite{aslam2023benefits}.
 
 Scalability is the ability of the service to handle increasing workloads and usage needs.
 Generally there are two methods of scaling, vertical scaling (also known as scale-up) and horizontal scaling (also known as scale-out).
 Vertical scaling involves giving more resources to the machine running the service, while horizontal scaling means distributing the application on multiple machines.
-In a cloud environment a scale-out solution is relied on more by default due to the available amount of resources and also due to the fact that increasing a machines resources is only feasible up to a level.
+In a cloud environment consumers rely on a scale-out solution more by default due to the available amount of resources and also due to the fact that increasing a machines resources is only feasible up to a level.
 However, most complex production system usually combine the two forms in some form.
 Not only that SaaS platforms commonly employ either a two level or a generalized K-level scalability structure where each level is a separate dimension of the service capable of scaling independently.
-Scaling solutions are also made tenant aware so that each tenant gets scaled for their respective needs \cite{scalable}.
+The platforms also make scaling solutions tenant aware so that each tenant gets scaled for their respective needs \cite{scalable}.
 
 Of course plenty more aspects could be reviewed and explored regarding SaaS applications, however the previously mentioned concerns and areas are sufficient to get a general understanding required for the topic.
 
-Nowadays, many popular applications operate using a SaaS model such as Microsoft's Office suite, Slack or Notion.
-In regard to the thesis topic there are also many similar existing solutions such as Squarespace, Wix, GoDaddy or Shopify.
+Nowadays, many popular applications operate using a SaaS model such as Microsoft's Office suite, Slack, or Notion.
+In regard to the thesis topic there are also many similar existing solutions such as Squarespace, Wix, GoDaddy, or Shopify.
 However, they almost always require a subscription or one time payment upfront and or only offer a limited trial.
 They also frequently have a steep learning curve due to their complexity, and specialize in one given business area.
