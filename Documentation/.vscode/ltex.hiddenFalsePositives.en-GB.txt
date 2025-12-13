@@ -10,3 +10,6 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qapp.posts.tsx Route nesting: /app/posts $ posts/$postId.tsx Route parameter\\E$"}
 {"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QTanStack Router naming convention examples Symbol Example Function root.tsx The root route (prefix) layout.tsx Layout route - (prefix) -button.tsx Excluded, used for colocation .\\E$"}
 {"rule":"DASH_RULE","sentence":"^\\QTanStack Router naming convention examples Symbol Example Function root.tsx The root route (prefix) layout.tsx Layout route - (prefix) -button.tsx Excluded, used for colocation .\\E$"}
+{"rule":"SENTENCE_FRAGMENT","sentence":"^\\QAfter the ORM let me go into detail about the implementation of the authentication feature set Authorization.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QOut of these three I only used the SPA session authentication.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QTo begin with the SANCTUMSTATEFULDOMAINS environment variable has to be set with the frontend, proxy urls.\\E$"}
