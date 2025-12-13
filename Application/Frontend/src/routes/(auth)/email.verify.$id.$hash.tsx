@@ -1,11 +1,11 @@
-import {createFileRoute, redirect, useNavigate} from '@tanstack/react-router';
+import {createFileRoute, Link, redirect} from '@tanstack/react-router';
 import {redirectOnlySearchSchema} from "@/types/search.ts";
 import {z} from "zod";
-import {BadgeCheckIcon, BadgeXIcon} from "lucide-react";
+import {BadgeCheckIcon} from "lucide-react";
 import {Item, ItemActions, ItemContent, ItemMedia, ItemTitle} from "@/components/ui/item.tsx";
-import {Button} from "@/components/ui/button.tsx";
 import {api} from "@/lib/api/api-client.ts";
-import {Loading} from "@/components/blocks/loading.tsx";
+import {EmailVerifyError} from "@/routes/(auth)/-components/email-verify-error.tsx";
+import {useAuth} from "@/hooks/use-auth.tsx";
 
 const emailVerifySearchParams = redirectOnlySearchSchema.extend({
     expires: z.number().default(0),
@@ -48,14 +48,15 @@ export const Route = createFileRoute('/(auth)/email/verify/$id/$hash')({
         return await context.queryClient.ensureQueryData(emailVerifyQueryOptions);
     },
     staleTime: Infinity,
+    errorComponent: EmailVerifyError,
     component: VerifyEmail,
 });
 
 function VerifyEmail() {
     const search = Route.useSearch();
     const params = Route.useParams();
-    const navigate = useNavigate({from: Route.path});
-    const {isError, isLoading} = api.useSuspenseQuery("get", "/email/verify/{id}/{hash}", {
+    const {fetchUserContext} = useAuth();
+    api.useSuspenseQuery("get", "/email/verify/{id}/{hash}", {
         params: {
             query: {
                 expires: search.expires,
@@ -67,28 +68,7 @@ function VerifyEmail() {
             }
         }
     });
-    if (isLoading) {
-        return <Loading/>;
-    }
-
-    if (isError) {
-        return <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
-            <Item variant="outline" size="default" className="bg-background">
-                <ItemMedia>
-                    <BadgeXIcon className="size-5"/>
-                </ItemMedia>
-                <ItemContent>
-                    <ItemTitle>Email verification failed</ItemTitle>
-                </ItemContent>
-                <ItemActions>
-                    <Button onClick={async () => {
-                        await navigate({to: "/account"});
-                    }}>Go to account settings</Button>
-                </ItemActions>
-            </Item>
-        </div>;
-    }
-
+    fetchUserContext().then();
     return (
         <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
             <Item variant="outline" size="default" className="bg-background">
@@ -99,9 +79,7 @@ function VerifyEmail() {
                     <ItemTitle>Your profile has been verified.</ItemTitle>
                 </ItemContent>
                 <ItemActions>
-                    <Button onClick={async () => {
-                        await navigate({to: "/account"});
-                    }}>Go to account settings</Button>
+                    <Link to={"/account"}>Go to account settings</Link>
                 </ItemActions>
             </Item>
         </div>

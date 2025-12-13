@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(DeploymentService::class, function ($app) {
+        $this->app->singleton(DeploymentService::class, function () {
             return new DeploymentService();
         });
         $this->app->singleton(HTMLSanitizerService::class, function () {
@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
         if (!app()->runningInConsole()) {
             ResetPassword::createUrlUsing(function (User $user, string $token) {
                 $frontendUrl = config('app.frontend_url');
-                return "{$frontendUrl}/reset-password?token={$token}&email={$user->email}";
+                return "$frontendUrl/reset-password?token=$token&email=$user->email";
             });
 
             VerifyEmail::createUrlUsing(function ($notifiable) {
@@ -52,20 +52,21 @@ class AppServiceProvider extends ServiceProvider
                     ]
                 );
                 $app_url = config('app.url');
+                $app_port = config('app.port', '80');
                 $frontendUrl = config('app.frontend_url');
-                return str_replace($app_url, $frontendUrl, $route);
+                return str_replace("$app_url:$app_port", $frontendUrl, $route);
             });
 
             if (class_exists(Scribe::class)) {
                 $user = User::factory()->create();
                 $user->assignRole(Roles::SUPER_ADMIN);
                 Scribe::beforeResponseCall(function () use ($user) {
-                    // Customise the request however you want (e.g. custom authentication)
+                    // Customize the request however you want (e.g. custom authentication)
                     Auth::guard('web')->login($user);
                 });
                 Scribe::afterResponseCall(function () use ($user) {
                     // Clean up after the request
-                    Auth::guard('web')->logout($user);
+                    Auth::guard('web')->logout();
                 });
                 $user->delete();
             }
