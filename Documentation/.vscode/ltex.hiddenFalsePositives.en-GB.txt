@@ -22,3 +22,4 @@
 {"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThe first part of the core CRUD logic is defining the API routes in the routes folder.\\E$"}
 {"rule":"THREE_NN","sentence":"^\\QFurthermore, I implemented a Filament relation manager for sites and pages so that the\\E$"}
 {"rule":"THREE_NN","sentence":"^\\QFurthermore, I implemented a Filament relation manager for sites and pages so that the pages of the sites could be controlled from the site view.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QThe goal of the thesis is to develop a template-driven website generator SaaS platform that allows users to create, customize, and publish their own websites.\\E$"}
