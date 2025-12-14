@@ -13,3 +13,12 @@
 {"rule":"SENTENCE_FRAGMENT","sentence":"^\\QAfter the ORM let me go into detail about the implementation of the authentication feature set Authorization.\\E$"}
 {"rule":"THREE_NN","sentence":"^\\QOut of these three I only used the SPA session authentication.\\E$"}
 {"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QTo begin with the SANCTUMSTATEFULDOMAINS environment variable has to be set with the frontend, proxy urls.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QTo finalize the authentication implementation the user model has to be extended from the Authenticable class, and has to implement the MustVerifyEmail interface.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThe users table is auto generated, the only change I made is regarding the ID (Identifier) field.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThe first part of the core crud logic is defining the API routes in the routes folder.\\E$"}
+{"rule":"SENT_START_CONJUNCTIVE_LINKING_ADVERB_COMMA","sentence":"^\\QHence the React SPA takes care of this functionality the only route handler I defined here is a redirect to the frontend's index page.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QThe Eloquent ORM then when running the migrations will take care of translating it to the query language of the chosen database management system.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QAll tables by default also have two timestamp fields a createdat and an updatedat.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThe first part of the core CRUD logic is defining the API routes in the routes folder.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QFurthermore, I implemented a Filament relation manager for sites and pages so that the\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QFurthermore, I implemented a Filament relation manager for sites and pages so that the pages of the sites could be controlled from the site view.\\E$"}

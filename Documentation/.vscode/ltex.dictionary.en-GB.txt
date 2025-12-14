@@ -27,3 +27,11 @@ PublishingState
 Multipurpose
 $postId
 DTO
+SANCTUMSTATEFULDOMAINS
+param
+HTMLSanitizer
+canAccessPanel
+FilamentUser
+StateFusion
+Assem
+Alwaseai
