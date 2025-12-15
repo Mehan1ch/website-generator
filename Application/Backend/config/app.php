@@ -55,6 +55,18 @@ return [
     'url' => env('APP_URL', 'http://localhost'),
 
     /*
+   |--------------------------------------------------------------------------
+   | Application Port
+   |--------------------------------------------------------------------------
+   |
+   | This value is the port your application is running on. It is used for
+   | generating URLs and other tasks that require knowledge of the port.
+   |
+   */
+
+    'port' => env('APP_PORT', '8000'),
+
+    /*
     |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------

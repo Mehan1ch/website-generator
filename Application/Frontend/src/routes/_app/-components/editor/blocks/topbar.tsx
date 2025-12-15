@@ -106,9 +106,6 @@ export const Topbar = ({
                 <div className="flex items-center gap-2">
                     <ButtonGroup>
                         <CopyButton
-                            onCopy={() => {
-                                toast.info("Content copied to clipboard");
-                            }}
                             content={compressAndEncodeBase64(query.serialize())}/>
                         <Dialog>
                             <DialogTrigger asChild>

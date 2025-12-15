@@ -7,7 +7,6 @@ services:
       NODE_ENV: '${NODE_ENV:-development}'
       VITE_APP_NAME: '${VITE_APP_NAME}'
       VITE_BACKEND_URL: '${VITE_BACKEND_URL}'
-      OPENAPI_SPEC_PATH: '${OPENAPI_SPEC_PATH}'
     volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
