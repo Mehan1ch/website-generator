@@ -1,0 +1,110 @@
+\section{Authentication, dashboard, and account routes}
+
+In this block I will mainly be presenting the authentication and account related pages that I created on the frontend.
+To begin with, a use case diagram on Figure \ref{fig:auth-use-case} shows in detail the authentication capabilities.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/auth-use-case.png}
+  \caption{Authentication use cases}
+  \label{fig:auth-use-case}
+\end{figure}
+
+Guests or unauthenticated users can log in, register and ask for a forgot password link which redirects them to a form allowing them to reset their password.
+Authenticated users can verify their email's which they automatically get after registration or can request a new on the account page, which I will talk about later.
+Obviously if the user clicks on the verification link in their email while being unauthenticated they will first be redirected to the login page.
+
+When a user first visits the frontend a simple index page greets them with directions to login, or register, or go to the dashboard if already logged in.
+The index page as shown for an unauthenticated user can be seen on Figure \ref{fig:index-page}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/index-page.png}
+  \caption{Index page for an unauthenticated user}
+  \label{fig:index-page}
+\end{figure}
+
+From the landing page, the user can directly log in and or register.
+As stated previously I used React Hook Form with Zod for creating all my forms.
+This ensures that there is proper client side validation, and can be used to display meaningful error messages to the user.
+All forms also employ a loading state to prevent multiple submissions while a previous request is running.
+I also display success and error responses using the aforementioned toast notifications in the bottom right corner of the screen.
+The registration page with an example for validation errors can be seen on Figure \ref{fig:register}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/register.png}
+  \caption{Register page with validation errors}
+  \label{fig:register}
+\end{figure}
+
+The rest of the forms look almost identical to the registration one, so I won't show each one-by-one unnecessarily.
+One thing worth mentioning is that both the registration and forgot password links send out email.
+Such an example email after registration captured by Mailpit can be seen on Figure \ref{fig:email}. On the sidebar the incoming password reset links can be seen as well.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/email.png}
+  \caption{Registration email seen in Mailpit}
+  \label{fig:email}
+\end{figure}
+
+After logging in, the user can access the main application routes grouped by the \texttt{\_app} folder.
+They are all surrounded with a layout component that has two main responsibilities.
+First check if the user has successfully logged in, if not redirect them to the login route.
+Secondly this is where the title callback I mentioned in Section \ref{section:frontend-setup} is used.
+The layout component collects the result of all title callbacks from the router state, which include the title names for all rendered child routes.
+Afterwards it dynamically builds the breadcrumb trail displayed to the user.
+
+The first such route is the dashboard, which displays a few statics and quick actions.
+Figure \ref{fig:dashboard} showcases it in detail.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/dashboard.png}
+  \caption{The dashboard page}
+  \label{fig:dashboard}
+\end{figure}
+
+Next let me provide and overview of account settings, which can be accessed via a pop-over by clicking on the user section of the sidebar.
+Another use case diagram showcasing the account related options can be seen on Figure \ref{fig:account-use-case}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/account-use-case.png}
+  \caption{Account settings use cases}
+  \label{fig:account-use-case}
+\end{figure}
+
+The user is able to switch the application between light, dark, and system themes.
+They can also update their profile information which includes changing their display name and email.
+Changing the email automatically sends a verification email for the new address.
+They can upload an avatar via a drag and drop field or the system file chooser, which can be previewed before saving.
+A tab which show the verification status is available, and if unverified a new link can be sent from here.
+Password's can be changes using a form, that shows the new password's strength using simple metrics like length and contained special characters.
+After changing it the user will be logged out automagically and prompted to log in again.
+Lastly the account can be deleted if the user wishes so.
+This will first show a confirmation dialog to avoid accidental deletion.
+
+Two pictures comparing light and dark modes can be seen on Figure \ref{fig:theming}.
+The light mode picture on Subfigure \ref{subfig:light-avatar} showcases the avatar upload tab, while the dark mode picture on Subfigure \ref{subfig:dark-password} presents the password change form.
+The light mode picture also displays, how to get to the account settings page.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figures/light-avatar.png}
+    \caption{Light mode avatar upload}
+    \label{subfig:light-avatar}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figures/dark-password.png}
+    \caption{Dark mode password change}
+    \label{subfig:dark-password}
+  \end{subfigure}
+  \caption{Dark and light modes}
+  \label{fig:theming}
+\end{figure}

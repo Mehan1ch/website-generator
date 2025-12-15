@@ -27,7 +27,7 @@ The backend communicates with both the frontend and the proxy application also t
 
 The Fastify NodeJS web framework provides the basis for the proxy application and the Kubernetes JavaScript library to connect to the running cluster.
 It also serves its own OpenAPI specification using the native Fastify OpenAPI plugin.
-For the reason of this functionality having its own separate application refer to Section \ref{sec:proxy}.
+For the reason of this functionality having its own separate application refer to Chapter \ref{chapter:proxy}.
 
 The proxy connects programmatically to the Kubernetes cluster to deploy the created websites using its official JS client library.
 The websites are all deployed to a given namespace ('default' namespace if not changed) using a Kubernetes Deployment.

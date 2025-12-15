@@ -1,0 +1,44 @@
+\section{Deployment Logic}
+\label{section:deployment-logic}
+
+The deployment logic technically first begins at the page controller. When a page gets updated the frontend sends both the content and generated static HTML's body in an encoded manner for more efficient network transfer.
+The HTML body then gets base64 decoded and zlib decompressed on the backend to recover the raw HTML.
+Following this the HTML gets sanitized to remove any unknown tags and malicious scripts and ensure no security concerns got added by any third-party.
+I implemented this by writing an HTML sanitizer service.
+This service uses Symfony's \texttt{HTMLSanitizer} class that I preconfigured with the allowed and rejected elements and attributes.
+Then I registered this service as a singleton in the application provider, so that Laravel can automatically discover it and inject it into the Page controller constructor.
+As a part of the sanitization process if it is successful, the service afterwards injects the body into a Blade template.
+This template provides the root HTML and head tags and a link to the stylesheet, which will be later injected by the proxy application.
+In the end the complete HTML content gets returned and saved to the S3 storage and of course and API resource object gets sent to the frontend.
+
+The MinIO S3 object storage showing the stored HTML files can be seen on Figure \ref{fig:minio}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/minio}
+  \caption{MinIO object storage}
+  \label{fig:minio}
+\end{figure}
+
+A sequence diagram displays this process to the fullest on Figure \ref{fig:html-service}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/html-service.png}
+  \caption{Sequence of saving the page content}
+  \label{fig:html-service}
+\end{figure}
+
+Next comes the Deployment controller which handles the actual site publishing related methods, which includes a full CRUD and the option to restart the site if need be.
+I have written and registered another singleton service handling deployments that the controller forwards the incoming request to.
+The deployment service then checks if the site can be transferred to the published state, builds the path and body of the request which afterwards gets deferred to the proxy application.
+When the proxy returns with a response, the service forwards it to the controller which finally forwards it to the frontend.
+
+Another sequence diagram on Figure \ref{fig:deployment-service} shows this process.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/deployment-service.png}
+  \caption{Sequence diagram of the deployment process}
+  \label{fig:deployment-service}
+\end{figure}
