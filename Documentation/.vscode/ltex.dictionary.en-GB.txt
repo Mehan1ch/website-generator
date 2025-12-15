@@ -56,3 +56,5 @@ csrf-cookie
 useTheme
 GatewayAPI
 io
+dialog
+Subfigure
