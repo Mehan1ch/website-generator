@@ -23,3 +23,6 @@
 {"rule":"THREE_NN","sentence":"^\\QFurthermore, I implemented a Filament relation manager for sites and pages so that the\\E$"}
 {"rule":"THREE_NN","sentence":"^\\QFurthermore, I implemented a Filament relation manager for sites and pages so that the pages of the sites could be controlled from the site view.\\E$"}
 {"rule":"THREE_NN","sentence":"^\\QThe goal of the thesis is to develop a template-driven website generator SaaS platform that allows users to create, customize, and publish their own websites.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThe components folder contains the UI elements added by the ShadCN library and other component blocks I created using them that are global to the application.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThe providers folder houses the context providers that the aforementioned context objects return.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QThe query client provider has access to the same query client as the router.\\E$"}
