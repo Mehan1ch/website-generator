@@ -1,1 +1,114 @@
 \section{Schemas, sites, and pages}
+
+Next up let me talk about creating and managing schemas.
+As with the previous features, I want to present a use-case diagram of them on Figure \ref{fig:schema-use-cases}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/schema-use-cases.png}
+  \caption{Schema use cases}
+  \label{fig:schema-use-cases}
+\end{figure}
+
+Schemas can be used as templates for pages, that I will mention the details of later.
+Most of the use cases include basic CRUD operations.
+Users however have to have a verified email to access schemas (sites and pages too), and also they can only view them. They also only see published schemas.
+Only administrators are capable of editing, designing and publishing schemas for users to reuse.
+I used similar page designs for related features across schemas, pages, and sites, so I won't show each page related to the schemas here.
+On Figure \ref{fig:schema-list} a list view of schemas can be seen.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/schema-list.png}
+  \caption{Card list of schemas}
+  \label{fig:schema-list}
+\end{figure}
+
+At the bottom of the screen the pagination component is visible, and the hovered first card has a shadow and shading applied.
+The detailed view of schemas is almost identical to the pages.
+For an idea on how that looks see Figure \ref{fig:page-detail}.
+The schema edit and create page is basically the same, and it is a simple form, that can be viewed on Figure \ref{fig:schema-edit}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/schema-edit.png}
+  \caption{Schema edit form}
+  \label{fig:schema-edit}
+\end{figure}
+
+The designer for schemas is the same as the one for the pages and is the main topic of Section \ref{section:editor}.
+
+The next resource on the frontend is the sites.
+Once again, a use case diagram of site related features is visible on Figure \ref{fig:site-use-cases}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/site-use-cases.png}
+  \caption{Site use cases}
+  \label{fig:site-use-cases}
+\end{figure}
+
+Sites encompass their pages. They have a two tabbed detail view, one showing general information while the other shows their pages.
+It also contains controls for deploying the application if it has not been published yet.
+If it has, it is possible to restart, update and delete it from the dropdown.
+A confirmation dialog appears in all mentioned cases.
+The detail view of the site appears on Figure \ref{fig:site-detail}.
+Subfigure \ref{subfig:site-overview} shows the general information, deployment controls, buttons that take the user to the edit form and designer pages, and a delete button for deleting the site and all its resources.
+A toast notification indicating a successful restart is also visible.
+On the other hand Subfigure \ref{subfig:site-pages} show the pages of the site, where their detail view can be visited by clicking on a card, or a new one can be created with the provided button.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figures/site-restart.png}
+    \caption{Overview tab}
+    \label{subfig:site-overview}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figures/site-pages.png}
+    \caption{Pages tab}
+    \label{subfig:site-pages}
+  \end{subfigure}
+  \caption{Site detail view}
+  \label{fig:site-detail}
+\end{figure}
+
+Finally, let me talk about the pages. As with the previous two cases Figure \ref{fig:page-use-cases} shows a use case diagram for existing page related actions.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/page-use-cases.png}
+  \caption{Page use cases}
+  \label{fig:page-use-cases}
+\end{figure}
+
+The editor related actions such as generating the HTML content play core parts in saving the page to the backend.
+Most other functions are identical to schemas and sites.
+A crucial difference is the creation form.
+Since pages can be based of schemas, the creation form needs to be able to provide the ability to select a schema as the base content for a page.
+Later this of course can be edited by the user without it having any effect on the original schema.
+The form basically copies its content into the page.
+To solve this problem I created a multistep form using the Stepperize React library which has built-in support for the ShadCN UI components. \cite{stepperize_2025}.
+Figure \ref{fig:page-create} showcases this form and the schema selection step. Schemas can be previewed here via a dialog.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/page-create.png}
+  \caption{Page creation multistep form}
+  \label{fig:page-create}
+\end{figure}
+
+At the end of the form I show to the user a review tab and the process can also be reset here if needed.
+The page edit form is similar to the schema edit form on Figure \ref{fig:schema-edit}.
+The detail view of the pages also contain a preview of the content for easier identification.
+Figure \ref{fig:page-detail} presents this functionality.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/page-detail.png}
+  \caption{Page details with content preview}
+  \label{fig:page-detail}
+\end{figure}

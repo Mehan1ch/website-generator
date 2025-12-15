@@ -26,6 +26,7 @@ I also defined a body parameters function in each form request to help the OpenA
 
 Due to the separation of concerns into the many capabilities most controllers are incredibly thin.
 Frequently they are only comprised of retrieving the validated form data, performing the CRUD operation, and returning the appropriate API resource instance.
+As an extra I implemented pagination when returning collections of resources for smaller payloads and better UX on the frontend.
 I used however the Scribe third-party package for generating an OpenAPI schema and hosted API documentation.
 The package auto discovers routes and controller methods and tries to deduce the parameters, bodies, and responses, but it can have errors or shortcomings.
 One way it can be helped is by giving the controller methods annotations or doc comments.
