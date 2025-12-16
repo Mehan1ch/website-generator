@@ -66,3 +66,9 @@ NestJS
 kube
 HTTPRoutes
 siteDeployment
+FakerPHP
+Vitest
+beforeAll
+afterEach
+OpenAPI-MSW
+FakerJS

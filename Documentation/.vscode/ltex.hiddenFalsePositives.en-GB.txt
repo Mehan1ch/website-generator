@@ -33,3 +33,5 @@
 {"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThe modules folder contains colocated logic of each Kubernetes resource, which is composed of request, services, and controllers.\\E$"}
 {"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThe modules folder contains colocated logic of each Kubernetes resource, which is mostly composed of requests, services, and controllers.\\E$"}
 {"rule":"UNIT_SPACE","sentence":"^\\QThe pod also has limits set as 500m for CPUs and 500Mi for memory.\\E$"}
+{"rule":"SENTENCE_FRAGMENT","sentence":"^\\QAfter this the test cases themselves were written\\E$"}
+{"rule":"AFTERALL","sentence":"^\\QThis included registering mocked hooks, specifying the beforeAll, afterAll and afterEach methods.\\E$"}
