@@ -8,6 +8,11 @@ There are many community packages, and most seemed promising, but regrettably al
 At this point I mostly finished the rest of the feature set of the backend, so instead of starting over, the most rational solution seemed to be outsourcing this capability to a small proxy application.
 This is the application described in this chapter.
 
+Before I begin with the development details of the app, I want to mention setting up the Kubernetes cluster itself for development.
+I used Docker desktop's built-in cluster while developing this project, but other distributions, such as minikube or k3d should suffice as well.
+Then I installed Traefik as a Gateway API into the cluster, with the helm package manager for Kubernetes.
+
+Now let me describe the implementation of the proxy application itself.
 I chose to use NodeJS due to it having an official client library and also due to the fact that experience with the language could be carried over from the frontend development.
 As with the other two application I set up a Docker init based Dockerfile and compose file for containerization purposes.
 I also configured TypeScript as the main language, set strict mode, provided an ESLint config, and created \texttt{.env} and \texttt{.env.example} files for environment variables.
