@@ -76,6 +76,18 @@ On the other hand Subfigure \ref{subfig:site-pages} show the pages of the site, 
   \label{fig:site-detail}
 \end{figure}
 
+Regarding the deployment options this and the schema publish is the only scenario in the frontend where I have to use manual query invalidation to update the displayed data in time.
+This is because we stay on the same view, instead of navigation away, which would normally trigger SWR's re-fetch mechanism.
+All three resources I talk about in this section also have an empty component that is displayed if the returned API answer is an empty collection.
+Figure \ref{fig:site-empty} displays the one belonging to sites.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/site-empty.png}
+  \caption{Site's empty component}
+  \label{fig:site-empty}
+\end{figure}
+
 Finally, let me talk about the pages. As with the previous two cases Figure \ref{fig:page-use-cases} shows a use case diagram for existing page related actions.
 
 \begin{figure}[H]

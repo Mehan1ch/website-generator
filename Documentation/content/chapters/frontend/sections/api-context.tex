@@ -18,8 +18,15 @@ Additionally, since the backend uses CORS and CSRF protection it requires reques
 This can be obtained by first making a request to the \texttt{/sanctum/csrf-cookie} endpoint.
 This was also configured in the fetch client to be handled automatically and re-fetch when the token expires.
 
-Moving on, I implemented the custom theme and authentication providers.
-I was guided by the ShadCN documentation \cite{shadcn_2025} on how to configure light, dark, and system themes using TailwindCSS's functionality.
+Moving on, I implemented the custom theme and authentication contexts.
+Developers use React context to avoid the so-called prop drilling.
+Prop drilling is passing a components prop (data) down multiple components in the component tree just to be used at the innermost child.
+This leads to many scalability and maintainability issues and is considered a code smell.
+Context solves this by making the prop available for direct use anywhere in the child component tree.
+There are also libraries such as Redux and Zustand that provide global state management, but I opted not to use these, as they themselves recommend against it if the application has few contexts.
+In some places I also use prop drilling instead of defining a context, but it is never deeper than three layers and the intermediate layer also uses the passed prop in these cases.
+
+For the theme provider I was guided by the ShadCN documentation \cite{shadcn_2025} on how to configure light, dark, and system themes using TailwindCSS's functionality.
 The provider stores the selected theme in and recovers it from the browser's local storage on subsequent visits.
 Toggling the themes are possible from the account page, and the app defaults to the system theme.
 Accessing the theme in other components is possible through a custom \texttt{useTheme} hook.

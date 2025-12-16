@@ -1,2 +1,137 @@
 \section{Editor}
 \label{section:editor}
+
+The editor or designer is undeniably the most complex and core component of the frontend.
+It uses the CraftJS library for its core functionalities.
+I reused this component in both schemas and pages, by passing a callback from the parent component that handles the saving functionality, which is the only difference it this case between the two.
+
+CraftJS allows the developer to define editable components.
+It leverages this by providing custom React hooks.
+These define the editable props, what options can be set for these props, whether the component is editable or not, and what regions can the user drop specific components to inside itself.
+
+The full use cases of the developed designer can be viewed on Figure \ref{fig:designer-use-cases}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/designer-use-cases.png}
+  \caption{Use cases of the designer component}
+  \label{fig:designer-use-cases}
+\end{figure}
+
+The editor with some example components inserted is displayed on Figure \ref{fig:editor-base}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/editor-base.png}
+  \caption{The editor filled with example content}
+  \label{fig:editor-base}
+\end{figure}
+
+I composed the designer of three main components.
+The first and most important is the editor area, which shows the design the user is creating.
+This is a resizeable canvas to which users can drag and drop the editor's components to.
+It
+On hovering the components an outline appears for the selection shown the name of the component, a mover icon prompting that it can be moved, and a delete button to remove it from the page.
+When dragging components around, green and red lines show that the given component can or cannot be moved to the new desired location.
+
+The second is the top bar which contains the control buttons.
+On the left side is a toggle that enables or disables preview mode.
+The preview mode prevents any sort of edits and changes and the sidebar of the editor, which is the third main component I will mention shortly, reflects this as well.
+Next to this is the buttons for undoing and redoing changes, for which I also implemented the usual keyboard shortcuts.
+CraftJS provides this functionality natively by itself, through a hook.
+
+The middle section of the top bar has viewport controls that resize the editable area to see how the page would look like in desktop (default), tablet and mobile sized screens.
+There is also a button to view the content in full screen, from which exiting is also possible by pressing the escape key.
+Lastly in this area I placed a reset button to exit full screen and or return the viewport to the desktop size.
+
+Figure \ref{fig:editor-preview} showcases the designer in preview and full screen mode.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/editor-preview.png}
+  \caption{Editor full screen preview}
+  \label{fig:editor-preview}
+\end{figure}
+
+The third section of the top bar houses a copy button for quick copying of the editor content, a load button that allows rebuilding the page from the copied content through a dialog.
+Lastly I located the save button for saving the changes to the database here.
+Related to saving I also implemented navigation blocking for pages that use this component.
+This displays the built-in alert of the browser notifying the user, that unsaved changes will be lost upon leaving the page.
+
+Before I describe the editor sidebar, I briefly want to talk about saving the content.
+CraftJS serializes the editor content into a JSON structure describing the component tree of the edited page.
+The root component is the canvas to which components can be dropped to.
+Each node of this tree also describes the props of the component and what values users passed to it.
+It is easy to see that this tree can grow large relatively quickly.
+Due to this, I used the Pako library providing a zlib port to JavaScript, to compress the JSON tree. \cite{nodeca/pako}
+I then also base64 encoded this to further reduce its size for network transfer.
+The steps described above however only take care of the JSON, however the static HTML has to be somehow generated as well.
+To achieve this I create an empty div to which I provide the editor in a disabled state with the filled content.
+Then I call React's \texttt{flushSync} method on this which returns the HTML that would be rendered by React.
+This is compressed the same way as the editor component tree and gets sent to the backend for processing.
+
+The final part of the editor page is the aforementioned sidebar.
+It has three tabs, the first shows the common settings and specific settings of the selected component, organized by accordions.
+Common settings include setting the margin and padding of the element.
+The second displays a customized version CraftJS's layers companion library, which renders the component tree, allows reorganization and selection directly, and can show or hide specific components.
+This has a default styling by default, so I replaced that following the example provided by the author to use the ShadCN UI library to match my application.
+The third tab shows the available component for use using small cards with icons, description, and tooltips.
+From here they can be dragged and dropped to the designer area.
+
+I implemented nine components as a part of the thesis.
+A generic typography component for creating texts, which can use three different fonts (sans, serif and mono), weight, italics, underlining and strike through among many.
+A button component which allows connecting the pages of a given site by using relative routes (e.g., \texttt{/about}) or by providing absolute links to external pages.
+A card component similar to the card view of schemas and sites.
+Simple badge and separator components. A calendar component displaying a specific date.
+An image component for external images, for which size and width can be either fixed or auto or a combination of it (e.g., fixed width and auto height).
+A video component for linking external videos, which also automatically converts YouTube links to their embedded versions.
+Finally, a grid component for organization which allows a row or column layout and setting the amount of cells. They can also be nested inside each other.
+
+Figure \ref{fig:editor-sidebar} showcases these sidebar features in detail. Subfigure \ref{subfig:editor-customize} showcases some customization options, Subfigure \ref{subfig:editor-layers} presents the custom layers component, while Subfigure \ref{subfig:editor-components} displays the component toolbox.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figures/editor-customize.png}
+    \caption{Customization tab}
+    \label{subfig:editor-customize}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figures/editor-layers.png}
+    \caption{Layers tab}
+    \label{subfig:editor-layers}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figures/editor-components.png}
+    \caption{Components tab}
+    \label{subfig:editor-components}
+  \end{subfigure}
+  \caption{Editor sidebar}
+  \label{fig:editor-sidebar}
+\end{figure}
+
+To finish off on Figure \ref{fig:editor-variant} the previously mentioned reaction to the disabled or unselected states can be viewed, on Subfigure \ref{subfig:editor-disabled} and Subfigure \ref{subfig:editor-no-selection} respectively.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figures/editor-disabled.png}
+    \caption{Disabled hint}
+    \label{subfig:editor-disabled}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figures/editor-no-selection.png}
+    \caption{No selection hint}
+    \label{subfig:editor-no-selection}
+  \end{subfigure}
+  \caption{Sidebar reacting to different states}
+  \label{fig:editor-variant}
+\end{figure}
