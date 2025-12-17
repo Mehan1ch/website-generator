@@ -1,7 +1,8 @@
 import {useEditor} from '@craftjs/core';
-import {EditableLayerName, useLayer} from "@craftjs/layers";
+import {useLayer} from "@craftjs/layers";
 import {ChevronDown, Eye, Link2} from "lucide-react";
 import {cn} from "@/lib/utils";
+import {EditorLayerName} from "@/routes/_app/-components/editor/blocks/editor-layer-name.tsx";
 
 export const EditorLayerHeader = () => {
     const {
@@ -71,7 +72,7 @@ export const EditorLayerHeader = () => {
                     ) : null}
 
                     <div className="flex-1 [&_h2]:text-[15px] [&_h2]:leading-[26px]">
-                        <EditableLayerName/>
+                        <EditorLayerName/>
                     </div>
                     <div>
                         {children && children.length ? (
