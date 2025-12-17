@@ -35,3 +35,6 @@
 {"rule":"UNIT_SPACE","sentence":"^\\QThe pod also has limits set as 500m for CPUs and 500Mi for memory.\\E$"}
 {"rule":"SENTENCE_FRAGMENT","sentence":"^\\QAfter this the test cases themselves were written\\E$"}
 {"rule":"AFTERALL","sentence":"^\\QThis included registering mocked hooks, specifying the beforeAll, afterAll and afterEach methods.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QIn production the revision history limit and replica set configuration's may need to be reviewed and edited accordingly.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QAdditionally, a blue-green deployment strategy, where two identical production version of the system, the new and old run simultaneously could be used.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QAdditionally, a blue-green deployment strategy, where two identical production versions of the system, the new and old run simultaneously could be used.\\E$"}

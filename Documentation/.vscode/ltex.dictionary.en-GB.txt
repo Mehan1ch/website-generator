@@ -72,3 +72,4 @@ beforeAll
 afterEach
 OpenAPI-MSW
 FakerJS
+EKS

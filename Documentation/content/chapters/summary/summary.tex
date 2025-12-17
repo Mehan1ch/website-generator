@@ -1,1 +1,30 @@
 \chapter{Summary}
+
+To summarize, I designed and developed a software as a service platform providing users the capability to create, design and publish personal websites without required professional knowledge.
+I began my work by researching the topic thoroughly and familiarizing myself with modern solutions used today in web application development and cloud based solutions.
+Then I described the requirements expected of the platform and designed the overall system level architecture of it, detailing each component's responsibility.
+Afterwards I began the implementation of the backend using the modern Laravel framework that provides the core logic and functionality of the system, with an approach that focuses on security, extensibility, and maintainability.
+I continued the development with the frontend using React, which houses the complex, but easy to use drag and drop editor for designing websites.
+All the while I paid attention to providing a responsive and modern user experience on the client side.
+I finished off the implementation by developing a NodeJS proxy application to handle the deployment and orchestration of the created sites to the Kubernetes cluster programmatically.
+Next, I provided unit, feature, and end-to-end tests for the implemented platform to ensure it meets the proposed requirements against it now and in the future.
+I also provided a full example in great detail, showcasing general usage of the system from a regular user's viewpoint.
+Finally, I presented some key considerations regarding the production use of the system, focusing on the aspects of continuous integration, continuous delivery, scalability, and redundancies.
+Overall, I believe I managed to solve a complex software development task by creating the SaaS platform, and had the opportunity to learn many modern technologies and further my knowledge and skills in the process.
+
+\section{Further improvements}
+
+As with all software products further refinements, iteration, and improvement is always possible.
+In this section I would like to outline a few ideas, that could enhance the capabilities of the platform further.
+
+First the editor could be extended with many more components to allow creating more complex websites.
+Extending the amount of options of each component is also considerable to allow for further customization.
+
+Version control or a revision history for websites would also be highly beneficial to allow rollbacks in case of problems with new designs.
+Related to this a soft deletion system could also be employed with restoration options, and automatic clean-up after a set amount of time.
+
+Next a higher level of multi tenancy could be implemented that supports multiple organizations, provides custom schemas, and ensures better separation of data.
+
+Finally, data usage, traffic tracking and various other observability and engagement metrics could be integrated into the cluster, such as for example Prometheus.
+The data gathered could be relayed to the user in the frontend, which could help in making decisions about further improving their websites.
+It could also be used for developers and admins alike to make further choices about improving the overall platform.
