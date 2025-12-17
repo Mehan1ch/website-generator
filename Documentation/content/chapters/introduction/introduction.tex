@@ -1,3 +1,38 @@
 %----------------------------------------------------------------------------
 \chapter{\bevezetes}
 %----------------------------------------------------------------------------
+
+Websites and web applications are part of everyday life: businesses, clubs, and people use them to share information, advertise, or show their work.
+
+For many small organizations and individuals, for example someone who wants a simple resume site or a small local shop advertising its services, having a website should be quick, affordable, and easy to manage.
+In practice, creating and keeping a website running often requires time, money and technical knowledge.
+Hiring a developer or an agency can be expensive, building and maintaining a site yourself can be confusing, time-consuming and requires deep technical knowledge.
+
+A software-as-a-service (SaaS) platform for websites tries to solve this problem by offering an all-in-one service.
+Easy tools to build the site, hosting, so the site is always available, and simple ways to update content without expecting professional skills.
+
+There are many existing solutions already on the market tailored to complex needs.
+However, most of them have a steep learning curve, and provider either no free tier or a very limited one.
+As a site gets complex, a subscription in these services will be unavoidable.
+
+This thesis presents a free, lightweight SaaS designed for simple use cases, websites made of static pages that display essential information with minimal setup.
+
+\section{Overview}
+
+In Chapter \ref{chapter:literature} I review background material needed to understand the concepts used later.
+This includes the idea of software-as-a-service (SaaS), an overview of the Laravel backend framework, a summary of React and client-side technologies, and an introduction to Kubernetes and key deployment concepts.
+
+Chapter \ref{chapter:architecture} defines the functional and non-functional requirements of the platform and presents the system-level architecture.
+I describe the purpose and general behaviour of each component and how they work together.
+
+Chapter \ref{chapter:backend} begins the implementation, focusing on the backend: the data model, core services, security and identity handling, integrations with external services, and the logic that provides the platform's main features.
+
+Continuing the development, Chapter \ref{chapter:frontend} covers the frontend implementation, presenting the user interface, components, and typical user flows for site creation and management.
+
+Finishing the main development areas, Chapter \ref{chapter:proxy} addresses deployment and operations by describing a lightweight proxy application used for deploying and serving user websites.
+
+Moving on, Chapter \ref{chapter:testing} provides the testing strategy and results to demonstrate correct behaviour, and offers a full end-to-end example showing how an end user would use the SaaS.
+
+Chapter \ref{chapter:production} discusses differences to consider when moving to production and practical considerations for operating the service.
+
+Finally, Chapter \ref{chapter:summary} summarizes the work and suggests directions for future improvements.

@@ -38,3 +38,4 @@
 {"rule":"THREE_NN","sentence":"^\\QIn production the revision history limit and replica set configuration's may need to be reviewed and edited accordingly.\\E$"}
 {"rule":"THREE_NN","sentence":"^\\QAdditionally, a blue-green deployment strategy, where two identical production version of the system, the new and old run simultaneously could be used.\\E$"}
 {"rule":"THREE_NN","sentence":"^\\QAdditionally, a blue-green deployment strategy, where two identical production versions of the system, the new and old run simultaneously could be used.\\E$"}
+{"rule":"PASSIVE_VOICE","sentence":"^\\QThe platform is built from separate parts (a backend, a frontend, and a small proxy/deployment component) so that it can be developed, tested, and operated effectively while remaining straightforward for end users.\\E$"}
