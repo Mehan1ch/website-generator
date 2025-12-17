@@ -1,42 +1,42 @@
 \section{Frontend testing}
 \label{section:testing-frontend}
 
-React is also unsurprisingly unopinionated about testing, and there exists many robust packages that solve this issue.
+React is also unsurprisingly unopinionated about testing, and there are many robust packages that solve this issue.
 A distinct difference about the available libraries is whether they actually run a browser in which the frontend runs and is tested, or rather the DOM gets simulated, and the tests run in this mocked environment.
-The latter has the potential problem that the simulated environment is not a one on one match with the live and the DOM and CSS get handled a bit differently.
+The latter has the potential problem that the simulated environment is not a one-on-one match with the live one, and the DOM and CSS get handled a bit differently.
 Due to this, I opted to go with the former method as it ensures the tests interact with the exact same interface as users would.
 
 I chose to use Vitest in browser mode out of the available solutions.
 Vitest provides comprehensive support for testing all Vite based applications.
-This means not just React but Vue and Angular based web apps can be tested using it.
-I used the package in conjunction with Playwright which provides the browser engine for the tests.
+This means not just React, but Vue and Angular based web apps can be tested using it.
+I used the package in conjunction with Playwright, which provides the browser engine for the tests.
 
-As the first step I installed the necessary packages and configured tests in the Vite config file.
-This included setting the default timeouts, the playwright provider with the chromium engine for browser tests and location of the output, setup, and coverage files.
+As the first step, I installed the necessary packages and configured tests in the Vite config file.
+This included setting the default timeouts, the Playwright provider with the Chromium engine for browser tests, and location of the output, setup, and coverage files.
 
-Next I created the setup file for Vitest.
-This included registering mocked hooks, specifying the \texttt{beforeAll}, \texttt{afterAll} and \texttt{afterEach} methods.
-The first two handles starting and stopping the mocked worker server (more on this later), while the third resets the handlers of the server and clears a test query client.
+Next, I created the setup file for Vitest.
+This included registering mocked hooks, specifying the \texttt{beforeAll}, \texttt{afterAll}, and \texttt{afterEach} methods.
+The first two handle starting and stopping the mocked worker server (more on this later), while the third resets the handlers of the server and clears the test query client.
 
-Moving on I created mocks for various aspects of the application.
+Moving on, I created mocks for various aspects of the application.
 I used the Mock Service Worker (MSW) package, with the OpenAPI-MSW lightweight wrapper to intercept and mock the API calls to the backend and return fake responses.
-The wrapper ensures that all mocked paths are valid according to the OpenAPI schema, and mocked requests' and responses' structure are correct.
+The wrapper ensures that all mocked paths are valid according to the OpenAPI schema, and mocked requests' and responses' structures are correct.
 A mock handler thus had to be created for each valid endpoint.
-Similarly to the backend I used the FakerJS library to create factory methods to mock types and responses with fake but realistic data.
+Similarly to the backend, I used the FakerJS library to create factory methods to mock types and responses with fake but realistic data.
 
-Afterwards I implemented utilities to create a test query client for TanStack Query and a test router for TanStack Router.
+Afterwards, I implemented utilities to create a test query client for TanStack Query and a test router for TanStack Router.
 I exported a method for rendering routes with the test providers inside tests according to the recommendation of the TanStack Router documentation.
 
-All that remained at this point is implementing the test cases.
-I implemented some basic component tests which test that each page renders properly, navigation is possible between them, and the elements react as expected to user input.
+All that remained at this point was implementing the test cases.
+I implemented some basic component tests, which test that each page renders properly, navigation is possible between them, and the elements react as expected to user input.
 This mostly means checking that elements having certain texts, tags, and other properties exist at a given time or after an event.
 
 Finally, I implemented two end-to-end tests for comprehensive feature testing.
-The first tests the authentication flow by registering a new user, logging out and back in, changing user information and password and finally logging back in with the new credentials after the automatic logout.
+The first one tests the authentication flow by registering a new user, logging out and back in, changing user information and password, and finally logging back in with the new credentials after the automatic logout.
 The other end-to-end test checks the site management flow.
-It includes logging in, navigating to the sites view, creating a new site, viewing it in detail view, opening its home page in the designer, re-saving the design, navigating back to the site detail view and deploying it.
+It includes logging in, navigating to the sites view, creating a new site, viewing it in the detail view, opening its home page in the designer, re-saving the design, navigating back to the site detail view, and deploying it.
 
-On Figure \ref{fig:frontend-test} the testing browser environment with the successfully run tests can be seen.
+In Figure \ref{fig:frontend-test}, the testing browser environment with the successfully executed tests can be seen.
 
 \begin{figure}[H]
   \centering
@@ -45,7 +45,7 @@ On Figure \ref{fig:frontend-test} the testing browser environment with the succe
   \label{fig:frontend-test}
 \end{figure}
 
-On the other hand Figure \ref{fig:frontend-coverage} showcases the coverage report for the frontend. In total the tests covered about 40\% of the frontend.
+On the other hand, Figure \ref{fig:frontend-coverage} showcases the coverage report for the frontend. In total, the tests covered about 40\% of the frontend.
 
 \begin{figure}[H]
   \centering

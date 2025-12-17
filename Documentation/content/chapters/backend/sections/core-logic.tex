@@ -1,40 +1,40 @@
 \section{Core Logic}
 \label{section:crud}
 The first part of the core CRUD logic is defining the API routes in the routes folder.
-Here routes can be defined for web, API, console use cases.
-The web handles standard web request if Laravel were to serve the frontend as well.
-Hence the React SPA takes care of this functionality the only route handler I defined here is a redirect to the frontend's index page.
-The console routes can be employed to define custom artisan commands, so it remained unused in this case.
+Here, routes can be defined for web, API, and console use cases.
+The web handles standard web requests if Laravel were to serve the frontend as well.
+Hence, the React SPA takes care of this functionality, the only route handler I defined here is a redirect to the frontend's index page.
+The console routes can be employed to define custom artisan commands, so they remained unused in this case.
 
 I decided to use API versioning for a cleaner design and architecture, so I prefixed all of my routes with \texttt{v1}.
-If in the future a new API version would need to be released with breaking changes this allows for a cleaner transition while keeping backwards compatibility.
+If, in the future, a new API version would need to be released with breaking changes, this allows for a cleaner transition while keeping backwards compatibility.
 
 I grouped all routes by their respective controller that handles the incoming request.
-There is a controller for each model, an avatar controller for handling profile pictures, a dashboard controller for returning the frontend dashboard's content and a deployment controller for handling making deployment requests to the proxy application.
-This is worth talking about more in depth which will be done in Section \ref{section:deployment-logic}.
-For each group the authentication I applied the middleware provided by Laravel Sanctum.
-Apart from the user and dashboard controller the others also have the verified middleware applied onto them that ensures the user making the request must have verified their email.
+There is a controller for each model, an avatar controller for handling profile pictures, a dashboard controller for returning the frontend dashboard's content, and a deployment controller for handling making deployment requests to the proxy application.
+This is worth talking about more in depth, which will be done in Section \ref{section:deployment-logic}.
+For each group authentication, I applied the middleware provided by Laravel Sanctum.
+Apart from the user and dashboard controllers, the others also have the verified middleware applied onto them that ensures the user making the request must have verified their email.
 
 The routes also have the appropriate policy methods called on them that I talked about in Section \ref{section:authorization}, to check against the given user's roles and capabilities.
 Route parameters specified with e.g., \texttt{\{param\}} also get automatically dependency injected into the controller method.
 
-Next in line I implemented Laravel's form request classes for the POST and PUT routes. They encapsulate the custom validation logic for each incoming request, which can be defined either using one of the many built-in validation rules or by creating a custom rule via a callback.
+Next in line, I implemented Laravel's form request classes for the POST and PUT routes. They encapsulate the custom validation logic for each incoming request, which can be defined either using one of the many built-in validation rules or by creating a custom rule via a callback.
 A custom rule I implemented is checking that each path segment mapped to a page must be unique within the parent site.
-I used the predefined rules to validate against types, null checks, optional body parameters, sizes and file MIME types among many.
-Custom auth can be implemented here, however since it is already taken care by the route policy and middleware I only provided a simple check to make sure the user exists.
+I used the predefined rules to validate against types, null checks, optional body parameters, sizes, and file MIME types among many.
+Custom auth can be implemented here, however, since it is already taken care of by the route policy and middleware, I only provided a simple check to make sure the user exists.
 I also defined a body parameters function in each form request to help the OpenAPI schema generation.
 
-Due to the separation of concerns into the many capabilities most controllers are incredibly thin.
-Frequently they are only comprised of retrieving the validated form data, performing the CRUD operation, and returning the appropriate API resource instance.
-As an extra I implemented pagination when returning collections of resources for smaller payloads and better UX on the frontend.
-I used however the Scribe third-party package for generating an OpenAPI schema and hosted API documentation.
+Due to the separation of concerns into the many capabilities, most controllers are incredibly thin.
+Frequently, they are only comprised of retrieving the validated form data, performing the CRUD operation, and returning the appropriate API resource instance.
+As an extra, I implemented pagination when returning collections of resources for smaller payloads and better UX on the frontend.
+I used, however, the Scribe third-party package for generating an OpenAPI schema and hosted API documentation.
 The package auto discovers routes and controller methods and tries to deduce the parameters, bodies, and responses, but it can have errors or shortcomings.
 One way it can be helped is by giving the controller methods annotations or doc comments.
 I chose the latter and provided additional descriptions for the schema generation.
 It is also possible to document the routes and controllers provided by other packages, which in my case was Laravel Fortify.
-This can be achieved by writing a custom YAML file describing those endpoints.
+This can be achieved by writing a custom YAML (YAML Ain't Markup Language) file describing those endpoints.
 
-I also modified the configuration of the package so that the application publishes the generated schema on the \texttt{/docs} endpoint, which can be seen on Figure \ref{fig:openapi-backend}.
+I also modified the configuration of the package so that the application publishes the generated schema on the \texttt{/docs} endpoint, which can be seen in Figure \ref{fig:openapi-backend}.
 
 \begin{figure}[H]
   \centering

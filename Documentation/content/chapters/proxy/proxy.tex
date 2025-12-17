@@ -2,23 +2,23 @@
 \label{chapter:proxy}
 
 The proxy application is a small NodeJS based application that forwards the backend's deployment request to the Kubernetes cluster.
-The first obvious question one may have is why is this a separate application instead of part of the backend.
-Unfortunately there is no official PHP client library maintained by the Kubernetes team itself.
+The first obvious question one may have is why this is a separate application instead of part of the backend.
+Unfortunately, there is no official PHP client library maintained by the Kubernetes team itself.
 There are many community packages, and most seemed promising, but regrettably all of them turned out to be outdated either from the perspective of the Kubernetes API versions or from major Laravel versions.
-At this point I mostly finished the rest of the feature set of the backend, so instead of starting over, the most rational solution seemed to be outsourcing this capability to a small proxy application.
+At this point, I mostly finished the rest of the feature set of the backend, so instead of starting over, the most rational solution seemed to be outsourcing this capability to a small proxy application.
 This is the application described in this chapter.
 
 Before I begin with the development details of the app, I want to mention setting up the Kubernetes cluster itself for development.
 I used Docker desktop's built-in cluster while developing this project, but other distributions, such as minikube or k3d should suffice as well.
-Then I installed Traefik as a Gateway API into the cluster, with the helm package manager for Kubernetes.
+Then, I installed Traefik as a Gateway API into the cluster, with the helm package manager for Kubernetes.
 
 Now let me describe the implementation of the proxy application itself.
 I chose to use NodeJS due to it having an official client library and also due to the fact that experience with the language could be carried over from the frontend development.
-As with the other two application I set up a Docker init based Dockerfile and compose file for containerization purposes.
+As with the other two applications, I set up a Docker init based Dockerfile and compose file for containerization purposes.
 I also configured TypeScript as the main language, set strict mode, provided an ESLint config, and created \texttt{.env} and \texttt{.env.example} files for environment variables.
 I decided to use Fastify as the server of this application as it provides request validation built-in, TypeScript support and is extendible over plugins.
 Furthermore, I decided to use the OpenAPI  generator plugin to also provide hosted documentation.
-This is seen on Figure \ref{fig:proxy-openapi}.
+This is seen in Figure \ref{fig:proxy-openapi}.
 
 \begin{figure}[H]
   \centering
@@ -27,8 +27,8 @@ This is seen on Figure \ref{fig:proxy-openapi}.
   \label{fig:proxy-openapi}
 \end{figure}
 
-Since Fastify is also unopinionated about the code structure, I decided to take inspiration from NestJS's module based structure, which provides a maintainable and extendible base for this proxy application.
-This structure can be seen on Figure \ref{fig:proxy-struct}.
+Since Fastify is also unopinionated about the code structure, I decided to take inspiration from NestJS's module based structure, which provides a maintainable and extensible base for this proxy application.
+This structure can be seen in Figure \ref{fig:proxy-struct}.
 
 \begin{figure}[H]
   \centering
@@ -37,36 +37,36 @@ This structure can be seen on Figure \ref{fig:proxy-struct}.
   \label{fig:proxy-struct}
 \end{figure}
 
-The \texttt{kube} folder contain an example configuration file for connecting to the cluster, which has to be copied and set accordingly.
-Inside \texttt{src} the \texttt{routes} folder contains files which list the routes of the application, in this case the CRUD + restart routes for deployments.
-The \texttt{assets} contain the \texttt{index.css} file which provides the look of the websites, while \texttt{types} organize global TypeScript types, as module specific ones live inside their respective folders.
+The \texttt{kube} folder contains an example configuration file for connecting to the cluster, which has to be copied and set accordingly.
+Inside \texttt{src}, the \texttt{routes} folder contains files, which list the routes of the application, in this case the CRUD and restart routes for deployments.
+The \texttt{assets} contains the \texttt{index.css} file, which provides the style of the websites, while \texttt{types} organizes global TypeScript types, as module specific ones live inside their respective folders.
 The \texttt{modules} folder contains colocated logic of each Kubernetes resource, which is mostly composed of requests, services, controllers, and types.
-Lastly I set up the server up in the \texttt{src/index.tsx} file where I registered the routes to the server instance.
+Lastly, I set the server up in the \texttt{src/index.tsx} file where I registered the routes to the server instance.
 
-The API module configures the Kubernetes client library and exports the core, apps, and objects API for other modules to use and create resources.
+The API module configures the Kubernetes client library and exports the core, apps, and objects APIs for other modules to use and create resources.
 The asset service has a method that ensures that a config map containing the style CSS file is available within the cluster for mounting as a volume for deployments.
-It leverages this by querying for the object and if not found assembles the specification and creates it through the library.
+It leverages this by querying for the object and if not found, assembles the specification and creates it through the library.
 
 The ingress module, which in reality uses the GatewayAPI and HTTPRoutes, assembles the specification of HTTPRoutes for the Traefik Gateway.
-It specifies the namespace, label selector for the application, name of the route resource, and the host which is composed of the domain of the SaaS and the subdomain given the website.
-All other Kubernetes resources get the same label selector defined so to easily identify all cluster resources belonging to the same site.
+It specifies the namespace, label selector for the application, name of the route resource, and the host, which is composed of the domain of the SaaS and the subdomain given the website.
+All other Kubernetes resources get the same label selector defined to easily identify all cluster resources belonging to the same site.
 
 The service module constructs the service for the website, which provides a single definition point.
 
 The deployment module has the task of creating the deployment object for the website.
 This is composed of multiple parts.
-First it mounts the aforementioned config map to access the style sheet.
+First, it mounts the aforementioned config map to access the style sheet.
 The HTML files already contain a link for this sheet.
-Then it parses the incoming request.
-This contains the name of the site, which in this case is equal to the subdomain as it is a unique identifier for it, array of its pages, and the namespace to deploy it to.
+Then, it parses the incoming request.
+This contains the name of the site, which in this case is equal to the subdomain as it is a unique identifier for it, the array of its pages, and the namespace to deploy it to.
 The pages only encompass the route path and object storage URL of the HTML file.
-Afterwards a one target replica and a revision history limit of 10 gets set.
-Next I use an init container to fetch the HTML files from the provided URL's of the S3 storage and mount the result to the actual container inside the pods.
+Afterwards, a one target replica and a revision history limit of 10 gets set.
+Next, I use an init container to fetch the HTML files from the provided URLs of the S3 storage and mount the result to the actual container inside the pods.
 The container itself is a simple NGINX web server serving the site and its pages statically.
-The pod also has limits set as 500m for CPUs and 500Mi for memory.
+The pod also has limits set as 500 m for CPUs and 500 Mi for memory.
 
 Finally, the \texttt{siteDeployment} module leverages the aforementioned modules to handle the full CRUD of the deployment strategy.
-The full sequence diagram for the creation of the website's deployment is on Figure \ref{fig:proxy-sequence}.
+The full sequence diagram for the creation of the website's deployment is in Figure \ref{fig:proxy-sequence}.
 
 \begin{figure}[H]
   \centering

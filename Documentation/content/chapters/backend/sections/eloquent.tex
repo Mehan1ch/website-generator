@@ -1,7 +1,7 @@
 \section{Eloquent ORM}
 
 Let me start building up the backend's feature set from the bottom, starting with the parts of the Eloquent ORM.
-The database schema of the backend including the most important tables can be seen on Figure \ref{fig:database}.
+The database schema of the backend including the most important tables can be seen in Figure \ref{fig:database}.
 
 Laravel has some other default tables, related to built-in features such as jobs and caching that I omitted from the diagram for better clarity as they will be unused in the application.
 
@@ -13,53 +13,54 @@ Laravel has some other default tables, related to built-in features such as jobs
 \end{figure}
 
 All the tables have a corresponding migration file that defines a migration class with an up and down method.
-In these methods using the provided schema class we can define the blueprints of the tables with their fields and data types, and how to create and drop them.
-The Eloquent ORM then when running the migrations will take care of translating it to the query language of the chosen database management system.
+In these methods, using the provided schema class, we can define the blueprints of the tables with their fields and data types, and how to create and drop them.
+The Eloquent ORM will then take care of translating it to the query language of the chosen database management system when running the migrations.
 
 The users table is auto generated, the only change I made is regarding the ID (Identifier) field.
-In all tables and models I opted to switch from the default integer ID to UUIDv7 (Universally Unique Identifiers version 7) which are time-based sortable universally unique identifiers composed of 32 hexadecimal digits.
-The application uses the simplest form of tenancy where each user is a tenant as that is sufficient for the current requirements.
+In all tables and models, I opted to switch from the default integer ID to UUIDv7 (Universally Unique Identifiers version 7), which are time-based sortable universally unique identifiers composed of 32 hexadecimal digits.
+The application uses the simplest form of tenancy where each user is a tenant, as that is sufficient for the current requirements.
 
-All tables by default also have two timestamp fields a \texttt{created\_at} and an \texttt{updated\_at}. Laravel automatically manages these and casts them by default to the included carbon class, which provides helper methods to manage times professionally.
+All tables also have two timestamp fields by default: \texttt{created\_at} and \texttt{updated\_at}. Laravel automatically manages these and casts them by default to the included carbon class, which provides helper methods to manage times professionally.
 
-The Spatie Laravel Permission package adds the role related tables, which I will talk about in more detail in the authorization Section \ref{section:authorization}.
+The Spatie Laravel Permission package adds the role related tables, which I will talk about in more detail in the authorization  description in Section \ref{section:authorization}.
 
-On the other hand the Spatie Media Library provides the media table which will be used to store profile pictures and the HTML files of the static pages.
+On the other hand, the Spatie Media Library provides the media table, which will be used to store profile pictures and the HTML files of the static pages.
 The application uses the password reset tokens and sessions table for authentication related features.
-The Sites table store the websites of the users. Each site must have a unique subdomain that will be assigned to it upon creation and which cannot be changed later.
+The Sites table stores the websites of the users. Each site must have a unique subdomain that will be assigned to it upon creation, and which cannot be changed later.
 
-Also, worth mentioning that each site also has a state that can be either draft or published, to track changes and whether they are visible to the end users.
-This is implemented using the Spatie Model States library which adds an easy to configure state machine pattern support with helper functions such as checking viable transitions.
+Also worth mentioning, that each site also has a state that can be either draft or published, to track changes and whether they are visible to the end users.
+This is implemented using the Spatie Model States library, which adds an easy to configure state machine pattern support with helper functions, such as checking viable transitions.
 It uses an abstract state (\texttt{PublishingState}) class with actual states being the concrete implementations (\texttt{Published}, \texttt{Draft}).
 Allowed transitions and transition handlers are also easy to configure and customize.
 
 A site can also have pages which need a corresponding URL segment (e.g., \texttt{/about}) for routing.
 The database stores the pages content in a zlib compressed and base64 encoded format for better transfer and storage efficiency, but can be cast to the uncompressed version if needed.
-The structure of the content will be further specified in Chapter \ref{chapter:frontend}, but in short it is a JSON file encoding a tree structure.
+The structure of the content will be further specified in Chapter \ref{chapter:frontend}, but in short, it is a JSON file encoding a tree structure.
 Pages also take advantage of the media library and S3 object storage to store the page's HTML in files.
-Last but not least the schemas table is a mix of the previous two, having both a content identical to that of the pages table and the same published and draft state as sites.
+Last but not least, the schemas table is a mix of the previous two, having both a content identical to that of the pages table, and the same published and draft state as sites.
 Schemas allow administrators to create and publish page schemas that users can base their own pages off of.
 
 The models paired with the tables contain most of the business logic that is independent of routes (heavy models).
-This includes defining all relationships and their inverses, like in the case of sites and pages a hasMany, and it's inverse belongsTo functions, defining fillable fields that can be assigned from requests, and any custom casts and attributes.
+This includes defining all relationships and their inverses, like in the case of sites and pages a hasMany and its inverse belongsTo functions, defining fillable fields that can be assigned from requests, and any custom casts and attributes.
 The former include casting to the aforementioned state classes while the latter includes accessing the decompressed and decoded content and the storage and retrieval of the HTML content of pages.
-Models register media collections for storing files by setting its name, accepted MIME (Multipurpose Internet Mail Extensions) types and the amount of files they can hold.
+Models register media collections for storing files by setting the name, accepted MIME (Multipurpose Internet Mail Extensions) types and the amount of files they can hold.
 
-Finally, for most of the mentioned models I extended the special boot method with additional functionality. Inside this the CRUD functionality can be extended with additional logic.
+Finally, for most of the mentioned models, I extended the special boot method with additional functionality.
+Inside this, the CRUD functionality can be extended with additional logic.
 Examples include ensuring that sites transfer to the draft state when one of their pages gets updated, ensuring that a home page (\texttt{/}) exists for all sites, and relationship and media clean up logic upon model deletion.
 
-A feature related to models is factories which allows the developer to create instances of models with set default attributes and persist them to the database.
-Another related feature is database seeding which allows us to populate the database with initial data.
-Since I use the aforementioned capabilities mostly for testing I will go into more detail about them in Section \ref{section:backend-testing}.
-For development purposes, however I use the user model's factory to create a super-admin user and seed roles and permissions into the database.
+A feature related to models is factories, which allow the developer to create instances of models with set default attributes and persist them to the database.
+Another related feature is database seeding, which allows us to populate the database with initial data.
+Since I use the aforementioned capabilities mostly for testing, I will go into more detail about them in Section \ref{section:backend-testing}.
+For development purposes, however, I use the user model's factory to create a super-admin user and seed roles and permissions into the database.
 I will talk about the previously mentioned features more in Section \ref{section:authorization}.
 
 The final component related to the Eloquent ORM I used and want to mention here is API resource classes. They provide a way to transform models into the JSON format that is returned to the application's frontend.
-It can be thought of as a Data Transfer Object (DTO) implementation as resource classes allow fine granular control over the returned properties.
+It can be thought of as a Data Transfer Object (DTO) implementation, as resource classes allow fine granular control over the returned properties.
 Fields can be hidden from models, relationships can be included with select fields, and any custom or calculated field can be defined.
-Moreover, resource collection classes can be defined which define how to return a collection of the given model as opposed to returning a singular instance.
-Furthermore, resources classes can also be defined without them being connected to a given model.
+Moreover, resource collection classes can be defined, which describe how to return a collection of the given model as opposed to returning a singular instance.
+Furthermore, resource classes can also be defined without them being connected to a given model.
 
-For each model and endpoint I defined a corresponding resource and resource collection class.
-In order to parse request and responses from the proxy application I implemented custom deployment resources as well.
+For each model and endpoint, I defined a corresponding resource and resource collection class.
+In order to parse requests and responses from the proxy application, I implemented custom deployment resources as well.
 I organized all of these classes  according to the API versioning, to which refer to Section \ref{section:crud}.

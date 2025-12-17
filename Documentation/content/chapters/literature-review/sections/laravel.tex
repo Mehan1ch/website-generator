@@ -2,7 +2,7 @@
 
 In this section I will be reviewing Laravel, and its most important features regarding the thesis.
 Laravel is a popular PHP web framework created by Taylor Otwell and first released in June 2011 \cite{stauffer2019laravel}.
-He based it upon Symfony which is another PHP web application framework first and foremost, but also contains a wide variety of PHP tools and libraries.
+He based it upon Symfony, which is another PHP web application framework first and foremost, but also contains a wide variety of PHP tools and libraries.
 It was also heavily inspired by Ruby on Rails.
 
 ``Laravel is, at its core, about equipping and enabling developers.
@@ -11,12 +11,12 @@ The tools and ecosystem of the framework allow developers to write more scalable
 
 Laravel uses the Model-View-Controller (MVC) architecture.
 
-Models represent logical entities or resources in the application and is implemented by the Eloquent ORM (Object-Relational Mapping) of Laravel.
+Models represent logical entities or resources in the application and are implemented by the Eloquent ORM (Object-Relational Mapping) of Laravel.
 Controllers provide methods to handle incoming requests and return an appropriate response or serve a view.
 Views display the aforementioned response from a controller method.
-Laravel provides the built-in Blade templating engine to return HTML views to the users \cite{subecz2021web}.
+Laravel provides the built-in Blade templating engine to return HTML (HyperText Markup Language) views to the users \cite{subecz2021web}.
 
-An example diagram visualizing this architecture can be seen on Figure \ref{fig:mvc}.
+An example diagram visualizing this architecture can be seen in Figure \ref{fig:mvc}.
 
 \begin{figure}[H]
   \centering
@@ -27,16 +27,16 @@ An example diagram visualizing this architecture can be seen on Figure \ref{fig:
 
 \subsection{Request Lifecycle}
 
-Aside from understanding the general architecture of Laravel getting a grasp of its inner workings through the request lifecycle allows one to better understand on a high-level how the framework truly functions.
-As with all web applications a web server serves Laravel, most commonly Apache, Nginx, or nowadays FrankenPHP (built on Caddy).
-The starting point of the application is the \texttt{public/index.php} file to which the web server directs all requests.
-From here the file retrieves a Laravel application instance from the \texttt{bootstrap/app.php} file.
-Next it sends the incoming request to the HTTP kernel which bootstraps all necessary service providers, and executes application level middleware.
-These include the database, queue, validation, and routing components among many.
-Following this the router will dispatch the incoming request to route specific middleware, after which a route or controller will handle generating a response.
+Aside from understanding the general architecture of Laravel, getting a grasp of its inner workings through the request lifecycle allows one to better understand on a high-level how the framework truly functions.
+As with all web applications, a web server serves Laravel, most commonly Apache, Nginx, or nowadays FrankenPHP (built on Caddy).
+The starting point of the application is the \texttt{public/index.php} file, to which the web server directs all requests.
+From here, the file retrieves a Laravel application instance from the \texttt{bootstrap/app.php} file.
+Next, it sends the incoming request to the HTTP (HyperText Transfer Protocol) kernel, which bootstraps all necessary service providers, and executes application level middleware.
+These include the database, queue, validation, and routing components, among many others.
+Following this, the router will dispatch the incoming request to route-specific middleware, after which a route or controller will handle generating a response.
 Finally, the response will be sent out through the HTTP kernel and application instance \cite{bean2015laravel}.
 
-A diagram of the complete request lifecycle and MVC can be seen on Figure \ref{fig:lifecycle}
+A diagram of the complete request lifecycle and MVC can be seen in Figure \ref{fig:lifecycle}
 
 \begin{figure}[H]
   \centering
@@ -47,9 +47,9 @@ A diagram of the complete request lifecycle and MVC can be seen on Figure \ref{f
 
 \subsection{Ecosystem}
 
-Laravel provides many built in functionalities for use, such as mailing, testing, queues, notifications, storage, authentication, and authorization among many.
+Laravel provides many built-in functionalities for use, such as mailing, testing, queues, notifications, storage, authentication, and authorization, among many.
 All of these capabilities can be extended, or new ones can be added through the rich package ecosystem surrounding the framework \cite{laravel-docs}.
 The creators of Laravel also maintain numerous first party packages, but there are also many other third party big packages and package maintainers.
-Most notably Spatie \cite{spatie} whose team maintain many packages and tools for the framework and FilamentPHP, which is a plugin extendable admin panel and UI (user interface) framework \cite{filament}.
+Most notably Spatie \cite{spatie}, whose team maintains many packages and tools for the framework, and FilamentPHP, which is a plugin extendable admin panel and UI (user interface) framework \cite{filament}.
 
 % TODO: kicsit több az artisan cli-t mindenképp

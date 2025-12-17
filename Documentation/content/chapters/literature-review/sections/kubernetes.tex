@@ -9,27 +9,28 @@ by Google, in March of 2016 it was donated to the Cloud Native
 Computing Foundation (CNCF) \cite{kubernetes2019kubernetes}.''
 
 Kubernetes has multiple distributions, can be installed standalone, or used through the services of popular cloud platform providers.
-It is used declaratively to configure the desired state of system or application.
+It is used declaratively to configure the desired state of a system or an application.
 Most often users interact with Kubernetes through its command line interface (CLI) with the \texttt{kubectl} command.
 This interacts with the underlying API of Kubernetes.
 
-Pods are either a single or a group of containers with shared network and storage resources and the smallest configurable and manageable deployment unit in the system.
+Pods are either a single or a group of containers with shared network and storage resources, and are the smallest configurable and manageable deployment unit in the system.
 A Pod can have any number of Init Containers.
-They must run successfully and in a set order, and can be used to do setup tasks for its respective Pod.
-Replicasets maintain a set number of replicas of the same pod while Deployments provide a declarative way to update Replicasets or Pods.
+They must run successfully and in a set order, and can be used to do setup tasks for their respective Pod.
+Replicasets maintain a set number of replicas of the same pod, while Deployments provide a declarative way to update Replicasets or Pods.
 Finally, a Service can be used to expose a network application that is running a set of pods behind a single outward facing endpoint \cite{luksa2017kubernetes}.
 
 \subsection{Ingress, Gateway API}
 
-Since Pods can be short-lived, often recreated and have multiple replicas, a specialized service is needed to access HTTP routes from outside to cluster. This is provided by the Kubernetes Ingress or Gateway API.
+Since Pods can be short-lived, often recreated, and have multiple replicas, they need a specialized service to access HTTP and HTTPS (HyperText Transfer Protocol Secure) routes from outside the cluster.
+This is provided by the Kubernetes Ingress or Gateway API.
 
 ``Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. Traffic routing is controlled by rules defined on the Ingress resource \cite{ingress_2025}.''
 
-The Gateway API is in a way is a successor to the Kubernetes Ingress and provides a more modern and scalable solution to route and traffic management \cite{Kanuru_Gurugubelli_2025}.
+The Gateway API is, in a way, a successor to the Kubernetes Ingress, and it provides a more modern and scalable solution to route and traffic management \cite{Kanuru_Gurugubelli_2025}.
 
-Both the Ingress and Gateway API need a controller or provider to function. One such industry standard is Traefik which can serve both functionalities, and is an open source application proxy \cite{sharma2020traefik}.
+Both the Ingress and Gateway API need a controller or provider to function. One such industry standard is Traefik, which can serve both functionalities, and is an open source application proxy \cite{sharma2020traefik}.
 
-A small illustration of the above concepts can be seen on Figure \ref{fig:traefik}.
+A small illustration of the above concepts can be seen in Figure \ref{fig:traefik}.
 
 \begin{figure}[H]
   \centering
