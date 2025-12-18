@@ -39,4 +39,11 @@ A small illustration of the above concepts can be seen in Figure \ref{fig:traefi
   \label{fig:traefik}
 \end{figure}
 
-%TODO: Client libs
+\subsection{Client Libraries}
+
+Kubernetes provides official client libraries for several programming languages, including Go, Python, Java, JavaScript, and .NET, enabling programmatic interaction with the Kubernetes API.
+Additional community maintained libraries are also available for most common programming languages and environments.
+
+These libraries enable developers to communicate with the cluster through code instead of calling the REST API directly.
+They provide typing support for requests, responses, and resources as well.
+Moreover, they handle common tasks, which include authentication against the cluster, using and discovering service accounts, and understanding and parsing the \texttt{kubeconfig} to read addresses and credentials \cite{client_libraries_2025}.

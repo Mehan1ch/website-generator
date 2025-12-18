@@ -5,8 +5,11 @@ The proxy application is a small NodeJS based application that forwards the back
 The first obvious question one may have is why this is a separate application instead of part of the backend.
 Unfortunately, there is no official PHP client library maintained by the Kubernetes team itself.
 There are many community packages, and most seemed promising, but regrettably all of them turned out to be outdated either from the perspective of the Kubernetes API versions or from major Laravel versions.
-At this point, I mostly finished the rest of the feature set of the backend, so instead of starting over, the most rational solution seemed to be outsourcing this capability to a small proxy application.
-This is the application described in this chapter.
+Due to this reason, I decided on outsourcing this capability to a small proxy application, which is the application described in this chapter.
+This comes with a few benefits, since the deployment logic of the system is completely separate from the rest of the business logic.
+The proxy application, and by extension the orchestration of the platform could be scaled and updated independently of the other parts.
+Moreover, by abstracting away the implementation details of operation, the platform as a whole is more flexible.
+New ways of deployment could be added by extension or be replaced without friction and notice.
 
 Before I begin with the development details of the app, I want to mention setting up the Kubernetes cluster itself for development.
 I used Docker desktop's built-in cluster while developing this project, but other distributions, such as minikube or k3d should suffice as well.

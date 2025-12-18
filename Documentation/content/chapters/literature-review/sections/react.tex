@@ -71,6 +71,13 @@ Due to JavaScript's, and by extension React's rich package and library ecosystem
 For the basis of the editor functionality I investigated two libraries, namely GrapesJS and CraftJS.
 They both offer capabilities to build one's own editor with drag-and-droppable UI elements \cite{bagwani2024implementing}.
 Ultimately, I decided against GrapesJS as CraftJS is built more around React, while the former relies more heavily on pure JavaScript elements.
-CraftJS modularizes the editor and allows one to fully customize it according to their own needs \cite{craftjs}.
 
-%TODO: extend with details
+CraftJS is a React library for building extensible drag-and-drop page editors.
+Unlike traditional page builders that provide a fixed set of components and limited customization, CraftJS provides a flexible foundation that allows developers to define their own editable components, control rendering logic, and implement custom drag-and-drop behaviours.
+The library manages the editor state through a centralized store, handles serialization and deserialization of the component tree, and provides hooks for accessing and manipulating editor content programmatically.
+
+Components in CraftJS are defined by wrapping standard React components with editor-specific configurations that specify draggable regions, droppable areas, connection points, and editable properties.
+The library distinguishes between user-facing components (rendered in the canvas) and their corresponding settings panels (displayed in toolbars or sidebars), allowing complete separation of editing interface and output.
+CraftJS also supports constraints and rules, such as restricting which components can be dropped into certain containers or limiting nesting depth.
+
+The library's modular architecture makes it well-suited for building domain-specific editors tailored to particular use cases \cite{craftjs}.

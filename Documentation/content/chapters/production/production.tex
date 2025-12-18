@@ -14,13 +14,13 @@ Also, the proxy app's Docker configuration should be edited as well, and a produ
 Many cloud-based services exist for the above steps that provide out of the box configuration or detailed help.
 Of course, the whole SaaS or parts of it could be self-hosted on an on-site infrastructure too if the resources are available.
 Nowadays, however, it is both cheaper and more convenient to rely on cloud providers, so I am going to focus on this solution.
-Most notable out of the providers is the big three, namely Azure, AWS, and GCP, which are all well regarded options.
+Most notable out of the providers is the big three, namely Azure, AWS, and Google Cloud Platform, which are all well regarded options.
 They also provide database, object storage and mailing services that can be used out of the box and scaled if needed.
 However, one should consider backups or replicas in other services as well.
 If the SaaS uses one provider exclusively, that can prove as a single point of failure, should the provider go offline for a while due to an error in the service.
 
 I suggest the Kubernetes cluster to be based on a cloud provider's solution even if one chooses the main app to be on-site.
-Such concrete options are Azure AKS or AWS EKS, as they have vast amounts of computing resources available.
+Such concrete options are Azure Kubernetes Service (AKS), Amazon Elastic Kubernetes Service (Amazon EKS) and Google Kubernetes Engine (GKS), as they have vast amounts of computing resources available.
 In production, the revision history limit and replica set configurations may need to be reviewed and edited accordingly.
 Horizontal autoscaling is beneficial to set up as well, to handle increased loads to deployed websites.
 This can be considered for parts of or the whole of the main application as well.
@@ -33,6 +33,23 @@ Additionally, a blue-green deployment strategy, where two identical production v
 This would allow for switching between the new and old version of the SaaS with zero downtime on updated.
 For the individual deployed sites, since users can choose when to update with their new designs, this is already solved.
 
-I believe the above considerations should help one get started in deploying the developed SaaS into production and help consider various scenarios and use cases.
+Security is another aspect that needs special attention in a production environment, especially in a SaaS system as the single deployment model and cloud based architecture provide many attacking points.
+The data of users is highly confidential and should be stored with great care.
+Tenants' data and resources, such as websites need to be properly isolated, and should never be allowed to mix or affect each other.
+Additionally, frequent encrypted backups should be created and then stored on a separate remote location, to protect against data loss and local disasters.
+The dependencies and the environment should be frequently updated to avoid critical vulnerabilities.
+These exposures could also be mitigated by actively employing tools that scan the system for vulnerable components.
+
+As a hypothetical full example, one might build the React frontend with Vite and publish static assets to a Contend Delivery Network (CDN) backed object store, for instance, S3 with CloudFront.
+Meanwhile, the Laravel backend could run in lightweight Alpine-based containers with FrankenPHP behind a TLS (Transport Layer Security) terminating reverse proxy.
+Containers could be deployed to a managed Kubernetes cluster such as EKS, AKS or GKS using Helm charts.
+A vault might keep secrets, like AWS Secrets Manager or HashiCorp Vault.
+A managed relational database, namely Amazon RDS (Relational Database Service), Aurora or Cloud SQL, could provide automated backups and read replicas.
+Mailpit could be swapped for a transactional mail provider, for example SendGrid or Mailgun, with uploads stored on S3-compatible object storage.
+CI/CD could be handled by GitHub Actions or GitLab CI to promote builds from staging to production using blue-green or canary strategies.
+Observability could be added with Prometheus, Grafana, and centralized logging, for instance Elastic Stack (ELK) or CloudWatch.
+TLS can be automated via cert-manager and Let's Encrypt, and tenant isolation can be enforced with network and ingress policies at the cluster level.
+
+I believe the above considerations and the example should help one get started in deploying the developed SaaS into production and help consider various scenarios and use cases.
 Of course, every situation is unique, so a solution fitting the requirements should be used that fits those needs.
 Not only that, as the deployed system evolves, changes, and grows the deployment and operational strategy should be fitted to the emerging problems and needs.

@@ -45,11 +45,16 @@ A diagram of the complete request lifecycle and MVC can be seen in Figure \ref{f
   \label{fig:lifecycle}
 \end{figure}
 
+\subsection{Artisan}
+
+Laravel includes Artisan, a command-line interface that provides dozens of helpful commands for common development tasks.
+Artisan commands cover a wide range of functionality, including database migrations, seeding, queue management, scheduled task execution, and code generation for models, controllers, and other framework components.
+Developers can also create custom Artisan commands by extending the base command class, defining input arguments and options, and implementing the command logic.
+Commands can be invoked interactively or programmatically from within the application, making them useful for both manual development workflows and automated processes \cite{laravel-artisan}.
+
 \subsection{Ecosystem}
 
 Laravel provides many built-in functionalities for use, such as mailing, testing, queues, notifications, storage, authentication, and authorization, among many.
 All of these capabilities can be extended, or new ones can be added through the rich package ecosystem surrounding the framework \cite{laravel-docs}.
 The creators of Laravel also maintain numerous first party packages, but there are also many other third party big packages and package maintainers.
 Most notably Spatie \cite{spatie}, whose team maintains many packages and tools for the framework, and FilamentPHP, which is a plugin extendable admin panel and UI (user interface) framework \cite{filament}.
-
-% TODO: kicsit több az artisan cli-t mindenképp

@@ -42,3 +42,16 @@
 {"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QFrom the structure of the routes folder a route tree file will also be generated which provides the type safe route checking features.\\E$"}
 {"rule":"PASSIVE_VOICE","sentence":"^\\QTraffic routing is controlled by rules defined on the Ingress resource \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.”\\E$"}
 {"rule":"THREE_NN","sentence":"^\\QIn production, the revision history limit and replica set configurations may need to be reviewed and edited accordingly.\\E$"}
+{"rule":"AGREEMENT_SENT_START","sentence":"^\\QThe assets contains the index.css file, which provides the style of the websites, while types organizes global TypeScript types, as module specific ones live inside their respective folders.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QInside src, the routes folder contains files, which list the routes of the application, in this case the CRUD and restart routes for deployments.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThe modules folder contains colocated logic of each Kubernetes resource, which is mostly composed of requests, services, controllers, and types.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QAdditionally, a blue-green deployment strategy, where two identical production versions of the system, the new and old, run simultaneously could be used.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QThis master's thesis presents the development of a template-driven website generator SaaS platform.\\E$"}
+{"rule":"PASSIVE_VOICE","sentence":"^\\QDeployment and operations are demonstrated using containerized components and a simple orchestration approach suitable for small-scale hosting environments.\\E$"}
+{"rule":"PASSIVE_VOICE","sentence":"^\\QResults are presented through a complete implementation, an end-to-end usage example, and testing that validates functional behavior and typical user flows.\\E$"}
+{"rule":"PASSIVE_VOICE","sentence":"^\\QResults are presented through a complete implementation, an end-to-end usage example, and testing that validates functional behaviour and typical user flows.\\E$"}
+{"rule":"PASSIVE_VOICE","sentence":"^\\QSites are modelled as collections of static pages generated from templates and user content; the platform automates publishing, routing, and basic security considerations.\\E$"}
+{"rule":"PASSIVE_VOICE","sentence":"^\\QSites are modelled as collections of static pages generated from templates and user content, the platform automates publishing, routing, and basic security considerations.\\E$"}
+{"rule":"PASSIVE_VOICE","sentence":"^\\QProduction considerations are also discussed, covering containerization, CDN-backed asset delivery, managed Kubernetes, CI/CD workflows, secrets and backup strategies, observability, tenant isolation, and autoscaling trade-offs.\\E$"}
+{"rule":"PASSIVE_VOICE","sentence":"^\\QProduction considerations are also discussed, covering containerization, CDN-backed asset delivery, managed Kubernetes, CI/CD workflows, secrets and backup strategies, observability, tenant isolation, and autoscaling.\\E$"}
+{"rule":"PASSIVE_VOICE","sentence":"^\\QA user thus will be able to create and design their website on the frontend, which will then be saved to the backend and through the proxy app deployed to the running Kubernetes cluster.\\E$"}

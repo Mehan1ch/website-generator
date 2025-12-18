@@ -30,7 +30,7 @@ A sequence diagram displays this process to the fullest in Figure \ref{fig:html-
   \label{fig:html-service}
 \end{figure}
 
-Next comes the Deployment controller, which handles the actual site publishing related methods, which includes a full CRUD and the option to restart the site if need be.
+Next comes the Deployment controller, which handles the actual site publishing related methods, which includes a full CRUD and the option to restart the site if it is needed.
 I have written and registered another singleton service handling deployments that the controller forwards the incoming request to.
 The deployment service then checks if the site can be transferred to the published state, builds the path and body of the request, which afterwards gets deferred to the proxy application.
 When the proxy returns with a response, the service forwards it to the controller, which finally forwards it to the frontend.

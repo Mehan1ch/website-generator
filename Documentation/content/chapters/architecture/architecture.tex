@@ -2,6 +2,9 @@
 \label{chapter:architecture}
 
 The goal of the thesis is to develop a template-driven website generator SaaS platform that allows users to create, customize, and publish single-page websites.
+While the specification only requires the ability to generate single-page websites, I decided to implement the application in a way that allows users to create sites with multiple pages and navigation between them.
+This solution still allows for single-page websites, but offers more flexibility at the same time.
+
 Special attention must be paid to scalability, security, and user experience (UX).
 The system needs to provide users with the tools to create and design static websites for unique use cases, publish them, and handle continuous integration and delivery of changes.
 All of this has to be implemented in a way that doesn't require users to have any knowledge of the underlying technical details.
@@ -20,23 +23,22 @@ To begin with, I will present the overarching high-level architecture of the com
 The system I designed has two main components: a Docker host and a Kubernetes cluster.
 The Docker host contains the three main applications of the SaaS, each running inside containers and having their own Docker Compose configuration.
 
-I built the frontend primarily using React with the Vite build and bundling tool. It communicates with the backend through a REST (Representational State Transfer) API. The CraftJS library provides the drag-and-droppable editor capabilities, which allow users to design and compose their websites using predefined blocks and templates.
+I will be building the frontend primarily using React with the Vite build and bundling tool. It is going to communicate with the backend through a REST (Representational State Transfer) API. The CraftJS library will provide the drag-and-droppable editor capabilities, which is going to allow users to design and compose their websites using predefined blocks and templates.
 
-The backend relies mainly on Laravel, but also uses MySQL for the database, Mailpit, which is a mailing testing tool that acts as an SMTP server, and MinIO, an S3 compatible object store.
-The backend serves the admin panel using FilamentPHP for the implementation, while I used the Scribe package to generate the backend's API documentation using the Scalar documentation template.
-The backend communicates with both the frontend and the proxy application also through REST.
+The backend relies mainly on Laravel, but is also going to use MySQL for the database, Mailpit, which is a mailing testing tool that acts as an SMTP server, and MinIO, an S3 compatible object store.
+The backend will serve the admin panel using FilamentPHP for the implementation, while I am going to use the Scribe package to generate the backend's API documentation using the Scalar documentation template.
+The backend will communicate with both the frontend and the proxy application also through REST.
 
-The Fastify NodeJS web framework provides the basis for the proxy application and the Kubernetes JavaScript library to connect to the running cluster.
-It also serves its own OpenAPI specification using the native Fastify OpenAPI plugin.
+The Fastify NodeJS web framework is going to provide the basis for the proxy application and the Kubernetes JavaScript library to connect to the running cluster.
+It will also serve its own OpenAPI specification using the native Fastify OpenAPI plugin.
 For the reason of this functionality having its own separate application, refer to Chapter \ref{chapter:proxy}.
 
-The proxy connects programmatically to the Kubernetes cluster to deploy the created websites using its official JS (JavaScript) client library.
-The websites are all deployed to a given namespace ('default' namespace if not changed) using a Kubernetes Deployment.
-The Deployments have the common style CSS (Cascading Style Sheets) attached as a volume through a ConfigMap.
-Furthermore, each Deployment by default has a revision limit of 10, default resource limits set, and a replica requirement of one.
+The proxy is going to connect programmatically to the Kubernetes cluster to deploy the created websites using its official JS (JavaScript) client library.
+The websites are will all be deployed to a given namespace ('default' namespace if not changed) using a Kubernetes Deployment.
+The Deployments will have the common style CSS (Cascading Style Sheets) attached as a volume through a ConfigMap.
+Furthermore, each Deployment by default will have a revision limit of 10, default resource limits set, and a replica requirement of one.
 In production, these values could obviously be reconfigured and scaled up.
-Finally, the application also creates a Service for each website, as well as an HTTP Route to connect to the Traefik API Gateway of the cluster for routing.
+Finally, the application will also create a Service for each website, as well as an HTTP Route to connect to the Traefik API Gateway of the cluster for routing.
 
-A user is thus able to create and design their website on the frontend, which is then saved to the backend and through the proxy app deployed to the running Kubernetes cluster. Outside users can then visit the deployed website through the Traefik API Gateway acting as a reverse proxy.
-
-%TODO: write about multiple pages
+A user thus will be able to create and design their website on the frontend, which will then be saved to the backend and through the proxy app deployed to the running Kubernetes cluster.
+Outside users will then be able to visit the deployed website through the Traefik API Gateway acting as a reverse proxy.

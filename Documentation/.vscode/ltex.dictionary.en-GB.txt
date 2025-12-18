@@ -74,3 +74,13 @@ OpenAPI-MSW
 FakerJS
 EKS
 end‑to‑end
+minikube
+Mailgun
+Gábor
+Knyihár
+Dóra
+Kálmánczhelyi
+Kivonat
+kubeconfig
+HyperText
+deserialization
