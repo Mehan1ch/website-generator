@@ -1,0 +1,53 @@
+%----------------------------------------------------------------------------
+\chapter{\bevezetes}
+%----------------------------------------------------------------------------
+
+Websites and web applications are part of everyday life: businesses, clubs, and people use them to share information, advertise, or show their work.
+
+For many small organizations and individuals, for example someone who wants a simple resume site or a small local shop advertising its services, having a website should be quick, affordable, and easy to manage.
+In practice, creating and keeping a website running often requires time, money and technical knowledge.
+Hiring a developer or an agency can be expensive, building and maintaining a site yourself can be confusing, time-consuming and requires deep technical knowledge.
+
+A software-as-a-service (SaaS) platform for websites tries to solve this problem by offering an all-in-one service: easy tools to build the site, hosting, so the site is always available, and simple ways to update content without requiring professional skills.
+
+Many such platforms exist on the market, including popular solutions like Squarespace, Wix, GoDaddy, and Shopify.
+However, most of them are tailored to complex needs and come with a steep learning curve.
+They typically provide either no free tier or a very limited one, and as a site grows more complex, a paid subscription becomes unavoidable.
+
+Consider Wix, one of the most popular website builders with millions of users worldwide.
+It offers an extensive drag-and-drop editor with hundreds of templates, e-commerce capabilities, advanced SEO (Search Engine Optimization) tools, and marketing integrations.
+While powerful, this breadth of features comes with complexity: users must navigate through numerous menus, settings, and configuration options.
+Wix's free tier displays prominent Wix branding and provides limited storage and bandwidth, making it unsuitable for professional use.
+To remove branding and access essential features, users must subscribe to paid plans, with full-featured e-commerce plans costing even more.
+
+Similarly, Shopify targets e-commerce specifically, offering inventory management, payment processing, shipping integrations, and detailed analytics.
+Its comprehensive feature set makes it ideal for serious online retailers, but also means a steeper learning curve as users must understand product variants, shipping zones, tax settings, and more.
+Shopify requires a minimum subscription with no free tier, and transaction fees apply unless using Shopify Payments.
+
+While these platforms excel at their intended use cases, complex websites and professional e-commerce, they are overcomplicated and cost-prohibitive for users who simply need a basic informational website.
+Someone wanting to display a resume, showcase a portfolio, or create a simple landing page for a local service does not need inventory management, payment gateways, or advanced marketing automation.
+
+This thesis presents a free, lightweight SaaS platform designed specifically for these simpler use cases: websites made of static pages that display essential information.
+By focusing on basic functionality rather than comprehensive features, the platform offers a significantly reduced learning curve.
+Users can create and publish a site in minutes without navigating complex settings or paying subscription fees.
+The trade-off is intentional: while the platform cannot match the advanced capabilities of Wix or Shopify, it provides exactly what is needed for straightforward informational sites, nothing more, nothing less.
+
+\section{Overview}
+
+In Chapter \ref{chapter:literature}, I review background material needed to understand the concepts I used later.
+This includes the idea of software-as-a-service (SaaS), an overview of the Laravel backend framework, a summary of React and client-side technologies, and an introduction to Kubernetes and key deployment concepts.
+
+Chapter \ref{chapter:architecture} defines the functional and non-functional requirements of the platform and presents the system-level architecture.
+I describe the purpose and general behaviour of each component and how they work together.
+
+Chapter \ref{chapter:backend} begins the implementation, focusing on the backend: the data model, core services, security and identity handling, integrations with external services, and the logic that provides the platform's main features.
+
+Continuing the development, Chapter \ref{chapter:frontend} covers the frontend implementation, presenting the user interface, components, and typical user flows for site creation and management.
+
+Finishing the main development areas, Chapter \ref{chapter:proxy} addresses deployment and operations by describing the lightweight proxy application I used for deploying and serving user websites.
+
+Moving on, Chapter \ref{chapter:testing} provides the testing strategy and results to demonstrate and validate correct behaviour, and offers a full end-to-end example showing how an end user would use the SaaS platform.
+
+Chapter \ref{chapter:production} discusses differences to consider when moving to production and practical considerations for operating the service.
+
+Finally, Chapter \ref{chapter:summary} summarizes my work and suggests directions for future improvements.

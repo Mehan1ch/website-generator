@@ -1,0 +1,57 @@
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QModels represent logical entities or resources in the application and is provided by Laravels Eloquent ORM\\E$"}
+{"rule":"MONTH_OF_XXXX","sentence":"^\\QOriginally created by Google, in March of 2016 it was donated to the Cloud Native Computing Foundation (CNCF)\\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.”\\E$"}
+{"rule":"MONTH_OF_XXXX","sentence":"^\\QOriginally created by Google, in March of 2016 it was donated to the Cloud Native Computing Foundation (CNCF) \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.”\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QIn all tables and models I opted to switch from the default integer ID to UUIDv7 (Universally Unique Identifiers version 7) which are time-based sortable universally unique identifiers composed of 32 hexadecimal digits.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThe Sites table store the websites of the users.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QLast but not least the schemas table is a mix of the previous two, having both a content identical to that of the pages table and the same published and draft state as sites.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QThe goal of the thesis is to develop a template-driven website generator SaaS platform that allows users to create, customize, and publish single-page websites.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\Q“Kubernetes is an open source container orchestration system.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QTanStack Router provides many features out of the box including but not limited to file and code based routing, caching, prefetching and data loading, route contexts, search, and URL parameter validation and native TypeScript support and type safe navigation \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qapp.posts.tsx Route nesting: /app/posts $ posts/$postId.tsx Route parameter\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QTanStack Router naming convention examples Symbol Example Function root.tsx The root route (prefix) layout.tsx Layout route - (prefix) -button.tsx Excluded, used for colocation .\\E$"}
+{"rule":"DASH_RULE","sentence":"^\\QTanStack Router naming convention examples Symbol Example Function root.tsx The root route (prefix) layout.tsx Layout route - (prefix) -button.tsx Excluded, used for colocation .\\E$"}
+{"rule":"SENTENCE_FRAGMENT","sentence":"^\\QAfter the ORM let me go into detail about the implementation of the authentication feature set Authorization.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QOut of these three I only used the SPA session authentication.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QTo begin with the SANCTUMSTATEFULDOMAINS environment variable has to be set with the frontend, proxy urls.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QTo finalize the authentication implementation the user model has to be extended from the Authenticable class, and has to implement the MustVerifyEmail interface.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThe users table is auto generated, the only change I made is regarding the ID (Identifier) field.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThe first part of the core crud logic is defining the API routes in the routes folder.\\E$"}
+{"rule":"SENT_START_CONJUNCTIVE_LINKING_ADVERB_COMMA","sentence":"^\\QHence the React SPA takes care of this functionality the only route handler I defined here is a redirect to the frontend's index page.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QThe Eloquent ORM then when running the migrations will take care of translating it to the query language of the chosen database management system.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QAll tables by default also have two timestamp fields a createdat and an updatedat.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThe first part of the core CRUD logic is defining the API routes in the routes folder.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QFurthermore, I implemented a Filament relation manager for sites and pages so that the\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QFurthermore, I implemented a Filament relation manager for sites and pages so that the pages of the sites could be controlled from the site view.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QThe goal of the thesis is to develop a template-driven website generator SaaS platform that allows users to create, customize, and publish their own websites.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThe components folder contains the UI elements added by the ShadCN library and other component blocks I created using them that are global to the application.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThe providers folder houses the context providers that the aforementioned context objects return.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QThe query client provider has access to the same query client as the router.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QInside src the routes folder contain\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QInside src the routes folder contains files which register the routes of the application, in this case the CRUD + restart routes for deployments.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QLastly the modules folder contains colocated logic of each Kubernetes resource, which is composed of request, services, and controllers.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QInside src the routes folder contains files which list the routes of the application, in this case the CRUD + restart routes for deployments.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThe modules folder contains colocated logic of each Kubernetes resource, which is composed of request, services, and controllers.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThe modules folder contains colocated logic of each Kubernetes resource, which is mostly composed of requests, services, and controllers.\\E$"}
+{"rule":"UNIT_SPACE","sentence":"^\\QThe pod also has limits set as 500m for CPUs and 500Mi for memory.\\E$"}
+{"rule":"SENTENCE_FRAGMENT","sentence":"^\\QAfter this the test cases themselves were written\\E$"}
+{"rule":"AFTERALL","sentence":"^\\QThis included registering mocked hooks, specifying the beforeAll, afterAll and afterEach methods.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QIn production the revision history limit and replica set configuration's may need to be reviewed and edited accordingly.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QAdditionally, a blue-green deployment strategy, where two identical production version of the system, the new and old run simultaneously could be used.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QAdditionally, a blue-green deployment strategy, where two identical production versions of the system, the new and old run simultaneously could be used.\\E$"}
+{"rule":"PASSIVE_VOICE","sentence":"^\\QThe platform is built from separate parts (a backend, a frontend, and a small proxy/deployment component) so that it can be developed, tested, and operated effectively while remaining straightforward for end users.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QFrom the structure of the routes folder a route tree file will also be generated which provides the type safe route checking features.\\E$"}
+{"rule":"PASSIVE_VOICE","sentence":"^\\QTraffic routing is controlled by rules defined on the Ingress resource \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.”\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QIn production, the revision history limit and replica set configurations may need to be reviewed and edited accordingly.\\E$"}
+{"rule":"AGREEMENT_SENT_START","sentence":"^\\QThe assets contains the index.css file, which provides the style of the websites, while types organizes global TypeScript types, as module specific ones live inside their respective folders.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QInside src, the routes folder contains files, which list the routes of the application, in this case the CRUD and restart routes for deployments.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThe modules folder contains colocated logic of each Kubernetes resource, which is mostly composed of requests, services, controllers, and types.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QAdditionally, a blue-green deployment strategy, where two identical production versions of the system, the new and old, run simultaneously could be used.\\E$"}
+{"rule":"THREE_NN","sentence":"^\\QThis master's thesis presents the development of a template-driven website generator SaaS platform.\\E$"}
+{"rule":"PASSIVE_VOICE","sentence":"^\\QDeployment and operations are demonstrated using containerized components and a simple orchestration approach suitable for small-scale hosting environments.\\E$"}
+{"rule":"PASSIVE_VOICE","sentence":"^\\QResults are presented through a complete implementation, an end-to-end usage example, and testing that validates functional behavior and typical user flows.\\E$"}
+{"rule":"PASSIVE_VOICE","sentence":"^\\QResults are presented through a complete implementation, an end-to-end usage example, and testing that validates functional behaviour and typical user flows.\\E$"}
+{"rule":"PASSIVE_VOICE","sentence":"^\\QSites are modelled as collections of static pages generated from templates and user content; the platform automates publishing, routing, and basic security considerations.\\E$"}
+{"rule":"PASSIVE_VOICE","sentence":"^\\QSites are modelled as collections of static pages generated from templates and user content, the platform automates publishing, routing, and basic security considerations.\\E$"}
+{"rule":"PASSIVE_VOICE","sentence":"^\\QProduction considerations are also discussed, covering containerization, CDN-backed asset delivery, managed Kubernetes, CI/CD workflows, secrets and backup strategies, observability, tenant isolation, and autoscaling trade-offs.\\E$"}
+{"rule":"PASSIVE_VOICE","sentence":"^\\QProduction considerations are also discussed, covering containerization, CDN-backed asset delivery, managed Kubernetes, CI/CD workflows, secrets and backup strategies, observability, tenant isolation, and autoscaling.\\E$"}
+{"rule":"PASSIVE_VOICE","sentence":"^\\QA user thus will be able to create and design their website on the frontend, which will then be saved to the backend and through the proxy app deployed to the running Kubernetes cluster.\\E$"}

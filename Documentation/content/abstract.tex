@@ -1,0 +1,54 @@
+\pagenumbering{roman}
+\setcounter{page}{1}
+\selectenglish
+
+%----------------------------------------------------------------------------
+% Abstract in English
+%----------------------------------------------------------------------------
+\chapter*{Abstract}\addcontentsline{toc}{chapter}{Abstract}
+
+\selectthesislanguage
+
+\newcounter{romanPage}
+\setcounter{romanPage}{\value{page}}
+\stepcounter{romanPage}
+
+This master's thesis presents the development of a template-driven website generator SaaS platform. Motivation stems from the observation that current website builders and e-commerce platforms, while powerful, are often feature-heavy, costly, and impose a steep learning curve.
+For users who only require basic informational sites (e.g., resumes, portfolios, local business pages), the complexity and recurring subscription costs of mainstream SaaS offerings present a practical barrier.
+
+The implemented solution composes a Laravel backend for data and user management, a React-based frontend with a streamlined component based editor, and a lightweight Node.js proxy to programmatically deploy user sites to a containerized environment.
+Sites are modelled as collections of static pages generated from templates and user content, the platform automates publishing, routing, and basic security considerations.
+The implementation emphasizes modularity, maintainability, and testability.
+
+Results include a complete prototype, a documented end-to-end usage example, and comprehensive testing validating core user flows.
+The prototype demonstrates that non-technical users can create and publish a static informational site within minutes, without complex configuration and technical knowledge required.
+
+Production considerations are also discussed, covering containerization, CDN-backed asset delivery, managed Kubernetes, CI/CD workflows, secrets and backup strategies, observability, tenant isolation, and autoscaling.
+
+In conclusion, the implemented SaaS can effectively serve many basic website needs.
+Future work includes additional components and customizability, revision history and rollback, stronger multi-tenancy, automated backups, richer observability, and evaluation of production-scale resilience and performance.
+
+\newpage
+\selecthungarian
+
+%----------------------------------------------------------------------------
+% Abstract in Hungarian
+%----------------------------------------------------------------------------
+\chapter*{Kivonat}\addcontentsline{toc}{chapter}{Kivonat}
+
+Jelen diplomamunka egy sablonvezérelt weboldal-generáló SaaS platform fejlesztését mutatja be.
+A motiváció abból ered, hogy a jelenlegi weboldal készítők és elektronikus kereskedelmi platformok, bár funkcióban gazdagok, gyakran túl sok funkciót kínálnak, költségesek, és meredek tanulási görbével járnak.
+Azoknak a felhasználóknak, akik csak egyszerű információs oldalakat igényelnek (például önéletrajz, portfólió vagy helyi vállalkozás bemutató oldala), az eljterjedt SaaS szolgáltatások összetettsége és ismétlődő előfizetési költségei gyakorlati akadályt jelentenek.
+
+A megvalósított megoldás egy Laravel alapú backendből a felhasználó és adatkezeléshez, egy React alapú kliensből egy egyszerűsített komponensalapú szerkesztővel, valamint egy könnyű Node.js proxyból áll, amely programatikusan telepíti a felhasználói oldalakat a konténerizált környezetbe.
+A weboldalakat sablonokból és felhasználói tartalomból generált statikus oldalak gyűjteményeként modelleztem, a platform automatizálja a publikálást, a routingot és az alapvető biztonsági beállításokat.
+A megvalósítás során a modularitásra, karbantarthatóságra és tesztelhetőségre helyeztem a hangsúlyt.
+
+Eredményként bemutatok egy működő prototípust, egy részletes és teljes példát a használatra, valamint átfogó teljeskörű teszteket, amelyek igazolják az alapvető felhasználói folyamatok helyes működését.
+A példa szemlélteti, hogy nem szakmai felhasználók percek alatt létrehozhatnak és publikálhatnak egy statikus információs oldalt, bonyolult konfiguráció és mély technikai ismeretek nélkül.
+
+A dolgozat tárgyalja az üzemeltetési megfontolásokat is: konténerizációt, CDN-támogatott tartalomszolgáltatást, menedzselt Kubernetes megoldásokat, CI/CD munkafolyamatokat, titkok és mentések kezelését, megfigyelhetőséget, izolációt és automatikus skálázás szempontjait.
+
+Összefoglalva, a megvalósított, szűkebb funkcionalitású SaaS hatékonyan képes kielégíteni számos alapvető weboldal igényeit. További fejlesztések közé tartozhatnak további komponensek és jobb testreszabhatóság, verziókezelés és visszaállítás, erősebb multi-tenancy, automatikus mentések, kiterjedtebb megfigyelhetőség, valamint az éles környezetben való üzemeltetés rendelkezésre állásának és teljesítmények vizsgálata.
+
+\selectenglish

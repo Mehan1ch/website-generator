@@ -1,0 +1,44 @@
+\subsection{Admin Panel}
+
+The final feature of the backend I want to talk about in this chapter is the admin panel.
+It is provided by the Filament PHP package, which specializes in building primarily admin panels for Laravel powered applications, but can also be used as a standalone server-driven UI framework if required.
+
+For the first step, the user model has to implement the \texttt{FilamentUser} interface.
+This interface requires the implementation of the \texttt{canAccessPanel} method, which has to return a boolean based on whether the user has access to the panel.
+Here is where I use the previously mentioned panel access permission.
+Afterwards, using the included artisan command by Filament, the admin panel needs to be initialized.
+If done, then it can be visited on the \texttt{/admin} route.
+
+The admin site is empty at first and has to be populated.
+Filament defines resources, which encompass the forms, pages, and schemas related to each Laravel model class.
+Here, UI elements Filament provides can be used to build interactive data tables, forms, and views. The package provides filtering and sorting options by default, easily configurable searching, and relationships can be displayed through more descriptive fields as well. For example, instead of displaying the user's ID, their name can be retrieved for a better UX.
+Further customization is possible, but the defaults cover most use cases.
+
+In Figure \ref{fig:admin-panel}, a data table view of the sites can be seen.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/admin-panel}
+  \caption{List view of sites on the admin panel}
+  \label{fig:admin-panel}
+\end{figure}
+
+I extended the functionality of the admin panel with the Filament StateFusion plugin created by Assem Alwaseai, and the Spatie Media Library
+plugin maintained by the Filament team themselves.
+The former plugin integrates the Spatie Model States package into the admin panel and provides quick actions to transfer models from one state to another.
+It also checks for allowed states.
+The latter plugin provides a droppable file upload field for storing files in the media library's collections, and also handles displaying them.
+This is mainly used to handle the user avatars from the panel.
+
+Furthermore, I implemented a Filament relation manager for sites and pages so that the pages of the sites could be controlled from the site view.
+Lastly, I created a custom action group to handle deployment related operations from the admin panel.
+These directly call the deployment service from the admin panel.
+
+An overview of the previous two functionalities of a site's detail view can be seen in Figure \ref{fig:admin-detail}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{./figures/admin-detail.png}
+  \caption{Site detail view on the admin panel}
+  \label{fig:admin-detail}
+\end{figure}

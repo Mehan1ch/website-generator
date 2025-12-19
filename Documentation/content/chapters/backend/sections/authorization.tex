@@ -1,0 +1,22 @@
+\section{Authorization}
+\label{section:authorization}
+Strongly related to authentication is authorization.
+Laravel provides gates and policies built-in for this purpose.
+Gates are closures that define whether the application authorizes the given user to make a certain action.
+
+However, I won't go into more detail about them as instead I will be using Spatie's Laravel Permission package.
+It allows developers to manage permissions and roles in a database.
+Since it provides native enum support, I implemented a role and a permission enum class.
+
+The defined roles in the system are user, which grants basic permissions after registration, admin who can manage users, schemas, and access the admin panel, and lastly, the super admin.
+The last is the only role where I use Laravel's gates natively, to grant super admins implicitly all permissions in the application service provider before any other checks.
+
+I defined permissions separately for each model and each CRUD method, as well as a unique permission for allowing access to the admin panel.
+
+Since the package is storing authorization logic in the database, it needs to be available after application setup.
+The straightforward method to do this is to write a seeder class that initializes the default values and what maps the appropriate permissions to the corresponding roles.
+
+Now, I only needed to set up the policy classes that use these roles.
+For each model, an appropriate policy class can be created that checks whether the given user can be allowed to make the specified action.
+Inside these functions we can check users against ownership of the roles defined before.
+A special use case of policies I used is inside the page's policy where I check against the page's URL and prevent overriding or deleting the homepage.
